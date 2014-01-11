@@ -9,6 +9,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface PhotoCell : UICollectionViewCell
+
 @property(nonatomic, strong) UIImage *image;
+
 @end
 

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ImageLink : NSObject
+@interface ImageLink : NSObject <NSCoding>
 
+@property (nonatomic, assign) CGRect rect;
+@property (nonatomic, strong) NSString *linkedToId;
 @end

@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ControlPointView : UIView
+{
+}
+
+@property (nonatomic, retain) UIColor* color;
 
 @end

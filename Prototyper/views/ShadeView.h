@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShadeView : UIView
+#import "ImageLink.h"
 
+@interface ShadeView : UIView
+{
+}
+
+@property (nonatomic, strong) ImageLink *associatedImageLink;
+
+- (void) updateFrame:(CGRect)f;
+- (UIColor *) getColor;
+- (void) setSelected:(bool)sel;
 @end

@@ -8,6 +8,7 @@
 
 #import "Project.h"
 #import "ImageDetails.h"
+#import "ImageLink.h"
 
 @implementation Project
 {
@@ -88,6 +89,27 @@
     [_images addObject:item];
     
     // Save Project
+    [self save];
+}
+
+- (void) removeItem:(ImageDetails *)item;
+{
+    [_images removeObject:item];
+    
+    NSError *err;
+    NSFileManager *mgr = [NSFileManager defaultManager];
+    [mgr removeItemAtPath:item.imagePath error:&err];
+    
+    // Now go through all the existing items and links and set any links that use this image to nil;
+    for ( ImageDetails *image in _images )
+    {
+        for ( ImageLink *link in image.links )
+        {
+            if ( [link.linkedToId isEqualToString:item.imageName] )
+                link.linkedToId = nil;
+        }
+    }
+    
     [self save];
 }
 

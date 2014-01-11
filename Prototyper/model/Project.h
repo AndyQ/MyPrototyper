@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class ImageDetails;
+
 @interface Project : NSObject <NSCoding>
 
 + (Project *) setupProject:(NSString *)projectName;
 
 - (NSString *) getProjectFolder;
 - (void) addImageToProject:(UIImage *)image;
+- (void) removeItem:(ImageDetails *)item;
 
 - (void) save;
 

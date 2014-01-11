@@ -8,6 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ImageEditViewDelegate <NSObject>
+
+- (void) selectAreaUpdate:(CGRect)r;
+
+@end
+
 @interface ImageEditView : UIView
+
+@property (nonatomic, strong) UIImage *image;
+
+@property (nonatomic, assign) bool showSelectArea;
+@property (nonatomic, assign) CGRect selectArea;
+@property (nonatomic, weak) IBOutlet id<ImageEditViewDelegate>delegate;
+
+- (void) setColor:(UIColor *)color;
+- (void) showSelectArea:(CGRect)r;
+- (void) hideSelectArea;
 
 @end

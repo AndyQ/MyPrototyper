@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Project.h"
 
+@protocol LinkImageViewControllerDelegate <NSObject>
+
+- (void) LIVC_didSelectImage:(NSString *)imageId;
+
+
+@end
 @interface LinkImageViewController : UIViewController
 
+@property (nonatomic, assign) id<LinkImageViewControllerDelegate> delegate;
+@property (nonatomic, strong) Project *project;
+@property (nonatomic, strong) NSString *currentImageId;
+@property (nonatomic, strong) NSString *linkedId;
 @end

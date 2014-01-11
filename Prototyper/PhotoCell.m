@@ -9,7 +9,7 @@
 #import "PhotoCell.h"
 
 @interface PhotoCell ()
-@property(nonatomic, weak) IBOutlet UIImageView *photoImageView;
+@property(nonatomic, weak) IBOutlet UIImageView *imageView;
 @end
 
 @implementation PhotoCell
@@ -17,7 +17,16 @@
 - (void) setImage:(UIImage *)image
 {
     _image = image;
-    self.photoImageView.image = image;
+    self.imageView.image = image;
 }
 
+- (void) setSelected:(BOOL)selected
+{
+    [super setSelected:selected];
+    
+    if ( selected )
+        self.backgroundColor = [UIColor yellowColor];
+    else
+        self.backgroundColor = [UIColor clearColor];
+}
 @end

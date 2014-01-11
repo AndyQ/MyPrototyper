@@ -6,7 +6,13 @@
 //  Copyright (c) 2014 Andy Qua. All rights reserved.
 //
 
+// Uses code based on iOS-Image-Crop-View by Ming Yang (https://github.com/myang-git/iOS-Image-Crop-View)
+
 #import "ImageEditViewController.h"
+#import "LinkImageViewController.h"
+#import "ImageEditView.h"
+#import "ShadeView.h"
+#import "ControlPointView.h"
 
 typedef struct {
     CGPoint dragStart;
@@ -25,99 +31,10 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
 }
 
 
-#pragma mark ControlPointView implementation
-
-@implementation ControlPointView
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        self.color = [UIColor colorWithRed:18.0/255.0 green:173.0/255.0 blue:251.0/255.0 alpha:1];
-        self.opaque = NO;
-    }
-    return self;
-}
-
-- (void)setColor:(UIColor *)_color {
-    [_color getRed:&red green:&green blue:&blue alpha:&alpha];
-    [self setNeedsDisplay];
-}
-
-- (UIColor*)color {
-    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-}
-
-- (void)drawRect:(CGRect)rect {
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextClearRect(context, rect);
-    CGContextSetRGBFillColor(context, red, green, blue, alpha);
-    CGContextFillEllipseInRect(context, rect);
-}
-
-@end
-
-#pragma mark - MaskView implementation
-
-@implementation ShadeView
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        self.opaque = NO;
-    }
-    return self;
-}
-
-- (void)setCropBorderColor:(UIColor *)_color {
-    [_color getRed:&cropBorderRed green:&cropBorderGreen blue:&cropBorderBlue alpha:&cropBorderAlpha];
-    [self setNeedsDisplay];
-}
-
-- (UIColor*)cropBorderColor {
-    return [UIColor colorWithRed:cropBorderRed green:cropBorderGreen blue:cropBorderBlue alpha:cropBorderAlpha];
-}
-
-- (void)setCropArea:(CGRect)_clearArea {
-    cropArea = _clearArea;
-    [self setNeedsDisplay];
-}
-
-- (CGRect)cropArea {
-    return cropArea;
-}
-
-- (void)setShadeAlpha:(CGFloat)_alpha {
-    shadeAlpha = cropBorderAlpha;
-    [self setNeedsDisplay];
-}
-
-- (CGFloat)shadeAlpha {
-    return shadeAlpha;
-}
-
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextClearRect(context, rect);
-    
-    CGContextSetRGBFillColor(context, cropBorderRed, cropBorderGreen, cropBorderBlue, 0.2);
-    CGContextFillRect(context, rect);
-    
-    CGContextSetRGBStrokeColor(context, cropBorderRed, cropBorderGreen, cropBorderBlue, cropBorderAlpha);
-    CGContextSetLineWidth(context, 2);
-    CGRect r = CGRectInset(rect, 1, 1);
-    CGContextStrokeRect(context, r);
-    
-}
-
-@end
 
 
-@interface ImageEditViewController ()
+
+@interface ImageEditViewController () <ImageEditViewDelegate, LinkImageViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     ShadeView* shadeView;
     CGFloat imageScale;
@@ -128,7 +45,6 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
     ControlPointView* bottomRightPoint;
     ControlPointView* topRightPoint;
 
-    UIColor *_controlColor;
     DragPoint dragPoint;
     UIView *dragControl;
 
@@ -153,22 +69,44 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
 {
     [super viewDidLoad];
 
-    self.imageView.image = [UIImage imageWithContentsOfFile:self.imageDetails.imagePath];
-
+    UIImage *image = [UIImage imageWithContentsOfFile:self.imageDetails.imagePath];
+    [(ImageEditView *)self.view setImage:image];
+    
     // Add existing rects
-    for ( ImageLinks *link in self.imageDetails.links )
+    for ( ImageLink *link in self.imageDetails.links )
     {
         // Add view
-        ShadeView *view = [[ShadeView alloc] initWithFrame:link.rect];
-        view.cropBorderColor = [UIColor greenColor];
+        ShadeView *view = [[ShadeView alloc] init];
+        [view setAssociatedImageLink:link];
+        
         [self.view addSubview:view];
     }
     
-    [self setupCaptureRect];
-    
-    self.controlColor = [UIColor redColor];
+//    UIPanGestureRecognizer* dragRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleDrag:)];
+//    [self.view addGestureRecognizer:dragRecognizer];
 
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    tapRecognizer.delegate = self;
+    [self.view addGestureRecognizer:tapRecognizer];
 }
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ( [segue.identifier isEqualToString:@"showLinkToVC"] )
+    {
+        LinkImageViewController *vc = segue.destinationViewController;
+        vc.delegate = self;
+        vc.project = self.project;
+        vc.currentImageId = self.imageDetails.imageName;
+        vc.linkedId = shadeView.associatedImageLink.linkedToId;
+    }
+}
+
+
+- (IBAction)unwindFromViewController:(UIStoryboardSegue *)segue
+{
+}
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -177,47 +115,97 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
 }
 
 
+-(BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+-(BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    if(action == @selector(deleteView))
+        return YES;
+    else if(action == @selector(linkView))
+        return YES;
+
+    return NO;
+}
+
+- (void) showMenuFromRect:(CGRect)r
+{
+    UIMenuController *sharedController = [UIMenuController sharedMenuController];
+    
+    UIMenuItem *menuItem1 = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteView)];
+    UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Link" action:@selector(linkView)];
+    
+    NSArray *menuItems = @[menuItem1, menuItem2];
+    
+    [sharedController setTargetRect:r inView:self.view];
+    
+    [sharedController setMenuItems:menuItems];
+    [sharedController setMenuVisible:YES animated:YES];
+    
+    [sharedController setMenuItems:nil];
+
+}
+
+- (void) deleteView
+{
+    // Remove item from list
+    [self.imageDetails.links removeObject:shadeView.associatedImageLink];
+    
+    // Delete shadeView
+    [shadeView removeFromSuperview];
+    shadeView = nil;
+    
+    [self showCaptureRect:NO];
+}
+
+- (void) linkView
+{
+    [self performSegueWithIdentifier:@"showLinkToVC" sender:self];
+}
+
+
 - (void) setupCaptureRect
 {
-    //control points
-    controlPointSize = 15;
-    int initialClearAreaSize = self.view.frame.size.width / 5;
-    CGPoint centerInView = CGPointMake(self.view.bounds.size.width / 2, self.view.bounds.size.height / 2);
-    
-    CGRect r = SquareCGRectAtCenter(centerInView.x - initialClearAreaSize,
-                                    centerInView.y - initialClearAreaSize,
-                                    controlPointSize);
-    topLeftPoint = [[ControlPointView alloc] initWithFrame:r];
-    
-    r = SquareCGRectAtCenter(centerInView.x + initialClearAreaSize,
-                             centerInView.y - initialClearAreaSize,
-                             controlPointSize);
-    topRightPoint = [[ControlPointView alloc] initWithFrame:r];
+    // Create points if necessary
+    topLeftPoint = [[ControlPointView alloc] init];
+    topRightPoint = [[ControlPointView alloc] init];
+    bottomLeftPoint = [[ControlPointView alloc] init];
+    bottomRightPoint = [[ControlPointView alloc] init];
 
-    r = SquareCGRectAtCenter(centerInView.x - initialClearAreaSize,
-                             centerInView.y + initialClearAreaSize,
-                             controlPointSize);
-    bottomLeftPoint = [[ControlPointView alloc] initWithFrame:r];
-
-    r = SquareCGRectAtCenter(centerInView.x + initialClearAreaSize,
-                             centerInView.y + initialClearAreaSize,
-                             controlPointSize);
-    bottomRightPoint = [[ControlPointView alloc] initWithFrame:r];
-
-    CGRect cropArea = [self clearAreaFromControlPoints];
-    
-    //the shade
-    shadeView = [[ShadeView alloc] initWithFrame:cropArea];
-    
-    UIPanGestureRecognizer* dragRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleDrag:)];
-    [self.view addGestureRecognizer:dragRecognizer];
-    
-    [self.view addSubview:shadeView];
     [self.view addSubview:topRightPoint];
     [self.view addSubview:bottomRightPoint];
     [self.view addSubview:topLeftPoint];
     [self.view addSubview:bottomLeftPoint];
     
+    [self setControlPointsColor];
+}
+
+- (void) positionCaptureRect:(CGRect)r
+{
+    if ( topLeftPoint == nil )
+        [self setupCaptureRect];
+    
+    controlPointSize = 15;
+
+    r.origin.x -= controlPointSize/2;
+    r.origin.y -= controlPointSize/2;
+    CGPoint topLeft = CGPointMake( r.origin.x, r.origin.y );
+    CGPoint topRight = CGPointMake( r.origin.x + r.size.width, r.origin.y );
+    CGPoint bottomLeft = CGPointMake( r.origin.x, r.origin.y + r.size.height );
+    CGPoint bottomRight = CGPointMake( r.origin.x + r.size.width, r.origin.y + r.size.height );
+    CGSize size = CGSizeMake( controlPointSize, controlPointSize );
+
+    
+
+    topLeftPoint.frame = (CGRect){ .origin = topLeft, .size = size};
+    topRightPoint.frame = (CGRect){ .origin = topRight, .size = size};
+    bottomLeftPoint.frame = (CGRect){ .origin = bottomLeft, .size = size};
+    bottomRightPoint.frame = (CGRect){ .origin = bottomRight, .size = size};
+    
+    [shadeView updateFrame:[self clearAreaFromControlPoints]];
+    [shadeView setSelected:YES];
 }
 
 
@@ -229,41 +217,110 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
 }
 
 
-- (UIColor *) controlColor
+- (void) setControlPointsColor
 {
-    return _controlColor;
-}
-
-- (void) setControlColor:(UIColor *)_color
-{
-    _controlColor = _color;
-    shadeView.cropBorderColor = _color;
-    topLeftPoint.color = _color;
-    bottomLeftPoint.color = _color;
-    bottomRightPoint.color = _color;
-    topRightPoint.color = _color;
-}
-
-- (IBAction)backPressed:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:^{}];
-}
-
-- (IBAction) saveRectPressed
-{
-    // Create Rect
-    CGRect rect = [self clearAreaFromControlPoints];
-    ImageLinks *link = [ImageLinks new];
-    link.rect = rect;
+    UIColor *color = [shadeView getColor];
     
+//    [(ImageEditView *)self.view setColor:color];
+    topLeftPoint.color = color;
+    bottomLeftPoint.color = color;
+    bottomRightPoint.color = color;
+    topRightPoint.color = color;
+}
+
+
+- (IBAction) addCaptureRectPressed
+{
+    if ( shadeView )
+        [shadeView setSelected:NO];
+    
+    ImageLink *link = [ImageLink new];
     [self.imageDetails.links addObject:link];
-    
-    // Add view
-    ShadeView *view = [[ShadeView alloc] initWithFrame:rect];
-    view.cropBorderColor = [UIColor greenColor];
-    [self.view addSubview:view];
+
+    shadeView = [[ShadeView alloc] init];
+    shadeView.associatedImageLink = link;
+    [self.view addSubview:shadeView];
+
+
+    CGRect r = CGRectMake( self.view.bounds.size.width / 2, self.view.bounds.size.height / 2, self.view.frame.size.width / 5, self.view.frame.size.width / 5 );
+    [self positionCaptureRect:r];
+
+    [self showCaptureRect:YES];
 }
 
+
+
+- (void) showCaptureRect:(bool)show
+{
+    [self setControlPointsColor];
+
+    shadeView.hidden = !show;
+    topLeftPoint.hidden = !show;
+    bottomLeftPoint.hidden = !show;
+    bottomRightPoint.hidden = !show;
+    topRightPoint.hidden = !show;
+    
+    if ( show )
+    {
+        [self showMenuFromRect:shadeView.frame];
+    }
+}
+
+
+- (void) selectAreaUpdate:(CGRect)r
+{
+    shadeView.frame = r;
+    [self showMenuFromRect:shadeView.frame];
+
+}
+#pragma mark - Tapping
+
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    
+    //ignore any touches from a UIToolbar
+    
+    if ([touch.view.superview isKindOfClass:[UIToolbar class]]) {
+        return NO;
+    }
+    
+    return YES;
+}
+- (void) handleTap:(UITapGestureRecognizer*)recognizer
+{
+    if (recognizer.state==UIGestureRecognizerStateEnded)
+    {
+        CGPoint p = [recognizer locationInView:self.view];
+        UIView* v = [self.view hitTest:p withEvent:nil];
+
+        if ( v != nil )
+        {
+            [shadeView setSelected:NO];
+            shadeView = nil;
+            if ( [v isKindOfClass:[ShadeView class]] )
+            {
+                shadeView = (ShadeView *)v;
+                [shadeView setSelected:YES];
+                [self showCaptureRect:YES];
+                [self positionCaptureRect:shadeView.frame];
+            }
+        }
+        
+        if ( shadeView == nil )
+        {
+            [self showCaptureRect:NO];
+        }
+    }
+}
+
+#pragma mark - LinkImageViewController delegate
+
+- (void) LIVC_didSelectImage:(NSString *)imageId
+{
+    shadeView.associatedImageLink.linkedToId = imageId;
+    [shadeView setNeedsDisplay];
+    [self setControlPointsColor];
+}
 
 #pragma mark - Dragging
 
@@ -274,8 +331,10 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
     return box;
 }
 
-- (void)handleDrag:(UIPanGestureRecognizer*)recognizer {
-    if (recognizer.state==UIGestureRecognizerStateBegan) {
+- (void)handleDrag:(UIPanGestureRecognizer*)recognizer
+{
+    if (recognizer.state==UIGestureRecognizerStateBegan)
+    {
         dragPoint.dragStart = [recognizer locationInView:self.view];
         dragPoint.topLeftCenter = topLeftPoint.center;
         dragPoint.bottomLeftCenter = bottomLeftPoint.center;
@@ -303,6 +362,8 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
     if (recognizer.state==UIGestureRecognizerStateEnded)
     {
         dragControl = nil;
+        if ( shadeView != nil )
+            [self showMenuFromRect:shadeView.frame];
     }
     
     CGPoint location = [recognizer locationInView:self.view];
@@ -323,7 +384,7 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
     }
     
     CGRect clearArea = [self clearAreaFromControlPoints];
-    shadeView.frame = clearArea;
+    [shadeView updateFrame:clearArea];
     
     [shadeView setNeedsDisplay];
 }
@@ -339,21 +400,29 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
     CGFloat xDir = draggedPoint.x<=oppositePoint.x ? 1 : -1;
     CGFloat yDir = draggedPoint.y<=oppositePoint.y ? 1 : -1;
     CGFloat newX = 0, newY = 0;
+    
     if (xDir>=0) {
         //on the right
+        if ( sizeW > -20 )
+            sizeW = -20;
         newX = oppositePoint.x - fabs(sizeW);
     }
     else {
         //on the left
+        if ( sizeW < 20 )
+            sizeW = 20;
         newX = oppositePoint.x + fabs(sizeW);
     }
-    
     if (yDir>=0) {
         //on the top
+        if ( sizeH > -20 )
+            sizeH = -20;
         newY = oppositePoint.y - fabs(sizeH);
     }
     else {
         //on the bottom
+        if ( sizeH < 20 )
+            sizeH = 20;
         newY = oppositePoint.y + fabs(sizeH);
     }
     
@@ -403,7 +472,8 @@ CGRect SquareCGRectAtCenter(CGFloat centerX, CGFloat centerY, CGFloat size) {
     CGRect boundingBox = [self boundingBoxForTopLeft:dragPoint.topLeftCenter bottomLeft:bottomLeft bottomRight:bottomRight topRight:topRight];
     
     CGRect imageFrameInView = self.imageView.frame;
-    if (CGRectContainsRect(imageFrameInView, boundingBox)) {
+    if (CGRectContainsRect(imageFrameInView, boundingBox))
+    {
         bottomRightPoint.center = bottomRight;
         topRightPoint.center = topRight;
         bottomLeftPoint.center = bottomLeft;

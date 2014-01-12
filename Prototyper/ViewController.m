@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import "ImageEditViewController.h"
+#import "PlaybackViewController.h"
 #import "Project.h"
 #import "ImageDetails.h"
 #import "PhotoCell.h"
@@ -54,6 +55,12 @@
         vc.project = project;
         vc.imageDetails = selectedImageDetails;
         selectedImageDetails = nil;
+    }
+    if ( [segue.identifier isEqualToString:@"showPlaybackVC"] )
+    {
+        PlaybackViewController *vc = segue.destinationViewController;
+        vc.project = project;
+
     }
 }
 

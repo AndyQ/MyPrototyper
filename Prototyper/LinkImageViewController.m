@@ -12,7 +12,7 @@
 
 @interface LinkImageViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 {
-    int selectedIndex;
+    NSInteger selectedIndex;
     
     UIBarButtonItem *doneBtn;
 }

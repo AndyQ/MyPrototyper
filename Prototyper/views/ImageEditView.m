@@ -48,11 +48,13 @@ CGPoint CGRectCenter( CGRect r )
     self.selectArea = r;
     [self updatePointsFromRect];
     self.showSelectArea = YES;
+    [self setNeedsDisplay];
 }
 
 - (void) hideSelectArea
 {
     self.showSelectArea = NO;
+    [self setNeedsDisplay];
 }
 
 - (void) setColor:(UIColor *)color
@@ -60,6 +62,7 @@ CGPoint CGRectCenter( CGRect r )
     borderColor = color;
 
     backgroundColor = [borderColor colorWithAlphaComponent:0.2];
+    [self setNeedsDisplay];
 }
 
 - (void) updatePointsFromRect
@@ -87,6 +90,8 @@ CGPoint CGRectCenter( CGRect r )
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
+    [super drawRect:rect];
+
     CGContextRef context = UIGraphicsGetCurrentContext();
     // Drawing code
     [self.image drawInRect:self.frame];
@@ -109,6 +114,7 @@ CGPoint CGRectCenter( CGRect r )
         CGContextFillEllipseInRect (context, bottomLeftPoint);
         CGContextFillEllipseInRect (context, bottomRightPoint);
     }
+
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -119,16 +125,23 @@ CGPoint CGRectCenter( CGRect r )
     startPoint = p;
     
     // Which point to move
-    if ( CGRectContainsPoint(topLeftPoint, p) )
-        pointMove = TOP_LEFT;
-    else if ( CGRectContainsPoint(topRightPoint, p) )
-        pointMove = TOP_RIGHT;
-    else if ( CGRectContainsPoint(bottomLeftPoint, p) )
-        pointMove = BOTTOM_LEFT;
-    else if ( CGRectContainsPoint(bottomRightPoint, p) )
-        pointMove = BOTTOM_RIGHT;
-    else if ( CGRectContainsPoint(self.selectArea, p) )
-        pointMove = FRAME;
+    if ( self.showSelectArea )
+    {
+        if ( CGRectContainsPoint(topLeftPoint, p) )
+            pointMove = TOP_LEFT;
+        else if ( CGRectContainsPoint(topRightPoint, p) )
+            pointMove = TOP_RIGHT;
+        else if ( CGRectContainsPoint(bottomLeftPoint, p) )
+            pointMove = BOTTOM_LEFT;
+        else if ( CGRectContainsPoint(bottomRightPoint, p) )
+            pointMove = BOTTOM_RIGHT;
+        else if ( CGRectContainsPoint(self.selectArea, p) )
+            pointMove = FRAME;
+        else
+            [self.delegate touchedViewAtPoint:p];
+    }
+    else
+        [self.delegate touchedViewAtPoint:p];
 }
 
 - (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -184,12 +197,13 @@ CGPoint CGRectCenter( CGRect r )
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint p = [touch locationInView:self];
+//    UITouch *touch = [touches anyObject];
+//    CGPoint p = [touch locationInView:self];
     
     pointMove = 0;
     
     // Notify delegate that the frame has moved
-    [self.delegate selectAreaUpdate:self.selectArea];
+    if ( self.showSelectArea )
+        [self.delegate selectAreaUpdate:self.selectArea];
 }
 @end

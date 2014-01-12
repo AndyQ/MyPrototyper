@@ -14,6 +14,8 @@
 		A1D2B2EF1880A4A500E250BF /* ShadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2EE1880A4A500E250BF /* ShadeView.m */; };
 		A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2F11880A4FA00E250BF /* ImageLink.m */; };
 		A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2F41881777B00E250BF /* ImageEditView.m */; };
+		A1D2B2F818820E8F00E250BF /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2F718820E8F00E250BF /* PlaybackViewController.m */; };
+		A1D2B2FB1882E73200E250BF /* PlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2FA1882E73200E250BF /* PlaybackView.m */; };
 		A1D75861187FDEFD00E7AA2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D75860187FDEFD00E7AA2F /* Foundation.framework */; };
 		A1D75863187FDEFD00E7AA2F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D75862187FDEFD00E7AA2F /* CoreGraphics.framework */; };
 		A1D75865187FDEFD00E7AA2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D75864187FDEFD00E7AA2F /* UIKit.framework */; };
@@ -58,6 +60,10 @@
 		A1D2B2F11880A4FA00E250BF /* ImageLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLink.m; sourceTree = "<group>"; };
 		A1D2B2F31881777B00E250BF /* ImageEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEditView.h; sourceTree = "<group>"; };
 		A1D2B2F41881777B00E250BF /* ImageEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageEditView.m; sourceTree = "<group>"; };
+		A1D2B2F618820E8F00E250BF /* PlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackViewController.h; sourceTree = "<group>"; };
+		A1D2B2F718820E8F00E250BF /* PlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
+		A1D2B2F91882E73200E250BF /* PlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackView.h; sourceTree = "<group>"; };
+		A1D2B2FA1882E73200E250BF /* PlaybackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackView.m; sourceTree = "<group>"; };
 		A1D7585D187FDEFD00E7AA2F /* Prototyper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prototyper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D75860187FDEFD00E7AA2F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1D75862187FDEFD00E7AA2F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -130,6 +136,8 @@
 				A1D2B2EE1880A4A500E250BF /* ShadeView.m */,
 				A1D2B2F31881777B00E250BF /* ImageEditView.h */,
 				A1D2B2F41881777B00E250BF /* ImageEditView.m */,
+				A1D2B2F91882E73200E250BF /* PlaybackView.h */,
+				A1D2B2FA1882E73200E250BF /* PlaybackView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -179,6 +187,8 @@
 				A1D75899187FDF3C00E7AA2F /* ImageEditViewController.m */,
 				A1D2B2DF18809C9E00E250BF /* LinkImageViewController.h */,
 				A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */,
+				A1D2B2F618820E8F00E250BF /* PlaybackViewController.h */,
+				A1D2B2F718820E8F00E250BF /* PlaybackViewController.m */,
 				A1D7589A187FDF3C00E7AA2F /* PhotoCell.h */,
 				A1D7589B187FDF3C00E7AA2F /* PhotoCell.m */,
 				A1D7587B187FDEFD00E7AA2F /* Images.xcassets */,
@@ -316,6 +326,8 @@
 			files = (
 				A1D758A0187FDF3C00E7AA2F /* ImageEditViewController.m in Sources */,
 				A1D758A1187FDF3C00E7AA2F /* PhotoCell.m in Sources */,
+				A1D2B2F818820E8F00E250BF /* PlaybackViewController.m in Sources */,
+				A1D2B2FB1882E73200E250BF /* PlaybackView.m in Sources */,
 				A1D7587A187FDEFD00E7AA2F /* ViewController.m in Sources */,
 				A1D2B2E91880A47E00E250BF /* Project.m in Sources */,
 				A1D2B2EF1880A4A500E250BF /* ShadeView.m in Sources */,

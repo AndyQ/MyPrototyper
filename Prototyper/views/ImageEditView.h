@@ -11,7 +11,7 @@
 @protocol ImageEditViewDelegate <NSObject>
 
 - (void) selectAreaUpdate:(CGRect)r;
-
+- (void) touchedViewAtPoint:(CGPoint)p;
 @end
 
 @interface ImageEditView : UIView

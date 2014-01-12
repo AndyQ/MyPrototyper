@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@class ImageDetails;
+#import "ImageDetails.h"
+#import "ImageLink.h"
+
 
 @interface Project : NSObject <NSCoding>
 

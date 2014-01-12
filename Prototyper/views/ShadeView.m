@@ -43,7 +43,7 @@
         borderColor = [UIColor redColor];
     }
     
-    float hue, sat, bright, alpha;
+    CGFloat hue, sat, bright, alpha;
     [borderColor getHue:&hue saturation:&sat brightness:&bright alpha:&alpha];
     unselBorderColor = [UIColor colorWithHue:hue saturation:sat brightness:bright*0.5 alpha:alpha];
     backgroundColor = [borderColor colorWithAlphaComponent:0.2];
@@ -92,17 +92,16 @@
 - (void)drawRect:(CGRect)rect
 {
     [self setColor];
-    
+ 
+    if ( selected )
+        return;
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextClearRect(context, rect);
     
     CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
     CGContextFillRect(context, rect);
     
-    if ( selected )
-        CGContextSetStrokeColorWithColor(context, borderColor.CGColor);
-    else
-        CGContextSetStrokeColorWithColor(context, unselBorderColor.CGColor);
+    CGContextSetStrokeColorWithColor(context, unselBorderColor.CGColor);
     
     CGContextSetLineWidth(context, 2);
     CGRect r = CGRectInset(rect, 1, 1);

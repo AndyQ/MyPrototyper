@@ -7,8 +7,6 @@
 //
 
 #import "Project.h"
-#import "ImageDetails.h"
-#import "ImageLink.h"
 
 @implementation Project
 {

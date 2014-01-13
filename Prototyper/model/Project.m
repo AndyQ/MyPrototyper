@@ -50,6 +50,19 @@
     return project;
 }
 
++ (void) deleteProjectWithName:(NSString *)projectName;
+{
+    NSFileManager *mgr = [NSFileManager defaultManager];
+    
+    NSError *err = nil;
+    NSString *path = [[self getDocsDir] stringByAppendingPathComponent:projectName];
+    [mgr removeItemAtPath:path error:&err];
+    if ( err != nil )
+    {
+        NSLog( @"Failed to remove project - %@ because %@", projectName, err.localizedDescription );
+    }
+}
+
 - (id) initWithProjectName:(NSString *)projectName
 {
     self = [super init];

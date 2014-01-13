@@ -400,13 +400,15 @@
                                 <action selector="addProjectPressed:" destination="BR6-Dv-U5V" id="m4o-88-QBc"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Kum-Z5-dSI">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Kum-Z5-dSI">
                             <connections>
                                 <action selector="editPressed:" destination="BR6-Dv-U5V" id="bbd-fK-d0e"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="1UM-Fa-WMZ" id="0u7-6I-8YD"/>
+                        <outlet property="editButton" destination="Kum-Z5-dSI" id="uBB-ul-qhC"/>
                         <outlet property="tableView" destination="l5V-HI-cGP" id="vyb-C2-FJY"/>
                         <segue destination="taF-rW-Ib2" kind="push" identifier="ShowProject" id="lLv-qQ-Ucy"/>
                     </connections>

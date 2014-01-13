@@ -10,13 +10,15 @@
 #import "ProjectViewController.h"
 #import "Project.h"
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MainViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *projects;
     NSString *selectedProjectName;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @end
 
@@ -45,18 +47,49 @@
 
 - (IBAction) addProjectPressed:(id)sender
 {
-    selectedProjectName = @"Default";
-    [projects addObject:selectedProjectName];
-    [self.tableView reloadData];
+    // prompt for name
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Enter project name" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    av.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [av show];
 }
 
 - (IBAction) editPressed:(id)sender
 {
-    
+    self.tableView.editing = !self.tableView.editing;
+    if ( self.tableView.editing )
+    {
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editPressed:)];
+        self.navigationItem.rightBarButtonItem = editButton;
+        self.addButton.enabled = NO;
+    }
+    else
+    {
+        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editPressed:)];
+        self.navigationItem.rightBarButtonItem = editButton;
+        self.addButton.enabled = YES;
+    }
 }
 
+#pragma mark - UIAlertViewDelegate methods
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    NSString *inputText = [[alertView textFieldAtIndex:0] text];
+    if ( [projects containsObject:inputText] || inputText.length == 0 )
+        return NO;
+    
+    return YES;
+}
 
-
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex == 1 )
+    {
+        NSString *name = [alertView textFieldAtIndex:0].text;
+        
+        [projects addObject:name];
+        [self.tableView reloadData];
+    }
+}
 #pragma mark - Load projects
 - (void) loadProjects
 {
@@ -117,6 +150,21 @@
 {
     selectedProjectName = projects[indexPath.row];
     [self performSegueWithIdentifier:@"ShowProject" sender:self];
+}
+
+- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ( editingStyle == UITableViewCellEditingStyleDelete )
+    {
+        [Project deleteProjectWithName:projects[indexPath.row]];
+        [projects removeObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 @end

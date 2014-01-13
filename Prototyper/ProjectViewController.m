@@ -36,7 +36,7 @@
 {
     [super viewDidLoad];
     
-    self.projectName = @"Default";
+    self.title = self.projectName;
     project = [Project setupProject:self.projectName];
     
     editBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editPressed:)];

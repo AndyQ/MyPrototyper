@@ -118,6 +118,8 @@
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.rightBarButtonItem = editBtn;
         self.collectionView.allowsMultipleSelection = NO;
+        
+        [self.collectionView reloadData];
     }
 }
 

@@ -33,16 +33,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ikk-ji-1sE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="104" height="146"/>
+                                                    <rect key="frame" x="5" y="5" width="94" height="136"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="ikk-ji-1sE" firstAttribute="trailing" secondItem="Vqd-iE-7yA" secondAttribute="trailing" id="5O9-2q-22u"/>
-                                            <constraint firstItem="ikk-ji-1sE" firstAttribute="top" secondItem="Vqd-iE-7yA" secondAttribute="top" id="eOR-eK-4HQ"/>
-                                            <constraint firstItem="ikk-ji-1sE" firstAttribute="bottom" secondItem="Vqd-iE-7yA" secondAttribute="bottom" id="fwH-sX-cag"/>
-                                            <constraint firstItem="ikk-ji-1sE" firstAttribute="leading" secondItem="Vqd-iE-7yA" secondAttribute="leading" id="rlq-GN-GZn"/>
+                                            <constraint firstItem="ikk-ji-1sE" firstAttribute="trailing" secondItem="Vqd-iE-7yA" secondAttribute="trailing" constant="-5" id="5O9-2q-22u"/>
+                                            <constraint firstItem="ikk-ji-1sE" firstAttribute="top" secondItem="Vqd-iE-7yA" secondAttribute="top" constant="5" id="eOR-eK-4HQ"/>
+                                            <constraint firstItem="ikk-ji-1sE" firstAttribute="bottom" secondItem="Vqd-iE-7yA" secondAttribute="bottom" constant="-5" id="fwH-sX-cag"/>
+                                            <constraint firstItem="ikk-ji-1sE" firstAttribute="leading" secondItem="Vqd-iE-7yA" secondAttribute="leading" constant="5" id="rlq-GN-GZn"/>
                                         </constraints>
                                         <size key="customSize" width="104" height="146"/>
                                         <connections>

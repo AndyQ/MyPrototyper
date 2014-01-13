@@ -107,7 +107,6 @@
     
     [self.delegate LIVC_didSelectImage:details.imageName];
     [self.navigationController popViewControllerAnimated:YES];
-   
 }
 
 @end

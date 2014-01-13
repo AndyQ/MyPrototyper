@@ -10,12 +10,14 @@
 		A1D2B2E118809C9E00E250BF /* LinkImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */; };
 		A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E51880A47E00E250BF /* ImageDetails.m */; };
 		A1D2B2E91880A47E00E250BF /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E71880A47E00E250BF /* Project.m */; };
-		A1D2B2EC1880A49400E250BF /* ControlPointView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2EB1880A49400E250BF /* ControlPointView.m */; };
-		A1D2B2EF1880A4A500E250BF /* ShadeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2EE1880A4A500E250BF /* ShadeView.m */; };
+		A1D2B2EF1880A4A500E250BF /* HotspotView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2EE1880A4A500E250BF /* HotspotView.m */; };
 		A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2F11880A4FA00E250BF /* ImageLink.m */; };
 		A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2F41881777B00E250BF /* ImageEditView.m */; };
 		A1D2B2F818820E8F00E250BF /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2F718820E8F00E250BF /* PlaybackViewController.m */; };
 		A1D2B2FB1882E73200E250BF /* PlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2FA1882E73200E250BF /* PlaybackView.m */; };
+		A1D2B30418832EC200E250BF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B30318832EC200E250BF /* MainViewController.m */; };
+		A1D2B3071883F10800E250BF /* DrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B3061883F10800E250BF /* DrawViewController.m */; };
+		A1D2B30A1883F11900E250BF /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B3091883F11900E250BF /* DrawView.m */; };
 		A1D75861187FDEFD00E7AA2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D75860187FDEFD00E7AA2F /* Foundation.framework */; };
 		A1D75863187FDEFD00E7AA2F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D75862187FDEFD00E7AA2F /* CoreGraphics.framework */; };
 		A1D75865187FDEFD00E7AA2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D75864187FDEFD00E7AA2F /* UIKit.framework */; };
@@ -24,7 +26,7 @@
 		A1D75871187FDEFD00E7AA2F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D75870187FDEFD00E7AA2F /* AppDelegate.m */; };
 		A1D75874187FDEFD00E7AA2F /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1D75872187FDEFD00E7AA2F /* Main_iPhone.storyboard */; };
 		A1D75877187FDEFD00E7AA2F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1D75875187FDEFD00E7AA2F /* Main_iPad.storyboard */; };
-		A1D7587A187FDEFD00E7AA2F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D75879187FDEFD00E7AA2F /* ViewController.m */; };
+		A1D7587A187FDEFD00E7AA2F /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D75879187FDEFD00E7AA2F /* ProjectViewController.m */; };
 		A1D7587C187FDEFD00E7AA2F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1D7587B187FDEFD00E7AA2F /* Images.xcassets */; };
 		A1D75883187FDEFD00E7AA2F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D75882187FDEFD00E7AA2F /* XCTest.framework */; };
 		A1D75884187FDEFD00E7AA2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D75860187FDEFD00E7AA2F /* Foundation.framework */; };
@@ -52,10 +54,8 @@
 		A1D2B2E51880A47E00E250BF /* ImageDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetails.m; sourceTree = "<group>"; };
 		A1D2B2E61880A47E00E250BF /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
 		A1D2B2E71880A47E00E250BF /* Project.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Project.m; sourceTree = "<group>"; };
-		A1D2B2EA1880A49400E250BF /* ControlPointView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlPointView.h; sourceTree = "<group>"; };
-		A1D2B2EB1880A49400E250BF /* ControlPointView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlPointView.m; sourceTree = "<group>"; };
-		A1D2B2ED1880A4A500E250BF /* ShadeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadeView.h; sourceTree = "<group>"; };
-		A1D2B2EE1880A4A500E250BF /* ShadeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadeView.m; sourceTree = "<group>"; };
+		A1D2B2ED1880A4A500E250BF /* HotspotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotspotView.h; sourceTree = "<group>"; };
+		A1D2B2EE1880A4A500E250BF /* HotspotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotspotView.m; sourceTree = "<group>"; };
 		A1D2B2F01880A4FA00E250BF /* ImageLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLink.h; sourceTree = "<group>"; };
 		A1D2B2F11880A4FA00E250BF /* ImageLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageLink.m; sourceTree = "<group>"; };
 		A1D2B2F31881777B00E250BF /* ImageEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageEditView.h; sourceTree = "<group>"; };
@@ -64,6 +64,12 @@
 		A1D2B2F718820E8F00E250BF /* PlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
 		A1D2B2F91882E73200E250BF /* PlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackView.h; sourceTree = "<group>"; };
 		A1D2B2FA1882E73200E250BF /* PlaybackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackView.m; sourceTree = "<group>"; };
+		A1D2B30218832EC200E250BF /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		A1D2B30318832EC200E250BF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		A1D2B3051883F10800E250BF /* DrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawViewController.h; sourceTree = "<group>"; };
+		A1D2B3061883F10800E250BF /* DrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawViewController.m; sourceTree = "<group>"; };
+		A1D2B3081883F11900E250BF /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
+		A1D2B3091883F11900E250BF /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
 		A1D7585D187FDEFD00E7AA2F /* Prototyper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prototyper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D75860187FDEFD00E7AA2F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1D75862187FDEFD00E7AA2F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -76,8 +82,8 @@
 		A1D75870187FDEFD00E7AA2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A1D75873187FDEFD00E7AA2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		A1D75876187FDEFD00E7AA2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		A1D75878187FDEFD00E7AA2F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A1D75879187FDEFD00E7AA2F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A1D75878187FDEFD00E7AA2F /* ProjectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
+		A1D75879187FDEFD00E7AA2F /* ProjectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectViewController.m; sourceTree = "<group>"; };
 		A1D7587B187FDEFD00E7AA2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A1D75881187FDEFD00E7AA2F /* PrototyperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototyperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D75882187FDEFD00E7AA2F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -130,12 +136,12 @@
 		A1D2B2E31880A45000E250BF /* views */ = {
 			isa = PBXGroup;
 			children = (
-				A1D2B2EA1880A49400E250BF /* ControlPointView.h */,
-				A1D2B2EB1880A49400E250BF /* ControlPointView.m */,
-				A1D2B2ED1880A4A500E250BF /* ShadeView.h */,
-				A1D2B2EE1880A4A500E250BF /* ShadeView.m */,
+				A1D2B2ED1880A4A500E250BF /* HotspotView.h */,
+				A1D2B2EE1880A4A500E250BF /* HotspotView.m */,
 				A1D2B2F31881777B00E250BF /* ImageEditView.h */,
 				A1D2B2F41881777B00E250BF /* ImageEditView.m */,
+				A1D2B3081883F11900E250BF /* DrawView.h */,
+				A1D2B3091883F11900E250BF /* DrawView.m */,
 				A1D2B2F91882E73200E250BF /* PlaybackView.h */,
 				A1D2B2FA1882E73200E250BF /* PlaybackView.m */,
 			);
@@ -181,10 +187,14 @@
 				A1D75870187FDEFD00E7AA2F /* AppDelegate.m */,
 				A1D75872187FDEFD00E7AA2F /* Main_iPhone.storyboard */,
 				A1D75875187FDEFD00E7AA2F /* Main_iPad.storyboard */,
-				A1D75878187FDEFD00E7AA2F /* ViewController.h */,
-				A1D75879187FDEFD00E7AA2F /* ViewController.m */,
+				A1D2B30218832EC200E250BF /* MainViewController.h */,
+				A1D2B30318832EC200E250BF /* MainViewController.m */,
+				A1D75878187FDEFD00E7AA2F /* ProjectViewController.h */,
+				A1D75879187FDEFD00E7AA2F /* ProjectViewController.m */,
 				A1D75898187FDF3C00E7AA2F /* ImageEditViewController.h */,
 				A1D75899187FDF3C00E7AA2F /* ImageEditViewController.m */,
+				A1D2B3051883F10800E250BF /* DrawViewController.h */,
+				A1D2B3061883F10800E250BF /* DrawViewController.m */,
 				A1D2B2DF18809C9E00E250BF /* LinkImageViewController.h */,
 				A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */,
 				A1D2B2F618820E8F00E250BF /* PlaybackViewController.h */,
@@ -328,15 +338,17 @@
 				A1D758A1187FDF3C00E7AA2F /* PhotoCell.m in Sources */,
 				A1D2B2F818820E8F00E250BF /* PlaybackViewController.m in Sources */,
 				A1D2B2FB1882E73200E250BF /* PlaybackView.m in Sources */,
-				A1D7587A187FDEFD00E7AA2F /* ViewController.m in Sources */,
+				A1D7587A187FDEFD00E7AA2F /* ProjectViewController.m in Sources */,
 				A1D2B2E91880A47E00E250BF /* Project.m in Sources */,
-				A1D2B2EF1880A4A500E250BF /* ShadeView.m in Sources */,
+				A1D2B3071883F10800E250BF /* DrawViewController.m in Sources */,
+				A1D2B2EF1880A4A500E250BF /* HotspotView.m in Sources */,
 				A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */,
 				A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */,
 				A1D2B2E118809C9E00E250BF /* LinkImageViewController.m in Sources */,
-				A1D2B2EC1880A49400E250BF /* ControlPointView.m in Sources */,
 				A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */,
 				A1D75871187FDEFD00E7AA2F /* AppDelegate.m in Sources */,
+				A1D2B30418832EC200E250BF /* MainViewController.m in Sources */,
+				A1D2B30A1883F11900E250BF /* DrawView.m in Sources */,
 				A1D7586D187FDEFD00E7AA2F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,6 +450,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Prototyper/Prototyper-Prefix.pch";
 				INFOPLIST_FILE = "Prototyper/Prototyper-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -479,7 +492,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andy Qua (8Q7Y8AHM47)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -497,6 +510,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "17A31A7D-0538-40CD-84EF-BA905102950F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -519,7 +533,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Andy Qua (8Q7Y8AHM47)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -530,6 +544,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				PROVISIONING_PROFILE = "17A31A7D-0538-40CD-84EF-BA905102950F";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -544,6 +559,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Prototyper/Prototyper-Prefix.pch";
 				INFOPLIST_FILE = "Prototyper/Prototyper-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -557,6 +573,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Prototyper/Prototyper-Prefix.pch";
 				INFOPLIST_FILE = "Prototyper/Prototyper-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

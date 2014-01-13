@@ -1,14 +1,14 @@
 //
-//  ShadeView.m
+//  HotspotView.m
 //  Prototyper
 //
 //  Created by Andy Qua on 10/01/2014.
 //  Copyright (c) 2014 Andy Qua. All rights reserved.
 //
 
-#import "ShadeView.h"
+#import "HotspotView.h"
 
-@implementation ShadeView
+@implementation HotspotView
 {
     ImageLink *_associatedImageLink;
     
@@ -22,8 +22,8 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    if (self)
+    {
         self.opaque = NO;
         selected = NO;
     }
@@ -93,6 +93,7 @@
 {
     [self setColor];
  
+    // We don't draw ourselves if selected as the main view handles showing the overlay (allowing user to adjust size)
     if ( selected )
         return;
     CGContextRef context = UIGraphicsGetCurrentContext();

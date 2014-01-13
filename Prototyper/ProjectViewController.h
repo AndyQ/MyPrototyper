@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ProjectViewController.h
 //  Prototyper
 //
 //  Created by Andy Qua on 09/01/2014.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController<UICollectionViewDataSource>
+@interface ProjectViewController : UIViewController<UICollectionViewDataSource>
 
 @property (nonatomic, strong) NSString *projectName;
 

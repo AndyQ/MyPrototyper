@@ -1,5 +1,5 @@
 //
-//  ShadeView.h
+//  HotspotView.h
 //  Prototyper
 //
 //  Created by Andy Qua on 10/01/2014.
@@ -10,7 +10,7 @@
 
 #import "ImageLink.h"
 
-@interface ShadeView : UIView
+@interface HotspotView : UIView
 {
 }
 

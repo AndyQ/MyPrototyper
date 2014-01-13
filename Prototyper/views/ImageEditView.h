@@ -10,7 +10,7 @@
 
 @protocol ImageEditViewDelegate <NSObject>
 
-- (void) selectAreaUpdate:(CGRect)r;
+- (void) hotspotAreaUpdate:(CGRect)r;
 - (void) touchedViewAtPoint:(CGPoint)p;
 @end
 

@@ -15,6 +15,7 @@
 @interface Project : NSObject <NSCoding>
 
 + (Project *) setupProject:(NSString *)projectName;
++ (NSString *) getDocsDir;
 
 - (NSString *) getProjectFolder;
 - (void) addImageToProject:(UIImage *)image;

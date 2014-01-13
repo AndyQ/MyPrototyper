@@ -1,18 +1,20 @@
 //
+//  ProjectViewController.m
 //  Prototyper
 //
 //  Created by Andy Qua on 09/01/2014.
 //  Copyright (c) 2014 Andy Qua. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "ProjectViewController.h"
 #import "ImageEditViewController.h"
 #import "PlaybackViewController.h"
+#import "DrawViewController.h"
 #import "Project.h"
 #import "ImageDetails.h"
 #import "PhotoCell.h"
 
-@interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProjectViewController () <DrawViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     Project *project;
     ImageDetails *selectedImageDetails;
@@ -28,7 +30,7 @@
 @property(nonatomic, strong) NSArray *assets;
 @end
 
-@implementation ViewController
+@implementation ProjectViewController
 
 - (void)viewDidLoad
 {
@@ -50,8 +52,7 @@
 {
     if ( [segue.identifier isEqualToString:@"EditImage"] )
     {
-        UINavigationController *nc = segue.destinationViewController;
-        ImageEditViewController *vc = (ImageEditViewController *)nc.topViewController;
+        ImageEditViewController *vc = segue.destinationViewController;
         vc.project = project;
         vc.imageDetails = selectedImageDetails;
         selectedImageDetails = nil;
@@ -60,7 +61,15 @@
     {
         PlaybackViewController *vc = segue.destinationViewController;
         vc.project = project;
-
+        
+    }
+    if ( [segue.identifier isEqualToString:@"ShowDraw"] )
+    {
+        UINavigationController *nc = segue.destinationViewController;
+        DrawViewController *vc = (DrawViewController *)nc.topViewController;
+        vc.delegate = self;
+//        vc.imageFile = project;
+        
     }
 }
 
@@ -71,9 +80,9 @@
     // Unselect all items
     for ( NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems] )
          [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+    
+    [self.collectionView reloadData];
 }
-
-
 
 #pragma mark - collection view data source
 
@@ -188,6 +197,13 @@
     mediaUI.delegate = self;
     [self presentViewController:mediaUI animated:YES completion:nil];
     
+}
+
+#pragma mark - DrawViewControllerDelegateMethods
+- (void) drawImageChanged:(UIImage *)image
+{
+    [project addImageToProject:image];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - image picker delegate

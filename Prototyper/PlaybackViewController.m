@@ -24,7 +24,8 @@
     
     imageDetails = self.project[0];
     
-    ((PlaybackView *)self.view).imageDetails = imageDetails;
+//    ((PlaybackView *)self.view).imageDetails = imageDetails;
+    [(PlaybackView *)self.view transitionTo:imageDetails];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self.view addGestureRecognizer:tap];
@@ -38,6 +39,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 - (void) tap:(UITapGestureRecognizer *)gr
@@ -82,7 +84,7 @@
         if ( [item.imageName isEqualToString:linkId] )
         {
             imageDetails = item;
-            ((PlaybackView *)self.view).imageDetails = imageDetails;
+            [(PlaybackView *)self.view transitionTo:imageDetails];
 
             [self.view setNeedsDisplay];
         }

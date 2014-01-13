@@ -10,26 +10,21 @@
 
 #import "ImageEditViewController.h"
 #import "LinkImageViewController.h"
+#import "DrawViewController.h"
 #import "ImageEditView.h"
-#import "ShadeView.h"
-#import "ControlPointView.h"
+#import "HotspotView.h"
 
-@interface ImageEditViewController () <ImageEditViewDelegate, LinkImageViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIGestureRecognizerDelegate>
 {
-    ShadeView* shadeView;
-    CGFloat imageScale;
-    
-    CGFloat controlPointSize;
-    ControlPointView* topLeftPoint;
-    ControlPointView* bottomLeftPoint;
-    ControlPointView* bottomRightPoint;
-    ControlPointView* topRightPoint;
-
-    UIView *dragControl;
+    HotspotView* shadeView;
 }
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomConstraint;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editImageButton;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet ImageEditView *imageEditView;
 
 @end
 
@@ -49,21 +44,17 @@
     [super viewDidLoad];
 
     UIImage *image = [UIImage imageWithContentsOfFile:self.imageDetails.imagePath];
-    [(ImageEditView *)self.view setImage:image];
+    self.imageView.image = image;
     
     // Add existing rects
     for ( ImageLink *link in self.imageDetails.links )
     {
         // Add view
-        ShadeView *view = [[ShadeView alloc] init];
+        HotspotView *view = [[HotspotView alloc] init];
         [view setAssociatedImageLink:link];
         
-        [self.view addSubview:view];
+        [self.imageEditView addSubview:view];
     }
-
-    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    tapRecognizer.delegate = self;
-//    [self.view addGestureRecognizer:tapRecognizer];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -75,6 +66,15 @@
         vc.project = self.project;
         vc.currentImageId = self.imageDetails.imageName;
         vc.linkedId = shadeView.associatedImageLink.linkedToId;
+    }
+    
+    if ( [segue.identifier isEqualToString:@"ShowDraw"] )
+    {
+        UINavigationController *nc = segue.destinationViewController;
+        DrawViewController *vc = (DrawViewController *)nc.topViewController;
+        vc.delegate = self;
+        UIImage *image = [UIImage imageWithContentsOfFile:self.imageDetails.imagePath];
+        vc.image = image;
     }
 }
 
@@ -96,6 +96,7 @@
     return YES;
 }
 
+#pragma mark - UIMenuController stuff
 -(BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
     if(action == @selector(deleteView))
@@ -133,7 +134,7 @@
     [shadeView removeFromSuperview];
     shadeView = nil;
     
-    [(ImageEditView *)self.view hideSelectArea];
+    [self.imageEditView hideSelectArea];
 }
 
 - (void) linkView
@@ -142,20 +143,20 @@
 }
 
 
-- (void) positionCaptureRect:(CGRect)r
+#pragma mark - Hotspot area management
+- (void) positionHotspotArea:(CGRect)r
 {
-    [(ImageEditView *)self.view showSelectArea:r];
+    [self.imageEditView showSelectArea:r];
     [shadeView updateFrame:r];
     [shadeView setSelected:YES];
 }
 
 
 
-- (void) setControlPointsColor
+- (void) updateLinkColor
 {
     UIColor *color = [shadeView getColor];
-    
-    [(ImageEditView *)self.view setColor:color];
+    [self.imageEditView setColor:color];
 }
 
 
@@ -167,13 +168,13 @@
     ImageLink *link = [ImageLink new];
     [self.imageDetails.links addObject:link];
 
-    shadeView = [[ShadeView alloc] init];
+    shadeView = [[HotspotView alloc] init];
     shadeView.associatedImageLink = link;
-    [self.view addSubview:shadeView];
+    [self.imageEditView addSubview:shadeView];
 
 
     CGRect r = CGRectMake( self.view.bounds.size.width / 2, self.view.bounds.size.height / 2, self.view.frame.size.width / 5, self.view.frame.size.width / 5 );
-    [self positionCaptureRect:r];
+    [self positionHotspotArea:r];
 
     [self showCaptureRect:YES];
 }
@@ -182,7 +183,7 @@
 
 - (void) showCaptureRect:(bool)show
 {
-    [self setControlPointsColor];
+    [self updateLinkColor];
 
     if ( show )
     {
@@ -190,17 +191,12 @@
     }
     else
     {
-        [(ImageEditView *)self.view hideSelectArea];
+        [self.imageEditView hideSelectArea];
     }
 }
 
 
-- (void) selectAreaUpdate:(CGRect)r
-{
-    [shadeView updateFrame:r];
-    [self showMenuFromRect:shadeView.frame];
 
-}
 #pragma mark - Tapping
 
 
@@ -208,17 +204,30 @@
     
     //ignore any touches from a UIToolbar
     
-    if ([touch.view.superview isKindOfClass:[UIToolbar class]]) {
+    if ([touch.view.superview isKindOfClass:[UIToolbar class]])
+    {
         return NO;
     }
     
     return YES;
 }
 
+#pragma mark - ImageEditViewDelegate methods
+
+// User has modified the current hotspot area
+- (void) hotspotAreaUpdate:(CGRect)r
+{
+    [shadeView updateFrame:r];
+    [self showMenuFromRect:shadeView.frame];
+    
+}
+
+// User has tapped the view outside the current hotspot area
 - (void) touchedViewAtPoint:(CGPoint)p
 {
     UIView* v = [self.view hitTest:p withEvent:nil];
     
+    // Check if we currently have a hotspot selected, if not, then we may be toggling showing/hiding the NavBar 
     bool maybeHideOrShowNavBar = NO;
     if ( shadeView == nil )
     {
@@ -229,18 +238,18 @@
     {
         [shadeView setSelected:NO];
         shadeView = nil;
-        if ( [v isKindOfClass:[ShadeView class]] )
+        if ( [v isKindOfClass:[HotspotView class]] )
         {
-            shadeView = (ShadeView *)v;
+            shadeView = (HotspotView *)v;
             [shadeView setSelected:YES];
             [self showCaptureRect:YES];
-            [self positionCaptureRect:shadeView.frame];
+            [self positionHotspotArea:shadeView.frame];
         }
     }
     
     if ( shadeView == nil )
     {
-        [(ImageEditView *)self.view hideSelectArea];
+        [self.imageEditView hideSelectArea];
         [self showCaptureRect:NO];
         
         if ( maybeHideOrShowNavBar )
@@ -262,66 +271,25 @@
     }
 }
 
-- (void) handleTap:(UITapGestureRecognizer*)recognizer
-{
-    if (recognizer.state==UIGestureRecognizerStateEnded)
-    {
-        CGPoint p = [recognizer locationInView:self.view];
-        UIView* v = [self.view hitTest:p withEvent:nil];
-
-        bool maybeHideOrShowNavBar = NO;
-        if ( shadeView == nil )
-        {
-            maybeHideOrShowNavBar = YES;
-        }
-        
-        if ( v != nil )
-        {
-            [shadeView setSelected:NO];
-            shadeView = nil;
-            if ( [v isKindOfClass:[ShadeView class]] )
-            {
-                shadeView = (ShadeView *)v;
-                [shadeView setSelected:YES];
-                [self showCaptureRect:YES];
-                [self positionCaptureRect:shadeView.frame];
-            }
-        }
-        
-        if ( shadeView == nil )
-        {
-            [(ImageEditView *)self.view hideSelectArea];
-            [self showCaptureRect:NO];
-            
-            if ( maybeHideOrShowNavBar )
-            {
-                // Toggle navigation bar hidden
-                BOOL hide = ![self.navigationController isNavigationBarHidden];
-                [self.navigationController setNavigationBarHidden:hide animated:YES];
-                [UIView animateWithDuration:0.15 animations:^{
-                    
-                    if ( hide )
-                        self.toolbarBottomConstraint.constant = -self.toolbar.frame.size.height;
-                    else
-                        self.toolbarBottomConstraint.constant = 0;
-                    
-                    [self.view layoutIfNeeded];
-                }];
-            }
-            
-        }
-    }
-}
-
 #pragma mark - LinkImageViewController delegate
 
 - (void) LIVC_didSelectImage:(NSString *)imageId
 {
     shadeView.associatedImageLink.linkedToId = imageId;
     [shadeView setNeedsDisplay];
-    [self setControlPointsColor];
+    [self updateLinkColor];
 }
 
-#pragma mark - Dragging
+#pragma mark - DrawViewControllerDelegateMethods
+- (void) drawImageChanged:(UIImage *)image
+{
+    // Save image
+    bool rc = [UIImagePNGRepresentation(image) writeToFile:self.imageDetails.imagePath atomically:YES];
+    if ( !rc )
+        NSLog( @"Failed");
+
+    self.imageView.image = image;
+}
+
 
 @end

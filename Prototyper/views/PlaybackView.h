@@ -11,5 +11,7 @@
 
 @interface PlaybackView : UIView
 
-@property (nonatomic, strong) ImageDetails *imageDetails;
+//@property (nonatomic, strong) ImageDetails *imageDetails;
+
+- (void) transitionTo:(ImageDetails *)newDetails;
 @end

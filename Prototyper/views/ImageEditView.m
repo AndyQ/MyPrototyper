@@ -20,6 +20,15 @@ CGPoint CGRectCenter( CGRect r )
     return p;
 }
 
+static CGPoint midpoint(CGPoint p0, CGPoint p1)
+{
+    return (CGPoint) {
+        (p0.x + p1.x) / 2.0,
+        (p0.y + p1.y) / 2.0
+    };
+}
+
+
 @implementation ImageEditView
 {
     UIColor *borderColor;
@@ -32,6 +41,8 @@ CGPoint CGRectCenter( CGRect r )
 
     int pointMove;
     CGPoint startPoint;
+    
+    UIBezierPath *path;
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder
@@ -86,16 +97,14 @@ CGPoint CGRectCenter( CGRect r )
     
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
     [super drawRect:rect];
 
     CGContextRef context = UIGraphicsGetCurrentContext();
-    // Drawing code
-    [self.image drawInRect:self.frame];
     
+    [self.image drawInRect:self.frame];
+
     if ( self.showSelectArea )
     {
         CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
@@ -114,7 +123,6 @@ CGPoint CGRectCenter( CGRect r )
         CGContextFillEllipseInRect (context, bottomLeftPoint);
         CGContextFillEllipseInRect (context, bottomRightPoint);
     }
-
 }
 
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -197,13 +205,10 @@ CGPoint CGRectCenter( CGRect r )
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-//    UITouch *touch = [touches anyObject];
-//    CGPoint p = [touch locationInView:self];
-    
     pointMove = 0;
     
     // Notify delegate that the frame has moved
     if ( self.showSelectArea )
-        [self.delegate selectAreaUpdate:self.selectArea];
+        [self.delegate hotspotAreaUpdate:self.selectArea];
 }
 @end

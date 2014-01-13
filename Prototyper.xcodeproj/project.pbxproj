@@ -14,7 +14,6 @@
 		A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2F11880A4FA00E250BF /* ImageLink.m */; };
 		A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2F41881777B00E250BF /* ImageEditView.m */; };
 		A1D2B2F818820E8F00E250BF /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2F718820E8F00E250BF /* PlaybackViewController.m */; };
-		A1D2B2FB1882E73200E250BF /* PlaybackView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2FA1882E73200E250BF /* PlaybackView.m */; };
 		A1D2B30418832EC200E250BF /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B30318832EC200E250BF /* MainViewController.m */; };
 		A1D2B3071883F10800E250BF /* DrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B3061883F10800E250BF /* DrawViewController.m */; };
 		A1D2B30A1883F11900E250BF /* DrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B3091883F11900E250BF /* DrawView.m */; };
@@ -35,6 +34,7 @@
 		A1D7588F187FDEFD00E7AA2F /* PrototyperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7588E187FDEFD00E7AA2F /* PrototyperTests.m */; };
 		A1D758A0187FDF3C00E7AA2F /* ImageEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D75899187FDF3C00E7AA2F /* ImageEditViewController.m */; };
 		A1D758A1187FDF3C00E7AA2F /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7589B187FDF3C00E7AA2F /* PhotoCell.m */; };
+		A1F1437C18848852006829F2 /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F1437B18848852006829F2 /* UIColor+Utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,8 +62,6 @@
 		A1D2B2F41881777B00E250BF /* ImageEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageEditView.m; sourceTree = "<group>"; };
 		A1D2B2F618820E8F00E250BF /* PlaybackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackViewController.h; sourceTree = "<group>"; };
 		A1D2B2F718820E8F00E250BF /* PlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
-		A1D2B2F91882E73200E250BF /* PlaybackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaybackView.h; sourceTree = "<group>"; };
-		A1D2B2FA1882E73200E250BF /* PlaybackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackView.m; sourceTree = "<group>"; };
 		A1D2B30218832EC200E250BF /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		A1D2B30318832EC200E250BF /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		A1D2B3051883F10800E250BF /* DrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawViewController.h; sourceTree = "<group>"; };
@@ -94,6 +92,9 @@
 		A1D75899187FDF3C00E7AA2F /* ImageEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageEditViewController.m; sourceTree = "<group>"; };
 		A1D7589A187FDF3C00E7AA2F /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		A1D7589B187FDF3C00E7AA2F /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		A1F1437A18848852006829F2 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
+		A1F1437B18848852006829F2 /* UIColor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utils.m"; sourceTree = "<group>"; };
+		A1F1437D18849DFD006829F2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,8 +143,6 @@
 				A1D2B2F41881777B00E250BF /* ImageEditView.m */,
 				A1D2B3081883F11900E250BF /* DrawView.h */,
 				A1D2B3091883F11900E250BF /* DrawView.m */,
-				A1D2B2F91882E73200E250BF /* PlaybackView.h */,
-				A1D2B2FA1882E73200E250BF /* PlaybackView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -185,6 +184,7 @@
 				A1D2B2E31880A45000E250BF /* views */,
 				A1D7586F187FDEFD00E7AA2F /* AppDelegate.h */,
 				A1D75870187FDEFD00E7AA2F /* AppDelegate.m */,
+				A1F1437D18849DFD006829F2 /* Constants.h */,
 				A1D75872187FDEFD00E7AA2F /* Main_iPhone.storyboard */,
 				A1D75875187FDEFD00E7AA2F /* Main_iPad.storyboard */,
 				A1D2B30218832EC200E250BF /* MainViewController.h */,
@@ -199,6 +199,8 @@
 				A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */,
 				A1D2B2F618820E8F00E250BF /* PlaybackViewController.h */,
 				A1D2B2F718820E8F00E250BF /* PlaybackViewController.m */,
+				A1F1437A18848852006829F2 /* UIColor+Utils.h */,
+				A1F1437B18848852006829F2 /* UIColor+Utils.m */,
 				A1D7589A187FDF3C00E7AA2F /* PhotoCell.h */,
 				A1D7589B187FDF3C00E7AA2F /* PhotoCell.m */,
 				A1D7587B187FDEFD00E7AA2F /* Images.xcassets */,
@@ -337,7 +339,7 @@
 				A1D758A0187FDF3C00E7AA2F /* ImageEditViewController.m in Sources */,
 				A1D758A1187FDF3C00E7AA2F /* PhotoCell.m in Sources */,
 				A1D2B2F818820E8F00E250BF /* PlaybackViewController.m in Sources */,
-				A1D2B2FB1882E73200E250BF /* PlaybackView.m in Sources */,
+				A1F1437C18848852006829F2 /* UIColor+Utils.m in Sources */,
 				A1D7587A187FDEFD00E7AA2F /* ProjectViewController.m in Sources */,
 				A1D2B2E91880A47E00E250BF /* Project.m in Sources */,
 				A1D2B3071883F10800E250BF /* DrawViewController.m in Sources */,

@@ -14,6 +14,9 @@
 
 @interface Project : NSObject <NSCoding>
 
+@property (nonatomic, readonly) NSString *projectName;
+@property (nonatomic, assign) NSInteger projectType;
+
 + (NSString *) getDocsDir;
 + (Project *) setupProject:(NSString *)projectName;
 + (void) deleteProjectWithName:(NSString *)projectName;
@@ -21,6 +24,7 @@
 - (NSString *) getProjectFolder;
 - (void) addImageToProject:(UIImage *)image;
 - (void) removeItem:(ImageDetails *)item;
+- (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
 
 - (void) save;
 

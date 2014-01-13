@@ -7,6 +7,7 @@
 //
 
 #import "HotspotView.h"
+#import "UIColor+Utils.h"
 
 @implementation HotspotView
 {
@@ -43,9 +44,7 @@
         borderColor = [UIColor redColor];
     }
     
-    CGFloat hue, sat, bright, alpha;
-    [borderColor getHue:&hue saturation:&sat brightness:&bright alpha:&alpha];
-    unselBorderColor = [UIColor colorWithHue:hue saturation:sat brightness:bright*0.5 alpha:alpha];
+    unselBorderColor = [borderColor darkerColorByAmount:0.5];
     backgroundColor = [borderColor colorWithAlphaComponent:0.2];
 }
 

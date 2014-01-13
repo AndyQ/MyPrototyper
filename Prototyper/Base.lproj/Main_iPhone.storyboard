@@ -61,7 +61,7 @@
                                 <items>
                                     <barButtonItem title="New" id="nVA-yG-kht">
                                         <connections>
-                                            <segue destination="Rce-PH-wyS" kind="modal" identifier="ShowDraw" id="fzL-Z5-DTz"/>
+                                            <segue destination="Rce-PH-wyS" kind="modal" identifier="ShowDraw" modalTransitionStyle="crossDissolve" id="fzL-Z5-DTz"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="OK2-9Y-sq7"/>
@@ -186,10 +186,22 @@
                         <viewControllerLayoutGuide type="top" id="RJF-7Y-zOJ"/>
                         <viewControllerLayoutGuide type="bottom" id="p4Z-eA-uVX"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jmU-yb-LdH" customClass="PlaybackView">
+                    <view key="view" contentMode="scaleToFill" id="jmU-yb-LdH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lAp-2Y-Kvr">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lAp-2Y-Kvr" firstAttribute="leading" secondItem="jmU-yb-LdH" secondAttribute="leading" id="F2y-NG-j63"/>
+                            <constraint firstAttribute="trailing" secondItem="lAp-2Y-Kvr" secondAttribute="trailing" id="P5w-5a-SHI"/>
+                            <constraint firstItem="p4Z-eA-uVX" firstAttribute="top" secondItem="lAp-2Y-Kvr" secondAttribute="bottom" id="cTj-wN-7r1"/>
+                            <constraint firstItem="lAp-2Y-Kvr" firstAttribute="top" secondItem="RJF-7Y-zOJ" secondAttribute="bottom" constant="-64" id="ecu-bz-uVV"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Playback" id="Mgg-aB-hjJ">
                         <barButtonItem key="rightBarButtonItem" title="Hide bar" id="KVe-iz-lqV">
@@ -198,6 +210,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="lAp-2Y-Kvr" id="9xI-QI-y3B"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujY-1p-3Rl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

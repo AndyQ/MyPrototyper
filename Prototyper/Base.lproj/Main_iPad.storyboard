@@ -165,6 +165,7 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="drawView" destination="Zvw-av-9fI" id="e9J-eu-Fjk"/>
                         <outlet property="imageView" destination="mvX-Qg-4ip" id="6Wx-gn-iMb"/>
                     </connections>
                 </viewController>
@@ -336,10 +337,22 @@
                         <viewControllerLayoutGuide type="top" id="GdD-RX-Mas"/>
                         <viewControllerLayoutGuide type="bottom" id="PVF-ya-fkc"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZZ0-cw-bbX" customClass="PlaybackView">
+                    <view key="view" contentMode="scaleToFill" id="ZZ0-cw-bbX">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-Bd-UN5">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PVF-ya-fkc" firstAttribute="top" secondItem="Q0t-Bd-UN5" secondAttribute="bottom" id="8MZ-Qi-yU6"/>
+                            <constraint firstItem="Q0t-Bd-UN5" firstAttribute="top" secondItem="GdD-RX-Mas" secondAttribute="bottom" constant="-64" id="IB6-mR-Ypc"/>
+                            <constraint firstAttribute="trailing" secondItem="Q0t-Bd-UN5" secondAttribute="trailing" id="r71-Oa-7pM"/>
+                            <constraint firstItem="Q0t-Bd-UN5" firstAttribute="leading" secondItem="ZZ0-cw-bbX" secondAttribute="leading" id="vLd-oq-RnA"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Playback" id="Z68-25-bxi">
                         <barButtonItem key="rightBarButtonItem" title="Hide bar" id="fEy-oW-Vm2">
@@ -348,6 +361,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="Q0t-Bd-UN5" id="zFY-mL-zZS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKy-OM-XrE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

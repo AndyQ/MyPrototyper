@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "ProjectViewController.h"
 #import "Project.h"
+#import "Constants.h"
 
 @interface MainViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
@@ -86,7 +87,8 @@
     {
         NSString *name = [alertView textFieldAtIndex:0].text;
         
-        [projects addObject:name];
+        Project *p = [Project setupProject:name];
+        [projects addObject:p];
         [self.tableView reloadData];
     }
 }
@@ -100,7 +102,17 @@
     for ( NSString *file in files )
     {
         if ( ![file hasPrefix:@"."] )
-            [projects addObject:file];
+        {
+            Project *p = [Project setupProject:file];
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+            {
+                if ( p.projectType == IPAD )
+                    [projects addObject:p];
+            }
+            else
+                if ( p.projectType == IPHONE )
+                    [projects addObject:p];
+        }
     }
 }
 
@@ -140,15 +152,16 @@
 
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *project = projects[indexPath.row];
-    cell.textLabel.text = project;
+    Project *project = projects[indexPath.row];
+    cell.textLabel.text = project.projectName;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectedProjectName = projects[indexPath.row];
+    Project *project = projects[indexPath.row];
+    selectedProjectName = project.projectName;
     [self performSegueWithIdentifier:@"ShowProject" sender:self];
 }
 
@@ -161,7 +174,8 @@
 {
     if ( editingStyle == UITableViewCellEditingStyleDelete )
     {
-        [Project deleteProjectWithName:projects[indexPath.row]];
+        Project *project = projects[indexPath.row];
+        [Project deleteProjectWithName:project.projectName];
         [projects removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }

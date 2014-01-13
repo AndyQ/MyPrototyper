@@ -7,10 +7,10 @@
 //
 
 #import "Project.h"
+#import "Constants.h"
 
 @implementation Project
 {
-    NSString *_projectName;
     NSMutableArray *_images;
 }
 
@@ -68,6 +68,11 @@
     self = [super init];
     if (self) {
         _projectName = projectName;
+        
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+            _projectType = IPAD;
+        else
+            _projectType = IPHONE;
         _images = [NSMutableArray array];
     }
     return self;
@@ -124,6 +129,21 @@
     [self save];
 }
 
+- (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
+{
+    ImageDetails *ret = nil;
+    for ( ImageDetails *item in _images )
+    {
+        if ( [item.imageName isEqualToString:linkedToId] )
+        {
+            ret = item;
+            break;
+        }
+    }
+    
+    return ret;
+}
+
 - (void) save
 {
     NSString *path = [self getProjectFolder];
@@ -150,7 +170,13 @@
     if(self = [super init])
     {
         _projectName = [aDecoder decodeObjectForKey:@"projectName"];
+        _projectType = [aDecoder decodeInt32ForKey:@"projectType"];
         _images = [aDecoder decodeObjectForKey:@"images"];
+        
+        // Little hack temporarily to assign unknown project types to the device we are running on
+        if ( _projectType == 0 )
+            _projectType = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? IPAD : IPHONE;
+
     }
     
     return self;
@@ -159,6 +185,7 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:_projectName forKey:@"projectName"];
+    [coder encodeInt32:_projectType forKey:@"projectType"];
     [coder encodeObject:_images forKey:@"images"];
 }
 

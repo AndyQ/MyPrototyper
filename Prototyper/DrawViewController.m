@@ -62,11 +62,12 @@
     UIImage* image = nil;
     
     UIGraphicsBeginImageContext(self.drawView.frame.size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
     {
         [[UIColor whiteColor] setFill];
         CGContextFillRect( UIGraphicsGetCurrentContext(), self.drawView.frame );
-        [self.imageView.layer renderInContext: UIGraphicsGetCurrentContext()];
-        [self.drawView.layer renderInContext: UIGraphicsGetCurrentContext()];
+        [self.imageView.layer renderInContext: ctx];
+        [self.drawView.layer renderInContext: ctx];
         image = UIGraphicsGetImageFromCurrentImageContext();
     }
     UIGraphicsEndImageContext();

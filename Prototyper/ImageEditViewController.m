@@ -14,7 +14,7 @@
 #import "ImageEditView.h"
 #import "HotspotView.h"
 
-@interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate>
 {
     HotspotView* shadeView;
 }
@@ -103,6 +103,8 @@
         return YES;
     else if(action == @selector(linkView))
         return YES;
+    else if(action == @selector(transitionView))
+        return YES;
 
     return NO;
 }
@@ -113,8 +115,9 @@
     
     UIMenuItem *menuItem1 = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteView)];
     UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Link" action:@selector(linkView)];
+    UIMenuItem *menuItem3 = [[UIMenuItem alloc] initWithTitle:@"Transition" action:@selector(transitionView)];
     
-    NSArray *menuItems = @[menuItem1, menuItem2];
+    NSArray *menuItems = @[menuItem1, menuItem2, menuItem3];
     
     [sharedController setTargetRect:r inView:self.view];
     
@@ -142,6 +145,31 @@
     [self performSegueWithIdentifier:@"showLinkToVC" sender:self];
 }
 
+- (void) transitionView
+{
+    // Display list of transition types
+    UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:@"Select transition type" delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
+    
+    NSArray *titles = @[@"None", @"Crossfade", @"Slide in from left", @"Slide in from right", @"Slide out from left", @"Slide out from right", @"Push left", @"Push right"];
+    for ( int i = 0 ; i < titles.count ; ++i )
+    {
+        NSString *title = titles[i];
+        if ( shadeView.associatedImageLink.transition == i )
+            title = [title stringByAppendingString:@" *"];
+        [as addButtonWithTitle:title];
+    }
+    [as showInView:self.view];
+}
+
+#pragma mark - UIActionSheetDelegate method
+- (void) actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex != actionSheet.cancelButtonIndex )
+    {
+        shadeView.associatedImageLink.transition = buttonIndex;
+    }
+    [self showMenuFromRect:shadeView.frame];
+}
 
 #pragma mark - Hotspot area management
 - (void) positionHotspotArea:(CGRect)r
@@ -278,6 +306,12 @@
     shadeView.associatedImageLink.linkedToId = imageId;
     [shadeView setNeedsDisplay];
     [self updateLinkColor];
+    
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self showMenuFromRect:shadeView.frame];
+    });
 }
 
 #pragma mark - DrawViewControllerDelegateMethods

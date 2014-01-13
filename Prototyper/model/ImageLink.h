@@ -8,8 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum ImageTransition
+{
+    IT_None = 0,
+    IT_CrossFade,
+    IT_SlideInFromLeft,
+    IT_SlideInFromRight,
+    IT_SlideOutFromLeft,
+    IT_SlideOutFromRight,
+    IT_PushToLeft,
+    IT_PushToRight
+} ImageTransition;
+
 @interface ImageLink : NSObject <NSCoding>
 
 @property (nonatomic, assign) CGRect rect;
 @property (nonatomic, strong) NSString *linkedToId;
+@property (nonatomic, assign) ImageTransition transition;
 @end

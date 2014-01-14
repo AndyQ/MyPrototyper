@@ -8,94 +8,64 @@
 
 #import "DrawView.h"
 
-static CGPoint midpoint(CGPoint p0, CGPoint p1)
-{
-    return (CGPoint) {
-        (p0.x + p1.x) / 2.0,
-        (p0.y + p1.y) / 2.0
-    };
-}
-
 @implementation DrawView
+
+- (void)reloadData
 {
-    CGPoint previousPoint;
-    
-    UIBezierPath *path;
-    NSMutableArray *pathArray;
-    NSMutableArray *bufferArray;
+    [self setNeedsDisplay];
 }
 
-- (id) initWithCoder:(NSCoder *)aDecoder
+- (void)reloadDataInRect:(CGRect)rect
 {
-    if ( [super initWithCoder:aDecoder] )
-    {        
-        pathArray=[[NSMutableArray alloc]init];
-        bufferArray=[[NSMutableArray alloc]init];
-
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-        pan.maximumNumberOfTouches = pan.minimumNumberOfTouches = 1;
-        [self addGestureRecognizer:pan];
-
-    }
-    return self;
+    [self setNeedsDisplayInRect:rect];
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    [super drawRect:rect];
-    
-    [[UIColor blackColor] setStroke];
-    
-    for (UIBezierPath *_path in pathArray)
-    {
-        [_path strokeWithBlendMode:kCGBlendModeNormal alpha:1.0];
+    NSUInteger numberOfShapes = [self.dataSource numberOfShapesInDrawingView:self];
+    NSUInteger indexOfSelectedShape = NSNotFound;
+    if ([self.dataSource respondsToSelector:@selector(indexOfSelectedShapeInDrawingView:)]) {
+        indexOfSelectedShape = [self.dataSource indexOfSelectedShapeInDrawingView:self];
     }
+    
+    for (NSUInteger shapeIndex = 0; shapeIndex < numberOfShapes; shapeIndex++)
+    {
+        UIBezierPath *path = [self.dataSource drawingView:self pathForShapeAtIndex:shapeIndex];
+        if (CGRectIntersectsRect(rect, CGRectInset(path.bounds, -(path.lineWidth + 1.0f), -(path.lineWidth + 1.0f))))
+        {
+            UIColor *lineColor = [self.dataSource drawingView:self lineColorForShapeAtIndex:shapeIndex];
+            if ( [self.dataSource drawingView:self shouldFillShapeAtIndex:shapeIndex] )
+            {
+                [lineColor setFill];
+                [path fill];
+            }
+            else
+            {
+                [lineColor setStroke];
+                [path stroke];
+            }
+            
+            if (shapeIndex == indexOfSelectedShape) {
+                UIBezierPath *pathCopy = [path copy];
+                CGPathRef cgPathSelectionRect = CGPathCreateCopyByStrokingPath(pathCopy.CGPath, NULL, pathCopy.lineWidth, pathCopy.lineCapStyle, pathCopy.lineJoinStyle, pathCopy.miterLimit);
+                UIBezierPath *selectionRect = [UIBezierPath bezierPathWithCGPath:cgPathSelectionRect];
+                CGPathRelease(cgPathSelectionRect);
+                
+                CGFloat dashStyle[] = { 5.0f, 5.0f };
+                [selectionRect setLineDash:dashStyle count:2 phase:0];
+                [[UIColor blackColor] setStroke];
+                [selectionRect stroke];
+            }
+        }
+    }
+    
+    if ( self.tmpPath != nil )
+    {
+        [self.tmpPathColor setStroke];
+        [self.tmpPath stroke];
+
+    }
+    
 }
-
--(void) undoButtonPressed
-{
-    if( [pathArray count] > 0 )
-    {
-        UIBezierPath *_path = [pathArray lastObject];
-        [bufferArray addObject:_path];
-        [pathArray removeLastObject];
-        [self setNeedsDisplay];
-    }
-}
-
--(void) redoButtonPressed
-{
-    if( [bufferArray count] > 0 )
-    {
-        UIBezierPath *_path = [bufferArray lastObject];
-        [pathArray addObject:_path];
-        [bufferArray removeLastObject];
-        [self setNeedsDisplay];
-    }
-}
-
-- (void)pan:(UIPanGestureRecognizer *)pan
-{
-    CGPoint currentPoint = [pan locationInView:self];
-    CGPoint midPoint = midpoint(previousPoint, currentPoint);
-    
-    if (pan.state == UIGestureRecognizerStateBegan)
-    {
-        path = [UIBezierPath bezierPath];
-        path.lineWidth = 5;
-        [pathArray addObject:path];
-
-        [path moveToPoint:currentPoint];
-    }
-    else if (pan.state == UIGestureRecognizerStateChanged)
-    {
-        [path addQuadCurveToPoint:midPoint controlPoint:previousPoint];
-    }
-    
-    previousPoint = currentPoint;
-    
-    [self setNeedsDisplay];
-}
-
 
 @end

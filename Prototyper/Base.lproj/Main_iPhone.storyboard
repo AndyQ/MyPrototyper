@@ -18,6 +18,7 @@
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="j7o-iA-KQd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KQn-sl-XQO">
                                     <size key="itemSize" width="104" height="146"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -397,15 +398,43 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="iGR-ku-d7J" id="OZo-jW-1TS"/>
+                                </connections>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NdZ-J0-Rv9">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Draw" id="e1j-yk-rbr"/>
-                                    <barButtonItem title="Undo" id="P1A-rU-SN7">
+                                    <barButtonItem style="plain" id="ykH-Np-tKu">
+                                        <view key="customView" contentMode="scaleToFill" id="73E-fz-IkD">
+                                            <rect key="frame" x="16" y="6" width="158" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="S6B-uP-PVa">
+                                                    <rect key="frame" x="6" y="2" width="146" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <segments>
+                                                        <segment title="Draw"/>
+                                                        <segment title="Erase"/>
+                                                        <segment title="Move"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="segDrawChanged:" destination="iGR-ku-d7J" eventType="valueChanged" id="JpE-09-n4D"/>
+                                                    </connections>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="centerX" secondItem="S6B-uP-PVa" secondAttribute="centerX" id="GtK-F7-mll"/>
+                                                <constraint firstAttribute="centerY" secondItem="S6B-uP-PVa" secondAttribute="centerY" constant="0.5" id="agc-8s-qkx"/>
+                                            </constraints>
+                                        </view>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="6Ll-0x-DAh"/>
+                                    <barButtonItem title="Add text" id="lu6-Di-QOx">
                                         <connections>
-                                            <action selector="undoPressed:" destination="iGR-ku-d7J" id="yx9-LU-oyK"/>
+                                            <action selector="addTextPressed:" destination="iGR-ku-d7J" id="RUs-H7-S84"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -436,6 +465,7 @@
                     <connections>
                         <outlet property="drawView" destination="wLE-Mb-NKy" id="0I4-dm-wyH"/>
                         <outlet property="imageView" destination="Hvt-EG-Iks" id="vIi-oi-NZ1"/>
+                        <outlet property="segDraw" destination="S6B-uP-PVa" id="b2E-P3-gbr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5n-Yc-MUh" userLabel="First Responder" sceneMemberID="firstResponder"/>

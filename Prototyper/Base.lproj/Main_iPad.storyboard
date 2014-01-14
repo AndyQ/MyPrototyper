@@ -132,10 +132,35 @@
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Draw" id="1a1-ul-Z5K"/>
-                                    <barButtonItem title="Undo" id="103-Xr-NLo">
+                                    <barButtonItem style="plain" id="IPQ-90-Qbe">
+                                        <view key="customView" contentMode="scaleToFill" id="YT5-gQ-za2">
+                                            <rect key="frame" x="16" y="6" width="158" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aSz-fK-tdc">
+                                                    <rect key="frame" x="6" y="2" width="146" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <segments>
+                                                        <segment title="Draw"/>
+                                                        <segment title="Erase"/>
+                                                        <segment title="Move"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="segDrawChanged:" destination="qLA-2e-chR" eventType="valueChanged" id="mnG-hw-4BU"/>
+                                                    </connections>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="aSz-fK-tdc" secondAttribute="centerY" constant="0.5" id="jJ8-su-Kng"/>
+                                                <constraint firstAttribute="centerX" secondItem="aSz-fK-tdc" secondAttribute="centerX" id="mIE-iN-he8"/>
+                                            </constraints>
+                                        </view>
+                                    </barButtonItem>
+                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Wfh-RO-q9t"/>
+                                    <barButtonItem title="Add Text" id="dh3-4x-5bH">
                                         <connections>
-                                            <action selector="undoPressed:" destination="qLA-2e-chR" id="Q3S-Oh-hu7"/>
+                                            <action selector="addTextPressed:" destination="qLA-2e-chR" id="9Tu-8o-9FU"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -167,6 +192,7 @@
                     <connections>
                         <outlet property="drawView" destination="Zvw-av-9fI" id="e9J-eu-Fjk"/>
                         <outlet property="imageView" destination="mvX-Qg-4ip" id="6Wx-gn-iMb"/>
+                        <outlet property="segDraw" destination="aSz-fK-tdc" id="Rga-rX-LZx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HI3-f1-xQW" userLabel="First Responder" sceneMemberID="firstResponder"/>

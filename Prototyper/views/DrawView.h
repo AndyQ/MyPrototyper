@@ -8,11 +8,38 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum DrawStates
+{
+    DRAW = 0,
+    ERASE,
+    MOVE
+    
+} DrawStates;
+
+
+@protocol DrawViewDataSource;
+
 @interface DrawView : UIView
 
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, weak) IBOutlet id <DrawViewDataSource> dataSource;
+@property (nonatomic, strong) UIColor *tmpPathColor;
+@property (nonatomic, strong) UIBezierPath *tmpPath;
 
--(void)undoButtonPressed;
--(void)redoButtonPressed;
+- (void)reloadData;
+- (void)reloadDataInRect:(CGRect)rect;
+
+@end
+
+
+@protocol DrawViewDataSource <NSObject>
+
+@required
+- (NSUInteger) numberOfShapesInDrawingView:(DrawView *)drawingView;
+- (UIBezierPath *) drawingView:(DrawView *)drawingView pathForShapeAtIndex:(NSUInteger)shapeIndex;
+- (UIColor *) drawingView:(DrawView *)drawingView lineColorForShapeAtIndex:(NSUInteger)shapeIndex;
+- (BOOL) drawingView:(DrawView *)drawingView shouldFillShapeAtIndex:(NSUInteger)shapeIndex;
+
+@optional
+- (NSUInteger)indexOfSelectedShapeInDrawingView:(DrawView *)drawingView;
 
 @end

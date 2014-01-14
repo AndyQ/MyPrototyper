@@ -69,7 +69,7 @@ CGPoint CGRectCenter( CGRect r )
 
 - (void) updatePointsFromRect
 {
-    CGFloat controlPointSize = 15;
+    CGFloat controlPointSize = 30;
     CGRect r = self.selectArea;
     r.origin.x -= controlPointSize/2;
     r.origin.y -= controlPointSize/2;
@@ -109,10 +109,10 @@ CGPoint CGRectCenter( CGRect r )
         
         // Draw control points
         CGContextSetFillColorWithColor(context, borderColor.CGColor);
-        CGContextFillEllipseInRect (context, topLeftPoint);
-        CGContextFillEllipseInRect (context, topRightPoint);
-        CGContextFillEllipseInRect (context, bottomLeftPoint);
-        CGContextFillEllipseInRect (context, bottomRightPoint);
+        CGContextFillEllipseInRect (context, CGRectInset( topLeftPoint, 7, 7 ));
+        CGContextFillEllipseInRect (context, CGRectInset( topRightPoint, 7, 7 ));
+        CGContextFillEllipseInRect (context, CGRectInset( bottomLeftPoint, 7, 7 ));
+        CGContextFillEllipseInRect (context, CGRectInset( bottomRightPoint, 7, 7 ));
     }
 }
 

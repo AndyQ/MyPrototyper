@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1758CFE1885DDA600490A06 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758CFD1885DDA600490A06 /* Shape.m */; };
+		A1758D011885DDB700490A06 /* UIBezierPath+TextPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D001885DDB700490A06 /* UIBezierPath+TextPaths.m */; };
 		A1D2B2E118809C9E00E250BF /* LinkImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */; };
 		A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E51880A47E00E250BF /* ImageDetails.m */; };
 		A1D2B2E91880A47E00E250BF /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E71880A47E00E250BF /* Project.m */; };
@@ -48,6 +50,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A1758CFC1885DDA600490A06 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
+		A1758CFD1885DDA600490A06 /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
+		A1758CFF1885DDB700490A06 /* UIBezierPath+TextPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+TextPaths.h"; sourceTree = "<group>"; };
+		A1758D001885DDB700490A06 /* UIBezierPath+TextPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+TextPaths.m"; sourceTree = "<group>"; };
 		A1D2B2DF18809C9E00E250BF /* LinkImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkImageViewController.h; sourceTree = "<group>"; };
 		A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkImageViewController.m; sourceTree = "<group>"; };
 		A1D2B2E41880A47E00E250BF /* ImageDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetails.h; sourceTree = "<group>"; };
@@ -124,6 +130,8 @@
 		A1D2B2E21880A45000E250BF /* model */ = {
 			isa = PBXGroup;
 			children = (
+				A1758CFC1885DDA600490A06 /* Shape.h */,
+				A1758CFD1885DDA600490A06 /* Shape.m */,
 				A1D2B2E41880A47E00E250BF /* ImageDetails.h */,
 				A1D2B2E51880A47E00E250BF /* ImageDetails.m */,
 				A1D2B2F01880A4FA00E250BF /* ImageLink.h */,
@@ -201,6 +209,8 @@
 				A1D2B2F718820E8F00E250BF /* PlaybackViewController.m */,
 				A1F1437A18848852006829F2 /* UIColor+Utils.h */,
 				A1F1437B18848852006829F2 /* UIColor+Utils.m */,
+				A1758CFF1885DDB700490A06 /* UIBezierPath+TextPaths.h */,
+				A1758D001885DDB700490A06 /* UIBezierPath+TextPaths.m */,
 				A1D7589A187FDF3C00E7AA2F /* PhotoCell.h */,
 				A1D7589B187FDF3C00E7AA2F /* PhotoCell.m */,
 				A1D7587B187FDEFD00E7AA2F /* Images.xcassets */,
@@ -342,6 +352,8 @@
 				A1F1437C18848852006829F2 /* UIColor+Utils.m in Sources */,
 				A1D7587A187FDEFD00E7AA2F /* ProjectViewController.m in Sources */,
 				A1D2B2E91880A47E00E250BF /* Project.m in Sources */,
+				A1758CFE1885DDA600490A06 /* Shape.m in Sources */,
+				A1758D011885DDB700490A06 /* UIBezierPath+TextPaths.m in Sources */,
 				A1D2B3071883F10800E250BF /* DrawViewController.m in Sources */,
 				A1D2B2EF1880A4A500E250BF /* HotspotView.m in Sources */,
 				A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */,

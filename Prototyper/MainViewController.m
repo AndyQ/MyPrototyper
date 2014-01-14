@@ -150,6 +150,8 @@
     return cell;
 }
 
+
+
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Project *project = projects[indexPath.row];

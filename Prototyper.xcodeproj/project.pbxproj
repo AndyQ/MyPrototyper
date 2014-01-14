@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A1758CFE1885DDA600490A06 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758CFD1885DDA600490A06 /* Shape.m */; };
 		A1758D011885DDB700490A06 /* UIBezierPath+TextPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D001885DDB700490A06 /* UIBezierPath+TextPaths.m */; };
+		A1758D031885F13300490A06 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A1758D021885F13300490A06 /* Settings.bundle */; };
 		A1D2B2E118809C9E00E250BF /* LinkImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */; };
 		A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E51880A47E00E250BF /* ImageDetails.m */; };
 		A1D2B2E91880A47E00E250BF /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E71880A47E00E250BF /* Project.m */; };
@@ -54,6 +55,7 @@
 		A1758CFD1885DDA600490A06 /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		A1758CFF1885DDB700490A06 /* UIBezierPath+TextPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+TextPaths.h"; sourceTree = "<group>"; };
 		A1758D001885DDB700490A06 /* UIBezierPath+TextPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+TextPaths.m"; sourceTree = "<group>"; };
+		A1758D021885F13300490A06 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
 		A1D2B2DF18809C9E00E250BF /* LinkImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkImageViewController.h; sourceTree = "<group>"; };
 		A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkImageViewController.m; sourceTree = "<group>"; };
 		A1D2B2E41880A47E00E250BF /* ImageDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetails.h; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 		A1D75867187FDEFD00E7AA2F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A1758D021885F13300490A06 /* Settings.bundle */,
 				A1D75868187FDEFD00E7AA2F /* Prototyper-Info.plist */,
 				A1D75869187FDEFD00E7AA2F /* InfoPlist.strings */,
 				A1D7586C187FDEFD00E7AA2F /* main.m */,
@@ -255,6 +258,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1D75892187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "Prototyper" */;
 			buildPhases = (
+				A1758D041885F1BE00490A06 /* ShellScript */,
 				A1D75859187FDEFD00E7AA2F /* Sources */,
 				A1D7585A187FDEFD00E7AA2F /* Frameworks */,
 				A1D7585B187FDEFD00E7AA2F /* Resources */,
@@ -326,6 +330,7 @@
 			files = (
 				A1D75877187FDEFD00E7AA2F /* Main_iPad.storyboard in Resources */,
 				A1D7587C187FDEFD00E7AA2F /* Images.xcassets in Resources */,
+				A1758D031885F13300490A06 /* Settings.bundle in Resources */,
 				A1D75874187FDEFD00E7AA2F /* Main_iPhone.storyboard in Resources */,
 				A1D7586B187FDEFD00E7AA2F /* InfoPlist.strings in Resources */,
 			);
@@ -340,6 +345,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A1758D041885F1BE00490A06 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"$SRCROOT/Prototyper/Prototyper-Info.plist\"\nversion=`/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" $SRCROOT/Prototyper/Prototyper-Info.plist`\nbuild=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $SRCROOT/Prototyper/Prototyper-Info.plist`\n\n/usr/libexec/PlistBuddy \"$SRCROOT/Settings.bundle/Root.plist\" -c \"set PreferenceSpecifiers:1:DefaultValue $version ($build)\"\n\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A1D75859187FDEFD00E7AA2F /* Sources */ = {

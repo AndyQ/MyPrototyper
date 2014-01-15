@@ -108,7 +108,7 @@
         <!--Image Edit View Controller - Edit View-->
         <scene sceneID="NNV-Vb-WoQ">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" automaticallyAdjustsScrollViewInsets="NO" id="id8-63-Ttf" customClass="ImageEditViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="id8-63-Ttf" customClass="ImageEditViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wA6-IK-Zvx"/>
                         <viewControllerLayoutGuide type="bottom" id="mxf-dZ-lCb"/>
@@ -117,45 +117,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RG0-uZ-SPH">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RG0-uZ-SPH">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QsN-gY-nz1" customClass="ImageEditView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QsN-gY-nz1" customClass="ImageEditView">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="id8-63-Ttf" id="w1S-eY-bhE"/>
                                 </connections>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C3Q-Zc-Bug">
-                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="NYm-Bt-af9"/>
-                                </constraints>
-                                <items>
-                                    <barButtonItem style="done" systemItem="add" id="xuG-wb-QHB">
-                                        <connections>
-                                            <action selector="addCaptureRectPressed" destination="id8-63-Ttf" id="N90-Bo-ymc"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="rsh-2v-ZRS"/>
-                                    <barButtonItem title="Edit image" id="N9y-2y-Rd9">
-                                        <connections>
-                                            <action selector="editImagePressed:" destination="id8-63-Ttf" id="Svk-Da-bVR"/>
-                                            <segue destination="Rce-PH-wyS" kind="modal" identifier="ShowDraw" modalTransitionStyle="crossDissolve" id="TLw-5k-yuH"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="C3Q-Zc-Bug" secondAttribute="trailing" id="J7T-wu-Dea"/>
-                            <constraint firstItem="C3Q-Zc-Bug" firstAttribute="leading" secondItem="WLT-aB-Y2Z" secondAttribute="leading" id="T9f-oz-d4b"/>
-                            <constraint firstItem="mxf-dZ-lCb" firstAttribute="top" secondItem="C3Q-Zc-Bug" secondAttribute="bottom" id="nVY-wr-Vg9"/>
+                            <constraint firstItem="RG0-uZ-SPH" firstAttribute="top" secondItem="wA6-IK-Zvx" secondAttribute="bottom" id="7hh-CG-9eg"/>
+                            <constraint firstItem="mxf-dZ-lCb" firstAttribute="top" secondItem="QsN-gY-nz1" secondAttribute="bottom" id="AW7-M6-ayM"/>
+                            <constraint firstAttribute="trailing" secondItem="QsN-gY-nz1" secondAttribute="trailing" id="YlR-tv-Zfw"/>
+                            <constraint firstItem="QsN-gY-nz1" firstAttribute="top" secondItem="wA6-IK-Zvx" secondAttribute="bottom" id="ZEW-uR-1J0"/>
+                            <constraint firstItem="QsN-gY-nz1" firstAttribute="leading" secondItem="WLT-aB-Y2Z" secondAttribute="leading" id="Zzt-IZ-ZjY"/>
+                            <constraint firstItem="mxf-dZ-lCb" firstAttribute="top" secondItem="QsN-gY-nz1" secondAttribute="bottom" id="hDh-f5-dQc"/>
+                            <constraint firstAttribute="trailing" secondItem="RG0-uZ-SPH" secondAttribute="trailing" id="s2E-t2-Lp7"/>
+                            <constraint firstItem="mxf-dZ-lCb" firstAttribute="top" secondItem="RG0-uZ-SPH" secondAttribute="bottom" id="vcq-MO-iE9"/>
+                            <constraint firstItem="RG0-uZ-SPH" firstAttribute="leading" secondItem="WLT-aB-Y2Z" secondAttribute="leading" id="yjR-fj-84S"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit View" id="Tp0-rN-kjh">
@@ -166,11 +151,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="editImageButton" destination="N9y-2y-Rd9" id="jVD-DH-Qwm"/>
                         <outlet property="imageEditView" destination="QsN-gY-nz1" id="P8a-9Q-4Hq"/>
                         <outlet property="imageView" destination="RG0-uZ-SPH" id="p4X-HS-Xtt"/>
-                        <outlet property="toolbar" destination="C3Q-Zc-Bug" id="nmq-7L-2yg"/>
-                        <outlet property="toolbarBottomConstraint" destination="nVY-wr-Vg9" id="aCd-Hq-DK0"/>
                         <segue destination="WeT-pJ-SdK" kind="push" identifier="showLinkToVC" id="Ihi-M4-rli"/>
                     </connections>
                 </viewController>
@@ -192,7 +174,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lAp-2Y-Kvr">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                         </subviews>
@@ -201,7 +183,7 @@
                             <constraint firstItem="lAp-2Y-Kvr" firstAttribute="leading" secondItem="jmU-yb-LdH" secondAttribute="leading" id="F2y-NG-j63"/>
                             <constraint firstAttribute="trailing" secondItem="lAp-2Y-Kvr" secondAttribute="trailing" id="P5w-5a-SHI"/>
                             <constraint firstItem="p4Z-eA-uVX" firstAttribute="top" secondItem="lAp-2Y-Kvr" secondAttribute="bottom" id="cTj-wN-7r1"/>
-                            <constraint firstItem="lAp-2Y-Kvr" firstAttribute="top" secondItem="RJF-7Y-zOJ" secondAttribute="bottom" constant="-64" id="ecu-bz-uVV"/>
+                            <constraint firstItem="lAp-2Y-Kvr" firstAttribute="top" secondItem="RJF-7Y-zOJ" secondAttribute="bottom" id="ecu-bz-uVV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Playback" id="Mgg-aB-hjJ">
@@ -233,6 +215,7 @@
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="X55-Um-3lm">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WJ9-Jl-sLA">
                                     <size key="itemSize" width="104" height="146"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -381,7 +364,7 @@
         <!--Draw View Controller-->
         <scene sceneID="Dqk-6j-xze">
             <objects>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="iGR-ku-d7J" customClass="DrawViewController" sceneMemberID="viewController">
+                <viewController id="iGR-ku-d7J" customClass="DrawViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PB9-vC-hB7"/>
                         <viewControllerLayoutGuide type="bottom" id="eha-ef-LVF"/>
@@ -391,11 +374,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hvt-EG-Iks">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wLE-Mb-NKy" customClass="DrawView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -442,13 +425,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Hvt-EG-Iks" firstAttribute="top" secondItem="PB9-vC-hB7" secondAttribute="bottom" constant="-64" id="0NA-Ig-uv1"/>
+                            <constraint firstItem="Hvt-EG-Iks" firstAttribute="top" secondItem="PB9-vC-hB7" secondAttribute="bottom" id="0NA-Ig-uv1"/>
                             <constraint firstAttribute="trailing" secondItem="Hvt-EG-Iks" secondAttribute="trailing" id="7fz-gf-UAI"/>
                             <constraint firstAttribute="trailing" secondItem="NdZ-J0-Rv9" secondAttribute="trailing" id="891-56-I7r"/>
                             <constraint firstItem="Hvt-EG-Iks" firstAttribute="leading" secondItem="uih-K2-rEJ" secondAttribute="leading" id="98a-IE-pTG"/>
                             <constraint firstItem="eha-ef-LVF" firstAttribute="top" secondItem="wLE-Mb-NKy" secondAttribute="bottom" id="HP5-EZ-2gZ"/>
                             <constraint firstAttribute="trailing" secondItem="wLE-Mb-NKy" secondAttribute="trailing" id="TEf-hG-Q8r"/>
-                            <constraint firstItem="wLE-Mb-NKy" firstAttribute="top" secondItem="PB9-vC-hB7" secondAttribute="bottom" constant="-64" id="Tiu-kp-lsN"/>
+                            <constraint firstItem="wLE-Mb-NKy" firstAttribute="top" secondItem="PB9-vC-hB7" secondAttribute="bottom" id="Tiu-kp-lsN"/>
                             <constraint firstItem="wLE-Mb-NKy" firstAttribute="leading" secondItem="uih-K2-rEJ" secondAttribute="leading" id="VDR-LK-5fd"/>
                             <constraint firstItem="NdZ-J0-Rv9" firstAttribute="leading" secondItem="uih-K2-rEJ" secondAttribute="leading" id="aDe-0S-Jox"/>
                             <constraint firstItem="eha-ef-LVF" firstAttribute="top" secondItem="Hvt-EG-Iks" secondAttribute="bottom" id="fiu-JI-cBI"/>
@@ -497,7 +480,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="fzL-Z5-DTz"/>
-    </inferredMetricsTieBreakers>
 </document>

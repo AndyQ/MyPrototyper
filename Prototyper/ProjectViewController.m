@@ -14,7 +14,9 @@
 #import "ImageDetails.h"
 #import "PhotoCell.h"
 
-@interface ProjectViewController () <DrawViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+#import "ELCImagePickerController.h"
+
+@interface ProjectViewController () <DrawViewControllerDelegate, ELCImagePickerControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     Project *project;
     ImageDetails *selectedImageDetails;
@@ -95,6 +97,9 @@
 {
     PhotoCell *cell = (PhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
+    cell.layer.borderColor = [UIColor blackColor].CGColor;
+    cell.layer.borderWidth = 1;
+    cell.layer.cornerRadius = 5;
     ImageDetails *imageDetails = project[indexPath.row];
     
     cell.image = [UIImage imageWithContentsOfFile:imageDetails.imagePath];
@@ -193,12 +198,19 @@
           UIImagePickerControllerSourceTypePhotoLibrary] == NO))
         return;
     
+    
+    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+    elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
+    elcPicker.imagePickerDelegate = self;
+    
+    [self presentViewController:elcPicker animated:YES completion:nil];
+/*
     UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
     mediaUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     mediaUI.allowsEditing = NO;
     mediaUI.delegate = self;
     [self presentViewController:mediaUI animated:YES completion:nil];
-    
+*/
 }
 
 #pragma mark - DrawViewControllerDelegateMethods
@@ -206,6 +218,27 @@
 {
     [project addImageToProject:image];
     [self.collectionView reloadData];
+}
+
+#pragma mark - ELCImagePickerController delegates
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+		
+	for (NSDictionary *dict in info) {
+        
+        UIImage *image = [dict objectForKey:UIImagePickerControllerOriginalImage];
+        
+        image = [self scaleAndRotateImage:image];
+        [project addImageToProject:image];
+	}
+    
+    [self.collectionView reloadData];
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - image picker delegate

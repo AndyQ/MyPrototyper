@@ -31,6 +31,13 @@
     doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
 
     [self.collectionView reloadData];
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO; // backed by your instance variable
 }
 
 

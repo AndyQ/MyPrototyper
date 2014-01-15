@@ -25,7 +25,7 @@
     [super setSelected:selected];
     
     if ( selected )
-        self.backgroundColor = [UIColor yellowColor];
+        self.backgroundColor = [UIColor greenColor];
     else
         self.backgroundColor = [UIColor clearColor];
 }

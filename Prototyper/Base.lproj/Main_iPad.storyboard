@@ -18,6 +18,7 @@
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ITH-B8-WzL">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fwA-f2-WWo">
                                     <size key="itemSize" width="104" height="146"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -110,7 +111,7 @@
         <!--Draw View Controller-->
         <scene sceneID="QUz-gK-vtU">
             <objects>
-                <viewController id="qLA-2e-chR" customClass="DrawViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="qLA-2e-chR" customClass="DrawViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Peg-AW-jui"/>
                         <viewControllerLayoutGuide type="bottom" id="c73-XT-QNr"/>
@@ -120,11 +121,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mvX-Qg-4ip">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zvw-av-9fI" customClass="DrawView">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -168,7 +169,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mvX-Qg-4ip" firstAttribute="top" secondItem="Peg-AW-jui" secondAttribute="bottom" constant="-64" id="02k-A4-dez"/>
+                            <constraint firstItem="mvX-Qg-4ip" firstAttribute="top" secondItem="Peg-AW-jui" secondAttribute="bottom" id="02k-A4-dez"/>
                             <constraint firstItem="c73-XT-QNr" firstAttribute="top" secondItem="Ywe-7W-PSX" secondAttribute="bottom" id="6yO-mk-iDw"/>
                             <constraint firstItem="Zvw-av-9fI" firstAttribute="leading" secondItem="DhM-Lo-UNt" secondAttribute="leading" id="Feu-SV-Tmv"/>
                             <constraint firstAttribute="trailing" secondItem="Zvw-av-9fI" secondAttribute="trailing" id="I4P-Qc-yGg"/>
@@ -176,7 +177,7 @@
                             <constraint firstItem="Ywe-7W-PSX" firstAttribute="leading" secondItem="DhM-Lo-UNt" secondAttribute="leading" id="OHH-4B-h9q"/>
                             <constraint firstItem="c73-XT-QNr" firstAttribute="top" secondItem="mvX-Qg-4ip" secondAttribute="bottom" id="TnM-jZ-JlR"/>
                             <constraint firstItem="mvX-Qg-4ip" firstAttribute="leading" secondItem="DhM-Lo-UNt" secondAttribute="leading" id="Urr-aK-AnX"/>
-                            <constraint firstItem="Zvw-av-9fI" firstAttribute="top" secondItem="Peg-AW-jui" secondAttribute="bottom" constant="-64" id="WOR-UB-6yG"/>
+                            <constraint firstItem="Zvw-av-9fI" firstAttribute="top" secondItem="Peg-AW-jui" secondAttribute="bottom" id="WOR-UB-6yG"/>
                             <constraint firstAttribute="trailing" secondItem="mvX-Qg-4ip" secondAttribute="trailing" id="bxT-hY-hie"/>
                             <constraint firstAttribute="trailing" secondItem="Ywe-7W-PSX" secondAttribute="trailing" id="tW4-Av-zDG"/>
                         </constraints>
@@ -213,48 +214,28 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TLK-2S-AY0">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QM0-RT-32j" customClass="ImageEditView">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="O5L-vZ-Ghy" id="Q7Q-7L-F12"/>
                                 </connections>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zuy-45-5hQ">
-                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem systemItem="add" id="Ooz-Pc-pec">
-                                        <connections>
-                                            <action selector="addCaptureRectPressed" destination="O5L-vZ-Ghy" id="Qv1-PR-paz"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="YPp-KU-F5e"/>
-                                    <barButtonItem title="Edit image" id="4Pi-ib-rH0">
-                                        <connections>
-                                            <segue destination="wWG-LC-huY" kind="modal" identifier="ShowDraw" modalTransitionStyle="crossDissolve" id="wyB-2x-hou"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mLS-m7-SSp" firstAttribute="top" secondItem="QM0-RT-32j" secondAttribute="bottom" id="7wd-zv-NUr"/>
-                            <constraint firstItem="Zuy-45-5hQ" firstAttribute="leading" secondItem="k7Z-aF-85G" secondAttribute="leading" id="9tC-dp-IwM"/>
-                            <constraint firstItem="QM0-RT-32j" firstAttribute="top" secondItem="zTW-f4-aVE" secondAttribute="bottom" constant="-64" id="AA4-Ka-I96"/>
-                            <constraint firstItem="TLK-2S-AY0" firstAttribute="top" secondItem="zTW-f4-aVE" secondAttribute="bottom" constant="-64" id="I42-jS-fzs"/>
-                            <constraint firstItem="mLS-m7-SSp" firstAttribute="top" secondItem="Zuy-45-5hQ" secondAttribute="bottom" id="Lro-IA-h6u"/>
+                            <constraint firstItem="QM0-RT-32j" firstAttribute="top" secondItem="zTW-f4-aVE" secondAttribute="bottom" id="AA4-Ka-I96"/>
+                            <constraint firstItem="TLK-2S-AY0" firstAttribute="top" secondItem="zTW-f4-aVE" secondAttribute="bottom" id="I42-jS-fzs"/>
                             <constraint firstAttribute="trailing" secondItem="QM0-RT-32j" secondAttribute="trailing" id="Q3H-Hn-sg2"/>
                             <constraint firstAttribute="trailing" secondItem="TLK-2S-AY0" secondAttribute="trailing" id="QLZ-IF-0sl"/>
                             <constraint firstItem="TLK-2S-AY0" firstAttribute="leading" secondItem="k7Z-aF-85G" secondAttribute="leading" id="YLE-oC-MXQ"/>
                             <constraint firstItem="mLS-m7-SSp" firstAttribute="top" secondItem="TLK-2S-AY0" secondAttribute="bottom" id="dJI-ao-ERS"/>
                             <constraint firstItem="QM0-RT-32j" firstAttribute="leading" secondItem="k7Z-aF-85G" secondAttribute="leading" id="gXN-cr-eNg"/>
-                            <constraint firstAttribute="trailing" secondItem="Zuy-45-5hQ" secondAttribute="trailing" id="whr-aG-g74"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit View" id="PCQ-Xe-uVD">
@@ -265,11 +246,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="editImageButton" destination="4Pi-ib-rH0" id="gMO-3i-5UA"/>
                         <outlet property="imageEditView" destination="QM0-RT-32j" id="7hf-v8-XbH"/>
                         <outlet property="imageView" destination="TLK-2S-AY0" id="T9T-gz-qng"/>
-                        <outlet property="toolbar" destination="Zuy-45-5hQ" id="LAg-aG-bCe"/>
-                        <outlet property="toolbarBottomConstraint" destination="Lro-IA-h6u" id="txY-VV-aca"/>
                         <segue destination="nlD-wq-UtV" kind="push" identifier="showLinkToVC" id="SBn-YE-5qI"/>
                     </connections>
                 </viewController>
@@ -292,6 +270,7 @@
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3la-yh-qFo">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="960"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tbF-eJ-Ubg">
                                     <size key="itemSize" width="104" height="146"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -368,14 +347,14 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-Bd-UN5">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PVF-ya-fkc" firstAttribute="top" secondItem="Q0t-Bd-UN5" secondAttribute="bottom" id="8MZ-Qi-yU6"/>
-                            <constraint firstItem="Q0t-Bd-UN5" firstAttribute="top" secondItem="GdD-RX-Mas" secondAttribute="bottom" constant="-64" id="IB6-mR-Ypc"/>
+                            <constraint firstItem="Q0t-Bd-UN5" firstAttribute="top" secondItem="GdD-RX-Mas" secondAttribute="bottom" id="IB6-mR-Ypc"/>
                             <constraint firstAttribute="trailing" secondItem="Q0t-Bd-UN5" secondAttribute="trailing" id="r71-Oa-7pM"/>
                             <constraint firstItem="Q0t-Bd-UN5" firstAttribute="leading" secondItem="ZZ0-cw-bbX" secondAttribute="leading" id="vLd-oq-RnA"/>
                         </constraints>
@@ -501,7 +480,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="i0k-vu-3S9"/>
-    </inferredMetricsTieBreakers>
 </document>

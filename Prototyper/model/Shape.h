@@ -27,6 +27,7 @@ typedef enum {
 
 - (BOOL)containsPoint:(CGPoint)point;
 - (void)moveBy:(CGPoint)delta;
+- (void)applyTransform:(CGAffineTransform)transform;
 
 @property (nonatomic, strong) UIBezierPath *path;
 @property (nonatomic, strong) UIColor *lineColor;

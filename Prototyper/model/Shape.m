@@ -159,7 +159,11 @@
     [self.tapTarget applyTransform:transform];
 }
 
-
+- (void)applyTransform:(CGAffineTransform)transform;
+{
+    [self.path applyTransform:transform];
+    [self.tapTarget applyTransform:transform];
+}
 
 #pragma mark - Random Shape Generator Methods
 

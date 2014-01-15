@@ -72,6 +72,9 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     pan.maximumNumberOfTouches = pan.minimumNumberOfTouches = 1;
     [self.drawView addGestureRecognizer:pan];
+
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinch:)];
+    [self.drawView addGestureRecognizer:pinch];
 }
 
 - (void)didReceiveMemoryWarning
@@ -216,6 +219,23 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
     previousPoint = currentPoint;
     
     [self.drawView setNeedsDisplay];
+}
+
+- (void)pinch:(UIPinchGestureRecognizer *)recognizer
+{
+    if ( self.selectedShape == nil )
+        return;
+    CGRect originalBounds = self.selectedShape.path.bounds;
+    
+    CGAffineTransform scale = CGAffineTransformMakeScale(recognizer.scale, recognizer.scale);
+    [self.selectedShape applyTransform:scale];
+    CGRect newBounds  = self.selectedShape.path.bounds;
+    
+    CGAffineTransform translate = CGAffineTransformMakeTranslation(-(newBounds.origin.x - originalBounds.origin.x) - (newBounds.size.width - originalBounds.size.width) * 0.5, -(newBounds.origin.y - originalBounds.origin.y) - (newBounds.size.height - originalBounds.size.height) * 0.5);
+    [self.selectedShape applyTransform:translate];
+    
+    [self.drawView reloadData];
+    recognizer.scale = 1;
 }
 
 - (void)addShape:(Shape *)newShape

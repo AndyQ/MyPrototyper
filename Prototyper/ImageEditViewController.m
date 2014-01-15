@@ -13,12 +13,17 @@
 #import "DrawViewController.h"
 #import "ImageEditView.h"
 #import "HotspotView.h"
+#import "PSActionSheet.h"
+#import "PopoverView.h"
 
-@interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate>
+@interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, PopoverViewDelegate>
 {
     HotspotView* shadeView;
+    PopoverView *thePopoverView;
+    CGPoint selectedPoint;
 }
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTopConstraint;
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomConstraint;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editImageButton;
@@ -30,7 +35,7 @@
 
 @implementation ImageEditViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -56,6 +61,8 @@
         [self.imageEditView addSubview:view];
     }
 }
+
+
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -119,7 +126,7 @@
     
     NSArray *menuItems = @[menuItem1, menuItem2, menuItem3];
     
-    [sharedController setTargetRect:r inView:self.view];
+    [sharedController setTargetRect:r inView:self.imageEditView];
     
     [sharedController setMenuItems:menuItems];
     [sharedController setMenuVisible:YES animated:YES];
@@ -188,25 +195,25 @@
 }
 
 
-- (IBAction) addCaptureRectPressed
+- (void) addHotspotAtPoint:(CGPoint)p
 {
     if ( shadeView )
         [shadeView setSelected:NO];
     
     ImageLink *link = [ImageLink new];
     [self.imageDetails.links addObject:link];
-
+    
     shadeView = [[HotspotView alloc] init];
     shadeView.associatedImageLink = link;
     [self.imageEditView addSubview:shadeView];
-
-
-    CGRect r = CGRectMake( self.view.bounds.size.width / 2, self.view.bounds.size.height / 2, self.view.frame.size.width / 5, self.view.frame.size.width / 5 );
+    
+    float w = self.view.frame.size.width / 5;
+    CGRect r = CGRectMake( p.x - w/2, p.y - w/2, w, w );
     [self positionHotspotArea:r];
-
+    
     [self showCaptureRect:YES];
-}
 
+}
 
 
 - (void) showCaptureRect:(bool)show
@@ -253,14 +260,12 @@
 // User has tapped the view outside the current hotspot area
 - (void) touchedViewAtPoint:(CGPoint)p
 {
-    UIView* v = [self.view hitTest:p withEvent:nil];
+    UIView* v = [self.imageEditView hitTest:p withEvent:nil];
     
-    // Check if we currently have a hotspot selected, if not, then we may be toggling showing/hiding the NavBar 
-    bool maybeHideOrShowNavBar = NO;
+    // Check if we currently have a hotspot selected, if not, then we may show a popover with options
+    bool showPopover = NO;
     if ( shadeView == nil )
-    {
-        maybeHideOrShowNavBar = YES;
-    }
+        showPopover = YES;
     
     if ( v != nil )
     {
@@ -280,20 +285,10 @@
         [self.imageEditView hideSelectArea];
         [self showCaptureRect:NO];
         
-        if ( maybeHideOrShowNavBar )
+        if ( showPopover )
         {
-            // Toggle navigation bar hidden
-            BOOL hide = ![self.navigationController isNavigationBarHidden];
-            [self.navigationController setNavigationBarHidden:hide animated:YES];
-            [UIView animateWithDuration:0.15 animations:^{
-                
-                if ( hide )
-                    self.toolbarBottomConstraint.constant = -self.toolbar.frame.size.height;
-                else
-                    self.toolbarBottomConstraint.constant = 0;
-                
-                [self.view layoutIfNeeded];
-            }];
+            selectedPoint = p;
+            thePopoverView = [PopoverView showPopoverAtPoint:p inView:self.imageEditView withStringArray:@[@"Add hotspot", @"Edit image"] delegate:self];
         }
         
     }
@@ -325,5 +320,16 @@
     self.imageView.image = image;
 }
 
+#pragma mark - PopoverView delegate
 
+- (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index itemText:(NSString *)text
+{
+    [popoverView dismiss];
+    
+    if ( [text isEqualToString:@"Add hotspot"] )
+        [self addHotspotAtPoint:selectedPoint];
+    if ( [text isEqualToString:@"Edit image"] )
+        [self performSegueWithIdentifier:@"ShowDraw" sender:self];
+   
+}
 @end

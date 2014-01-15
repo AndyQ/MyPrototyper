@@ -47,6 +47,15 @@
 {
     [super viewDidLoad];
 
+    [self setupView];
+}
+
+- (void) setupView
+{
+    [self.imageEditView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    shadeView = nil;
+    [self showHotspotRect:NO];
+    
     UIImage *image = [UIImage imageWithContentsOfFile:self.imageDetails.imagePath];
     self.imageView.image = image;
     
@@ -111,6 +120,8 @@
         return YES;
     else if(action == @selector(transitionView))
         return YES;
+    else if(action == @selector(gotoLink))
+        return YES;
 
     return NO;
 }
@@ -122,8 +133,11 @@
     UIMenuItem *menuItem1 = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteView)];
     UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Link" action:@selector(linkView)];
     UIMenuItem *menuItem3 = [[UIMenuItem alloc] initWithTitle:@"Transition" action:@selector(transitionView)];
+    UIMenuItem *menuItem4 = [[UIMenuItem alloc] initWithTitle:@"Follow link" action:@selector(gotoLink)];
     
-    NSArray *menuItems = @[menuItem1, menuItem2, menuItem3];
+    NSMutableArray *menuItems = [@[menuItem1, menuItem2, menuItem3] mutableCopy];
+    if ( shadeView.associatedImageLink.linkedToId.length > 0 )
+        [menuItems addObject:menuItem4];
     
     [sharedController setTargetRect:r inView:self.imageEditView];
     
@@ -165,6 +179,12 @@
         [as addButtonWithTitle:title];
     }
     [as showInView:self.view];
+}
+
+- (void) gotoLink
+{
+    self.imageDetails = [self.project getLinkWithId:shadeView.associatedImageLink.linkedToId];
+    [self setupView];
 }
 
 #pragma mark - UIActionSheetDelegate method
@@ -210,12 +230,12 @@
     CGRect r = CGRectMake( p.x - w/2, p.y - w/2, w, w );
     [self positionHotspotArea:r];
     
-    [self showCaptureRect:YES];
+    [self showHotspotRect:YES];
 
 }
 
 
-- (void) showCaptureRect:(bool)show
+- (void) showHotspotRect:(bool)show
 {
     [self updateLinkColor];
 
@@ -226,6 +246,7 @@
     else
     {
         [self.imageEditView hideSelectArea];
+        [[UIMenuController sharedMenuController] setMenuVisible:NO];
     }
 }
 
@@ -274,7 +295,7 @@
         {
             shadeView = (HotspotView *)v;
             [shadeView setSelected:YES];
-            [self showCaptureRect:YES];
+            [self showHotspotRect:YES];
             [self positionHotspotArea:shadeView.frame];
         }
     }
@@ -282,7 +303,7 @@
     if ( shadeView == nil )
     {
         [self.imageEditView hideSelectArea];
-        [self showCaptureRect:NO];
+        [self showHotspotRect:NO];
         
         if ( showPopover )
         {

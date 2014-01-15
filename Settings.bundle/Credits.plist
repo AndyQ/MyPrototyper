@@ -8,6 +8,30 @@
                     <key>Type</key>
                     <string>PSChildPaneSpecifier</string>
                     <key>Title</key>
+                    <string>ELCImagePickerController</string>
+                    <key>File</key>
+                    <string>ELCImagePickerController</string>
+                </dict>
+                <dict>
+                    <key>Type</key>
+                    <string>PSChildPaneSpecifier</string>
+                    <key>Title</key>
+                    <string>PopoverView</string>
+                    <key>File</key>
+                    <string>PopoverView</string>
+                </dict>
+                <dict>
+                    <key>Type</key>
+                    <string>PSChildPaneSpecifier</string>
+                    <key>Title</key>
+                    <string>PSAlertView</string>
+                    <key>File</key>
+                    <string>PSAlertView</string>
+                </dict>
+                <dict>
+                    <key>Type</key>
+                    <string>PSChildPaneSpecifier</string>
+                    <key>Title</key>
                     <string>Thanks</string>
                     <key>File</key>
                     <string>Thanks</string>

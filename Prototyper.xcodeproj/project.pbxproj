@@ -11,8 +11,6 @@
 		A1758D011885DDB700490A06 /* UIBezierPath+TextPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D001885DDB700490A06 /* UIBezierPath+TextPaths.m */; };
 		A1758D031885F13300490A06 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A1758D021885F13300490A06 /* Settings.bundle */; };
 		A1758D0E1886FBFF00490A06 /* IMG_0001.PNG in Resources */ = {isa = PBXBuildFile; fileRef = A1758D0D1886FBFF00490A06 /* IMG_0001.PNG */; };
-		A1758D131887285100490A06 /* PSActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D111887285100490A06 /* PSActionSheet.m */; };
-		A1758D141887285100490A06 /* PSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D121887285100490A06 /* PSAlertView.m */; };
 		A1758D1718872E4F00490A06 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D1618872E4F00490A06 /* PopoverView.m */; };
 		A1758D2B1887330C00490A06 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D1A1887330C00490A06 /* ELCAlbumPickerController.m */; };
 		A1758D2C1887330C00490A06 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D1C1887330C00490A06 /* ELCAsset.m */; };
@@ -21,6 +19,9 @@
 		A1758D2F1887330C00490A06 /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D241887330C00490A06 /* ELCImagePickerController.m */; };
 		A1758D331887330C00490A06 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = A1758D291887330C00490A06 /* Overlay.png */; };
 		A1758D341887330C00490A06 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A1758D2A1887330C00490A06 /* Overlay@2x.png */; };
+		A1758D3C188739CB00490A06 /* PSPDFActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D37188739CB00490A06 /* PSPDFActionSheet.m */; };
+		A1758D3D188739CB00490A06 /* PSPDFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D39188739CB00490A06 /* PSPDFAlertView.m */; };
+		A1758D3E188739CB00490A06 /* UIColor+PSPDFKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D3B188739CB00490A06 /* UIColor+PSPDFKitAdditions.m */; };
 		A1D2B2E118809C9E00E250BF /* LinkImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */; };
 		A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E51880A47E00E250BF /* ImageDetails.m */; };
 		A1D2B2E91880A47E00E250BF /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E71880A47E00E250BF /* Project.m */; };
@@ -68,10 +69,6 @@
 		A1758D001885DDB700490A06 /* UIBezierPath+TextPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+TextPaths.m"; sourceTree = "<group>"; };
 		A1758D021885F13300490A06 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
 		A1758D0D1886FBFF00490A06 /* IMG_0001.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IMG_0001.PNG; sourceTree = "<group>"; };
-		A1758D0F1887283F00490A06 /* PSActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSActionSheet.h; sourceTree = "<group>"; };
-		A1758D101887283F00490A06 /* PSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAlertView.h; sourceTree = "<group>"; };
-		A1758D111887285100490A06 /* PSActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSActionSheet.m; sourceTree = "<group>"; };
-		A1758D121887285100490A06 /* PSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAlertView.m; sourceTree = "<group>"; };
 		A1758D1518872E4F00490A06 /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
 		A1758D1618872E4F00490A06 /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
 		A1758D191887330C00490A06 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
@@ -88,6 +85,12 @@
 		A1758D241887330C00490A06 /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
 		A1758D291887330C00490A06 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		A1758D2A1887330C00490A06 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
+		A1758D36188739CB00490A06 /* PSPDFActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPDFActionSheet.h; sourceTree = "<group>"; };
+		A1758D37188739CB00490A06 /* PSPDFActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPDFActionSheet.m; sourceTree = "<group>"; };
+		A1758D38188739CB00490A06 /* PSPDFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPDFAlertView.h; sourceTree = "<group>"; };
+		A1758D39188739CB00490A06 /* PSPDFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPDFAlertView.m; sourceTree = "<group>"; };
+		A1758D3A188739CB00490A06 /* UIColor+PSPDFKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PSPDFKitAdditions.h"; sourceTree = "<group>"; };
+		A1758D3B188739CB00490A06 /* UIColor+PSPDFKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PSPDFKitAdditions.m"; sourceTree = "<group>"; };
 		A1D2B2DF18809C9E00E250BF /* LinkImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkImageViewController.h; sourceTree = "<group>"; };
 		A1D2B2E018809C9E00E250BF /* LinkImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinkImageViewController.m; sourceTree = "<group>"; };
 		A1D2B2E41880A47E00E250BF /* ImageDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetails.h; sourceTree = "<group>"; };
@@ -190,6 +193,19 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		A1758D35188739CB00490A06 /* PSAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				A1758D36188739CB00490A06 /* PSPDFActionSheet.h */,
+				A1758D37188739CB00490A06 /* PSPDFActionSheet.m */,
+				A1758D38188739CB00490A06 /* PSPDFAlertView.h */,
+				A1758D39188739CB00490A06 /* PSPDFAlertView.m */,
+				A1758D3A188739CB00490A06 /* UIColor+PSPDFKitAdditions.h */,
+				A1758D3B188739CB00490A06 /* UIColor+PSPDFKitAdditions.m */,
+			);
+			path = PSAlertView;
+			sourceTree = "<group>";
+		};
 		A1D2B2E21880A45000E250BF /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +267,7 @@
 		A1D75866187FDEFD00E7AA2F /* Prototyper */ = {
 			isa = PBXGroup;
 			children = (
+				A1758D35188739CB00490A06 /* PSAlertView */,
 				A1758D181887330C00490A06 /* ELCImagePicker */,
 				A1D2B2E21880A45000E250BF /* model */,
 				A1D2B2E31880A45000E250BF /* views */,
@@ -277,10 +294,6 @@
 				A1758D001885DDB700490A06 /* UIBezierPath+TextPaths.m */,
 				A1D7589A187FDF3C00E7AA2F /* PhotoCell.h */,
 				A1D7589B187FDF3C00E7AA2F /* PhotoCell.m */,
-				A1758D0F1887283F00490A06 /* PSActionSheet.h */,
-				A1758D111887285100490A06 /* PSActionSheet.m */,
-				A1758D101887283F00490A06 /* PSAlertView.h */,
-				A1758D121887285100490A06 /* PSAlertView.m */,
 				A1758D1518872E4F00490A06 /* PopoverView.h */,
 				A1758D1618872E4F00490A06 /* PopoverView.m */,
 				A1D7587B187FDEFD00E7AA2F /* Images.xcassets */,
@@ -442,7 +455,6 @@
 			files = (
 				A1758D2B1887330C00490A06 /* ELCAlbumPickerController.m in Sources */,
 				A1D758A0187FDF3C00E7AA2F /* ImageEditViewController.m in Sources */,
-				A1758D131887285100490A06 /* PSActionSheet.m in Sources */,
 				A1D758A1187FDF3C00E7AA2F /* PhotoCell.m in Sources */,
 				A1D2B2F818820E8F00E250BF /* PlaybackViewController.m in Sources */,
 				A1758D2D1887330C00490A06 /* ELCAssetCell.m in Sources */,
@@ -454,11 +466,12 @@
 				A1758CFE1885DDA600490A06 /* Shape.m in Sources */,
 				A1758D011885DDB700490A06 /* UIBezierPath+TextPaths.m in Sources */,
 				A1D2B3071883F10800E250BF /* DrawViewController.m in Sources */,
-				A1758D141887285100490A06 /* PSAlertView.m in Sources */,
 				A1758D2C1887330C00490A06 /* ELCAsset.m in Sources */,
 				A1D2B2EF1880A4A500E250BF /* HotspotView.m in Sources */,
+				A1758D3D188739CB00490A06 /* PSPDFAlertView.m in Sources */,
 				A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */,
 				A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */,
+				A1758D3E188739CB00490A06 /* UIColor+PSPDFKitAdditions.m in Sources */,
 				A1D2B2E118809C9E00E250BF /* LinkImageViewController.m in Sources */,
 				A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */,
 				A1D75871187FDEFD00E7AA2F /* AppDelegate.m in Sources */,
@@ -466,6 +479,7 @@
 				A1D2B30A1883F11900E250BF /* DrawView.m in Sources */,
 				A1D7586D187FDEFD00E7AA2F /* main.m in Sources */,
 				A1758D2E1887330C00490A06 /* ELCAssetTablePicker.m in Sources */,
+				A1758D3C188739CB00490A06 /* PSPDFActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

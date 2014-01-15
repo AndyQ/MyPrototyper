@@ -13,7 +13,6 @@
 #import "DrawViewController.h"
 #import "ImageEditView.h"
 #import "HotspotView.h"
-#import "PSActionSheet.h"
 #import "PopoverView.h"
 
 @interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, PopoverViewDelegate>

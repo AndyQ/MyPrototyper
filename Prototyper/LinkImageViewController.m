@@ -53,7 +53,7 @@
     PhotoCell *cell = (PhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
     ImageDetails *imageDetails = self.project[indexPath.row];
-    cell.image = [UIImage imageWithContentsOfFile:imageDetails.imagePath];
+    cell.image = [imageDetails getImage];
     
     if ( [self.currentImageId isEqualToString:imageDetails.imageName] )
         cell.contentView.alpha = 0.3;

@@ -93,10 +93,19 @@
     NSString *imageName = [NSString stringWithFormat:@"%@.png", guid];
 
     // Save image to string
-    NSString *path = [self getProjectFolder];
-    NSString *imageFile = [path stringByAppendingPathComponent:imageName];
+    NSString *path = [Project getDocsDir];
+    NSString *imageFile = [_projectName stringByAppendingPathComponent:imageName];
+    NSString *imagePath = [path stringByAppendingPathComponent:imageFile];
     if ( image != nil )
-        [UIImagePNGRepresentation(image) writeToFile:imageFile atomically:YES];
+    {
+        bool rc = [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+        if ( rc != YES )
+        {
+            NSLog( @"Failed to save image - %@", imagePath );
+        }
+    }
+    else
+        NSLog( @"Failed to save image as its nil!" );
     
     // Add image to list
     ImageDetails *item = [ImageDetails new];

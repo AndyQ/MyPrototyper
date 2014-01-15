@@ -8,6 +8,7 @@
 
 #import "ImageDetails.h"
 #import "ImageLink.h"
+#import "Project.h"
 
 
 @implementation ImageDetails
@@ -19,6 +20,15 @@
         self.links = [NSMutableArray array];
     }
     return self;
+}
+
+- (UIImage *) getImage
+{
+    NSString *path = [Project getDocsDir];
+    NSString *imagePath = [path stringByAppendingPathComponent:self.imagePath];
+    
+    UIImage *i = [UIImage imageWithContentsOfFile:imagePath];
+    return i;
 }
 
 // Decode an object from an archive

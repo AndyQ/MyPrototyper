@@ -102,7 +102,8 @@
     cell.layer.cornerRadius = 5;
     ImageDetails *imageDetails = project[indexPath.row];
     
-    cell.image = [UIImage imageWithContentsOfFile:imageDetails.imagePath];
+    UIImage *i = [imageDetails getImage];
+    cell.image = i;
     cell.backgroundColor = [UIColor clearColor];
     
     return cell;

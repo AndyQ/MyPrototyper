@@ -15,4 +15,6 @@
 @property (nonatomic, strong) NSString *imagePath;
 @property (nonatomic, strong) NSMutableArray *links;
 
+- (UIImage *) getImage;
+
 @end

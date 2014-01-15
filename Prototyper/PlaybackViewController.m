@@ -25,7 +25,7 @@
     
     imageDetails = self.project[0];
     
-    self.imageView.image = [UIImage imageWithContentsOfFile:imageDetails.imagePath];
+    self.imageView.image = [imageDetails getImage];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self.view addGestureRecognizer:tap];
@@ -99,7 +99,7 @@
         [self.imageView.layer addAnimation:transition forKey:nil];
     
     imageDetails = [self.project getLinkWithId:link.linkedToId];
-    self.imageView.image = [UIImage imageWithContentsOfFile:imageDetails.imagePath];
+    self.imageView.image = [imageDetails getImage];
 
     if ( transition == nil )
         [self updateHotspots];

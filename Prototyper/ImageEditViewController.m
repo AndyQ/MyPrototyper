@@ -56,8 +56,7 @@
     shadeView = nil;
     [self showHotspotRect:NO];
     
-    UIImage *image = [UIImage imageWithContentsOfFile:self.imageDetails.imagePath];
-    self.imageView.image = image;
+    self.imageView.image = [self.imageDetails getImage];
     
     // Add existing rects
     for ( ImageLink *link in self.imageDetails.links )
@@ -88,7 +87,7 @@
         UINavigationController *nc = segue.destinationViewController;
         DrawViewController *vc = (DrawViewController *)nc.topViewController;
         vc.delegate = self;
-        UIImage *image = [UIImage imageWithContentsOfFile:self.imageDetails.imagePath];
+        UIImage *image = [self.imageDetails getImage];
         vc.image = image;
     }
 }
@@ -333,7 +332,8 @@
 - (void) drawImageChanged:(UIImage *)image
 {
     // Save image
-    bool rc = [UIImagePNGRepresentation(image) writeToFile:self.imageDetails.imagePath atomically:YES];
+    NSString *path = [[Project getDocsDir] stringByAppendingPathComponent:self.imageDetails.imagePath];
+    bool rc = [UIImagePNGRepresentation(image) writeToFile:path atomically:YES];
     if ( !rc )
         NSLog( @"Failed");
 

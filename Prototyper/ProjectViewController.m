@@ -67,8 +67,7 @@
     }
     if ( [segue.identifier isEqualToString:@"ShowDraw"] )
     {
-        UINavigationController *nc = segue.destinationViewController;
-        DrawViewController *vc = (DrawViewController *)nc.topViewController;
+        DrawViewController *vc = segue.destinationViewController;
         vc.delegate = self;
 //        vc.imageFile = project;
         

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A14C9375189295D2008F6A0D /* ColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C9352189295D1008F6A0D /* ColorButton.m */; };
+		A14C9376189295D2008F6A0D /* ColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C9354189295D1008F6A0D /* ColorViewController.m */; };
+		A14C9377189295D2008F6A0D /* ColorPopoverLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A14C9355189295D1008F6A0D /* ColorPopoverLocalizable.strings */; };
+		A14C9378189295D2008F6A0D /* GzColors.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C9358189295D1008F6A0D /* GzColors.m */; };
 		A1758CFE1885DDA600490A06 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758CFD1885DDA600490A06 /* Shape.m */; };
 		A1758D011885DDB700490A06 /* UIBezierPath+TextPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758D001885DDB700490A06 /* UIBezierPath+TextPaths.m */; };
 		A1758D031885F13300490A06 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A1758D021885F13300490A06 /* Settings.bundle */; };
@@ -63,6 +67,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A14C9351189295D1008F6A0D /* ColorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorButton.h; sourceTree = "<group>"; };
+		A14C9352189295D1008F6A0D /* ColorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorButton.m; sourceTree = "<group>"; };
+		A14C9353189295D1008F6A0D /* ColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorViewController.h; sourceTree = "<group>"; };
+		A14C9354189295D1008F6A0D /* ColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorViewController.m; sourceTree = "<group>"; };
+		A14C9356189295D1008F6A0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ColorPopoverLocalizable.strings; sourceTree = "<group>"; };
+		A14C9357189295D1008F6A0D /* GzColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzColors.h; sourceTree = "<group>"; };
+		A14C9358189295D1008F6A0D /* GzColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzColors.m; sourceTree = "<group>"; };
 		A1758CFC1885DDA600490A06 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		A1758CFD1885DDA600490A06 /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		A1758CFF1885DDB700490A06 /* UIBezierPath+TextPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+TextPaths.h"; sourceTree = "<group>"; };
@@ -164,6 +175,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A14C9350189295D1008F6A0D /* ColorPopover */ = {
+			isa = PBXGroup;
+			children = (
+				A14C9351189295D1008F6A0D /* ColorButton.h */,
+				A14C9352189295D1008F6A0D /* ColorButton.m */,
+				A14C9353189295D1008F6A0D /* ColorViewController.h */,
+				A14C9354189295D1008F6A0D /* ColorViewController.m */,
+				A14C9355189295D1008F6A0D /* ColorPopoverLocalizable.strings */,
+				A14C9357189295D1008F6A0D /* GzColors.h */,
+				A14C9358189295D1008F6A0D /* GzColors.m */,
+			);
+			path = ColorPopover;
+			sourceTree = "<group>";
+		};
 		A1758D181887330C00490A06 /* ELCImagePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +292,7 @@
 		A1D75866187FDEFD00E7AA2F /* Prototyper */ = {
 			isa = PBXGroup;
 			children = (
+				A14C9350189295D1008F6A0D /* ColorPopover */,
 				A1758D35188739CB00490A06 /* PSAlertView */,
 				A1758D181887330C00490A06 /* ELCImagePicker */,
 				A1D2B2E21880A45000E250BF /* model */,
@@ -415,6 +441,7 @@
 				A1758D341887330C00490A06 /* Overlay@2x.png in Resources */,
 				A1758D031885F13300490A06 /* Settings.bundle in Resources */,
 				A1D75874187FDEFD00E7AA2F /* Main_iPhone.storyboard in Resources */,
+				A14C9377189295D2008F6A0D /* ColorPopoverLocalizable.strings in Resources */,
 				A1758D331887330C00490A06 /* Overlay.png in Resources */,
 				A1758D0E1886FBFF00490A06 /* IMG_0001.PNG in Resources */,
 				A1D7586B187FDEFD00E7AA2F /* InfoPlist.strings in Resources */,
@@ -461,6 +488,7 @@
 				A1758D1718872E4F00490A06 /* PopoverView.m in Sources */,
 				A1F1437C18848852006829F2 /* UIColor+Utils.m in Sources */,
 				A1758D2F1887330C00490A06 /* ELCImagePickerController.m in Sources */,
+				A14C9376189295D2008F6A0D /* ColorViewController.m in Sources */,
 				A1D7587A187FDEFD00E7AA2F /* ProjectViewController.m in Sources */,
 				A1D2B2E91880A47E00E250BF /* Project.m in Sources */,
 				A1758CFE1885DDA600490A06 /* Shape.m in Sources */,
@@ -472,10 +500,12 @@
 				A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */,
 				A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */,
 				A1758D3E188739CB00490A06 /* UIColor+PSPDFKitAdditions.m in Sources */,
+				A14C9378189295D2008F6A0D /* GzColors.m in Sources */,
 				A1D2B2E118809C9E00E250BF /* LinkImageViewController.m in Sources */,
 				A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */,
 				A1D75871187FDEFD00E7AA2F /* AppDelegate.m in Sources */,
 				A1D2B30418832EC200E250BF /* MainViewController.m in Sources */,
+				A14C9375189295D2008F6A0D /* ColorButton.m in Sources */,
 				A1D2B30A1883F11900E250BF /* DrawView.m in Sources */,
 				A1D7586D187FDEFD00E7AA2F /* main.m in Sources */,
 				A1758D2E1887330C00490A06 /* ELCAssetTablePicker.m in Sources */,
@@ -502,6 +532,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A14C9355189295D1008F6A0D /* ColorPopoverLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A14C9356189295D1008F6A0D /* en */,
+			);
+			name = ColorPopoverLocalizable.strings;
+			sourceTree = "<group>";
+		};
 		A1D75869187FDEFD00E7AA2F /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

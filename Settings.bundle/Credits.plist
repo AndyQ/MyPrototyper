@@ -8,6 +8,14 @@
                     <key>Type</key>
                     <string>PSChildPaneSpecifier</string>
                     <key>Title</key>
+                    <string>ColorPopover</string>
+                    <key>File</key>
+                    <string>ColorPopover</string>
+                </dict>
+                <dict>
+                    <key>Type</key>
+                    <string>PSChildPaneSpecifier</string>
+                    <key>Title</key>
                     <string>ELCImagePickerController</string>
                     <key>File</key>
                     <string>ELCImagePickerController</string>

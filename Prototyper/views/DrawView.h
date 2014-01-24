@@ -10,9 +10,10 @@
 
 typedef enum DrawStates
 {
-    DRAW = 0,
-    ERASE,
-    MOVE
+    DRAW_FREEHAND = 0,
+    DRAW_TEXT,
+    DRAW_RECT,
+    DRAW_OVAL
     
 } DrawStates;
 

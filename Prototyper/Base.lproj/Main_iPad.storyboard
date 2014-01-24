@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5037.2" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="J8q-O9-423">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5037.3" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="J8q-O9-423">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -62,7 +62,7 @@
                                 <items>
                                     <barButtonItem title="New" id="l8Q-Al-zJQ">
                                         <connections>
-                                            <segue destination="wWG-LC-huY" kind="modal" identifier="ShowDraw" modalTransitionStyle="crossDissolve" id="i0k-vu-3S9"/>
+                                            <segue destination="qLA-2e-chR" kind="push" identifier="ShowDraw" id="cmn-Un-dnd"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="sEc-82-s9n"/>
@@ -128,40 +128,33 @@
                                 <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="qLA-2e-chR" id="Ope-gd-tdT"/>
+                                </connections>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ywe-7W-PSX">
                                 <rect key="frame" x="0.0" y="980" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem style="plain" id="IPQ-90-Qbe">
-                                        <view key="customView" contentMode="scaleToFill" id="YT5-gQ-za2">
-                                            <rect key="frame" x="16" y="6" width="158" height="33"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aSz-fK-tdc">
-                                                    <rect key="frame" x="6" y="2" width="146" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <segments>
-                                                        <segment title="Draw"/>
-                                                        <segment title="Erase"/>
-                                                        <segment title="Move"/>
-                                                    </segments>
-                                                    <connections>
-                                                        <action selector="segDrawChanged:" destination="qLA-2e-chR" eventType="valueChanged" id="mnG-hw-4BU"/>
-                                                    </connections>
-                                                </segmentedControl>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="aSz-fK-tdc" secondAttribute="centerY" constant="0.5" id="jJ8-su-Kng"/>
-                                                <constraint firstAttribute="centerX" secondItem="aSz-fK-tdc" secondAttribute="centerX" id="mIE-iN-he8"/>
-                                            </constraints>
-                                        </view>
-                                    </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="Wfh-RO-q9t"/>
-                                    <barButtonItem title="Add Text" id="dh3-4x-5bH">
+                                    <barButtonItem title="Freehand" id="m09-VH-ArM">
                                         <connections>
-                                            <action selector="addTextPressed:" destination="qLA-2e-chR" id="9Tu-8o-9FU"/>
+                                            <action selector="btnDrawTypePressed:" destination="qLA-2e-chR" id="7qJ-CX-zRA"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="j5J-6i-yfo"/>
+                                    <barButtonItem width="50" style="plain" id="26g-b4-h8X">
+                                        <view key="customView" contentMode="scaleToFill" id="6SQ-RO-saL">
+                                            <rect key="frame" x="579" y="6" width="50" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <action selector="choseColourPressed:" destination="qLA-2e-chR" id="ZoG-X5-loN"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Choose colour" id="Qdp-ZU-MBg">
+                                        <connections>
+                                            <action selector="choseColourPressed:" destination="qLA-2e-chR" id="6gg-dR-Cyl"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -191,9 +184,10 @@
                     </navigationItem>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="btnDrawType" destination="m09-VH-ArM" id="lRV-bq-nb9"/>
+                        <outlet property="colorView" destination="6SQ-RO-saL" id="Ff1-Sj-36f"/>
                         <outlet property="drawView" destination="Zvw-av-9fI" id="e9J-eu-Fjk"/>
                         <outlet property="imageView" destination="mvX-Qg-4ip" id="6Wx-gn-iMb"/>
-                        <outlet property="segDraw" destination="aSz-fK-tdc" id="Rga-rX-LZx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HI3-f1-xQW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -249,6 +243,7 @@
                         <outlet property="imageEditView" destination="QM0-RT-32j" id="7hf-v8-XbH"/>
                         <outlet property="imageView" destination="TLK-2S-AY0" id="T9T-gz-qng"/>
                         <segue destination="nlD-wq-UtV" kind="push" identifier="showLinkToVC" id="SBn-YE-5qI"/>
+                        <segue destination="qLA-2e-chR" kind="push" identifier="ShowDraw" id="RCG-Os-Jk3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3uQ-DR-uAv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -359,13 +354,7 @@
                             <constraint firstItem="Q0t-Bd-UN5" firstAttribute="leading" secondItem="ZZ0-cw-bbX" secondAttribute="leading" id="vLd-oq-RnA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Playback" id="Z68-25-bxi">
-                        <barButtonItem key="rightBarButtonItem" title="Hide bar" id="fEy-oW-Vm2">
-                            <connections>
-                                <action selector="hidePressed:" destination="UeX-H3-hXM" id="teR-ag-wBZ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Playback" id="Z68-25-bxi"/>
                     <connections>
                         <outlet property="imageView" destination="Q0t-Bd-UN5" id="zFY-mL-zZS"/>
                     </connections>
@@ -456,28 +445,13 @@
             </objects>
             <point key="canvasLocation" x="171" y="138"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Wt5-ao-MIA">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wWG-LC-huY" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="29M-gn-Hhg">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="qLA-2e-chR" kind="relationship" relationship="rootViewController" id="pVR-jx-Mmi"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6cL-Gi-il8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2312" y="-1036"/>
-        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="RCG-Os-Jk3"/>
+    </inferredMetricsTieBreakers>
 </document>

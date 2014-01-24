@@ -24,6 +24,15 @@
 
 - (UIImage *) getImage
 {
+    // Fix image path it it has more that two path components - only get the last two (the project and filename
+    NSArray *items = [self.imagePath pathComponents];
+    if ( items.count > 2 )
+    {
+        NSString *project = items[items.count-2];
+        NSString *file = [items lastObject];
+        self.imagePath = [project stringByAppendingPathComponent:file];
+    }
+    
     NSString *path = [Project getDocsDir];
     NSString *imagePath = [path stringByAppendingPathComponent:self.imagePath];
     

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5037.2" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nCa-Yb-gFQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5037.3" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nCa-Yb-gFQ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -62,7 +62,7 @@
                                 <items>
                                     <barButtonItem title="New" id="nVA-yG-kht">
                                         <connections>
-                                            <segue destination="Rce-PH-wyS" kind="modal" identifier="ShowDraw" modalTransitionStyle="crossDissolve" id="fzL-Z5-DTz"/>
+                                            <segue destination="iGR-ku-d7J" kind="push" identifier="ShowDraw" id="xBA-rr-lfY"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="OK2-9Y-sq7"/>
@@ -154,6 +154,7 @@
                         <outlet property="imageEditView" destination="QsN-gY-nz1" id="P8a-9Q-4Hq"/>
                         <outlet property="imageView" destination="RG0-uZ-SPH" id="p4X-HS-Xtt"/>
                         <segue destination="WeT-pJ-SdK" kind="push" identifier="showLinkToVC" id="Ihi-M4-rli"/>
+                        <segue destination="iGR-ku-d7J" kind="push" identifier="ShowDraw" id="5cg-DH-dKG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HbK-BF-RRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -186,13 +187,7 @@
                             <constraint firstItem="lAp-2Y-Kvr" firstAttribute="top" secondItem="RJF-7Y-zOJ" secondAttribute="bottom" id="ecu-bz-uVV"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Playback" id="Mgg-aB-hjJ">
-                        <barButtonItem key="rightBarButtonItem" title="Hide bar" id="KVe-iz-lqV">
-                            <connections>
-                                <action selector="hidePressed:" destination="Fc0-GT-s3r" id="B4I-Gt-qyI"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Playback" id="Mgg-aB-hjJ"/>
                     <connections>
                         <outlet property="imageView" destination="lAp-2Y-Kvr" id="9xI-QI-y3B"/>
                     </connections>
@@ -385,39 +380,29 @@
                                     <outlet property="dataSource" destination="iGR-ku-d7J" id="OZo-jW-1TS"/>
                                 </connections>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NdZ-J0-Rv9">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o8F-dT-n17">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem style="plain" id="ykH-Np-tKu">
-                                        <view key="customView" contentMode="scaleToFill" id="73E-fz-IkD">
-                                            <rect key="frame" x="16" y="6" width="158" height="33"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="S6B-uP-PVa">
-                                                    <rect key="frame" x="6" y="2" width="146" height="29"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <segments>
-                                                        <segment title="Draw"/>
-                                                        <segment title="Erase"/>
-                                                        <segment title="Move"/>
-                                                    </segments>
-                                                    <connections>
-                                                        <action selector="segDrawChanged:" destination="iGR-ku-d7J" eventType="valueChanged" id="JpE-09-n4D"/>
-                                                    </connections>
-                                                </segmentedControl>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="centerX" secondItem="S6B-uP-PVa" secondAttribute="centerX" id="GtK-F7-mll"/>
-                                                <constraint firstAttribute="centerY" secondItem="S6B-uP-PVa" secondAttribute="centerY" constant="0.5" id="agc-8s-qkx"/>
-                                            </constraints>
-                                        </view>
-                                    </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="6Ll-0x-DAh"/>
-                                    <barButtonItem title="Add text" id="lu6-Di-QOx">
+                                    <barButtonItem title="Freehand" id="MFA-kh-gmS">
                                         <connections>
-                                            <action selector="addTextPressed:" destination="iGR-ku-d7J" id="RUs-H7-S84"/>
+                                            <action selector="btnDrawTypePressed:" destination="iGR-ku-d7J" id="dwv-eh-F5F"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qaT-JH-K9i"/>
+                                    <barButtonItem width="50" style="plain" id="luD-hv-IkS">
+                                        <view key="customView" contentMode="scaleToFill" id="AZB-Nf-nYH">
+                                            <rect key="frame" x="131" y="6" width="50" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <action selector="choseColourPressed:" destination="iGR-ku-d7J" id="cub-P5-zuF"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Choose colour" id="als-bt-9T8">
+                                        <connections>
+                                            <action selector="choseColourPressed:" destination="iGR-ku-d7J" id="PfM-6v-Jym"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -426,16 +411,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Hvt-EG-Iks" firstAttribute="top" secondItem="PB9-vC-hB7" secondAttribute="bottom" id="0NA-Ig-uv1"/>
+                            <constraint firstItem="eha-ef-LVF" firstAttribute="top" secondItem="o8F-dT-n17" secondAttribute="bottom" id="70l-AI-v0s"/>
                             <constraint firstAttribute="trailing" secondItem="Hvt-EG-Iks" secondAttribute="trailing" id="7fz-gf-UAI"/>
-                            <constraint firstAttribute="trailing" secondItem="NdZ-J0-Rv9" secondAttribute="trailing" id="891-56-I7r"/>
                             <constraint firstItem="Hvt-EG-Iks" firstAttribute="leading" secondItem="uih-K2-rEJ" secondAttribute="leading" id="98a-IE-pTG"/>
                             <constraint firstItem="eha-ef-LVF" firstAttribute="top" secondItem="wLE-Mb-NKy" secondAttribute="bottom" id="HP5-EZ-2gZ"/>
                             <constraint firstAttribute="trailing" secondItem="wLE-Mb-NKy" secondAttribute="trailing" id="TEf-hG-Q8r"/>
                             <constraint firstItem="wLE-Mb-NKy" firstAttribute="top" secondItem="PB9-vC-hB7" secondAttribute="bottom" id="Tiu-kp-lsN"/>
                             <constraint firstItem="wLE-Mb-NKy" firstAttribute="leading" secondItem="uih-K2-rEJ" secondAttribute="leading" id="VDR-LK-5fd"/>
-                            <constraint firstItem="NdZ-J0-Rv9" firstAttribute="leading" secondItem="uih-K2-rEJ" secondAttribute="leading" id="aDe-0S-Jox"/>
+                            <constraint firstItem="o8F-dT-n17" firstAttribute="leading" secondItem="uih-K2-rEJ" secondAttribute="leading" id="VZw-7f-ZVd"/>
                             <constraint firstItem="eha-ef-LVF" firstAttribute="top" secondItem="Hvt-EG-Iks" secondAttribute="bottom" id="fiu-JI-cBI"/>
-                            <constraint firstItem="eha-ef-LVF" firstAttribute="top" secondItem="NdZ-J0-Rv9" secondAttribute="bottom" id="jMH-H9-5Yg"/>
+                            <constraint firstAttribute="trailing" secondItem="o8F-dT-n17" secondAttribute="trailing" id="un9-yk-lRw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IHw-xU-Eth">
@@ -446,9 +431,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="colorView" destination="AZB-Nf-nYH" id="s2G-RH-Bim"/>
                         <outlet property="drawView" destination="wLE-Mb-NKy" id="0I4-dm-wyH"/>
                         <outlet property="imageView" destination="Hvt-EG-Iks" id="vIi-oi-NZ1"/>
-                        <outlet property="segDraw" destination="S6B-uP-PVa" id="b2E-P3-gbr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5n-Yc-MUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -456,28 +441,13 @@
             </objects>
             <point key="canvasLocation" x="1353" y="-904"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Lte-l9-uj4">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rce-PH-wyS" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="99Z-1S-SP8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="iGR-ku-d7J" kind="relationship" relationship="rootViewController" id="tTm-27-m1v"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="G4F-lq-ass" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="827" y="-904"/>
-        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="xBA-rr-lfY"/>
+    </inferredMetricsTieBreakers>
 </document>

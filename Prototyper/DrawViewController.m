@@ -10,6 +10,9 @@
 #import "DrawView.h"
 #import "Project.h"
 #import "Shape.h"
+#import "PopoverView.h"
+
+#import "ColorViewController.h"
 
 
 static CGPoint midpoint(CGPoint p0, CGPoint p1)
@@ -21,11 +24,15 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
 }
 
 
-@interface DrawViewController () <UIAlertViewDelegate>
+@interface DrawViewController () <ColorViewControllerDelegate, PopoverViewDelegate, UIAlertViewDelegate>
 {
+    PopoverView *popoverView;
+    ColorViewController *cv;
+    
     CGPoint previousPoint;
     DrawStates state;
     
+    UIColor *selectedColor;
     UIBezierPath *path;
     bool addingText;
     CGPoint textPoint;
@@ -38,6 +45,8 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet DrawView *drawView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segDraw;
+@property (weak, nonatomic) IBOutlet UIView *colorView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnDrawType;
 
 - (void)addShape:(Shape *)newShape;
 - (NSUInteger)hitTest:(CGPoint)point;
@@ -59,11 +68,11 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
 {
     [super viewDidLoad];
 
-    state = DRAW;
+    state = DRAW_FREEHAND;
+    selectedColor = [UIColor blackColor];
 
     self.imageView.image = self.image;
-    
-    _selectedShapeIndex = NSNotFound;
+    self.selectedShapeIndex = NSNotFound;
     self.shapes = [NSMutableArray array];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDetected:)];
@@ -83,19 +92,50 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)undoPressed:(id)sender
+- (IBAction)btnDrawTypePressed:(id)sender
 {
-//    [self.drawView undoButtonPressed];
+    NSArray *items = @[@"Freehand", @"Text"];
+    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( 50, self.view.frame.size.height - 44) inView:self.view withStringArray:items delegate:self];
 }
 
-- (IBAction)segDrawChanged:(id)sender
+- (IBAction)choseColourPressed:(id)sender
 {
-    if ( self.segDraw.selectedSegmentIndex == 0 )
-        state = DRAW;
-    if ( self.segDraw.selectedSegmentIndex == 1 )
-        state = ERASE;
-    if ( self.segDraw.selectedSegmentIndex == 2 )
-        state = MOVE;
+    if (popoverView)
+    {
+		[popoverView dismiss];
+		popoverView = nil;
+    }
+		
+    cv = [[ColorViewController alloc] init];
+    cv.delegate = self;
+    
+    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( self.view.frame.size.width-100, self.view.frame.size.height-44) inView:self.view withContentView:cv.view delegate:self];
+}
+
+#pragma mark - PopoverView delegate
+
+- (void)popoverView:(PopoverView *)thePopoverView didSelectItemAtIndex:(NSInteger)index itemText:(NSString *)text
+{
+    if ( index == 0 )
+        state = DRAW_FREEHAND;
+    if ( index == 1 )
+        state = DRAW_TEXT;
+
+    self.btnDrawType.title = text;
+    [popoverView dismiss];
+    
+}
+
+#pragma mark - ColorViewControllerDelegate implementation
+
+-(void) colorPopoverControllerDidSelectColor:(NSString *)hexColor
+{
+    selectedColor = [GzColors colorFromHex:hexColor];
+    self.colorView.backgroundColor = selectedColor;
+
+    cv = nil;
+    [popoverView dismiss];
+    popoverView = nil;
 }
 
 - (IBAction) addTextPressed:(id)sender
@@ -140,19 +180,21 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
 {
     CGPoint tapLocation = [tapRecognizer locationInView:self.drawView];
     
-    if ( !addingText )
+    if ( self.selectedShapeIndex != NSNotFound )
     {
         self.selectedShapeIndex = [self hitTest:tapLocation];
     }
     else
     {
-        addingText = NO;
-        
-        textPoint = tapLocation;
-        // Ask what text to add
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Enter text to draw" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-        alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-        [alertView show];
+        self.selectedShapeIndex = [self hitTest:tapLocation];
+        if ( self.selectedShapeIndex == NSNotFound && state == DRAW_TEXT )
+        {
+            textPoint = tapLocation;
+            // Ask what text to add
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Enter text to draw" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            [alertView show];
+        }
     }
 }
 
@@ -174,24 +216,25 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
     
     if (pan.state == UIGestureRecognizerStateBegan)
     {
-        if ( state == DRAW || state == ERASE )
+        CGPoint tapLocation = [pan locationInView:self.drawView];
+        self.selectedShapeIndex = [self hitTest:tapLocation];
+
+        if ( self.selectedShape == nil && state == DRAW_FREEHAND )
         {
             path = [UIBezierPath bezierPath];
             path.lineWidth = 5;
             
             [path moveToPoint:currentPoint];
             self.drawView.tmpPath = path;
-            self.drawView.tmpPathColor = state == DRAW ? [UIColor blackColor] : [UIColor whiteColor];
+            self.drawView.tmpPathColor = selectedColor;
         }
         else
         {
-            CGPoint tapLocation = [pan locationInView:self.drawView];
-            self.selectedShapeIndex = [self hitTest:tapLocation];
         }
     }
     else if (pan.state == UIGestureRecognizerStateChanged)
     {
-        if ( state == DRAW || state == ERASE )
+        if ( self.selectedShape == nil && state == DRAW_FREEHAND )
             [path addQuadCurveToPoint:midPoint controlPoint:previousPoint];
         else
         {
@@ -207,13 +250,12 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
     }
     else if (pan.state == UIGestureRecognizerStateEnded)
     {
-        if ( state == DRAW || state == ERASE )
+        if ( self.selectedShape == nil && state == DRAW_FREEHAND )
         {
-            Shape *pathShape = [Shape shapeWithPath:path lineColor:state == DRAW ? [UIColor blackColor] : [UIColor whiteColor]];
+            Shape *pathShape = [Shape shapeWithPath:path lineColor:selectedColor];
             [self addShape:pathShape];
             
             self.drawView.tmpPath = nil;
-
         }
     }
     previousPoint = currentPoint;

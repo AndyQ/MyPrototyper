@@ -202,18 +202,18 @@
 		A14C9399189530C5008F6A0D /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
-				A14C939A189530C5008F6A0D /* DrawViewController.h */,
-				A14C939B189530C5008F6A0D /* DrawViewController.m */,
-				A14C939C189530C5008F6A0D /* ImageEditViewController.h */,
-				A14C939D189530C5008F6A0D /* ImageEditViewController.m */,
-				A14C939E189530C5008F6A0D /* LinkImageViewController.h */,
-				A14C939F189530C5008F6A0D /* LinkImageViewController.m */,
 				A14C93A0189530C5008F6A0D /* MainViewController.h */,
 				A14C93A1189530C5008F6A0D /* MainViewController.m */,
-				A14C93A2189530C5008F6A0D /* PlaybackViewController.h */,
-				A14C93A3189530C5008F6A0D /* PlaybackViewController.m */,
 				A14C93A4189530C5008F6A0D /* ProjectViewController.h */,
 				A14C93A5189530C5008F6A0D /* ProjectViewController.m */,
+				A14C939C189530C5008F6A0D /* ImageEditViewController.h */,
+				A14C939D189530C5008F6A0D /* ImageEditViewController.m */,
+				A14C939A189530C5008F6A0D /* DrawViewController.h */,
+				A14C939B189530C5008F6A0D /* DrawViewController.m */,
+				A14C939E189530C5008F6A0D /* LinkImageViewController.h */,
+				A14C939F189530C5008F6A0D /* LinkImageViewController.m */,
+				A14C93A2189530C5008F6A0D /* PlaybackViewController.h */,
+				A14C93A3189530C5008F6A0D /* PlaybackViewController.m */,
 			);
 			path = viewcontrollers;
 			sourceTree = "<group>";

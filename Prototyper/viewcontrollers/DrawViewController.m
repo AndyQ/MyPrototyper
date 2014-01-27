@@ -94,7 +94,7 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
 
 - (IBAction)btnDrawTypePressed:(id)sender
 {
-    NSArray *items = @[@"Freehand", @"Text"];
+    NSArray *items = @[@"Freehand", @"Text", @"Rectangle", @"Ellipse"];
     popoverView = [PopoverView showPopoverAtPoint:CGPointMake( 50, self.view.frame.size.height - 44) inView:self.view withStringArray:items delegate:self];
 }
 
@@ -120,6 +120,10 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
         state = DRAW_FREEHAND;
     if ( index == 1 )
         state = DRAW_TEXT;
+    if ( index == 2 )
+        state = DRAW_RECT;
+    if ( index == 3 )
+        state = DRAW_OVAL;
 
     self.btnDrawType.title = text;
     [popoverView dismiss];
@@ -187,13 +191,33 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
     else
     {
         self.selectedShapeIndex = [self hitTest:tapLocation];
-        if ( self.selectedShapeIndex == NSNotFound && state == DRAW_TEXT )
+        if ( self.selectedShapeIndex == NSNotFound )
         {
-            textPoint = tapLocation;
-            // Ask what text to add
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Enter text to draw" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-            [alertView show];
+            
+            if ( state == DRAW_TEXT )
+            {
+                textPoint = tapLocation;
+                // Ask what text to add
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Enter text to draw" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+                alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+                [alertView show];
+            }
+
+            if ( state == DRAW_RECT )
+            {
+                CGRect bounds = CGRectMake( tapLocation.x - 50, tapLocation.y - 50, 100, 100 );
+                ShapeType type = ShapeTypeRect;
+                Shape *shape = [Shape shapeOfType:type inBounds:bounds lineWidth:5 color:selectedColor];
+                [self addShape:shape];
+            }
+
+            if ( state == DRAW_OVAL )
+            {
+                CGRect bounds = CGRectMake( tapLocation.x - 50, tapLocation.y - 50, 100, 100 );
+                ShapeType type = ShapeTypeEllipse;
+                Shape *shape = [Shape shapeOfType:type inBounds:bounds lineWidth:5 color:selectedColor];
+                [self addShape:shape];
+            }
         }
     }
 }

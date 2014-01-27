@@ -9,6 +9,15 @@
 #import "HotspotView.h"
 #import "UIColor+Utils.h"
 
+
+/**
+ *
+ * A Hotspot view is used to display a touchable hotspot
+ * However, when we are editing it, we don't display this view but a draggable area in the ImageEditView instead
+ * This is so that we can simply expand/contract/move the area within the view and the just update the bounds of this
+ * view rather than trying to figure out touchpositions in this view relative to the parent view which TBH got too messy and complex
+ * and wasn't worth the bother so this was simpler at a cost of slight obscurity
+ */
 @implementation HotspotView
 {
     ImageLink *_associatedImageLink;

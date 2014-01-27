@@ -20,6 +20,11 @@ CGPoint CGRectCenter( CGRect r )
     return p;
 }
 
+/**
+ * This view is used to dispay an editable hotspot area that can be moved/expanded/contracted and will update its delegate
+ * (parent VC in this case) when it gets moved
+ * It also shows the starting image - allowing the user to 'draw' (create paths) on top of the base image.
+ */
 @implementation ImageEditView
 {
     UIColor *borderColor;
@@ -137,7 +142,11 @@ CGPoint CGRectCenter( CGRect r )
         else if ( CGRectContainsPoint(self.selectArea, p) )
             pointMove = FRAME;
         else
+        {
+            // User didn't tap on hotspot area so we may need to do/select something else
+            // so tell the delegate we aren't interested in this
             [self.delegate touchedViewAtPoint:p];
+        }
     }
     else
         [self.delegate touchedViewAtPoint:p];
@@ -198,7 +207,7 @@ CGPoint CGRectCenter( CGRect r )
 {
     pointMove = 0;
     
-    // Notify delegate that the frame has moved
+    // Notify delegate that the frame has changed
     if ( self.showSelectArea )
         [self.delegate hotspotAreaUpdate:self.selectArea];
 }

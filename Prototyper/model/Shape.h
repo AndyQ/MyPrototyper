@@ -19,15 +19,16 @@ typedef enum {
 
 @interface Shape : NSObject
 
-+ (id)randomShapeInBounds:(CGRect)maxBounds;
-+ (id)shape;
-+ (id)shapeWithText:(NSString *)text atPoint:(CGPoint)p;
-+ (id)shapeWithPath:(UIBezierPath *)path lineColor:(UIColor *)lineColor;
-- (id)initWithPath:(UIBezierPath *)path lineColor:(UIColor *)lineColor;
++ (instancetype) randomShapeInBounds:(CGRect)maxBounds;
++ (instancetype) shapeOfType:(ShapeType)type inBounds:(CGRect)bounds lineWidth:(CGFloat)width color:(UIColor *)color;
++ (instancetype) shape;
++ (instancetype) shapeWithText:(NSString *)text atPoint:(CGPoint)p;
++ (instancetype) shapeWithPath:(UIBezierPath *)path lineColor:(UIColor *)lineColor;
+- (instancetype) initWithPath:(UIBezierPath *)path lineColor:(UIColor *)lineColor;
 
-- (BOOL)containsPoint:(CGPoint)point;
-- (void)moveBy:(CGPoint)delta;
-- (void)applyTransform:(CGAffineTransform)transform;
+- (BOOL) containsPoint:(CGPoint)point;
+- (void) moveBy:(CGPoint)delta;
+- (void) applyTransform:(CGAffineTransform)transform;
 
 @property (nonatomic, strong) UIBezierPath *path;
 @property (nonatomic, strong) UIColor *lineColor;

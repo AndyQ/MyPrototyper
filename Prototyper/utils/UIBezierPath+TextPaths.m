@@ -2,7 +2,6 @@
 //  UIBezierPath+TextPaths.m
 //  PathHitTesting
 //
-//  Created by Andy Qua on 14/01/2014.
 //  Copyright (c) 2014 Ole Begemann. All rights reserved.
 //
 

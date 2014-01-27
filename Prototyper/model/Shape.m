@@ -33,11 +33,19 @@
 @dynamic totalBounds;
 
 
-+ (id)randomShapeInBounds:(CGRect)maxBounds
++ (instancetype) randomShapeInBounds:(CGRect)maxBounds
 {
-    UIBezierPath *path = nil;
     CGRect bounds = [self randomRectInBounds:maxBounds];
     ShapeType type = [self randomShapeType];
+    int width = 5;
+    UIColor *lineColor = [self randomColor];
+
+    return [Shape shapeOfType:type inBounds:bounds lineWidth:width color:lineColor];
+}
+
++ (instancetype) shapeOfType:(ShapeType)type inBounds:(CGRect)bounds lineWidth:(CGFloat)width color:(UIColor *)color
+{
+    UIBezierPath *path = nil;
     switch (type) {
         case ShapeTypeRect:
             path = [UIBezierPath bezierPathWithRect:bounds];
@@ -56,13 +64,12 @@
             break;
     }
 
-    path.lineWidth = 1;//[self randomLineWidth];
-    UIColor *lineColor = [self randomColor];
+    path.lineWidth = width;
     
-    return [[self alloc] initWithPath:path lineColor:lineColor];
+    return [[self alloc] initWithPath:path lineColor:color];
 }
 
-+ (id)shapeWithText:(NSString *)text atPoint:(CGPoint)p;
++ (instancetype) shapeWithText:(NSString *)text atPoint:(CGPoint)p;
 {
     UIBezierPath *path = nil;
     path = [self text:text atPoint:p];
@@ -73,19 +80,19 @@
     return s;
 }
 
-+ (id)shape
++ (instancetype) shape
 {
     UIBezierPath *path = [UIBezierPath bezierPath];
     return [[self alloc] initWithPath:path lineColor:[UIColor blackColor]];
 }
 
-+ (id)shapeWithPath:(UIBezierPath *)path lineColor:(UIColor *)lineColor
++ (instancetype)shapeWithPath:(UIBezierPath *)path lineColor:(UIColor *)lineColor
 {
     return [[self alloc] initWithPath:path lineColor:lineColor];
 }
 
 
-- (id)initWithPath:(UIBezierPath *)path lineColor:(UIColor *)lineColor
+- (instancetype) initWithPath:(UIBezierPath *)path lineColor:(UIColor *)lineColor
 {
     self = [super init];
     if (self != nil)
@@ -97,7 +104,7 @@
     return self;
 }
 
-- (id)init
+- (instancetype) init
 {
     UIBezierPath *defaultPath = [UIBezierPath bezierPathWithRect:CGRectMake(0.0f, 0.0f, 100.0f, 100.0f)];
     UIColor *defaultLineColor = [UIColor blackColor];
@@ -107,7 +114,7 @@
 
 #pragma mark - Description
 
-- (NSString *)description
+- (NSString *) description
 {
     return [NSString stringWithFormat:@"<Shape: %p - Bounds: %@ - Color: %@>", self, NSStringFromCGRect(self.path.bounds), self.lineColor];
 }
@@ -115,7 +122,7 @@
 
 #pragma mark - Hit Testing
 
-- (UIBezierPath *)tapTargetForPath:(UIBezierPath *)path
+- (UIBezierPath *) tapTargetForPath:(UIBezierPath *)path
 {
     if (path == nil) {
         return nil;
@@ -140,7 +147,7 @@
 
 #pragma mark - Bounds
 
-- (CGRect)totalBounds
+- (CGRect) totalBounds
 {
     if (self.path == nil) {
         return CGRectZero;
@@ -152,14 +159,14 @@
 
 #pragma mark - Modifying Shapes
 
-- (void)moveBy:(CGPoint)delta
+- (void) moveBy:(CGPoint)delta
 {
     CGAffineTransform transform = CGAffineTransformMakeTranslation(delta.x, delta.y);
     [self.path applyTransform:transform];
     [self.tapTarget applyTransform:transform];
 }
 
-- (void)applyTransform:(CGAffineTransform)transform;
+- (void) applyTransform:(CGAffineTransform)transform;
 {
     [self.path applyTransform:transform];
     [self.tapTarget applyTransform:transform];
@@ -167,12 +174,12 @@
 
 #pragma mark - Random Shape Generator Methods
 
-+ (ShapeType)randomShapeType
++ (ShapeType) randomShapeType
 {
     return arc4random_uniform(SHAPE_TYPE_COUNT);
 }
 
-+ (CGRect)randomRectInBounds:(CGRect)maxBounds
++ (CGRect) randomRectInBounds:(CGRect)maxBounds
 {
     CGRect normalizedBounds = CGRectStandardize(maxBounds);
     uint32_t minOriginX = normalizedBounds.origin.x;
@@ -196,7 +203,7 @@
     return randomRect;
 }
 
-+ (UIColor *)randomColor
++ (UIColor *) randomColor
 {
     NSArray *colors = [NSArray arrayWithObjects:
                        [UIColor blueColor], 
@@ -212,14 +219,14 @@
     return [colors objectAtIndex:colorIndex];
 }
 
-+ (CGFloat)randomLineWidth
++ (CGFloat) randomLineWidth
 {
     uint32_t maxLineWidth = 15;
     CGFloat lineWidth = arc4random_uniform(maxLineWidth) + 1.0f; // avoid lineWidth == 0.0f
     return lineWidth;
 }
 
-+ (UIBezierPath *)houseInRect:(CGRect)bounds
++ (UIBezierPath *) houseInRect:(CGRect)bounds
 {
     CGPoint bottomLeft 	= CGPointMake(CGRectGetMinX(bounds), CGRectGetMinY(bounds));
     CGPoint topLeft		= CGPointMake(CGRectGetMinX(bounds), CGRectGetMinY(bounds) + CGRectGetHeight(bounds) * 2.0f/3.0f);
@@ -250,7 +257,7 @@
     return path;
 }
 
-+ (UIBezierPath *)arcInRect:(CGRect)bounds
++ (UIBezierPath *) arcInRect:(CGRect)bounds
 {
     CGPoint center      = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
     CGPoint centerRight = CGPointMake(CGRectGetMaxX(bounds), CGRectGetMidY(bounds));
@@ -275,7 +282,7 @@
 }
 
 
-+ (UIBezierPath *)text:(NSString *)text atPoint:(CGPoint)p
++ (UIBezierPath *) text:(NSString *)text atPoint:(CGPoint)p
 {
     UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:30];
 

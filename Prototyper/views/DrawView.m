@@ -65,7 +65,6 @@
         [self.tmpPath stroke];
 
     }
-    
 }
 
 @end

@@ -431,6 +431,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnDrawType" destination="MFA-kh-gmS" id="Wh5-SA-AeN"/>
                         <outlet property="colorView" destination="AZB-Nf-nYH" id="s2G-RH-Bim"/>
                         <outlet property="drawView" destination="wLE-Mb-NKy" id="0I4-dm-wyH"/>
                         <outlet property="imageView" destination="Hvt-EG-Iks" id="vIi-oi-NZ1"/>

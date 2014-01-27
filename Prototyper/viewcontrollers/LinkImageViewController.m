@@ -10,6 +10,13 @@
 #import "ImageDetails.h"
 #import "PhotoCell.h"
 
+
+/**
+ * This is basically just a Collection view allowing the user to select an image to link to
+ * double tapping the image will select it as will selecting the image then selecting the done button
+ */
+
+
 @interface LinkImageViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 {
     NSInteger selectedIndex;
@@ -36,8 +43,9 @@
 
 }
 
-- (BOOL)prefersStatusBarHidden {
-    return NO; // backed by your instance variable
+- (BOOL)prefersStatusBarHidden
+{
+    return NO;
 }
 
 

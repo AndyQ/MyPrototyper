@@ -434,7 +434,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"$SRCROOT/Prototyper/Prototyper-Info.plist\"\nversion=`/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" $SRCROOT/Prototyper/Prototyper-Info.plist`\nbuild=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $SRCROOT/Prototyper/Prototyper-Info.plist`\n\n/usr/libexec/PlistBuddy \"$SRCROOT/Settings.bundle/Root.plist\" -c \"set PreferenceSpecifiers:1:DefaultValue $version ($build)\"\ntouch $SRCROOT/Settings.bundle\n";
+			shellScript = "echo \"$SRCROOT/Prototyper/Prototyper-Info.plist\"\nversion=`/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" $SRCROOT/Prototyper/Prototyper-Info.plist`\nbuild=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" $SRCROOT/Prototyper/Prototyper-Info.plist`\n\n/usr/libexec/PlistBuddy \"$SRCROOT/Settings.bundle/Root.plist\" -c \"set PreferenceSpecifiers:1:DefaultValue $version ($build)\"\n\nstringsFile=\"$SRCROOT/Settings.bundle/en.lproj/Root.strings\"\necho \"\\\"author\\\" = \\\"Prototyper Version ${version} (${build})\" > $stringsFile\necho \"Written by Andy Qua\\\";\" >> $stringsFile\ntouch \"$SRCROOT/Settings.bundle\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

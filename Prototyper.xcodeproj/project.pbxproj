@@ -34,6 +34,13 @@
 		A14C93E7189531CB008F6A0D /* PSPDFActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93D3189531CB008F6A0D /* PSPDFActionSheet.m */; };
 		A14C93E8189531CB008F6A0D /* PSPDFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93D5189531CB008F6A0D /* PSPDFAlertView.m */; };
 		A14C93E9189531CB008F6A0D /* UIColor+PSPDFKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93D7189531CB008F6A0D /* UIColor+PSPDFKitAdditions.m */; };
+		A14C93F718970311008F6A0D /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = A14C93ED18970311008F6A0D /* ioapi.c */; };
+		A14C93F818970311008F6A0D /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = A14C93EF18970311008F6A0D /* mztools.c */; };
+		A14C93F918970311008F6A0D /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = A14C93F118970311008F6A0D /* unzip.c */; };
+		A14C93FA18970311008F6A0D /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = A14C93F318970311008F6A0D /* zip.c */; };
+		A14C93FB18970311008F6A0D /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93F618970311008F6A0D /* SSZipArchive.m */; };
+		A14C93FD1899A50D008F6A0D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A14C93FC1899A50D008F6A0D /* libz.dylib */; };
+		A14C94001899A56D008F6A0D /* ProjectSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93FF1899A56D008F6A0D /* ProjectSelectTableViewCell.m */; };
 		A1758CFE1885DDA600490A06 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758CFD1885DDA600490A06 /* Shape.m */; };
 		A1758D031885F13300490A06 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A1758D021885F13300490A06 /* Settings.bundle */; };
 		A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E51880A47E00E250BF /* ImageDetails.m */; };
@@ -119,6 +126,20 @@
 		A14C93D5189531CB008F6A0D /* PSPDFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPDFAlertView.m; sourceTree = "<group>"; };
 		A14C93D6189531CB008F6A0D /* UIColor+PSPDFKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PSPDFKitAdditions.h"; sourceTree = "<group>"; };
 		A14C93D7189531CB008F6A0D /* UIColor+PSPDFKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PSPDFKitAdditions.m"; sourceTree = "<group>"; };
+		A14C93EC18970311008F6A0D /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		A14C93ED18970311008F6A0D /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		A14C93EE18970311008F6A0D /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		A14C93EF18970311008F6A0D /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		A14C93F018970311008F6A0D /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		A14C93F118970311008F6A0D /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		A14C93F218970311008F6A0D /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		A14C93F318970311008F6A0D /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		A14C93F418970311008F6A0D /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		A14C93F518970311008F6A0D /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
+		A14C93F618970311008F6A0D /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		A14C93FC1899A50D008F6A0D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A14C93FE1899A56D008F6A0D /* ProjectSelectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectSelectTableViewCell.h; sourceTree = "<group>"; };
+		A14C93FF1899A56D008F6A0D /* ProjectSelectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectSelectTableViewCell.m; sourceTree = "<group>"; };
 		A1758CFC1885DDA600490A06 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		A1758CFD1885DDA600490A06 /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		A1758D021885F13300490A06 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
@@ -160,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A14C93FD1899A50D008F6A0D /* libz.dylib in Frameworks */,
 				A1D75863187FDEFD00E7AA2F /* CoreGraphics.framework in Frameworks */,
 				A1D75865187FDEFD00E7AA2F /* UIKit.framework in Frameworks */,
 				A1D75861187FDEFD00E7AA2F /* Foundation.framework in Frameworks */,
@@ -184,6 +206,8 @@
 			children = (
 				A14C938F189530C5008F6A0D /* PhotoCell.h */,
 				A14C9390189530C5008F6A0D /* PhotoCell.m */,
+				A14C93FE1899A56D008F6A0D /* ProjectSelectTableViewCell.h */,
+				A14C93FF1899A56D008F6A0D /* ProjectSelectTableViewCell.m */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -221,6 +245,7 @@
 		A14C93B1189531CB008F6A0D /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				A14C93EA18970311008F6A0D /* SSZipArchive */,
 				A14C93B2189531CB008F6A0D /* ColorPopover */,
 				A14C93BB189531CB008F6A0D /* ELCImagePicker */,
 				A14C93CE189531CB008F6A0D /* PopoverView */,
@@ -297,6 +322,32 @@
 			path = PSAlertView;
 			sourceTree = "<group>";
 		};
+		A14C93EA18970311008F6A0D /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				A14C93EB18970311008F6A0D /* minizip */,
+				A14C93F518970311008F6A0D /* SSZipArchive.h */,
+				A14C93F618970311008F6A0D /* SSZipArchive.m */,
+			);
+			path = SSZipArchive;
+			sourceTree = "<group>";
+		};
+		A14C93EB18970311008F6A0D /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				A14C93EC18970311008F6A0D /* crypt.h */,
+				A14C93ED18970311008F6A0D /* ioapi.c */,
+				A14C93EE18970311008F6A0D /* ioapi.h */,
+				A14C93EF18970311008F6A0D /* mztools.c */,
+				A14C93F018970311008F6A0D /* mztools.h */,
+				A14C93F118970311008F6A0D /* unzip.c */,
+				A14C93F218970311008F6A0D /* unzip.h */,
+				A14C93F318970311008F6A0D /* zip.c */,
+				A14C93F418970311008F6A0D /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
 		A1D2B2E21880A45000E250BF /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +398,7 @@
 		A1D7585F187FDEFD00E7AA2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A14C93FC1899A50D008F6A0D /* libz.dylib */,
 				A1D75860187FDEFD00E7AA2F /* Foundation.framework */,
 				A1D75862187FDEFD00E7AA2F /* CoreGraphics.framework */,
 				A1D75864187FDEFD00E7AA2F /* UIKit.framework */,
@@ -540,22 +592,28 @@
 				A1758CFE1885DDA600490A06 /* Shape.m in Sources */,
 				A14C93DB189531CB008F6A0D /* GzColors.m in Sources */,
 				A14C93AB189530C5008F6A0D /* ImageEditViewController.m in Sources */,
+				A14C93F918970311008F6A0D /* unzip.c in Sources */,
 				A14C93AA189530C5008F6A0D /* DrawViewController.m in Sources */,
 				A14C93D9189531CB008F6A0D /* ColorViewController.m in Sources */,
 				A14C93DE189531CB008F6A0D /* ELCAssetCell.m in Sources */,
 				A1D2B2EF1880A4A500E250BF /* HotspotView.m in Sources */,
 				A14C93AF189530C5008F6A0D /* ProjectViewController.m in Sources */,
+				A14C93F718970311008F6A0D /* ioapi.c in Sources */,
+				A14C93F818970311008F6A0D /* mztools.c in Sources */,
 				A14C93DC189531CB008F6A0D /* ELCAlbumPickerController.m in Sources */,
 				A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */,
 				A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */,
+				A14C93FA18970311008F6A0D /* zip.c in Sources */,
 				A14C93AD189530C5008F6A0D /* MainViewController.m in Sources */,
 				A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */,
+				A14C93FB18970311008F6A0D /* SSZipArchive.m in Sources */,
 				A1D75871187FDEFD00E7AA2F /* AppDelegate.m in Sources */,
 				A14C93E6189531CB008F6A0D /* PopoverView.m in Sources */,
 				A14C93AC189530C5008F6A0D /* LinkImageViewController.m in Sources */,
 				A1D2B30A1883F11900E250BF /* DrawView.m in Sources */,
 				A14C93E9189531CB008F6A0D /* UIColor+PSPDFKitAdditions.m in Sources */,
 				A14C93E0189531CB008F6A0D /* ELCImagePickerController.m in Sources */,
+				A14C94001899A56D008F6A0D /* ProjectSelectTableViewCell.m in Sources */,
 				A1D7586D187FDEFD00E7AA2F /* main.m in Sources */,
 				A14C93E8189531CB008F6A0D /* PSPDFAlertView.m in Sources */,
 			);

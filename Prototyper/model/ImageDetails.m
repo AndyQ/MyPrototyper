@@ -29,17 +29,14 @@
     // This is to support older style projects that embedded the full path! Should no longer be needed but 
     // kept here whilst I check.
     NSArray *items = [self.imagePath pathComponents];
-    if ( items.count > 2 )
+    if ( items.count >= 2 )
     {
         NSString *project = items[items.count-2];
         NSString *file = [items lastObject];
         self.imagePath = [project stringByAppendingPathComponent:file];
     }
 */
-    NSString *path = [Project getDocsDir];
-    NSString *imagePath = [path stringByAppendingPathComponent:self.imagePath];
-    
-    UIImage *i = [UIImage imageWithContentsOfFile:imagePath];
+    UIImage *i = [UIImage imageWithContentsOfFile:self.imagePath];
     return i;
 }
 
@@ -49,7 +46,6 @@
     if(self = [super init])
     {
         self.imageName = [aDecoder decodeObjectForKey:@"imageName"];
-        self.imagePath = [aDecoder decodeObjectForKey:@"imagePath"];
         self.links = [aDecoder decodeObjectForKey:@"links"];
         
         if ( self.links == nil )
@@ -62,7 +58,6 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:self.imageName forKey:@"imageName"];
-    [coder encodeObject:self.imagePath forKey:@"imagePath"];
     [coder encodeObject:self.links forKey:@"links"];
 }
 

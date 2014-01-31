@@ -14,6 +14,9 @@
     ImageDetails *imageDetails;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *doubleTapText;
+
 @end
 
 @implementation PlaybackViewController
@@ -33,6 +36,12 @@
     dtap.numberOfTapsRequired = 2;
     [self.view addGestureRecognizer:dtap];
     
+    // Add outline around double tap text
+    self.doubleTapText.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.doubleTapText.layer.shadowRadius = 2;
+    self.doubleTapText.layer.shadowOpacity = 1;
+    self.doubleTapText.layer.shadowOffset = CGSizeMake( 0, 0 );
+
     // Add views for touchpoints
     [self updateHotspots];
 }
@@ -65,31 +74,41 @@
         {
             for ( UIView *v in self.imageView.subviews )
                 v.alpha = 1;
-            
-            [UIView animateWithDuration:0.75 animations:^{
-                for ( UIView *v in self.imageView.subviews )
-                    v.alpha = 0;
-                
-            }];
+
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [UIView animateWithDuration:.5 animations:^{
+                    for ( UIView *v in self.imageView.subviews )
+                        v.alpha = 0;
+                }];
+
+            });
         }
     }
 }
 
 - (IBAction)hidePressed:(id)sender
 {
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.topConstraint.constant = 22;
 
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"" message:@"Double tap to unhide the navigation bar" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [av show];
+    self.doubleTapText.alpha = 1;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [UIView animateWithDuration:.25 animations:^{
+            self.doubleTapText.alpha = 0;
+        }];
+    });
 }
 
 - (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    self.topConstraint.constant = 22;
 }
 
 - (void) doubleTap:(UITapGestureRecognizer *)gr
 {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    self.topConstraint.constant = 0;
 }
 
 - (void) selectLink:(ImageLink *)link

@@ -40,6 +40,14 @@
                     <key>Type</key>
                     <string>PSChildPaneSpecifier</string>
                     <key>Title</key>
+                    <string>SSZipArchive</string>
+                    <key>File</key>
+                    <string>SSZipArchive</string>
+                </dict>
+                <dict>
+                    <key>Type</key>
+                    <string>PSChildPaneSpecifier</string>
+                    <key>Title</key>
                     <string>Thanks</string>
                     <key>File</key>
                     <string>Thanks</string>

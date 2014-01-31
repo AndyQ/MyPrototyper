@@ -7,5 +7,13 @@
 //
 
 // Various app wide constants
-#define IPAD 1
-#define IPHONE 2
+
+typedef enum ProjectType
+{
+    PT_IPAD = 1,
+    PT_IPHONE
+} ProjectType;
+
+
+// Notifications
+#define NOTIF_IMPORTED @"NOTIF_IMPORTED"

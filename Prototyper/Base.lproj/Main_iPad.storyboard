@@ -344,22 +344,46 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-Bd-UN5">
                                 <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="960" id="9ym-5Q-Bqb"/>
+                                    <constraint firstAttribute="width" constant="768" id="Dpq-Zu-ShG"/>
+                                </constraints>
                             </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap to unhide the navigation bar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="738" translatesAutoresizingMaskIntoConstraints="NO" id="ZH9-Cq-tVJ">
+                                <rect key="frame" x="10" y="74" width="738" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PVF-ya-fkc" firstAttribute="top" secondItem="Q0t-Bd-UN5" secondAttribute="bottom" id="8MZ-Qi-yU6"/>
                             <constraint firstItem="Q0t-Bd-UN5" firstAttribute="top" secondItem="GdD-RX-Mas" secondAttribute="bottom" id="IB6-mR-Ypc"/>
                             <constraint firstAttribute="trailing" secondItem="Q0t-Bd-UN5" secondAttribute="trailing" id="r71-Oa-7pM"/>
                             <constraint firstItem="Q0t-Bd-UN5" firstAttribute="leading" secondItem="ZZ0-cw-bbX" secondAttribute="leading" id="vLd-oq-RnA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Playback" id="Z68-25-bxi"/>
+                    <navigationItem key="navigationItem" title="Playback" id="Z68-25-bxi">
+                        <barButtonItem key="leftBarButtonItem" title="Stop playback" id="AEt-DE-5JC">
+                            <connections>
+                                <segue destination="SnL-hE-DxX" kind="unwind" unwindAction="unwindFromViewController:" id="ZoQ-rE-w5B"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Hide title bar" id="fcr-Pt-Fmp">
+                            <connections>
+                                <action selector="hidePressed:" destination="UeX-H3-hXM" id="3Cq-Oz-iJc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="doubleTapText" destination="ZH9-Cq-tVJ" id="cpJ-ii-Pd3"/>
                         <outlet property="imageView" destination="Q0t-Bd-UN5" id="zFY-mL-zZS"/>
+                        <outlet property="topConstraint" destination="IB6-mR-Ypc" id="qZ0-Ft-Mgl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKy-OM-XrE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="SnL-hE-DxX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3233" y="725"/>
         </scene>
@@ -380,13 +404,25 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="LOc-jc-SrX">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" id="LOc-jc-SrX" customClass="ProjectSelectTableViewCell">
                                         <rect key="frame" x="0.0" y="22" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LOc-jc-SrX" id="tLd-ho-K5q">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjT-Ec-mSk">
+                                                    <rect key="frame" x="20" y="11" width="655" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="projectName" destination="gjT-Ec-mSk" id="vRd-CW-lqN"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

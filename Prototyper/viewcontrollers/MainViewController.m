@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import "ProjectViewController.h"
 #import "Project.h"
+#import "ProjectSelectTableViewCell.h"
+
 #import "Constants.h"
 
 @interface MainViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -41,6 +43,18 @@
     [self loadProjects];
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    // Register for import notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadProjects) name:NOTIF_IMPORTED object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -57,6 +71,7 @@
 - (IBAction) editPressed:(id)sender
 {
     self.tableView.editing = !self.tableView.editing;
+    [self.tableView reloadData];
     if ( self.tableView.editing )
     {
         UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editPressed:)];
@@ -87,7 +102,8 @@
     {
         NSString *name = [alertView textFieldAtIndex:0].text;
         
-        Project *p = [Project setupProject:name];
+        Project *p = [[Project alloc] init];
+        p.projectName = name;
         [projects addObject:p];
         [self.tableView reloadData];
     }
@@ -101,19 +117,19 @@
     NSArray *files = [fm contentsOfDirectoryAtPath:[Project getDocsDir] error:nil];
     for ( NSString *file in files )
     {
-        if ( ![file hasPrefix:@"."] )
+        NSString *path = [[Project getDocsDir] stringByAppendingPathComponent:file];
+        BOOL isDir = NO;
+        if (![file hasPrefix:@"."] && [fm fileExistsAtPath:path isDirectory:&isDir] && isDir)
         {
-            Project *p = [Project setupProject:file];
-            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
-            {
-                if ( p.projectType == IPAD )
-                    [projects addObject:p];
-            }
-            else
-                if ( p.projectType == IPHONE )
-                    [projects addObject:p];
+            ProjectType projectType = [Project getProjectTypeForProject:file];
+            Project *p = [[Project alloc] init];
+            p.projectName = file;
+            p.projectType = projectType;
+            [projects addObject:p];
         }
     }
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - Navigation
@@ -143,20 +159,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    ProjectSelectTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    [self configureCell:cell forRowAtIndexPath:indexPath];
+    Project *project = projects[indexPath.row];
+    cell.projectName.text = project.projectName;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && project.projectType == PT_IPHONE)
+        cell.projectName.text = [project.projectName stringByAppendingString:@" - iPhone project"];
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone && project.projectType == PT_IPAD)
+        cell.projectName.text = [project.projectName stringByAppendingString:@" - iPad project"];
     
     return cell;
 }
 
-
-
-- (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    Project *project = projects[indexPath.row];
-    cell.textLabel.text = project.projectName;
-}
 
 #pragma mark - UITableViewDelegate
 

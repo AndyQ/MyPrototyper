@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "Project.h"
+#import "SSZipArchive.h"
 
 @implementation AppDelegate
 
@@ -15,7 +17,111 @@
     // Override point for customization after application launch.
     return YES;
 }
-							
+
+#pragma mark - Open File from external app
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
+        annotation:(id)annotation
+{
+    if (url != nil && [url isFileURL])
+    {
+        [self handleDocumentOpenURL:url];
+        
+        // Remove all stored files in Inbox folder
+        NSFileManager *fm = [NSFileManager defaultManager];
+        NSURL *docsUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                                 inDomains:NSUserDomainMask] lastObject];
+        NSString *path = [docsUrl.path stringByAppendingPathComponent:@"Inbox"];
+        NSArray *files = [fm contentsOfDirectoryAtPath:path error:nil];
+        for ( NSString *file in files )
+        {
+            [fm removeItemAtPath:[path stringByAppendingPathComponent:file] error:nil];
+        }
+
+        // Post notification to update files
+        [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_IMPORTED object:self];
+    }
+    return YES;
+}
+
+- (bool) handleDocumentOpenURL:(NSURL *)url
+{
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *error = nil;
+    NSString *zipName = [url lastPathComponent];
+    NSString *file = [[Project getDocsDir] stringByAppendingPathComponent:zipName];
+    NSString *projectFolder = [file stringByDeletingPathExtension];
+
+    NSString *errorMsg = nil;
+    // before we do anything check if file exists already
+    bool valid = YES;
+    if ( [fm fileExistsAtPath:projectFolder] )
+    {
+        errorMsg = @"A project with this name already exists - currently can't replace it";
+        valid = NO;
+    }
+    else
+        [fm createDirectoryAtPath:projectFolder withIntermediateDirectories:YES attributes:nil error:&error];
+
+    if ( valid )
+    {
+        [fm removeItemAtPath:file error:nil];
+        [fm moveItemAtURL:url toURL:[NSURL fileURLWithPath:file] error:&error];
+        if ( error != nil )
+        {
+            NSLog( @"Error - %@", error.localizedDescription );
+            // Error - go no futher
+            errorMsg = @"Unable to save file";
+            valid = NO;
+        }
+    }
+    
+    if ( valid )
+    {
+        bool rc = [SSZipArchive unzipFileAtPath:file toDestination:projectFolder];
+        if ( !rc )
+        {
+            // Error - go no futher
+            errorMsg = @"Unable to unzip file";
+            valid = NO;
+        }
+    }
+    
+    error = nil;
+    if ( valid )
+    {
+        valid = NO;
+        
+        // Finally, validate project
+        if ( [fm fileExistsAtPath:[projectFolder stringByAppendingPathComponent:@"project.dat"]] )
+        {
+            // Make sure we can open it
+            Project *p = [[Project alloc] init];
+            p.projectName = [zipName stringByDeletingPathExtension];
+            valid = [p load];
+        }
+        
+        if ( !valid )
+            errorMsg = @"Project not valid - not imported";
+    }
+
+    // remove zip file
+    [fm removeItemAtPath:file error:&error];
+
+    if ( !valid )
+    {
+        error = nil;
+        [fm removeItemAtPath:projectFolder error:&error];
+        
+        // Error - go no futher
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Problem" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
+        return NO;
+    }
+    
+    return YES;
+}
+				
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

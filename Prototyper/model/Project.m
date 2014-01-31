@@ -9,6 +9,13 @@
 #import "Project.h"
 #import "Constants.h"
 
+#import "SSZipArchive.h"
+
+@interface Project () 
+
+@end
+
+
 @implementation Project
 {
     NSMutableArray *_images;
@@ -19,35 +26,8 @@
     NSURL *docsUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
                                                    inDomains:NSUserDomainMask] lastObject];
     
-    return docsUrl.path;
-}
-
-+ (Project *) setupProject:(NSString *)projectName
-{
-    Project *project;
-    NSFileManager *mgr = [NSFileManager defaultManager];
-    
-    NSString *path = [[self getDocsDir] stringByAppendingPathComponent:projectName];
-    NSString *dataFile = [path stringByAppendingPathComponent:@"project.dat"];
-    if ( ![mgr fileExistsAtPath:dataFile isDirectory:nil] )
-    {
-        NSError *err = nil;
-        [mgr createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:&err];
-        if ( err )
-        {
-            NSLog( @"Error creating project directory - %@", err.localizedDescription );
-        }
-        
-        project = [[Project alloc] initWithProjectName:projectName];
-    }
-    else
-    {
-        // Load images
-        project = [NSKeyedUnarchiver unarchiveObjectWithFile:dataFile];
-        
-    }
-    
-    return project;
+    NSString *path = [docsUrl.path stringByAppendingPathComponent:@"Projects"];
+    return path;
 }
 
 + (void) deleteProjectWithName:(NSString *)projectName;
@@ -63,20 +43,64 @@
     }
 }
 
+
++ (ProjectType) getProjectTypeForProject:(NSString *)projectName
+{
+    NSString *dataFile = [[[Project getDocsDir] stringByAppendingPathComponent:projectName] stringByAppendingPathComponent:@"project.dat"];
+    NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
+    NSData *data = [NSData dataWithContentsOfURL:archiveURL];
+    
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    
+    // Customize the unarchiver.
+    ProjectType projectType = [unarchiver decodeIntegerForKey:@"projectType"];
+    
+    [unarchiver finishDecoding];
+
+    return projectType;
+}
+
 - (id) initWithProjectName:(NSString *)projectName
 {
     self = [super init];
     if (self) {
         _projectName = projectName;
         
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            _projectType = IPAD;
+        NSFileManager *mgr = [NSFileManager defaultManager];
+        
+        NSString *projectFolder = [self getProjectFolder];
+        NSString *dataFile = [projectFolder stringByAppendingPathComponent:@"project.dat"];
+        if ( ![mgr fileExistsAtPath:dataFile isDirectory:nil] )
+        {
+            NSError *err = nil;
+            [mgr createDirectoryAtPath:projectFolder withIntermediateDirectories:YES attributes:nil error:&err];
+            if ( err )
+            {
+                NSLog( @"Error creating project directory - %@", err.localizedDescription );
+            }
+            
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+                _projectType = PT_IPAD;
+            else
+                _projectType = PT_IPHONE;
+            _images = [NSMutableArray array];
+        }
         else
-            _projectType = IPHONE;
-        _images = [NSMutableArray array];
+        {
+            [self load];
+            [self setupProjectPaths];
+            
+            // Little hack temporarily to assign unknown project types to the device we are running on
+            if ( _projectType == 0 )
+                _projectType = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? PT_IPAD : PT_IPHONE;
+        }
+        
+
+        
     }
     return self;
 }
+
 
 - (NSString *) getProjectFolder
 {
@@ -90,15 +114,13 @@
     // Generate file name for image
     NSString *guid = [[NSUUID new] UUIDString];
 
-    NSString *imageName = [NSString stringWithFormat:@"%@.png", guid];
+    NSString *imageName = [NSString stringWithFormat:@"%@.jpg", guid];
 
     // Save image to string
-    NSString *path = [Project getDocsDir];
-    NSString *imageFile = [_projectName stringByAppendingPathComponent:imageName];
-    NSString *imagePath = [path stringByAppendingPathComponent:imageFile];
+    NSString *imagePath = [[self getProjectFolder] stringByAppendingPathComponent:imageName];
     if ( image != nil )
     {
-        bool rc = [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+        bool rc = [UIImageJPEGRepresentation(image, 0.8) writeToFile:imagePath atomically:YES];
         if ( rc != YES )
         {
             NSLog( @"Failed to save image - %@", imagePath );
@@ -109,8 +131,8 @@
     
     // Add image to list
     ImageDetails *item = [ImageDetails new];
-    item.imageName = imageName;
-    item.imagePath = imageFile;
+    item.imageName = [imageName stringByDeletingPathExtension];
+    item.imagePath = imagePath;
     [_images addObject:item];
     
     // Save Project
@@ -121,9 +143,11 @@
 {
     [_images removeObject:item];
     
+    NSString *path = item.imagePath;
+
     NSError *err;
     NSFileManager *mgr = [NSFileManager defaultManager];
-    [mgr removeItemAtPath:item.imagePath error:&err];
+    [mgr removeItemAtPath:path error:&err];
     
     // Now go through all the existing items and links and set any links that use this image to nil;
     for ( ImageDetails *image in _images )
@@ -153,14 +177,7 @@
     return ret;
 }
 
-- (void) save
-{
-    NSString *path = [self getProjectFolder];
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
-    NSString *dataFile = [path stringByAppendingPathComponent:@"project.dat"];
-    [data writeToFile:dataFile atomically:YES];
 
-}
 
 - (NSInteger) count
 {
@@ -172,30 +189,96 @@
     return _images[idx];
 }
 
-
-// Decode an object from an archive
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (NSString *) exportFile
 {
-    if(self = [super init])
-    {
-        _projectName = [aDecoder decodeObjectForKey:@"projectName"];
-        _projectType = [aDecoder decodeInt32ForKey:@"projectType"];
-        _images = [aDecoder decodeObjectForKey:@"images"];
-        
-        // Little hack temporarily to assign unknown project types to the device we are running on
-        if ( _projectType == 0 )
-            _projectType = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? IPAD : IPHONE;
+    NSString *path = [Project getDocsDir];
+    NSString *zipPath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.zip", self.projectName]];
 
-    }
+    NSMutableArray *filesList = [NSMutableArray array];
     
-    return self;
+    for ( int i = 0 ; i < self.count ; ++i )
+    {
+        ImageDetails *imageDetails = self[i];
+        NSString *path = imageDetails.imagePath;
+        [filesList addObject:path];
+    }
+    [filesList addObject:[[self getProjectFolder] stringByAppendingPathComponent:@"project.dat"]];
+    
+    NSLog( @"Creating zip file - %@", zipPath );
+    [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:filesList];
+    NSLog( @"Zip file created." );
+
+    return zipPath;
 }
 
-- (void)encodeWithCoder:(NSCoder *)coder
+
+- (void) setupProjectPaths
 {
-    [coder encodeObject:_projectName forKey:@"projectName"];
-    [coder encodeInt32:_projectType forKey:@"projectType"];
-    [coder encodeObject:_images forKey:@"images"];
+    // Set image paths
+    NSArray *extensions = @[@"jpg", @"png"];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    for ( int i = 0 ; i < self.count ; ++i )
+    {
+        ImageDetails *imageDetails = self[i];
+        imageDetails.imageName = [imageDetails.imageName stringByDeletingPathExtension];
+        NSString *base = [[self getProjectFolder] stringByAppendingPathComponent:imageDetails.imageName];
+        for ( NSString *ext in extensions )
+        {
+            NSString *file = [base stringByAppendingPathExtension:ext];
+            if ( [fm fileExistsAtPath:file] )
+            {
+                imageDetails.imagePath = file;
+                break;
+            }
+        }
+        
+        // Remove extensions from links
+        for ( ImageLink *il in imageDetails.links )
+        {
+            il.linkedToId = [il.linkedToId stringByDeletingPathExtension];
+        }
+    }
+    
+    [self save];
+}
+
+
+#pragma mark - serialization
+- (bool) load
+{
+    NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.dat"];
+    NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
+    NSData *data = [NSData dataWithContentsOfURL:archiveURL];
+    
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    
+    bool valid = NO;
+    if ( [unarchiver containsValueForKey:@"projectType"] && [unarchiver containsValueForKey:@"images"] )
+    {
+        _projectType = [unarchiver decodeIntegerForKey:@"projectType"];
+        _images = [unarchiver decodeObjectForKey:@"images"];
+        valid = YES;
+    }
+    [unarchiver finishDecoding];
+
+    return valid;
+}
+
+
+
+- (void) save
+{
+    NSMutableData *data = [NSMutableData data];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    
+    [archiver encodeInteger:_projectType forKey:@"projectType"];
+    [archiver encodeObject:_images forKey:@"images"];
+    [archiver finishEncoding];
+    
+    NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.dat"];
+    NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
+    BOOL rc = [data writeToURL:archiveURL atomically:YES];
+    NSLog( @"Rc - %d", rc );
 }
 
 

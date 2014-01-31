@@ -13,11 +13,14 @@
 #import "Project.h"
 #import "ImageDetails.h"
 #import "PhotoCell.h"
+#import "PSPDFActionSheet.h"
 
 #import "ELCImagePickerController.h"
 
-@interface ProjectViewController () <DrawViewControllerDelegate, ELCImagePickerControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProjectViewController () <DrawViewControllerDelegate, ELCImagePickerControllerDelegate, UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
+    UIDocumentInteractionController *docController;
+
     Project *project;
     ImageDetails *selectedImageDetails;
     
@@ -26,6 +29,8 @@
     UIBarButtonItem *doneBtn;
     UIBarButtonItem *deleteBtn;
     UIBarButtonItem *backBtn;
+    
+    PSPDFActionSheet *popupSheet;
 }
 
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -39,9 +44,9 @@
     [super viewDidLoad];
     
     self.title = self.projectName;
-    project = [Project setupProject:self.projectName];
+    project = [[Project alloc] initWithProjectName:self.projectName];
     
-    editBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editPressed:)];
+    editBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionPressed:)];
     doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editPressed:)];
     deleteBtn = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deletePressed:)];
     
@@ -69,8 +74,6 @@
     {
         DrawViewController *vc = segue.destinationViewController;
         vc.delegate = self;
-//        vc.imageFile = project;
-        
     }
 }
 
@@ -108,45 +111,6 @@
     return cell;
 }
 
-- (void) editPressed:(id)sender
-{
-    editMode = !editMode;
-    if ( editMode )
-    {
-        self.navigationItem.leftBarButtonItem = doneBtn;
-        self.navigationItem.rightBarButtonItem = deleteBtn;
-        
-        self.collectionView.allowsMultipleSelection = YES;
-    }
-    else
-    {
-        self.navigationItem.leftBarButtonItem = nil;
-        self.navigationItem.rightBarButtonItem = editBtn;
-        self.collectionView.allowsMultipleSelection = NO;
-        
-        [self.collectionView reloadData];
-    }
-}
-
-- (void) deletePressed:(id)sender
-{
-    // Remove selected cells
-    NSArray *selectedCells = [self.collectionView indexPathsForSelectedItems];
-    
-    // Remove images from project
-    NSMutableArray *itemsToDelete = [NSMutableArray array];
-    for ( NSIndexPath *indexPath in selectedCells )
-    {
-        [itemsToDelete addObject:project[indexPath.row]];
-    }
-
-    for ( ImageDetails *item in itemsToDelete )
-        [project removeItem:item];
-    [self.collectionView deleteItemsAtIndexPaths:selectedCells];
-    
-    [self editPressed:nil];
-}
-
 - (CGFloat) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 4;
@@ -173,6 +137,124 @@
 
 
 #pragma mark - Actions
+
+- (void) actionPressed:(id)sender
+{
+    if ( popupSheet != nil )
+    {
+        [popupSheet dismissWithClickedButtonIndex:0 animated:YES];
+        popupSheet = nil;
+        return;
+    }
+    
+    // Display Action sheet in popever
+    popupSheet = [[PSPDFActionSheet alloc] initWithTitle:@"Action"];
+    
+    __block __typeof__(self) blockSelf = self;
+    
+    
+    [popupSheet addButtonWithTitle:@"Delete images" block:^{
+        
+        blockSelf->popupSheet = nil;
+        [blockSelf editPressed:sender];
+    }];
+    
+    [popupSheet addButtonWithTitle:@"Export project" block:^{
+        
+        blockSelf->popupSheet = nil;
+        [blockSelf exportProject];
+    }];
+    
+    [popupSheet addButtonWithTitle:@"Compress images" block:^{
+        
+        blockSelf->popupSheet = nil;
+        [blockSelf compressImages];
+    }];
+    
+    [popupSheet setCancelButtonWithTitle:@"Cancel" block:^{
+        blockSelf->popupSheet = nil;
+    }];
+    
+    [popupSheet showWithSender:sender fallbackView:self.view animated:YES];
+
+}
+
+- (void) editPressed:(id)sender
+{
+    editMode = !editMode;
+    if ( editMode )
+    {
+        self.navigationItem.leftBarButtonItem = doneBtn;
+        self.navigationItem.rightBarButtonItem = deleteBtn;
+        
+        self.collectionView.allowsMultipleSelection = YES;
+    }
+    else
+    {
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem = editBtn;
+        self.collectionView.allowsMultipleSelection = NO;
+        
+        [self.collectionView reloadData];
+    }
+}
+
+- (void) exportProject
+{
+    NSString *exportPath = [project exportFile];
+    
+    NSURL *url = [[NSURL alloc] initFileURLWithPath:exportPath];
+    docController = [UIDocumentInteractionController interactionControllerWithURL:url];
+    docController.URL = url;
+    docController.delegate = self;
+    bool rc = [docController presentOptionsMenuFromBarButtonItem:editBtn animated:YES];
+    
+    NSLog( @"rc = %d", rc );
+
+}
+
+
+- (void) compressImages
+{
+    for ( int i = 0 ; i < project.count ; ++i )
+    {
+        ImageDetails *imageDetails = project[i];
+        
+        UIImage *i = [imageDetails getImage];
+        NSLog( @"Converting %@", imageDetails.imageName );
+        
+        imageDetails.imagePath = [imageDetails.imagePath stringByReplacingOccurrencesOfString:@".png" withString:@".jpg"];
+
+        bool rc = [UIImageJPEGRepresentation(i, 0.5) writeToFile:imageDetails.imagePath atomically:YES];
+        if ( !rc )
+        {
+            NSLog( @"Failed to convert %@", imageDetails.imageName );
+        }
+    }
+    
+    [project save];
+    
+}
+
+- (void) deletePressed:(id)sender
+{
+    // Remove selected cells
+    NSArray *selectedCells = [self.collectionView indexPathsForSelectedItems];
+    
+    // Remove images from project
+    NSMutableArray *itemsToDelete = [NSMutableArray array];
+    for ( NSIndexPath *indexPath in selectedCells )
+    {
+        [itemsToDelete addObject:project[indexPath.row]];
+    }
+    
+    for ( ImageDetails *item in itemsToDelete )
+        [project removeItem:item];
+    [self.collectionView deleteItemsAtIndexPaths:selectedCells];
+    
+    [self editPressed:nil];
+}
+
 
 - (IBAction)takePhotoButtonTapped:(id)sender
 {
@@ -204,13 +286,6 @@
     elcPicker.imagePickerDelegate = self;
     
     [self presentViewController:elcPicker animated:YES completion:nil];
-/*
-    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
-    mediaUI.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    mediaUI.allowsEditing = NO;
-    mediaUI.delegate = self;
-    [self presentViewController:mediaUI animated:YES completion:nil];
-*/
 }
 
 #pragma mark - DrawViewControllerDelegateMethods
@@ -362,4 +437,18 @@
     
     return imageCopy;
 }
+
+#pragma mark - UIDocumentInteractionControllerDelegate methods
+
+- (void) documentInteractionControllerDidDismissOptionsMenu:(UIDocumentInteractionController *)controller
+{
+    NSURL *url = controller.URL;
+    
+    NSError *error = nil;
+    NSFileManager *fm = [NSFileManager defaultManager];
+    [fm removeItemAtURL:url error:&error];
+    if ( error )
+        NSLog( @"Error removing %@ - %@", url, error.localizedDescription );
+}
+
 @end

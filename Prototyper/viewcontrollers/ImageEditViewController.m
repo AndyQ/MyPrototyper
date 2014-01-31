@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Andy Qua. All rights reserved.
 //
 
-// Uses code based on iOS-Image-Crop-View by Ming Yang (https://github.com/myang-git/iOS-Image-Crop-View)
-
 #import "ImageEditViewController.h"
 #import "LinkImageViewController.h"
 #import "DrawViewController.h"
@@ -331,8 +329,9 @@
 - (void) drawImageChanged:(UIImage *)image
 {
     // Save image
-    NSString *path = [[Project getDocsDir] stringByAppendingPathComponent:self.imageDetails.imagePath];
-    bool rc = [UIImagePNGRepresentation(image) writeToFile:path atomically:YES];
+    NSString *path = self.imageDetails.imagePath;
+    path = [path stringByReplacingOccurrencesOfString:@".png" withString:@".jpg"];
+    bool rc = [UIImageJPEGRepresentation(image, 0.5) writeToFile:path atomically:YES];
     if ( !rc )
         NSLog( @"Failed");
 

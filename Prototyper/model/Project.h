@@ -10,25 +10,30 @@
 
 #import "ImageDetails.h"
 #import "ImageLink.h"
+#import "Constants.h"
 
 
-@interface Project : NSObject <NSCoding>
+@interface Project : NSObject
 
-@property (nonatomic, readonly) NSString *projectName;
+@property (nonatomic, strong) NSString *projectName;
 @property (nonatomic, assign) NSInteger projectType;
 
 + (NSString *) getDocsDir;
-+ (Project *) setupProject:(NSString *)projectName;
 + (void) deleteProjectWithName:(NSString *)projectName;
++ (ProjectType) getProjectTypeForProject:(NSString *)projectName;
 
+
+- (id) initWithProjectName:(NSString *)projectName;
 - (NSString *) getProjectFolder;
 - (void) addImageToProject:(UIImage *)image;
 - (void) removeItem:(ImageDetails *)item;
 - (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
 
+- (bool) load;
 - (void) save;
 
 - (NSInteger) count;
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 
+- (NSString *) exportFile;
 @end

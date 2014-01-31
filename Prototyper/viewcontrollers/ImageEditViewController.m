@@ -345,8 +345,22 @@
 {
     // Save image
     NSString *path = self.imageDetails.imagePath;
-    path = [path stringByReplacingOccurrencesOfString:@".png" withString:@".jpg"];
-    bool rc = [UIImageJPEGRepresentation(image, 0.5) writeToFile:path atomically:YES];
+    
+    bool rc;
+    NSString *imageType = [[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_FORMAT];
+    if ( [imageType isEqualToString:JPEG] )
+    {
+        path = [path stringByReplacingOccurrencesOfString:@".png" withString:@".jpg"];
+        CGFloat imageQuality = [[[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_QUALITY] floatValue];
+        rc = [UIImageJPEGRepresentation(image, imageQuality) writeToFile:path atomically:YES];
+    }
+    else
+    {
+        path = [path stringByReplacingOccurrencesOfString:@".jpg" withString:@".png"];
+        rc = [UIImagePNGRepresentation(image) writeToFile:path atomically:YES];
+    }
+    self.imageDetails.imagePath = path;
+    
     if ( !rc )
         NSLog( @"Failed");
 

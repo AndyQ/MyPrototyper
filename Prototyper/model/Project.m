@@ -119,13 +119,24 @@
     if ( self.startImage.length == 0 )
         self.startImage = guid;
 
-    NSString *imageName = [NSString stringWithFormat:@"%@.jpg", guid];
-
-    // Save image to string
+    
+    NSString *imageType = [[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_FORMAT];
+    NSString *imageName = [NSString stringWithFormat:@"%@.%@", guid, imageType];
     NSString *imagePath = [[self getProjectFolder] stringByAppendingPathComponent:imageName];
+
+    bool rc;
     if ( image != nil )
     {
-        bool rc = [UIImageJPEGRepresentation(image, 0.8) writeToFile:imagePath atomically:YES];
+        if ( [imageType isEqualToString:JPEG] )
+        {
+            CGFloat imageQuality = [[[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_QUALITY] floatValue];
+            rc = [UIImageJPEGRepresentation(image, imageQuality) writeToFile:imagePath atomically:YES];
+        }
+        else
+        {
+            rc = [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+        }
+
         if ( rc != YES )
         {
             NSLog( @"Failed to save image - %@", imagePath );

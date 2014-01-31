@@ -26,8 +26,8 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
 
 @interface DrawViewController () <ColorViewControllerDelegate, PopoverViewDelegate, UIAlertViewDelegate>
 {
-    PopoverView *popoverView;
     ColorViewController *cv;
+    PopoverView *popoverView;
     
     CGPoint previousPoint;
     DrawStates state;
@@ -107,10 +107,12 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
     }
 		
     cv = [[ColorViewController alloc] init];
+    cv.view.frame = CGRectMake( 0, 0, 240, 250 );;
     cv.delegate = self;
     
     popoverView = [PopoverView showPopoverAtPoint:CGPointMake( self.view.frame.size.width-100, self.view.frame.size.height-44) inView:self.view withContentView:cv.view delegate:self];
 }
+
 
 #pragma mark - PopoverView delegate
 
@@ -137,9 +139,9 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
     selectedColor = [GzColors colorFromHex:hexColor];
     self.colorView.backgroundColor = selectedColor;
 
-    cv = nil;
     [popoverView dismiss];
     popoverView = nil;
+    cv = nil;
 }
 
 - (IBAction) addTextPressed:(id)sender

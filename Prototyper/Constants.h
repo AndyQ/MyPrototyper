@@ -14,6 +14,12 @@ typedef enum ProjectType
     PT_IPHONE
 } ProjectType;
 
+// Preferences
+#define PREF_IMAGE_FORMAT @"pref_imageFormat"
+#define PREF_IMAGE_QUALITY @"pref_imageQuality"
+
+#define JPEG @"jpg"
+#define PNG @"png"
 
 // Notifications
 #define NOTIF_IMPORTED @"NOTIF_IMPORTED"

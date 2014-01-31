@@ -15,9 +15,10 @@
 #import "PhotoCell.h"
 #import "PSPDFActionSheet.h"
 
-#import <ELCImagePickerController/ELCImagePickerController.h>
+#import "ELCImagePickerController.h"
+#import "IASKAppSettingsViewController.h"
 
-@interface ProjectViewController () <DrawViewControllerDelegate, ELCImagePickerControllerDelegate, UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProjectViewController () <DrawViewControllerDelegate, ELCImagePickerControllerDelegate, IASKSettingsDelegate,UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     UIDocumentInteractionController *docController;
 
@@ -60,6 +61,14 @@
     [self.collectionView reloadData];
     
     self.selectStartImageDisplayViewBottom.constant -= self.selectStartImageDisplayView.bounds.size.height;
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    if ( popupSheet != nil )
+    {
+        [popupSheet dismissWithClickedButtonIndex:0 animated:NO];
+    }
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -198,11 +207,26 @@
         [blockSelf exportProject];
     }];
     
+    [popupSheet addButtonWithTitle:@"Settings" block:^{
+        blockSelf->popupSheet = nil;
+        IASKAppSettingsViewController *appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
+        appSettingsViewController.delegate = blockSelf;
+        appSettingsViewController.showDoneButton = YES;
+        
+        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:appSettingsViewController];
+        nc.modalPresentationStyle = UIModalPresentationFormSheet;
+        nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        
+        [blockSelf presentViewController:nc animated:YES completion:^{ }];
+    }];
+    
+/*
     [popupSheet addButtonWithTitle:@"Compress images" block:^{
         
         blockSelf->popupSheet = nil;
         [blockSelf compressImages];
     }];
+*/
     
     [popupSheet setCancelButtonWithTitle:@"Cancel" block:^{
         blockSelf->popupSheet = nil;
@@ -258,7 +282,8 @@
         
         imageDetails.imagePath = [imageDetails.imagePath stringByReplacingOccurrencesOfString:@".png" withString:@".jpg"];
 
-        bool rc = [UIImageJPEGRepresentation(i, 0.5) writeToFile:imageDetails.imagePath atomically:YES];
+        CGFloat imageQuality = [[[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_QUALITY] floatValue];
+        bool rc = [UIImageJPEGRepresentation(i, imageQuality) writeToFile:imageDetails.imagePath atomically:YES];
         if ( !rc )
         {
             NSLog( @"Failed to convert %@", imageDetails.imageName );
@@ -482,5 +507,12 @@
     if ( error )
         NSLog( @"Error removing %@ - %@", url, error.localizedDescription );
 }
+
+#pragma mark - InAppSettingsKit Delegate
+- (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end

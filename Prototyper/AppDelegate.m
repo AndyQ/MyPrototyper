@@ -10,12 +10,13 @@
 #import "Project.h"
 #import "SSZipArchive.h"
 
+#import "Constants.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSDictionary *userDefaultsDefaults = @{ @"pref_imageFormat" : @"jpg",
-                                            @"pref_imageQuality" : @"0.5"};
+    NSDictionary *userDefaultsDefaults = @{ PREF_IMAGE_FORMAT : @"jpg",
+                                            PREF_IMAGE_QUALITY : @"0.5"};
     [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
 
     // Override point for customization after application launch.

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0500"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5728B221E07B466CB8F9A3BB"
+               BlueprintIdentifier = "416A003BE2E94B68A974C53A"
                BuildableName = "libPods-ColorPopover.a"
                BlueprintName = "Pods-ColorPopover"
                ReferencedContainer = "container:Pods.xcodeproj">

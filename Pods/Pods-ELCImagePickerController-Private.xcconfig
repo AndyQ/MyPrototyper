@@ -1,5 +1,5 @@
 #include "Pods-ELCImagePickerController.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/ELCImagePickerController" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/ColorPopover" "${PODS_ROOT}/Headers/ELCImagePickerController" "${PODS_ROOT}/Headers/PSAlertView" "${PODS_ROOT}/Headers/PopoverView" "${PODS_ROOT}/Headers/SSZipArchive" "${PODS_ROOT}/Headers/SSZipArchive/minizip" "${PODS_ROOT}/Headers/WEPopover"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/ELCImagePickerController" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/ColorPopover" "${PODS_ROOT}/Headers/ELCImagePickerController" "${PODS_ROOT}/Headers/InAppSettingsKit" "${PODS_ROOT}/Headers/PSAlertView" "${PODS_ROOT}/Headers/PopoverView" "${PODS_ROOT}/Headers/SSZipArchive" "${PODS_ROOT}/Headers/SSZipArchive/minizip" "${PODS_ROOT}/Headers/WEPopover"
 OTHER_LDFLAGS = -ObjC ${PODS_ELCIMAGEPICKERCONTROLLER_OTHER_LDFLAGS}
 PODS_ROOT = ${SRCROOT}

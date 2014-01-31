@@ -386,15 +386,9 @@
                                 <action selector="addProjectPressed:" destination="Sb5-yY-Itv" id="Ezr-IU-YRk"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="nmg-WO-dJH">
-                            <connections>
-                                <action selector="editPressed:" destination="Sb5-yY-Itv" id="uif-xw-gHv"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="QXv-GF-fda" id="QqT-oX-P45"/>
-                        <outlet property="editButton" destination="nmg-WO-dJH" id="uiN-qS-Lcp"/>
                         <outlet property="tableView" destination="veY-Tk-khA" id="NxM-4U-Are"/>
                         <segue destination="L7h-rU-lpT" kind="push" identifier="ShowProject" id="G4c-cc-faY"/>
                     </connections>

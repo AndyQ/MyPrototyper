@@ -25,7 +25,7 @@
     ImageDetails *selectedImageDetails;
     
     bool editMode;
-    UIBarButtonItem *editBtn;
+    UIBarButtonItem *actionBtn;
     UIBarButtonItem *doneBtn;
     UIBarButtonItem *deleteBtn;
     UIBarButtonItem *backBtn;
@@ -51,11 +51,11 @@
     self.title = self.projectName;
     project = [[Project alloc] initWithProjectName:self.projectName];
     
-    editBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionPressed:)];
+    actionBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionPressed:)];
     doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editPressed:)];
     deleteBtn = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deletePressed:)];
     
-    self.navigationItem.rightBarButtonItem = editBtn;
+    self.navigationItem.rightBarButtonItem = actionBtn;
 
     [self.collectionView reloadData];
     
@@ -225,7 +225,7 @@
     else
     {
         self.navigationItem.leftBarButtonItem = nil;
-        self.navigationItem.rightBarButtonItem = editBtn;
+        self.navigationItem.rightBarButtonItem = actionBtn;
         self.collectionView.allowsMultipleSelection = NO;
         
         [self.collectionView reloadData];
@@ -240,7 +240,7 @@
     docController = [UIDocumentInteractionController interactionControllerWithURL:url];
     docController.URL = url;
     docController.delegate = self;
-    bool rc = [docController presentOptionsMenuFromBarButtonItem:editBtn animated:YES];
+    bool rc = [docController presentOptionsMenuFromBarButtonItem:actionBtn animated:YES];
     
     NSLog( @"rc = %d", rc );
 

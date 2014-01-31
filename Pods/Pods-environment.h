@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_ELCImagePickerController 2
 #define COCOAPODS_VERSION_PATCH_ELCImagePickerController 0
 
+// InAppSettingsKit
+#define COCOAPODS_POD_AVAILABLE_InAppSettingsKit
+#define COCOAPODS_VERSION_MAJOR_InAppSettingsKit 2
+#define COCOAPODS_VERSION_MINOR_InAppSettingsKit 0
+#define COCOAPODS_VERSION_PATCH_InAppSettingsKit 0
+
 // PSAlertView
 #define COCOAPODS_POD_AVAILABLE_PSAlertView
 #define COCOAPODS_VERSION_MAJOR_PSAlertView 1

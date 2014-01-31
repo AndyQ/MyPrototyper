@@ -4,4 +4,4 @@ pod 'ColorPopover',  '~> 0.0.1'
 pod 'ELCImagePickerController',  '~> 0.2.0'
 pod 'PopoverView',  '~> 0.0.1'
 pod 'PSAlertView',  '~> 1.1'
-
+pod 'InAppSettingsKit', '~> 2.0'

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0500"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9F1D6A9F3F644CFA97CF44DD"
+               BlueprintIdentifier = "0CF3E1D42B704E0B8D4A51BD"
                BuildableName = "libPods-WEPopover.a"
                BlueprintName = "Pods-WEPopover"
                ReferencedContainer = "container:Pods.xcodeproj">

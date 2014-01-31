@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0510"
+   LastUpgradeVersion = "0500"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B70CFB04FA954DE7A1C38EE3"
+               BlueprintIdentifier = "E5BBCA2C2E6A4E399F760362"
                BuildableName = "libPods-PSAlertView.a"
                BlueprintName = "Pods-PSAlertView"
                ReferencedContainer = "container:Pods.xcodeproj">

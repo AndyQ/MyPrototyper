@@ -10,17 +10,24 @@
 #import "ProjectViewController.h"
 #import "Project.h"
 #import "ProjectSelectTableViewCell.h"
+#import "PSPDFActionSheet.h"
 
 #import "Constants.h"
 
-@interface MainViewController () <UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
+#import "IASKAppSettingsViewController.h"
+
+@interface MainViewController () <IASKSettingsDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
+    PSPDFActionSheet *popupSheet;
+
     NSMutableArray *projects;
     NSString *selectedProjectName;
+    
+    UIBarButtonItem *actionButton;
+    UIBarButtonItem *doneButton;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
 
 @end
@@ -38,7 +45,12 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+    [super viewDidLoad];\
+    
+    actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionPressed:)];
+    doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
+    self.navigationItem.rightBarButtonItem = actionButton;
+
 
     [self loadProjects];
 }
@@ -68,22 +80,57 @@
     [av show];
 }
 
-- (IBAction) editPressed:(id)sender
+- (IBAction) actionPressed:(id)sender
 {
-    self.tableView.editing = !self.tableView.editing;
+    if ( popupSheet != nil )
+    {
+        [popupSheet dismissWithClickedButtonIndex:0 animated:YES];
+        popupSheet = nil;
+        return;
+    }
+    
+    // Display Action sheet in popever
+    popupSheet = [[PSPDFActionSheet alloc] initWithTitle:@"Prototyper"];
+    
+    __block __typeof__(self) blockSelf = self;
+    
+    [popupSheet addButtonWithTitle:@"Delete projects" block:^{
+        
+        blockSelf->popupSheet = nil;
+        blockSelf.tableView.editing = YES;
+        [blockSelf.tableView reloadData];
+        blockSelf.navigationItem.rightBarButtonItem = blockSelf->doneButton;
+        blockSelf.addButton.enabled = NO;
+    }];
+    
+    [popupSheet addButtonWithTitle:@"Settings" block:^{
+        blockSelf->popupSheet = nil;
+        IASKAppSettingsViewController *appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
+        appSettingsViewController.delegate = blockSelf;
+        appSettingsViewController.showDoneButton = YES;
+        
+        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:appSettingsViewController];
+        nc.modalPresentationStyle = UIModalPresentationFormSheet;
+        nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        
+        [blockSelf presentViewController:nc animated:YES completion:^{ }];
+    }];
+    
+    [popupSheet setCancelButtonWithTitle:@"Cancel" block:^{
+        blockSelf->popupSheet = nil;
+    }];
+    
+    [popupSheet showWithSender:sender fallbackView:self.view animated:YES];
+
+}
+
+- (void) donePressed:(id)sender
+{
+    self.tableView.editing = NO;
     [self.tableView reloadData];
-    if ( self.tableView.editing )
-    {
-        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editPressed:)];
-        self.navigationItem.rightBarButtonItem = editButton;
-        self.addButton.enabled = NO;
-    }
-    else
-    {
-        UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editPressed:)];
-        self.navigationItem.rightBarButtonItem = editButton;
-        self.addButton.enabled = YES;
-    }
+
+    self.navigationItem.rightBarButtonItem = actionButton;
+    self.addButton.enabled = YES;
 }
 
 #pragma mark - UIAlertViewDelegate methods
@@ -196,5 +243,13 @@
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
+
+#pragma mark - InAppSettingsKit Delegate
+- (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 
 @end

@@ -1,0 +1,1766 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00AF98D6430341468043431F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDEE258CE094B9F90A04B3A /* Foundation.framework */; };
+		0319E4E0B14C4C1C858E3F24 /* WEPopoverParentView.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E7E8F3437C4945BAD03FA6 /* WEPopoverParentView.h */; };
+		03552C42C2A5429B9F6A45CD /* ELCAssetSelectionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 88A72F56CC544FE2BC2B349B /* ELCAssetSelectionDelegate.h */; };
+		0444B752829A4F6FA6DB93B1 /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = D82B5B9B190F4D68A6F63804 /* ELCAssetTablePicker.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		054754F9CD084B91B625C071 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E9602681EA649D591B9C10E /* CoreLocation.framework */; };
+		0600C744F71643F2A034A645 /* libPods-SSZipArchive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C39D6947D464CC8A7049C4A /* libPods-SSZipArchive.a */; };
+		0D1BF31B46E84381993CB6DD /* ColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 42DFD91DF2664EDFABEF6BAB /* ColorButton.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		118F9AF4248F43A384B37479 /* PSPDFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0FF8C9C1ED8417EBF763FE3 /* PSPDFAlertView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		14891F2A0DC44C0ABE35A143 /* UIColor+PSPDFKitAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 353457256B8641A9A87C2C58 /* UIColor+PSPDFKitAdditions.h */; };
+		20FD3093A6B34877A82C690E /* UIColor+PSPDFKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D64AD84B0784172BB7A9609 /* UIColor+PSPDFKitAdditions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		22ABA9B7961A4E86810536EB /* SSZipArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CAB6296BA4849A4952BC893 /* SSZipArchive.h */; };
+		2687021A5C304526BB453A83 /* libPods-PSAlertView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61BD3954302C4FF487D16018 /* libPods-PSAlertView.a */; };
+		2690AD31C059469888570EE5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDEE258CE094B9F90A04B3A /* Foundation.framework */; };
+		2C73C8C265294F0F9D50EDFB /* WEPopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A11F38EF519E4B50A9A005EB /* WEPopoverViewController.m */; };
+		32D1D0CF6BDE48A58BAD6E52 /* WEPopoverContentViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B52871C7DD94412A6E4D42C /* WEPopoverContentViewController.h */; };
+		382DC4A1024142439F3B63D2 /* WEPopoverTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FA4274FED97474188D8A210 /* WEPopoverTableViewController.h */; };
+		3D5FD8D6B30D47B589401765 /* mztools.h in Headers */ = {isa = PBXBuildFile; fileRef = D7D22DF9F81E4571AAEDFC2F /* mztools.h */; };
+		3EA375C19ED048619C1126A0 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 7022F0FB0695492DA287E6C6 /* ELCAsset.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		3FB2BFE30E9A48E39B276CA0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDEE258CE094B9F90A04B3A /* Foundation.framework */; };
+		41DBD19B85FD4DA1A2D7E0C9 /* zip.h in Headers */ = {isa = PBXBuildFile; fileRef = B7A366938F214C0E94A182E2 /* zip.h */; };
+		45DE3715B23446958AE09E27 /* WEPopoverController.h in Headers */ = {isa = PBXBuildFile; fileRef = 52577858578847B68B021044 /* WEPopoverController.h */; };
+		463B34D59A21467D809AADE8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDEE258CE094B9F90A04B3A /* Foundation.framework */; };
+		46C0E6A6835C417889D87F6E /* WEPopoverAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 90AA598412E2498482E5F038 /* WEPopoverAppDelegate.h */; };
+		4C4FDA5E499A4201BE9192CE /* ioapi.h in Headers */ = {isa = PBXBuildFile; fileRef = 05E364EF55504099939F8AD9 /* ioapi.h */; };
+		544F83B8E31D4F2798098780 /* Pods-ColorPopover-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 35523D4085064384BB3AC048 /* Pods-ColorPopover-dummy.m */; };
+		59E213A3CCEF436E91C06388 /* WEPopoverContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59633AC57A114D97994E076E /* WEPopoverContentViewController.m */; };
+		5BC5335AEB3B47BCB474AE8C /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B84A2EB199134F7AA0EFF0E0 /* PopoverView.m */; };
+		62A6420EF6EE46F2B93AF4F0 /* PSPDFAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 31C0B478CC744DBC9579A3D5 /* PSPDFAlertView.h */; };
+		63FC47DBE8D04FF581A1B752 /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = F2DE39C298CF49428F6AEEC2 /* ioapi.c */; };
+		6C5E801CA43846B0836FCBA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDEE258CE094B9F90A04B3A /* Foundation.framework */; };
+		6DD713741F7C41C7BD2C8589 /* UIBarButtonItem+WEPopover.h in Headers */ = {isa = PBXBuildFile; fileRef = BC358AEA8C7B4995B3DFE4D9 /* UIBarButtonItem+WEPopover.h */; };
+		703B835FA6424A32ACCCD31F /* Pods-WEPopover-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E3CCEAE320CA41099125A507 /* Pods-WEPopover-dummy.m */; };
+		746FE86D0950437AAC672283 /* unzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 29D806D6DFF74ACB8532A398 /* unzip.h */; };
+		74717518C0824235AC30B6E9 /* PSPDFActionSheet.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F1B7FB824474224A96756A7 /* PSPDFActionSheet.h */; };
+		7614FAF3AE134640A36FE842 /* PopoverView.h in Headers */ = {isa = PBXBuildFile; fileRef = DB460D053D6445EF9E05BB86 /* PopoverView.h */; };
+		76A881D37537405AA1AF616D /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F7EE9C8A8ED4A668EFE276F /* ELCAlbumPickerController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		7FBF9864AF934333B14DA565 /* GzColors.h in Headers */ = {isa = PBXBuildFile; fileRef = BFC63553EF0F44C4A9AAFE98 /* GzColors.h */; };
+		83004127955E4EDA86A59F96 /* ELCAlbumPickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = C972ED3FE7BB48B9BDB8BF63 /* ELCAlbumPickerController.h */; };
+		832B9BE1A2474BE381296351 /* ColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD8506C891BE4513B5CB793C /* ColorViewController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		839ADCAED9854913AE14F6CD /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 090CB38D56884D5E95C3D9ED /* zip.c */; };
+		8AAA2DB11F3345458D68FAD4 /* ELCAssetPickerFilterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 39C33DCECB9D44F99CB630E0 /* ELCAssetPickerFilterDelegate.h */; };
+		8D689A33203A49AFB3FEAF1D /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 539EC97CEDEF4D7C9017881B /* AssetsLibrary.framework */; };
+		902B01E24F514D08B376B929 /* Pods-ELCImagePickerController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D5363B5AD9B47F7BB810799 /* Pods-ELCImagePickerController-dummy.m */; };
+		91BE57C5DACA404899E13FA8 /* ELCImagePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = E77AA95D8D514952BF31D15A /* ELCImagePickerController.h */; };
+		9491D3AED8A44D2987ECD6C9 /* libPods-ColorPopover.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46232FB724304E3490841A63 /* libPods-ColorPopover.a */; };
+		9E6C0DD69D9C4FF680B0FD57 /* GzColors.m in Sources */ = {isa = PBXBuildFile; fileRef = A90207EDF62847B5844DD5ED /* GzColors.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		A0671E6DF2354147BDE42A10 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C36B93840C6945FCA503EE5D /* UIKit.framework */; };
+		A14D821F89DF43F4975174C0 /* PSPDFActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 910FCD05C47C4193BE69042E /* PSPDFActionSheet.m */; settings = {COMPILER_FLAGS = "-fobjc-arc -DOS_OBJECT_USE_OBJC=0"; }; };
+		A280F0A755E64DD99030778B /* PopoverView_Configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = 5C592BCF782742BD8A5FB109 /* PopoverView_Configuration.h */; };
+		A9DD96E93FCF462AB9089945 /* WEPopoverViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EA2E41F5DB14A3D80998819 /* WEPopoverViewController.h */; };
+		AB482EA2CB16444BB35CDD2A /* ELCAssetTablePicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 02C8E22A538A439D866990D8 /* ELCAssetTablePicker.h */; };
+		ACC5A4D3C5CC49DB99C9964F /* ELCAssetCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C78811CC2F87419C8722D8AE /* ELCAssetCell.h */; };
+		AED77C6782DA43E59659DF23 /* WETouchableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A189FC462014E1D990ADD91 /* WETouchableView.h */; };
+		B0B00C163A1346DCA4638CD8 /* ColorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 785DDA3715B64A9CAD4A4D9E /* ColorViewController.h */; };
+		B23A3E167A324369BD9AF5F6 /* WEPopoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B479B2741409AA074C3CA /* WEPopoverTableViewController.m */; };
+		B5E707D850E34506A444173F /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D72BE6087C491B817BA0B6 /* ELCImagePickerController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		B7D968B952564044A4E75FEC /* WEPopoverContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F63F0A51F2AB4EA88E3756C6 /* WEPopoverContainerView.m */; };
+		BAB7516CD82C4B3188E52BDB /* WEPopoverAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AB73D80770249A9B862EA8D /* WEPopoverAppDelegate.m */; };
+		BD3BED45237541BCBCC707D6 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EB82E5CA7441F9F449731 /* SSZipArchive.m */; };
+		BE7899C63F3D4C14BA39505B /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = BB81AADA34214F888399F665 /* mztools.c */; };
+		C1DAE6D63468426D920DC107 /* WEPopoverContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = ED99AD1010FC46E6A8B8D530 /* WEPopoverContainerView.h */; };
+		C261852BADA843D98BB8456F /* Pods-SSZipArchive-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4CD58011DF4634BDD62B56 /* Pods-SSZipArchive-dummy.m */; };
+		C660368726C84B2097AAB185 /* crypt.h in Headers */ = {isa = PBXBuildFile; fileRef = A6A2D1D8C8DB40878512C883 /* crypt.h */; };
+		C662D16AAE1845BA9F41BE24 /* libPods-PopoverView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CA0096575424665BAFDDBAA /* libPods-PopoverView.a */; };
+		C668F836B471455AA93A79BA /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B5CCA3FA24AC42BA80F2506F /* Pods-dummy.m */; };
+		D1DD56662D3E41D7AE2A5139 /* WETouchableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 531349D3CFB34D51B2F65224 /* WETouchableView.m */; };
+		D2E11FD4A42C41AABDC1E3F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDEE258CE094B9F90A04B3A /* Foundation.framework */; };
+		DD4F712D65994D9D9C3785BB /* libPods-WEPopover.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB3F8C4180F34F25AC5EC8D1 /* libPods-WEPopover.a */; };
+		DDD4CA692E1A4F43AE3F5DC8 /* WEPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFCB5A8AE5B744A699D326AD /* WEPopoverController.m */; };
+		DF5A43928E39426BB830080F /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = 3B0BCDF896784BE9A57B555D /* unzip.c */; };
+		E0880F369B184FADBAD370E5 /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F87EB4EFFA642358F8F4F23 /* ELCAssetCell.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		E0B9B8E6CECC41ADB556705C /* ELCAsset.h in Headers */ = {isa = PBXBuildFile; fileRef = CAAC3C930E644F708ABD5D9D /* ELCAsset.h */; };
+		EF4C6CB2AD474AD78CEBD08B /* Pods-PSAlertView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AF467E775CA444BEA7633B4C /* Pods-PSAlertView-dummy.m */; };
+		F0BC2B5C9FAF4FACB4760250 /* ColorButton.h in Headers */ = {isa = PBXBuildFile; fileRef = C0156577E34248068DCD34AF /* ColorButton.h */; };
+		F4B15CC66B2E4F96AECB294A /* Pods-PopoverView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 13E1D37F8FC74293A66788E1 /* Pods-PopoverView-dummy.m */; };
+		FB9DE44C8DB44403A42EB81F /* UIBarButtonItem+WEPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BC56B7504EA40C48BF4DA89 /* UIBarButtonItem+WEPopover.m */; };
+		FD3A829C38944910AB4A2C4B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EEDEE258CE094B9F90A04B3A /* Foundation.framework */; };
+		FE7429FC3FB5404C8797C0DA /* libPods-ELCImagePickerController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9100A4A253BD4E34BE4A9110 /* libPods-ELCImagePickerController.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0CECFFF59ECA412BA77C9837 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F4A448E099D47948B6F1B1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4639092EAFD74C739F39D05C;
+			remoteInfo = "Pods-ELCImagePickerController";
+		};
+		344F90544E7144DAA13C5AD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F4A448E099D47948B6F1B1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F795D25DF684C238527001D;
+			remoteInfo = "Pods-SSZipArchive";
+		};
+		6B26126C4E3F479D86D89ACB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F4A448E099D47948B6F1B1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F1D6A9F3F644CFA97CF44DD;
+			remoteInfo = "Pods-WEPopover";
+		};
+		8B7F20AE628E4C1AAFD84624 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F4A448E099D47948B6F1B1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C337966EBD4D4F88AF616828;
+			remoteInfo = "Pods-PopoverView";
+		};
+		9094AB3106444DA89A5EB6CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F4A448E099D47948B6F1B1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F1D6A9F3F644CFA97CF44DD;
+			remoteInfo = "Pods-WEPopover";
+		};
+		94AFCFA751CF4834976CEE66 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F4A448E099D47948B6F1B1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5728B221E07B466CB8F9A3BB;
+			remoteInfo = "Pods-ColorPopover";
+		};
+		DAB689BF399246C0AC802123 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F4A448E099D47948B6F1B1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B70CFB04FA954DE7A1C38EE3;
+			remoteInfo = "Pods-PSAlertView";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00D72BE6087C491B817BA0B6 /* ELCImagePickerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ELCImagePickerController.m; path = Classes/ELCImagePicker/ELCImagePickerController.m; sourceTree = "<group>"; };
+		02C8E22A538A439D866990D8 /* ELCAssetTablePicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ELCAssetTablePicker.h; path = Classes/ELCImagePicker/ELCAssetTablePicker.h; sourceTree = "<group>"; };
+		05970187FFD448F091959897 /* Pods-WEPopover-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WEPopover-Private.xcconfig"; sourceTree = "<group>"; };
+		05E364EF55504099939F8AD9 /* ioapi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ioapi.h; path = minizip/ioapi.h; sourceTree = "<group>"; };
+		0688E44E063944E9BDE57C30 /* Pods-ColorPopover-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ColorPopover-prefix.pch"; sourceTree = "<group>"; };
+		06C7F73B92D14D8E88213009 /* Pods-SSZipArchive.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SSZipArchive.xcconfig"; sourceTree = "<group>"; };
+		090CB38D56884D5E95C3D9ED /* zip.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = zip.c; path = minizip/zip.c; sourceTree = "<group>"; };
+		0E2B479B2741409AA074C3CA /* WEPopoverTableViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WEPopoverTableViewController.m; path = Classes/WEPopoverTableViewController.m; sourceTree = "<group>"; };
+		0F4C134913034F408A4B6205 /* Pods-ColorPopover.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ColorPopover.xcconfig"; sourceTree = "<group>"; };
+		13E1D37F8FC74293A66788E1 /* Pods-PopoverView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PopoverView-dummy.m"; sourceTree = "<group>"; };
+		1B52871C7DD94412A6E4D42C /* WEPopoverContentViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WEPopoverContentViewController.h; path = Classes/WEPopoverContentViewController.h; sourceTree = "<group>"; };
+		1D64AD84B0784172BB7A9609 /* UIColor+PSPDFKitAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PSPDFKitAdditions.m"; sourceTree = "<group>"; };
+		1DED78D0F4094E43BC7F26BB /* popoverArrowDown.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverArrowDown.png; sourceTree = "<group>"; };
+		1DF2C807709440658005DF67 /* popoverArrowDownSimple.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverArrowDownSimple.png; sourceTree = "<group>"; };
+		1EA2E41F5DB14A3D80998819 /* WEPopoverViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WEPopoverViewController.h; path = Classes/WEPopoverViewController.h; sourceTree = "<group>"; };
+		1FE2C4CB4B37441BA8B344D3 /* popoverArrowRightSimple.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverArrowRightSimple.png; sourceTree = "<group>"; };
+		24CEB6598C1842738D5C7553 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.xcconfig; sourceTree = "<group>"; };
+		29D806D6DFF74ACB8532A398 /* unzip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = unzip.h; path = minizip/unzip.h; sourceTree = "<group>"; };
+		2AB73D80770249A9B862EA8D /* WEPopoverAppDelegate.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WEPopoverAppDelegate.m; path = Classes/WEPopoverAppDelegate.m; sourceTree = "<group>"; };
+		2AB94FF1A70A4B7AB4A4CCF0 /* popoverArrowLeft.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverArrowLeft.png; sourceTree = "<group>"; };
+		2C264801D2664EE699CDDE18 /* popoverArrowLeftSimple.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverArrowLeftSimple.png; sourceTree = "<group>"; };
+		30600D0CA7244A0FB8D375FE /* popoverArrowUpSimple.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverArrowUpSimple.png; sourceTree = "<group>"; };
+		31C0B478CC744DBC9579A3D5 /* PSPDFAlertView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PSPDFAlertView.h; sourceTree = "<group>"; };
+		353457256B8641A9A87C2C58 /* UIColor+PSPDFKitAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+PSPDFKitAdditions.h"; sourceTree = "<group>"; };
+		35523D4085064384BB3AC048 /* Pods-ColorPopover-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ColorPopover-dummy.m"; sourceTree = "<group>"; };
+		3562B16278D04FE9A1B5EEFA /* Pods-ELCImagePickerController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ELCImagePickerController-prefix.pch"; sourceTree = "<group>"; };
+		39C33DCECB9D44F99CB630E0 /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ELCAssetPickerFilterDelegate.h; path = Classes/ELCImagePicker/ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
+		3A189FC462014E1D990ADD91 /* WETouchableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WETouchableView.h; path = Classes/Popover/WETouchableView.h; sourceTree = "<group>"; };
+		3B0BCDF896784BE9A57B555D /* unzip.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = unzip.c; path = minizip/unzip.c; sourceTree = "<group>"; };
+		42DFD91DF2664EDFABEF6BAB /* ColorButton.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ColorButton.m; path = Colors/ColorPopover/ColorButton.m; sourceTree = "<group>"; };
+		46232FB724304E3490841A63 /* libPods-ColorPopover.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ColorPopover.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		475A98350DF348DD928B0934 /* Pods-PopoverView-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PopoverView-Private.xcconfig"; sourceTree = "<group>"; };
+		51D23FA7740040C5A96AF42C /* popoverArrowUp.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverArrowUp.png; sourceTree = "<group>"; };
+		51E7E8F3437C4945BAD03FA6 /* WEPopoverParentView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WEPopoverParentView.h; path = Classes/Popover/WEPopoverParentView.h; sourceTree = "<group>"; };
+		52577858578847B68B021044 /* WEPopoverController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WEPopoverController.h; path = Classes/Popover/WEPopoverController.h; sourceTree = "<group>"; };
+		531349D3CFB34D51B2F65224 /* WETouchableView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WETouchableView.m; path = Classes/Popover/WETouchableView.m; sourceTree = "<group>"; };
+		539EC97CEDEF4D7C9017881B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/AssetsLibrary.framework; sourceTree = DEVELOPER_DIR; };
+		59633AC57A114D97994E076E /* WEPopoverContentViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WEPopoverContentViewController.m; path = Classes/WEPopoverContentViewController.m; sourceTree = "<group>"; };
+		5A3887BC49CC4A6780223BAE /* Overlay@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "Overlay@2x.png"; path = "Classes/ELCImagePicker/Resources/Overlay@2x.png"; sourceTree = "<group>"; };
+		5C39D6947D464CC8A7049C4A /* libPods-SSZipArchive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SSZipArchive.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C592BCF782742BD8A5FB109 /* PopoverView_Configuration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PopoverView_Configuration.h; path = PopoverView/PopoverView_Configuration.h; sourceTree = "<group>"; };
+		5D5363B5AD9B47F7BB810799 /* Pods-ELCImagePickerController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ELCImagePickerController-dummy.m"; sourceTree = "<group>"; };
+		5D84829801AF4A5B88DE3DBA /* popoverArrowDown@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "popoverArrowDown@2x.png"; sourceTree = "<group>"; };
+		5F1B7FB824474224A96756A7 /* PSPDFActionSheet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PSPDFActionSheet.h; sourceTree = "<group>"; };
+		5FA4274FED97474188D8A210 /* WEPopoverTableViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WEPopoverTableViewController.h; path = Classes/WEPopoverTableViewController.h; sourceTree = "<group>"; };
+		61BD3954302C4FF487D16018 /* libPods-PSAlertView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PSAlertView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		629B45C40D974DEDAF17FEAE /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		64D21D9D59144EB2A3F6B485 /* Pods-PSAlertView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PSAlertView-prefix.pch"; sourceTree = "<group>"; };
+		6B58C3A476484CA29442B1E8 /* popoverBgSimple.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverBgSimple.png; sourceTree = "<group>"; };
+		6CAB6296BA4849A4952BC893 /* SSZipArchive.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SSZipArchive.h; path = SSZipArchive/SSZipArchive.h; sourceTree = "<group>"; };
+		7022F0FB0695492DA287E6C6 /* ELCAsset.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ELCAsset.m; path = Classes/ELCImagePicker/ELCAsset.m; sourceTree = "<group>"; };
+		73031C997C2D4F8F927D60B4 /* Pods-WEPopover.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-WEPopover.xcconfig"; sourceTree = "<group>"; };
+		730EB402619F41F196AE693D /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		785DDA3715B64A9CAD4A4D9E /* ColorViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ColorViewController.h; path = Colors/ColorPopover/ColorViewController.h; sourceTree = "<group>"; };
+		7A576C33F2C54615974F533D /* Pods-PopoverView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PopoverView.xcconfig"; sourceTree = "<group>"; };
+		7CA0096575424665BAFDDBAA /* libPods-PopoverView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PopoverView.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88A72F56CC544FE2BC2B349B /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ELCAssetSelectionDelegate.h; path = Classes/ELCImagePicker/ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
+		8B04EF5371EC48EBB5FD886C /* ELCAssetPicker.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = ELCAssetPicker.xib; path = Classes/ELCImagePicker/Resources/ELCAssetPicker.xib; sourceTree = "<group>"; };
+		8F7EE9C8A8ED4A668EFE276F /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ELCAlbumPickerController.m; path = Classes/ELCImagePicker/ELCAlbumPickerController.m; sourceTree = "<group>"; };
+		8F87EB4EFFA642358F8F4F23 /* ELCAssetCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ELCAssetCell.m; path = Classes/ELCImagePicker/ELCAssetCell.m; sourceTree = "<group>"; };
+		8FEC536191714B0E82B8E4E2 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		90AA598412E2498482E5F038 /* WEPopoverAppDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WEPopoverAppDelegate.h; path = Classes/WEPopoverAppDelegate.h; sourceTree = "<group>"; };
+		9100A4A253BD4E34BE4A9110 /* libPods-ELCImagePickerController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ELCImagePickerController.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		910FCD05C47C4193BE69042E /* PSPDFActionSheet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PSPDFActionSheet.m; sourceTree = "<group>"; };
+		91E53D7CFE4B41DF9770178B /* Pods-ELCImagePickerController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ELCImagePickerController.xcconfig"; sourceTree = "<group>"; };
+		9242E97DA82144EF85A185CE /* Pods-PopoverView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PopoverView-prefix.pch"; sourceTree = "<group>"; };
+		9B4B883491C440E08CF1652F /* Pods-PSAlertView-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PSAlertView-Private.xcconfig"; sourceTree = "<group>"; };
+		9BC56B7504EA40C48BF4DA89 /* UIBarButtonItem+WEPopover.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIBarButtonItem+WEPopover.m"; path = "Classes/Popover/UIBarButtonItem+WEPopover.m"; sourceTree = "<group>"; };
+		9E9602681EA649D591B9C10E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		A0298FC64A30407C89600C91 /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
+		A11F38EF519E4B50A9A005EB /* WEPopoverViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WEPopoverViewController.m; path = Classes/WEPopoverViewController.m; sourceTree = "<group>"; };
+		A6A2D1D8C8DB40878512C883 /* crypt.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = crypt.h; path = minizip/crypt.h; sourceTree = "<group>"; };
+		A90207EDF62847B5844DD5ED /* GzColors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GzColors.m; path = Colors/ColorPopover/GzColors.m; sourceTree = "<group>"; };
+		AF467E775CA444BEA7633B4C /* Pods-PSAlertView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PSAlertView-dummy.m"; sourceTree = "<group>"; };
+		B35777F5752547078CF2BC71 /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = ELCAlbumPickerController.xib; path = Classes/ELCImagePicker/Resources/ELCAlbumPickerController.xib; sourceTree = "<group>"; };
+		B5CCA3FA24AC42BA80F2506F /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		B7A366938F214C0E94A182E2 /* zip.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = zip.h; path = minizip/zip.h; sourceTree = "<group>"; };
+		B84A2EB199134F7AA0EFF0E0 /* PopoverView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = PopoverView.m; path = PopoverView/PopoverView.m; sourceTree = "<group>"; };
+		BB81AADA34214F888399F665 /* mztools.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = mztools.c; path = minizip/mztools.c; sourceTree = "<group>"; };
+		BC358AEA8C7B4995B3DFE4D9 /* UIBarButtonItem+WEPopover.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIBarButtonItem+WEPopover.h"; path = "Classes/Popover/UIBarButtonItem+WEPopover.h"; sourceTree = "<group>"; };
+		BD90AAC56FE04094A45C81BB /* popoverBg.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverBg.png; sourceTree = "<group>"; };
+		BFC63553EF0F44C4A9AAFE98 /* GzColors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GzColors.h; path = Colors/ColorPopover/GzColors.h; sourceTree = "<group>"; };
+		C0156577E34248068DCD34AF /* ColorButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ColorButton.h; path = Colors/ColorPopover/ColorButton.h; sourceTree = "<group>"; };
+		C057A740BEC64284B4FDAA05 /* Pods-SSZipArchive-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SSZipArchive-prefix.pch"; sourceTree = "<group>"; };
+		C2B812AA42CA4C6B86EE9A04 /* Pods-WEPopover-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-WEPopover-prefix.pch"; sourceTree = "<group>"; };
+		C36B93840C6945FCA503EE5D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		C448A50C1A244EB19FA04F2E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C78811CC2F87419C8722D8AE /* ELCAssetCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ELCAssetCell.h; path = Classes/ELCImagePicker/ELCAssetCell.h; sourceTree = "<group>"; };
+		C7CCBB7A180F4EEBAC4F12C0 /* Pods-ColorPopover-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ColorPopover-Private.xcconfig"; sourceTree = "<group>"; };
+		C972ED3FE7BB48B9BDB8BF63 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ELCAlbumPickerController.h; path = Classes/ELCImagePicker/ELCAlbumPickerController.h; sourceTree = "<group>"; };
+		CAAC3C930E644F708ABD5D9D /* ELCAsset.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ELCAsset.h; path = Classes/ELCImagePicker/ELCAsset.h; sourceTree = "<group>"; };
+		CC2307B694154E439E45EF83 /* popoverArrowRight.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = popoverArrowRight.png; sourceTree = "<group>"; };
+		CFED807E868A4041B4E938A7 /* popoverArrowUp@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "popoverArrowUp@2x.png"; sourceTree = "<group>"; };
+		D0280A8374594E91B99157C0 /* Pods-SSZipArchive-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SSZipArchive-Private.xcconfig"; sourceTree = "<group>"; };
+		D0BD8B28A22646C99E44C0D6 /* popoverBg@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "popoverBg@2x.png"; sourceTree = "<group>"; };
+		D7D22DF9F81E4571AAEDFC2F /* mztools.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = mztools.h; path = minizip/mztools.h; sourceTree = "<group>"; };
+		D82B5B9B190F4D68A6F63804 /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ELCAssetTablePicker.m; path = Classes/ELCImagePicker/ELCAssetTablePicker.m; sourceTree = "<group>"; };
+		DB460D053D6445EF9E05BB86 /* PopoverView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = PopoverView.h; path = PopoverView/PopoverView.h; sourceTree = "<group>"; };
+		DD4CD58011DF4634BDD62B56 /* Pods-SSZipArchive-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SSZipArchive-dummy.m"; sourceTree = "<group>"; };
+		E0B4FCA278464C5E90F77E69 /* popoverArrowRight@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "popoverArrowRight@2x.png"; sourceTree = "<group>"; };
+		E0FF8C9C1ED8417EBF763FE3 /* PSPDFAlertView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PSPDFAlertView.m; sourceTree = "<group>"; };
+		E3CCEAE320CA41099125A507 /* Pods-WEPopover-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-WEPopover-dummy.m"; sourceTree = "<group>"; };
+		E630F7B67B9E43CFAC839A48 /* Pods-PSAlertView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PSAlertView.xcconfig"; sourceTree = "<group>"; };
+		E77AA95D8D514952BF31D15A /* ELCImagePickerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ELCImagePickerController.h; path = Classes/ELCImagePicker/ELCImagePickerController.h; sourceTree = "<group>"; };
+		E95EB82E5CA7441F9F449731 /* SSZipArchive.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SSZipArchive.m; path = SSZipArchive/SSZipArchive.m; sourceTree = "<group>"; };
+		EB3F8C4180F34F25AC5EC8D1 /* libPods-WEPopover.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WEPopover.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED00031EC474415AAFEC5724 /* popoverArrowLeft@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; path = "popoverArrowLeft@2x.png"; sourceTree = "<group>"; };
+		ED99AD1010FC46E6A8B8D530 /* WEPopoverContainerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WEPopoverContainerView.h; path = Classes/Popover/WEPopoverContainerView.h; sourceTree = "<group>"; };
+		EEDEE258CE094B9F90A04B3A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		F0BE2723299C401E847608D0 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		F1C6C7D5EF3F4B049DCE396C /* Overlay.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = Overlay.png; path = Classes/ELCImagePicker/Resources/Overlay.png; sourceTree = "<group>"; };
+		F2DE39C298CF49428F6AEEC2 /* ioapi.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = ioapi.c; path = minizip/ioapi.c; sourceTree = "<group>"; };
+		F63F0A51F2AB4EA88E3756C6 /* WEPopoverContainerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WEPopoverContainerView.m; path = Classes/Popover/WEPopoverContainerView.m; sourceTree = "<group>"; };
+		F7C40EBDB8F0401EA80E1B68 /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = ELCAssetTablePicker.xib; path = Classes/ELCImagePicker/Resources/ELCAssetTablePicker.xib; sourceTree = "<group>"; };
+		FBA2A1219E0B437D8C6516DF /* Pods-ELCImagePickerController-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ELCImagePickerController-Private.xcconfig"; sourceTree = "<group>"; };
+		FD8506C891BE4513B5CB793C /* ColorViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ColorViewController.m; path = Colors/ColorPopover/ColorViewController.m; sourceTree = "<group>"; };
+		FFCB5A8AE5B744A699D326AD /* WEPopoverController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = WEPopoverController.m; path = Classes/Popover/WEPopoverController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1647B7BDD4D240879938B370 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D689A33203A49AFB3FEAF1D /* AssetsLibrary.framework in Frameworks */,
+				054754F9CD084B91B625C071 /* CoreLocation.framework in Frameworks */,
+				3FB2BFE30E9A48E39B276CA0 /* Foundation.framework in Frameworks */,
+				A0671E6DF2354147BDE42A10 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BEB336BA60C4C1EA49E7B31 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD3A829C38944910AB4A2C4B /* Foundation.framework in Frameworks */,
+				9491D3AED8A44D2987ECD6C9 /* libPods-ColorPopover.a in Frameworks */,
+				FE7429FC3FB5404C8797C0DA /* libPods-ELCImagePickerController.a in Frameworks */,
+				2687021A5C304526BB453A83 /* libPods-PSAlertView.a in Frameworks */,
+				C662D16AAE1845BA9F41BE24 /* libPods-PopoverView.a in Frameworks */,
+				0600C744F71643F2A034A645 /* libPods-SSZipArchive.a in Frameworks */,
+				DD4F712D65994D9D9C3785BB /* libPods-WEPopover.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5140126E068A45D590B7F787 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2690AD31C059469888570EE5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		620E230506FF458581260B4F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00AF98D6430341468043431F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E491E85D4AC48FBADCA4ED5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6C5E801CA43846B0836FCBA4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A61D03A762EB4B3C99B2EF03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2E11FD4A42C41AABDC1E3F7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5DD5BFC9D754EA0A78EEB57 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				463B34D59A21467D809AADE8 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03E1196E86F34AA8B36D1CFD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B35777F5752547078CF2BC71 /* ELCAlbumPickerController.xib */,
+				8B04EF5371EC48EBB5FD886C /* ELCAssetPicker.xib */,
+				F7C40EBDB8F0401EA80E1B68 /* ELCAssetTablePicker.xib */,
+				F1C6C7D5EF3F4B049DCE396C /* Overlay.png */,
+				5A3887BC49CC4A6780223BAE /* Overlay@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		0C154B873D6C46A1810B307C /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				06C7F73B92D14D8E88213009 /* Pods-SSZipArchive.xcconfig */,
+				D0280A8374594E91B99157C0 /* Pods-SSZipArchive-Private.xcconfig */,
+				DD4CD58011DF4634BDD62B56 /* Pods-SSZipArchive-dummy.m */,
+				C057A740BEC64284B4FDAA05 /* Pods-SSZipArchive-prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = SOURCE_ROOT;
+		};
+		2022382EBD77486A9BA120D7 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0F4C134913034F408A4B6205 /* Pods-ColorPopover.xcconfig */,
+				C7CCBB7A180F4EEBAC4F12C0 /* Pods-ColorPopover-Private.xcconfig */,
+				35523D4085064384BB3AC048 /* Pods-ColorPopover-dummy.m */,
+				0688E44E063944E9BDE57C30 /* Pods-ColorPopover-prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = SOURCE_ROOT;
+		};
+		23D7807F783E4E13823044A7 = {
+			isa = PBXGroup;
+			children = (
+				F0BE2723299C401E847608D0 /* Podfile */,
+				2BB0242C87ED4A89AB784870 /* Frameworks */,
+				FE7CE8E0D1E04D22A276703F /* Pods */,
+				D2E5641F4DC54712A8CFBF2F /* Products */,
+				5E1A7715CAFF472FB78BBC3B /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		2B804003A6BF47119D189E09 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1DED78D0F4094E43BC7F26BB /* popoverArrowDown.png */,
+				5D84829801AF4A5B88DE3DBA /* popoverArrowDown@2x.png */,
+				1DF2C807709440658005DF67 /* popoverArrowDownSimple.png */,
+				2AB94FF1A70A4B7AB4A4CCF0 /* popoverArrowLeft.png */,
+				ED00031EC474415AAFEC5724 /* popoverArrowLeft@2x.png */,
+				2C264801D2664EE699CDDE18 /* popoverArrowLeftSimple.png */,
+				CC2307B694154E439E45EF83 /* popoverArrowRight.png */,
+				E0B4FCA278464C5E90F77E69 /* popoverArrowRight@2x.png */,
+				1FE2C4CB4B37441BA8B344D3 /* popoverArrowRightSimple.png */,
+				51D23FA7740040C5A96AF42C /* popoverArrowUp.png */,
+				CFED807E868A4041B4E938A7 /* popoverArrowUp@2x.png */,
+				30600D0CA7244A0FB8D375FE /* popoverArrowUpSimple.png */,
+				BD90AAC56FE04094A45C81BB /* popoverBg.png */,
+				D0BD8B28A22646C99E44C0D6 /* popoverBg@2x.png */,
+				6B58C3A476484CA29442B1E8 /* popoverBgSimple.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		2BB0242C87ED4A89AB784870 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C6E1964567014E1D888E236D /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2D4027130C884F919D78BEAC /* ColorPopover */ = {
+			isa = PBXGroup;
+			children = (
+				C0156577E34248068DCD34AF /* ColorButton.h */,
+				42DFD91DF2664EDFABEF6BAB /* ColorButton.m */,
+				785DDA3715B64A9CAD4A4D9E /* ColorViewController.h */,
+				FD8506C891BE4513B5CB793C /* ColorViewController.m */,
+				BFC63553EF0F44C4A9AAFE98 /* GzColors.h */,
+				A90207EDF62847B5844DD5ED /* GzColors.m */,
+				2022382EBD77486A9BA120D7 /* Support Files */,
+			);
+			path = ColorPopover;
+			sourceTree = "<group>";
+		};
+		34598B98508A4508B43D6C28 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				73031C997C2D4F8F927D60B4 /* Pods-WEPopover.xcconfig */,
+				05970187FFD448F091959897 /* Pods-WEPopover-Private.xcconfig */,
+				E3CCEAE320CA41099125A507 /* Pods-WEPopover-dummy.m */,
+				C2B812AA42CA4C6B86EE9A04 /* Pods-WEPopover-prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = SOURCE_ROOT;
+		};
+		430FE58DDC92415FAB237ADF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E630F7B67B9E43CFAC839A48 /* Pods-PSAlertView.xcconfig */,
+				9B4B883491C440E08CF1652F /* Pods-PSAlertView-Private.xcconfig */,
+				AF467E775CA444BEA7633B4C /* Pods-PSAlertView-dummy.m */,
+				64D21D9D59144EB2A3F6B485 /* Pods-PSAlertView-prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = SOURCE_ROOT;
+		};
+		5B6941F57D624848AA1B434B /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				91E53D7CFE4B41DF9770178B /* Pods-ELCImagePickerController.xcconfig */,
+				FBA2A1219E0B437D8C6516DF /* Pods-ELCImagePickerController-Private.xcconfig */,
+				5D5363B5AD9B47F7BB810799 /* Pods-ELCImagePickerController-dummy.m */,
+				3562B16278D04FE9A1B5EEFA /* Pods-ELCImagePickerController-prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = SOURCE_ROOT;
+		};
+		5E1A7715CAFF472FB78BBC3B /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE2FFA84AC5A46B69A139517 /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		95349CC6A3214062BDCC6FED /* PopoverView */ = {
+			isa = PBXGroup;
+			children = (
+				DB460D053D6445EF9E05BB86 /* PopoverView.h */,
+				B84A2EB199134F7AA0EFF0E0 /* PopoverView.m */,
+				5C592BCF782742BD8A5FB109 /* PopoverView_Configuration.h */,
+				C5864D2A3FFA4204BB768B6F /* Support Files */,
+			);
+			path = PopoverView;
+			sourceTree = "<group>";
+		};
+		99D24170700846D6B886B381 /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				6CAB6296BA4849A4952BC893 /* SSZipArchive.h */,
+				E95EB82E5CA7441F9F449731 /* SSZipArchive.m */,
+				A6A2D1D8C8DB40878512C883 /* crypt.h */,
+				F2DE39C298CF49428F6AEEC2 /* ioapi.c */,
+				05E364EF55504099939F8AD9 /* ioapi.h */,
+				BB81AADA34214F888399F665 /* mztools.c */,
+				D7D22DF9F81E4571AAEDFC2F /* mztools.h */,
+				3B0BCDF896784BE9A57B555D /* unzip.c */,
+				29D806D6DFF74ACB8532A398 /* unzip.h */,
+				090CB38D56884D5E95C3D9ED /* zip.c */,
+				B7A366938F214C0E94A182E2 /* zip.h */,
+				0C154B873D6C46A1810B307C /* Support Files */,
+			);
+			path = SSZipArchive;
+			sourceTree = "<group>";
+		};
+		A4BD99CA69834AE888DD4507 /* PSAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				5F1B7FB824474224A96756A7 /* PSPDFActionSheet.h */,
+				910FCD05C47C4193BE69042E /* PSPDFActionSheet.m */,
+				31C0B478CC744DBC9579A3D5 /* PSPDFAlertView.h */,
+				E0FF8C9C1ED8417EBF763FE3 /* PSPDFAlertView.m */,
+				353457256B8641A9A87C2C58 /* UIColor+PSPDFKitAdditions.h */,
+				1D64AD84B0784172BB7A9609 /* UIColor+PSPDFKitAdditions.m */,
+				430FE58DDC92415FAB237ADF /* Support Files */,
+			);
+			path = PSAlertView;
+			sourceTree = "<group>";
+		};
+		BBAB243C4620471E8F3B893A /* WEPopover */ = {
+			isa = PBXGroup;
+			children = (
+				BC358AEA8C7B4995B3DFE4D9 /* UIBarButtonItem+WEPopover.h */,
+				9BC56B7504EA40C48BF4DA89 /* UIBarButtonItem+WEPopover.m */,
+				90AA598412E2498482E5F038 /* WEPopoverAppDelegate.h */,
+				2AB73D80770249A9B862EA8D /* WEPopoverAppDelegate.m */,
+				ED99AD1010FC46E6A8B8D530 /* WEPopoverContainerView.h */,
+				F63F0A51F2AB4EA88E3756C6 /* WEPopoverContainerView.m */,
+				1B52871C7DD94412A6E4D42C /* WEPopoverContentViewController.h */,
+				59633AC57A114D97994E076E /* WEPopoverContentViewController.m */,
+				52577858578847B68B021044 /* WEPopoverController.h */,
+				FFCB5A8AE5B744A699D326AD /* WEPopoverController.m */,
+				51E7E8F3437C4945BAD03FA6 /* WEPopoverParentView.h */,
+				5FA4274FED97474188D8A210 /* WEPopoverTableViewController.h */,
+				0E2B479B2741409AA074C3CA /* WEPopoverTableViewController.m */,
+				1EA2E41F5DB14A3D80998819 /* WEPopoverViewController.h */,
+				A11F38EF519E4B50A9A005EB /* WEPopoverViewController.m */,
+				3A189FC462014E1D990ADD91 /* WETouchableView.h */,
+				531349D3CFB34D51B2F65224 /* WETouchableView.m */,
+				2B804003A6BF47119D189E09 /* Resources */,
+				34598B98508A4508B43D6C28 /* Support Files */,
+			);
+			path = WEPopover;
+			sourceTree = "<group>";
+		};
+		BE2FFA84AC5A46B69A139517 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				24CEB6598C1842738D5C7553 /* Pods.xcconfig */,
+				730EB402619F41F196AE693D /* Pods-acknowledgements.markdown */,
+				629B45C40D974DEDAF17FEAE /* Pods-acknowledgements.plist */,
+				B5CCA3FA24AC42BA80F2506F /* Pods-dummy.m */,
+				A0298FC64A30407C89600C91 /* Pods-environment.h */,
+				8FEC536191714B0E82B8E4E2 /* Pods-resources.sh */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		C5864D2A3FFA4204BB768B6F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7A576C33F2C54615974F533D /* Pods-PopoverView.xcconfig */,
+				475A98350DF348DD928B0934 /* Pods-PopoverView-Private.xcconfig */,
+				13E1D37F8FC74293A66788E1 /* Pods-PopoverView-dummy.m */,
+				9242E97DA82144EF85A185CE /* Pods-PopoverView-prefix.pch */,
+			);
+			name = "Support Files";
+			sourceTree = SOURCE_ROOT;
+		};
+		C6E1964567014E1D888E236D /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				539EC97CEDEF4D7C9017881B /* AssetsLibrary.framework */,
+				9E9602681EA649D591B9C10E /* CoreLocation.framework */,
+				EEDEE258CE094B9F90A04B3A /* Foundation.framework */,
+				C36B93840C6945FCA503EE5D /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D2E5641F4DC54712A8CFBF2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C448A50C1A244EB19FA04F2E /* libPods.a */,
+				46232FB724304E3490841A63 /* libPods-ColorPopover.a */,
+				9100A4A253BD4E34BE4A9110 /* libPods-ELCImagePickerController.a */,
+				61BD3954302C4FF487D16018 /* libPods-PSAlertView.a */,
+				7CA0096575424665BAFDDBAA /* libPods-PopoverView.a */,
+				5C39D6947D464CC8A7049C4A /* libPods-SSZipArchive.a */,
+				EB3F8C4180F34F25AC5EC8D1 /* libPods-WEPopover.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E5781126A1674609B5D54E2B /* ELCImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				C972ED3FE7BB48B9BDB8BF63 /* ELCAlbumPickerController.h */,
+				8F7EE9C8A8ED4A668EFE276F /* ELCAlbumPickerController.m */,
+				CAAC3C930E644F708ABD5D9D /* ELCAsset.h */,
+				7022F0FB0695492DA287E6C6 /* ELCAsset.m */,
+				C78811CC2F87419C8722D8AE /* ELCAssetCell.h */,
+				8F87EB4EFFA642358F8F4F23 /* ELCAssetCell.m */,
+				39C33DCECB9D44F99CB630E0 /* ELCAssetPickerFilterDelegate.h */,
+				88A72F56CC544FE2BC2B349B /* ELCAssetSelectionDelegate.h */,
+				02C8E22A538A439D866990D8 /* ELCAssetTablePicker.h */,
+				D82B5B9B190F4D68A6F63804 /* ELCAssetTablePicker.m */,
+				E77AA95D8D514952BF31D15A /* ELCImagePickerController.h */,
+				00D72BE6087C491B817BA0B6 /* ELCImagePickerController.m */,
+				03E1196E86F34AA8B36D1CFD /* Resources */,
+				5B6941F57D624848AA1B434B /* Support Files */,
+			);
+			path = ELCImagePickerController;
+			sourceTree = "<group>";
+		};
+		FE7CE8E0D1E04D22A276703F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2D4027130C884F919D78BEAC /* ColorPopover */,
+				E5781126A1674609B5D54E2B /* ELCImagePickerController */,
+				A4BD99CA69834AE888DD4507 /* PSAlertView */,
+				95349CC6A3214062BDCC6FED /* PopoverView */,
+				99D24170700846D6B886B381 /* SSZipArchive */,
+				BBAB243C4620471E8F3B893A /* WEPopover */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2E84A4AAEC754B24B0D61233 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DD713741F7C41C7BD2C8589 /* UIBarButtonItem+WEPopover.h in Headers */,
+				46C0E6A6835C417889D87F6E /* WEPopoverAppDelegate.h in Headers */,
+				C1DAE6D63468426D920DC107 /* WEPopoverContainerView.h in Headers */,
+				32D1D0CF6BDE48A58BAD6E52 /* WEPopoverContentViewController.h in Headers */,
+				45DE3715B23446958AE09E27 /* WEPopoverController.h in Headers */,
+				0319E4E0B14C4C1C858E3F24 /* WEPopoverParentView.h in Headers */,
+				382DC4A1024142439F3B63D2 /* WEPopoverTableViewController.h in Headers */,
+				A9DD96E93FCF462AB9089945 /* WEPopoverViewController.h in Headers */,
+				AED77C6782DA43E59659DF23 /* WETouchableView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		715BB7093A8143BCA2945392 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22ABA9B7961A4E86810536EB /* SSZipArchive.h in Headers */,
+				C660368726C84B2097AAB185 /* crypt.h in Headers */,
+				4C4FDA5E499A4201BE9192CE /* ioapi.h in Headers */,
+				3D5FD8D6B30D47B589401765 /* mztools.h in Headers */,
+				746FE86D0950437AAC672283 /* unzip.h in Headers */,
+				41DBD19B85FD4DA1A2D7E0C9 /* zip.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		966A881C7CFA4994A1E9DF43 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7614FAF3AE134640A36FE842 /* PopoverView.h in Headers */,
+				A280F0A755E64DD99030778B /* PopoverView_Configuration.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ABD6009B6B6F4885BA83EE73 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				83004127955E4EDA86A59F96 /* ELCAlbumPickerController.h in Headers */,
+				E0B9B8E6CECC41ADB556705C /* ELCAsset.h in Headers */,
+				ACC5A4D3C5CC49DB99C9964F /* ELCAssetCell.h in Headers */,
+				8AAA2DB11F3345458D68FAD4 /* ELCAssetPickerFilterDelegate.h in Headers */,
+				03552C42C2A5429B9F6A45CD /* ELCAssetSelectionDelegate.h in Headers */,
+				AB482EA2CB16444BB35CDD2A /* ELCAssetTablePicker.h in Headers */,
+				91BE57C5DACA404899E13FA8 /* ELCImagePickerController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B0096C9B428B43CBAC1E3B90 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0BC2B5C9FAF4FACB4760250 /* ColorButton.h in Headers */,
+				B0B00C163A1346DCA4638CD8 /* ColorViewController.h in Headers */,
+				7FBF9864AF934333B14DA565 /* GzColors.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1003F29F0E74E5B887D649B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74717518C0824235AC30B6E9 /* PSPDFActionSheet.h in Headers */,
+				62A6420EF6EE46F2B93AF4F0 /* PSPDFAlertView.h in Headers */,
+				14891F2A0DC44C0ABE35A143 /* UIColor+PSPDFKitAdditions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		4639092EAFD74C739F39D05C /* Pods-ELCImagePickerController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DCA7594D195242A897ACCF5A /* Build configuration list for PBXNativeTarget "Pods-ELCImagePickerController" */;
+			buildPhases = (
+				ED5B2760A1E344B2A21617F2 /* Sources */,
+				1647B7BDD4D240879938B370 /* Frameworks */,
+				ABD6009B6B6F4885BA83EE73 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-ELCImagePickerController";
+			productName = "Pods-ELCImagePickerController";
+			productReference = 9100A4A253BD4E34BE4A9110 /* libPods-ELCImagePickerController.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		5728B221E07B466CB8F9A3BB /* Pods-ColorPopover */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 82D80AD10F1C42F58942E5C9 /* Build configuration list for PBXNativeTarget "Pods-ColorPopover" */;
+			buildPhases = (
+				AC68B50596D0458DA1AE08BB /* Sources */,
+				8E491E85D4AC48FBADCA4ED5 /* Frameworks */,
+				B0096C9B428B43CBAC1E3B90 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D023BFFEA66A4C789AE03FD4 /* PBXTargetDependency */,
+			);
+			name = "Pods-ColorPopover";
+			productName = "Pods-ColorPopover";
+			productReference = 46232FB724304E3490841A63 /* libPods-ColorPopover.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		9F1D6A9F3F644CFA97CF44DD /* Pods-WEPopover */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF203D4D5C4D439B8FFB0348 /* Build configuration list for PBXNativeTarget "Pods-WEPopover" */;
+			buildPhases = (
+				CF28C85E083F4BD69A35DD87 /* Sources */,
+				5140126E068A45D590B7F787 /* Frameworks */,
+				2E84A4AAEC754B24B0D61233 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-WEPopover";
+			productName = "Pods-WEPopover";
+			productReference = EB3F8C4180F34F25AC5EC8D1 /* libPods-WEPopover.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		9F795D25DF684C238527001D /* Pods-SSZipArchive */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9593FCB77D3148EEB5D959E6 /* Build configuration list for PBXNativeTarget "Pods-SSZipArchive" */;
+			buildPhases = (
+				7506DE1051CA468D914C9397 /* Sources */,
+				E5DD5BFC9D754EA0A78EEB57 /* Frameworks */,
+				715BB7093A8143BCA2945392 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SSZipArchive";
+			productName = "Pods-SSZipArchive";
+			productReference = 5C39D6947D464CC8A7049C4A /* libPods-SSZipArchive.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		B70CFB04FA954DE7A1C38EE3 /* Pods-PSAlertView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C884F2AB5A8D43D29C8821DB /* Build configuration list for PBXNativeTarget "Pods-PSAlertView" */;
+			buildPhases = (
+				64FAA563F1BB49648B4979A9 /* Sources */,
+				A61D03A762EB4B3C99B2EF03 /* Frameworks */,
+				E1003F29F0E74E5B887D649B /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-PSAlertView";
+			productName = "Pods-PSAlertView";
+			productReference = 61BD3954302C4FF487D16018 /* libPods-PSAlertView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		C337966EBD4D4F88AF616828 /* Pods-PopoverView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12EED60F0EB64D4B83DF74E1 /* Build configuration list for PBXNativeTarget "Pods-PopoverView" */;
+			buildPhases = (
+				C7127001D81C4352924A1DD2 /* Sources */,
+				620E230506FF458581260B4F /* Frameworks */,
+				966A881C7CFA4994A1E9DF43 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-PopoverView";
+			productName = "Pods-PopoverView";
+			productReference = 7CA0096575424665BAFDDBAA /* libPods-PopoverView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D18B93CCCB034063A8F5F2AB /* Pods */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8989272469914FE7A6236897 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildPhases = (
+				319A85BB425C4E74B5504176 /* Sources */,
+				4BEB336BA60C4C1EA49E7B31 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B85D388C5E2B4D81AF597701 /* PBXTargetDependency */,
+				69DA21F009F4452583A87424 /* PBXTargetDependency */,
+				CEE9CFF8B93948C295A0EA97 /* PBXTargetDependency */,
+				CB7CB5EDC5E14BB7AEDC970A /* PBXTargetDependency */,
+				B0D00E1D7943413080BFB5A4 /* PBXTargetDependency */,
+				491A35E9F480482C9965ACED /* PBXTargetDependency */,
+			);
+			name = Pods;
+			productName = Pods;
+			productReference = C448A50C1A244EB19FA04F2E /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9F4A448E099D47948B6F1B1C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 82EA1EA1C1114EA19CDB851A /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 23D7807F783E4E13823044A7;
+			productRefGroup = D2E5641F4DC54712A8CFBF2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D18B93CCCB034063A8F5F2AB /* Pods */,
+				5728B221E07B466CB8F9A3BB /* Pods-ColorPopover */,
+				4639092EAFD74C739F39D05C /* Pods-ELCImagePickerController */,
+				B70CFB04FA954DE7A1C38EE3 /* Pods-PSAlertView */,
+				C337966EBD4D4F88AF616828 /* Pods-PopoverView */,
+				9F795D25DF684C238527001D /* Pods-SSZipArchive */,
+				9F1D6A9F3F644CFA97CF44DD /* Pods-WEPopover */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		319A85BB425C4E74B5504176 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C668F836B471455AA93A79BA /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64FAA563F1BB49648B4979A9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A14D821F89DF43F4975174C0 /* PSPDFActionSheet.m in Sources */,
+				118F9AF4248F43A384B37479 /* PSPDFAlertView.m in Sources */,
+				EF4C6CB2AD474AD78CEBD08B /* Pods-PSAlertView-dummy.m in Sources */,
+				20FD3093A6B34877A82C690E /* UIColor+PSPDFKitAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7506DE1051CA468D914C9397 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C261852BADA843D98BB8456F /* Pods-SSZipArchive-dummy.m in Sources */,
+				BD3BED45237541BCBCC707D6 /* SSZipArchive.m in Sources */,
+				63FC47DBE8D04FF581A1B752 /* ioapi.c in Sources */,
+				BE7899C63F3D4C14BA39505B /* mztools.c in Sources */,
+				DF5A43928E39426BB830080F /* unzip.c in Sources */,
+				839ADCAED9854913AE14F6CD /* zip.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC68B50596D0458DA1AE08BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D1BF31B46E84381993CB6DD /* ColorButton.m in Sources */,
+				832B9BE1A2474BE381296351 /* ColorViewController.m in Sources */,
+				9E6C0DD69D9C4FF680B0FD57 /* GzColors.m in Sources */,
+				544F83B8E31D4F2798098780 /* Pods-ColorPopover-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7127001D81C4352924A1DD2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4B15CC66B2E4F96AECB294A /* Pods-PopoverView-dummy.m in Sources */,
+				5BC5335AEB3B47BCB474AE8C /* PopoverView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF28C85E083F4BD69A35DD87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				703B835FA6424A32ACCCD31F /* Pods-WEPopover-dummy.m in Sources */,
+				FB9DE44C8DB44403A42EB81F /* UIBarButtonItem+WEPopover.m in Sources */,
+				BAB7516CD82C4B3188E52BDB /* WEPopoverAppDelegate.m in Sources */,
+				B7D968B952564044A4E75FEC /* WEPopoverContainerView.m in Sources */,
+				59E213A3CCEF436E91C06388 /* WEPopoverContentViewController.m in Sources */,
+				DDD4CA692E1A4F43AE3F5DC8 /* WEPopoverController.m in Sources */,
+				B23A3E167A324369BD9AF5F6 /* WEPopoverTableViewController.m in Sources */,
+				2C73C8C265294F0F9D50EDFB /* WEPopoverViewController.m in Sources */,
+				D1DD56662D3E41D7AE2A5139 /* WETouchableView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ED5B2760A1E344B2A21617F2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76A881D37537405AA1AF616D /* ELCAlbumPickerController.m in Sources */,
+				3EA375C19ED048619C1126A0 /* ELCAsset.m in Sources */,
+				E0880F369B184FADBAD370E5 /* ELCAssetCell.m in Sources */,
+				0444B752829A4F6FA6DB93B1 /* ELCAssetTablePicker.m in Sources */,
+				B5E707D850E34506A444173F /* ELCImagePickerController.m in Sources */,
+				902B01E24F514D08B376B929 /* Pods-ELCImagePickerController-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		491A35E9F480482C9965ACED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F1D6A9F3F644CFA97CF44DD /* Pods-WEPopover */;
+			targetProxy = 6B26126C4E3F479D86D89ACB /* PBXContainerItemProxy */;
+		};
+		69DA21F009F4452583A87424 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4639092EAFD74C739F39D05C /* Pods-ELCImagePickerController */;
+			targetProxy = 0CECFFF59ECA412BA77C9837 /* PBXContainerItemProxy */;
+		};
+		B0D00E1D7943413080BFB5A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F795D25DF684C238527001D /* Pods-SSZipArchive */;
+			targetProxy = 344F90544E7144DAA13C5AD6 /* PBXContainerItemProxy */;
+		};
+		B85D388C5E2B4D81AF597701 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5728B221E07B466CB8F9A3BB /* Pods-ColorPopover */;
+			targetProxy = 94AFCFA751CF4834976CEE66 /* PBXContainerItemProxy */;
+		};
+		CB7CB5EDC5E14BB7AEDC970A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C337966EBD4D4F88AF616828 /* Pods-PopoverView */;
+			targetProxy = 8B7F20AE628E4C1AAFD84624 /* PBXContainerItemProxy */;
+		};
+		CEE9CFF8B93948C295A0EA97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B70CFB04FA954DE7A1C38EE3 /* Pods-PSAlertView */;
+			targetProxy = DAB689BF399246C0AC802123 /* PBXContainerItemProxy */;
+		};
+		D023BFFEA66A4C789AE03FD4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F1D6A9F3F644CFA97CF44DD /* Pods-WEPopover */;
+			targetProxy = 9094AB3106444DA89A5EB6CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0C7DB14851A24E84A33B5DDD /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 475A98350DF348DD928B0934 /* Pods-PopoverView-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-PopoverView-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		0CB4F6350AB3401F98A67995 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24CEB6598C1842738D5C7553 /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		11C002B7CC38496CBBD6FC0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		135362DAF5E942ED9ACDC70D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0280A8374594E91B99157C0 /* Pods-SSZipArchive-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-SSZipArchive-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		16154B34520747C3865A59D7 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7CCBB7A180F4EEBAC4F12C0 /* Pods-ColorPopover-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-ColorPopover-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		1636505EEBF648D5874AFC63 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B4B883491C440E08CF1652F /* Pods-PSAlertView-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-PSAlertView-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1783D6660C854F60BAEA31E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05970187FFD448F091959897 /* Pods-WEPopover-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-WEPopover-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		266DF2EF620741849803C9F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		59D1EDB3908B4A53876DFDD4 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBA2A1219E0B437D8C6516DF /* Pods-ELCImagePickerController-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-ELCImagePickerController-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		609C74148EF648BB803261F3 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		636A6A5CD7F84437AFF8D16B /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05970187FFD448F091959897 /* Pods-WEPopover-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-WEPopover-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		6DF367F579574A5587686CCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7CCBB7A180F4EEBAC4F12C0 /* Pods-ColorPopover-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-ColorPopover-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ACCF9E83C0D84BB3B681AEC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C7CCBB7A180F4EEBAC4F12C0 /* Pods-ColorPopover-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-ColorPopover-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AF3EE5003F734C46B990914F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B4B883491C440E08CF1652F /* Pods-PSAlertView-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-PSAlertView-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B1F653ECC3BB4C1589F09355 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0280A8374594E91B99157C0 /* Pods-SSZipArchive-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-SSZipArchive-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		BA583C25D89544F0AA1CFEF9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBA2A1219E0B437D8C6516DF /* Pods-ELCImagePickerController-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-ELCImagePickerController-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CA1EA7405F0144019514E965 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 475A98350DF348DD928B0934 /* Pods-PopoverView-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-PopoverView-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CA9ABB3D042C460F96D3C81B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 475A98350DF348DD928B0934 /* Pods-PopoverView-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-PopoverView-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D15E04647F30486490F6F1AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 05970187FFD448F091959897 /* Pods-WEPopover-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-WEPopover-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		DE83DF23D810466BA59BB56F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FBA2A1219E0B437D8C6516DF /* Pods-ELCImagePickerController-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-ELCImagePickerController-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		E223562D43DF4906BF8C3B0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24CEB6598C1842738D5C7553 /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F06A868AE4444A298D386AFA /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24CEB6598C1842738D5C7553 /* Pods.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		F52899D8890B4A26BF16C819 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0280A8374594E91B99157C0 /* Pods-SSZipArchive-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-SSZipArchive-prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		F61D12287B9E41F4BD02778E /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B4B883491C440E08CF1652F /* Pods-PSAlertView-Private.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Pods-PSAlertView-prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNS_BLOCK_ASSERTIONS=1",
+					"$(inherited)",
+				);
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		12EED60F0EB64D4B83DF74E1 /* Build configuration list for PBXNativeTarget "Pods-PopoverView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0C7DB14851A24E84A33B5DDD /* AdHoc */,
+				CA1EA7405F0144019514E965 /* Debug */,
+				CA9ABB3D042C460F96D3C81B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82D80AD10F1C42F58942E5C9 /* Build configuration list for PBXNativeTarget "Pods-ColorPopover" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				16154B34520747C3865A59D7 /* AdHoc */,
+				ACCF9E83C0D84BB3B681AEC8 /* Debug */,
+				6DF367F579574A5587686CCF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		82EA1EA1C1114EA19CDB851A /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				609C74148EF648BB803261F3 /* AdHoc */,
+				11C002B7CC38496CBBD6FC0A /* Debug */,
+				266DF2EF620741849803C9F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8989272469914FE7A6236897 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F06A868AE4444A298D386AFA /* AdHoc */,
+				0CB4F6350AB3401F98A67995 /* Debug */,
+				E223562D43DF4906BF8C3B0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9593FCB77D3148EEB5D959E6 /* Build configuration list for PBXNativeTarget "Pods-SSZipArchive" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1F653ECC3BB4C1589F09355 /* AdHoc */,
+				F52899D8890B4A26BF16C819 /* Debug */,
+				135362DAF5E942ED9ACDC70D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C884F2AB5A8D43D29C8821DB /* Build configuration list for PBXNativeTarget "Pods-PSAlertView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F61D12287B9E41F4BD02778E /* AdHoc */,
+				AF3EE5003F734C46B990914F /* Debug */,
+				1636505EEBF648D5874AFC63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF203D4D5C4D439B8FFB0348 /* Build configuration list for PBXNativeTarget "Pods-WEPopover" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				636A6A5CD7F84437AFF8D16B /* AdHoc */,
+				D15E04647F30486490F6F1AF /* Debug */,
+				1783D6660C854F60BAEA31E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DCA7594D195242A897ACCF5A /* Build configuration list for PBXNativeTarget "Pods-ELCImagePickerController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59D1EDB3908B4A53876DFDD4 /* AdHoc */,
+				DE83DF23D810466BA59BB56F /* Debug */,
+				BA583C25D89544F0AA1CFEF9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9F4A448E099D47948B6F1B1C /* Project object */;
+}

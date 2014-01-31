@@ -13,11 +13,15 @@
 #import "HotspotView.h"
 #import "PopoverView.h"
 
+#import "UIImageView+ContentScale.h"
+
 @interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, PopoverViewDelegate>
 {
     HotspotView* shadeView;
     PopoverView *thePopoverView;
     CGPoint selectedPoint;
+    
+    CGSize imageScale;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTopConstraint;
@@ -45,22 +49,30 @@
 {
     [super viewDidLoad];
 
-    [self setupView];
+    UIImage *image = [self.imageDetails getImage];
+    self.imageView.image = image;
 }
 
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [self setupView];
+
+}
 - (void) setupView
 {
     [self.imageEditView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     shadeView = nil;
     [self showHotspotRect:NO];
-    
-    self.imageView.image = [self.imageDetails getImage];
-    
+
+    imageScale.width = self.imageView.widthScale;
+    imageScale.height = self.imageView.heightScale;
+
     // Add existing rects
     for ( ImageLink *link in self.imageDetails.links )
     {
         // Add view
-        HotspotView *view = [[HotspotView alloc] init];
+        HotspotView *view = [[HotspotView alloc] initWithScale:imageScale];
         [view setAssociatedImageLink:link];
         
         [self.imageEditView addSubview:view];
@@ -218,7 +230,7 @@
     ImageLink *link = [ImageLink new];
     [self.imageDetails.links addObject:link];
     
-    shadeView = [[HotspotView alloc] init];
+    shadeView = [[HotspotView alloc] initWithScale:imageScale];
     shadeView.associatedImageLink = link;
     [self.imageEditView addSubview:shadeView];
     
@@ -340,13 +352,13 @@
 
 #pragma mark - PopoverView delegate
 
-- (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index itemText:(NSString *)text
+- (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index;
 {
     [popoverView dismiss];
     
-    if ( [text isEqualToString:@"Add hotspot"] )
+    if ( index == 0 )
         [self addHotspotAtPoint:selectedPoint];
-    if ( [text isEqualToString:@"Edit image"] )
+    else if ( index == 1 )
         [self performSegueWithIdentifier:@"ShowDraw" sender:self];
    
 }

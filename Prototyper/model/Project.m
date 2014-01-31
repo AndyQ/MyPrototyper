@@ -13,12 +13,13 @@
 
 @interface Project () 
 
+@property (nonatomic, strong) NSMutableArray *images;
+
 @end
 
 
 @implementation Project
 {
-    NSMutableArray *_images;
 }
 
 + (NSString *) getDocsDir
@@ -64,7 +65,7 @@
 {
     self = [super init];
     if (self) {
-        _projectName = projectName;
+        self.projectName = projectName;
         
         NSFileManager *mgr = [NSFileManager defaultManager];
         
@@ -80,10 +81,10 @@
             }
             
             if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-                _projectType = PT_IPAD;
+                self.projectType = PT_IPAD;
             else
-                _projectType = PT_IPHONE;
-            _images = [NSMutableArray array];
+                self.projectType = PT_IPHONE;
+            self.images = [NSMutableArray array];
         }
         else
         {
@@ -104,7 +105,7 @@
 
 - (NSString *) getProjectFolder
 {
-    NSString *path = [[Project getDocsDir] stringByAppendingPathComponent:_projectName];
+    NSString *path = [[Project getDocsDir] stringByAppendingPathComponent:self.projectName];
     return path;
 }
 
@@ -113,6 +114,10 @@
 {
     // Generate file name for image
     NSString *guid = [[NSUUID new] UUIDString];
+    
+    // If we haven't got a start image then mark this image as the start image
+    if ( self.startImage.length == 0 )
+        self.startImage = guid;
 
     NSString *imageName = [NSString stringWithFormat:@"%@.jpg", guid];
 
@@ -150,7 +155,7 @@
     [mgr removeItemAtPath:path error:&err];
     
     // Now go through all the existing items and links and set any links that use this image to nil;
-    for ( ImageDetails *image in _images )
+    for ( ImageDetails *image in self.images )
     {
         for ( ImageLink *link in image.links )
         {
@@ -165,7 +170,7 @@
 - (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
 {
     ImageDetails *ret = nil;
-    for ( ImageDetails *item in _images )
+    for ( ImageDetails *item in self.images )
     {
         if ( [item.imageName isEqualToString:linkedToId] )
         {
@@ -178,15 +183,29 @@
 }
 
 
+- (ImageDetails *) getStartImageDetails;
+{
+    ImageDetails *ret = nil;
+    for ( ImageDetails *item in self.images )
+    {
+        if ( [item.imageName isEqualToString:self.startImage] )
+        {
+            ret = item;
+            break;
+        }
+    }
+    
+    return ret;
+}
 
 - (NSInteger) count
 {
-    return _images.count;
+    return self.images.count;
 }
 
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 {
-    return _images[idx];
+    return self.images[idx];
 }
 
 - (NSString *) exportFile
@@ -219,7 +238,12 @@
     NSFileManager *fm = [NSFileManager defaultManager];
     for ( int i = 0 ; i < self.count ; ++i )
     {
-        ImageDetails *imageDetails = self[i];
+        ImageDetails *imageDetails = self.images[i];
+        
+        // Set start image if necessary
+        if ( self.startImage.length == 0 )
+            self.startImage = imageDetails.imageName;
+        
         imageDetails.imageName = [imageDetails.imageName stringByDeletingPathExtension];
         NSString *base = [[self getProjectFolder] stringByAppendingPathComponent:imageDetails.imageName];
         for ( NSString *ext in extensions )
@@ -255,8 +279,9 @@
     bool valid = NO;
     if ( [unarchiver containsValueForKey:@"projectType"] && [unarchiver containsValueForKey:@"images"] )
     {
-        _projectType = [unarchiver decodeIntegerForKey:@"projectType"];
-        _images = [unarchiver decodeObjectForKey:@"images"];
+        self.projectType = [unarchiver decodeIntegerForKey:@"projectType"];
+        self.startImage = [unarchiver decodeObjectForKey:@"startImage"];
+        self.images = [unarchiver decodeObjectForKey:@"images"];
         valid = YES;
     }
     [unarchiver finishDecoding];
@@ -271,14 +296,16 @@
     NSMutableData *data = [NSMutableData data];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     
-    [archiver encodeInteger:_projectType forKey:@"projectType"];
-    [archiver encodeObject:_images forKey:@"images"];
+    [archiver encodeInteger:self.projectType forKey:@"projectType"];
+    [archiver encodeObject:self.startImage forKey:@"startImage"];
+    [archiver encodeObject:self.images forKey:@"images"];
     [archiver finishEncoding];
     
     NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.dat"];
     NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
     BOOL rc = [data writeToURL:archiveURL atomically:YES];
-    NSLog( @"Rc - %d", rc );
+    if ( !rc )
+        NSLog( @"Rc - %d", rc );
 }
 
 

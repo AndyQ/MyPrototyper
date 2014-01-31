@@ -85,15 +85,39 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6aD-Ql-zQf">
+                                <rect key="frame" x="0.0" y="913" width="768" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the starting image" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d9l-M9-oUU">
+                                        <rect key="frame" x="20" y="11" width="728" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.3006597741" green="0.54180345900000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="d9l-M9-oUU" secondAttribute="trailing" constant="20" id="0ku-UJ-tMR"/>
+                                    <constraint firstItem="d9l-M9-oUU" firstAttribute="top" secondItem="6aD-Ql-zQf" secondAttribute="top" constant="11" id="Apx-hH-j0V"/>
+                                    <constraint firstItem="d9l-M9-oUU" firstAttribute="leading" secondItem="6aD-Ql-zQf" secondAttribute="leading" constant="20" id="HgO-jr-ev6"/>
+                                    <constraint firstAttribute="bottom" secondItem="d9l-M9-oUU" secondAttribute="bottom" constant="15" id="Xyr-CN-ajZ"/>
+                                    <constraint firstAttribute="height" constant="47" id="aXi-CS-yNs"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vJ4-Hc-8yM" firstAttribute="top" secondItem="LPe-3M-VWc" secondAttribute="bottom" id="Brw-Yi-RHZ"/>
                             <constraint firstAttribute="trailing" secondItem="LPe-3M-VWc" secondAttribute="trailing" id="CW2-VO-XTJ"/>
                             <constraint firstItem="ITH-B8-WzL" firstAttribute="top" secondItem="eBV-yV-qz6" secondAttribute="bottom" id="EuO-u5-8dy"/>
+                            <constraint firstItem="vJ4-Hc-8yM" firstAttribute="top" secondItem="6aD-Ql-zQf" secondAttribute="bottom" id="VDo-fr-wei"/>
                             <constraint firstItem="ITH-B8-WzL" firstAttribute="leading" secondItem="VLZ-rx-PTi" secondAttribute="leading" id="Xd8-ZO-ejr"/>
                             <constraint firstItem="ITH-B8-WzL" firstAttribute="bottom" secondItem="VLZ-rx-PTi" secondAttribute="bottom" id="e89-mL-75s"/>
+                            <constraint firstItem="6aD-Ql-zQf" firstAttribute="leading" secondItem="VLZ-rx-PTi" secondAttribute="leading" id="eA9-9r-AOZ"/>
                             <constraint firstItem="ITH-B8-WzL" firstAttribute="trailing" secondItem="VLZ-rx-PTi" secondAttribute="trailing" id="kn5-XN-spH"/>
+                            <constraint firstAttribute="trailing" secondItem="6aD-Ql-zQf" secondAttribute="trailing" id="ra1-er-Rz5"/>
                             <constraint firstItem="LPe-3M-VWc" firstAttribute="leading" secondItem="VLZ-rx-PTi" secondAttribute="leading" id="sGK-Ei-3qb"/>
                         </constraints>
                     </view>
@@ -101,6 +125,8 @@
                     <navigationItem key="navigationItem" title="Prototyper" id="4WQ-ro-g4W"/>
                     <connections>
                         <outlet property="collectionView" destination="ITH-B8-WzL" id="FAt-RQ-x9X"/>
+                        <outlet property="selectStartImageDisplayView" destination="6aD-Ql-zQf" id="m41-Tm-YBl"/>
+                        <outlet property="selectStartImageDisplayViewBottom" destination="VDo-fr-wei" id="v8B-Rt-0ch"/>
                         <segue destination="O5L-vZ-Ghy" kind="push" identifier="EditImage" id="gaA-FR-9Hd"/>
                     </connections>
                 </viewController>
@@ -344,10 +370,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-Bd-UN5">
                                 <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="960" id="9ym-5Q-Bqb"/>
-                                    <constraint firstAttribute="width" constant="768" id="Dpq-Zu-ShG"/>
-                                </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap to unhide the navigation bar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="738" translatesAutoresizingMaskIntoConstraints="NO" id="ZH9-Cq-tVJ">
                                 <rect key="frame" x="10" y="74" width="738" height="41"/>
@@ -359,9 +381,10 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Q0t-Bd-UN5" secondAttribute="trailing" id="8ft-f9-Nf1"/>
                             <constraint firstItem="Q0t-Bd-UN5" firstAttribute="top" secondItem="GdD-RX-Mas" secondAttribute="bottom" id="IB6-mR-Ypc"/>
-                            <constraint firstAttribute="trailing" secondItem="Q0t-Bd-UN5" secondAttribute="trailing" id="r71-Oa-7pM"/>
-                            <constraint firstItem="Q0t-Bd-UN5" firstAttribute="leading" secondItem="ZZ0-cw-bbX" secondAttribute="leading" id="vLd-oq-RnA"/>
+                            <constraint firstItem="PVF-ya-fkc" firstAttribute="top" secondItem="Q0t-Bd-UN5" secondAttribute="bottom" id="hiV-pD-w6l"/>
+                            <constraint firstItem="Q0t-Bd-UN5" firstAttribute="leading" secondItem="ZZ0-cw-bbX" secondAttribute="leading" id="yhp-CV-3It"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Playback" id="Z68-25-bxi">
@@ -377,6 +400,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomConstraint" destination="hiV-pD-w6l" id="kRH-gG-7OP"/>
                         <outlet property="doubleTapText" destination="ZH9-Cq-tVJ" id="cpJ-ii-Pd3"/>
                         <outlet property="imageView" destination="Q0t-Bd-UN5" id="zFY-mL-zZS"/>
                         <outlet property="topConstraint" destination="IB6-mR-Ypc" id="qZ0-Ft-Mgl"/>
@@ -488,6 +512,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="RCG-Os-Jk3"/>
+        <segue reference="cmn-Un-dnd"/>
     </inferredMetricsTieBreakers>
 </document>

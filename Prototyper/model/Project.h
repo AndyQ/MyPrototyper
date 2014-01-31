@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) NSString *projectName;
 @property (nonatomic, assign) NSInteger projectType;
+@property (nonatomic, strong) NSString *startImage;
 
 + (NSString *) getDocsDir;
 + (void) deleteProjectWithName:(NSString *)projectName;
@@ -28,6 +29,7 @@
 - (void) addImageToProject:(UIImage *)image;
 - (void) removeItem:(ImageDetails *)item;
 - (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
+- (ImageDetails *) getStartImageDetails;
 
 - (bool) load;
 - (void) save;

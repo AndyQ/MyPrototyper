@@ -31,7 +31,12 @@
     UIBarButtonItem *backBtn;
     
     PSPDFActionSheet *popupSheet;
+    
+    bool settingStartImage;
 }
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectStartImageDisplayViewBottom;
+@property (weak, nonatomic) IBOutlet UIView *selectStartImageDisplayView;
 
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSArray *assets;
@@ -53,6 +58,8 @@
     self.navigationItem.rightBarButtonItem = editBtn;
 
     [self.collectionView reloadData];
+    
+    self.selectStartImageDisplayViewBottom.constant -= self.selectStartImageDisplayView.bounds.size.height;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -99,14 +106,14 @@
 {
     PhotoCell *cell = (PhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
-    cell.layer.borderColor = [UIColor blackColor].CGColor;
-    cell.layer.borderWidth = 1;
-    cell.layer.cornerRadius = 5;
     ImageDetails *imageDetails = project[indexPath.row];
     
     UIImage *i = [imageDetails getImage];
     cell.image = i;
     cell.backgroundColor = [UIColor clearColor];
+    
+    if ( [project.startImage isEqualToString:imageDetails.imageName] )
+        cell.backgroundColor = [UIColor blueColor];
     
     return cell;
 }
@@ -126,7 +133,20 @@
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ( !editMode )
+    if ( settingStartImage )
+    {
+        ImageDetails *imageDetails = project[indexPath.row];
+        project.startImage = imageDetails.imageName;
+        [project save];
+        
+        self.selectStartImageDisplayViewBottom.constant -= self.selectStartImageDisplayView.bounds.size.height;
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+
+        [self.collectionView reloadData];
+    }
+    else if ( !editMode )
     {
         selectedImageDetails = project[indexPath.row];
         
@@ -151,6 +171,18 @@
     popupSheet = [[PSPDFActionSheet alloc] initWithTitle:@"Action"];
     
     __block __typeof__(self) blockSelf = self;
+    
+    
+    [popupSheet addButtonWithTitle:@"Set start image" block:^{
+        blockSelf->popupSheet = nil;
+        blockSelf->settingStartImage = YES;
+        blockSelf.selectStartImageDisplayViewBottom.constant += blockSelf.selectStartImageDisplayView.bounds.size.height;
+
+        [UIView animateWithDuration:0.25 animations:^{
+            [blockSelf.view layoutIfNeeded];
+        }];
+
+    }];
     
     
     [popupSheet addButtonWithTitle:@"Delete images" block:^{

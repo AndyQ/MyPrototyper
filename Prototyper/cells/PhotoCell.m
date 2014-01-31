@@ -14,6 +14,18 @@
 
 @implementation PhotoCell
 
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self)
+    {
+        self.layer.borderColor = [UIColor blackColor].CGColor;
+        self.layer.borderWidth = 1;
+        self.layer.cornerRadius = 5;
+    }
+    return self;
+}
 - (void) setImage:(UIImage *)image
 {
     _image = image;

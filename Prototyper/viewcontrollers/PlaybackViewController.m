@@ -8,13 +8,17 @@
 
 #import "PlaybackViewController.h"
 #import "UIColor+Utils.h"
+#import "UIImageView+ContentScale.h"
 
 @interface PlaybackViewController () <UIAlertViewDelegate>
 {
     ImageDetails *imageDetails;
+    
+    CGSize imageScale;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *doubleTapText;
 
 @end
@@ -26,7 +30,7 @@
 {
     [super viewDidLoad];
     
-    imageDetails = self.project[0];
+    imageDetails = [self.project getStartImageDetails];
     
     self.imageView.image = [imageDetails getImage];
     
@@ -41,6 +45,14 @@
     self.doubleTapText.layer.shadowRadius = 2;
     self.doubleTapText.layer.shadowOpacity = 1;
     self.doubleTapText.layer.shadowOffset = CGSizeMake( 0, 0 );
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    // Have to do this here as this is when the autolayout stuff has finished
+    
+    imageScale.width = self.imageView.widthScale;
+    imageScale.height = self.imageView.heightScale;
 
     // Add views for touchpoints
     [self updateHotspots];
@@ -59,13 +71,16 @@
     if ( gr.state == UIGestureRecognizerStateEnded )
     {
         CGPoint p = [gr locationInView:self.imageView];
+        p.x /= imageScale.width;
+        p.y /= imageScale.height;
         bool hit = NO;
         for ( ImageLink *link in imageDetails.links )
         {
             if ( CGRectContainsPoint( link.rect, p ) )
             {
                 hit = YES;
-                [self selectLink:link];
+                if ( link.linkedToId != nil )
+                    [self selectLink:link];
                 break;
             }
         }
@@ -80,7 +95,6 @@
                     for ( UIView *v in self.imageView.subviews )
                         v.alpha = 0;
                 }];
-
             });
         }
     }
@@ -90,6 +104,7 @@
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.topConstraint.constant = 22;
+    self.bottomConstraint.constant = 22;
 
     self.doubleTapText.alpha = 1;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -99,16 +114,11 @@
     });
 }
 
-- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-    self.topConstraint.constant = 22;
-}
-
 - (void) doubleTap:(UITapGestureRecognizer *)gr
 {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.topConstraint.constant = 0;
+    self.bottomConstraint.constant = 0;
 }
 
 - (void) selectLink:(ImageLink *)link
@@ -182,7 +192,15 @@
     int index = 1000;
     for ( ImageLink *link in imageDetails.links )
     {
-        UIView *v = [[UIView alloc] initWithFrame:link.rect];
+        if ( link.linkedToId.length == 0 )
+            continue;
+        
+        CGRect f = link.rect;
+        f.origin.x *= imageScale.width;
+        f.origin.y *= imageScale.height;
+        f.size.width *= imageScale.width;
+        f.size.height *= imageScale.height;
+        UIView *v = [[UIView alloc] initWithFrame:f];
         
         UIColor *bgColor;
         if ( link.linkedToId.length == 0 )
@@ -192,7 +210,7 @@
         
         UIColor *darkerColor = [bgColor darkerColorByAmount:0.5];
         
-        v.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.2];
+        v.backgroundColor = [bgColor colorWithAlphaComponent:0.2];
         v.layer.borderColor = darkerColor.CGColor;
         v.layer.borderWidth = 2;
         v.alpha = 0;

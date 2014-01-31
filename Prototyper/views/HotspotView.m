@@ -10,6 +10,7 @@
 #import "UIColor+Utils.h"
 
 
+
 /**
  *
  * A Hotspot view is used to display a touchable hotspot
@@ -21,6 +22,7 @@
 @implementation HotspotView
 {
     ImageLink *_associatedImageLink;
+    CGSize scale;
     
     UIColor *unselBorderColor;
     UIColor *borderColor;
@@ -29,13 +31,14 @@
 }
 
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithScale:(CGSize)imageScale
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self)
     {
         self.opaque = NO;
         selected = NO;
+        scale = imageScale;
     }
     return self;
 }
@@ -71,7 +74,16 @@
 - (void) setAssociatedImageLink:(ImageLink *)link
 {
     _associatedImageLink = link;
-    [self updateFrame:link.rect];
+    
+    CGRect f = link.rect;
+    f.origin.x *= scale.width;
+    f.origin.y *= scale.height;
+    f.size.width *= scale.width;
+    f.size.height *= scale.height;
+
+    self.frame = f;
+    [self setNeedsDisplay];
+//    [self updateFrame:link.rect];
 }
 
 - (void) updateFrame:(CGRect)f
@@ -83,6 +95,12 @@
     f.size.height = (int)f.size.height;
     
     self.frame = f;
+    
+    f.origin.x /= scale.width;
+    f.origin.y /= scale.height;
+    f.size.width /= scale.width;
+    f.size.height /= scale.height;
+    
     _associatedImageLink.rect = f;
     [self setNeedsDisplay];
 }

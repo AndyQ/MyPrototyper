@@ -14,6 +14,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSDictionary *userDefaultsDefaults = @{ @"pref_imageFormat" : @"jpg",
+                                            @"pref_imageQuality" : @"0.5"};
+    [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
+
     // Override point for customization after application launch.
     return YES;
 }

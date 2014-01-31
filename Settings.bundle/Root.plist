@@ -13,14 +13,56 @@
 			<string>PSGroupSpecifier</string>
 		</dict>
 		<dict>
-			<key>DefaultValue</key>
-			<string>1.0.0 (10)</string>
-			<key>Key</key>
-			<string>version_preference</string>
+			<key>FooterText</key>
+			<string> (only if image type is Jpeg)</string>
 			<key>Title</key>
-			<string>Version</string>
+			<string>Application Settings</string>
 			<key>Type</key>
-			<string>PSTitleValueSpecifier</string>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>jpg</string>
+			<key>Key</key>
+			<string>pref_imageFormat</string>
+			<key>Title</key>
+			<string>Default saved image format</string>
+			<key>Titles</key>
+			<array>
+				<string>Jpeg</string>
+				<string>Png</string>
+			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Values</key>
+			<array>
+				<string>jpg</string>
+				<string>png</string>
+			</array>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<string>0.5</string>
+			<key>Key</key>
+			<string>pref_imageQuality</string>
+			<key>Title</key>
+			<string>Jpeg image quality</string>
+			<key>Titles</key>
+			<array>
+				<string>Highest</string>
+				<string>High</string>
+				<string>Medium</string>
+				<string>Low</string>
+			</array>
+			<key>Type</key>
+			<string>PSMultiValueSpecifier</string>
+			<key>Values</key>
+			<array>
+				<string>1</string>
+				<string>0.5</string>
+				<string>0.25</string>
+				<string>0.1</string>
+			</array>
 		</dict>
 		<dict>
 			<key>Title</key>

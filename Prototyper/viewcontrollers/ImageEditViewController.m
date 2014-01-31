@@ -65,6 +65,9 @@
     shadeView = nil;
     [self showHotspotRect:NO];
 
+    UIImage *image = [self.imageDetails getImage];
+    self.imageView.image = image;
+
     imageScale.width = self.imageView.widthScale;
     imageScale.height = self.imageView.heightScale;
 

@@ -145,6 +145,7 @@
         }];
 
         [self.collectionView reloadData];
+        settingStartImage = NO;
     }
     else if ( !editMode )
     {

@@ -16,29 +16,6 @@
 		A14C93AD189530C5008F6A0D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93A1189530C5008F6A0D /* MainViewController.m */; };
 		A14C93AE189530C5008F6A0D /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93A3189530C5008F6A0D /* PlaybackViewController.m */; };
 		A14C93AF189530C5008F6A0D /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93A5189530C5008F6A0D /* ProjectViewController.m */; };
-		A14C93D8189531CB008F6A0D /* ColorButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93B4189531CB008F6A0D /* ColorButton.m */; };
-		A14C93D9189531CB008F6A0D /* ColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93B6189531CB008F6A0D /* ColorViewController.m */; };
-		A14C93DA189531CB008F6A0D /* ColorPopoverLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A14C93B7189531CB008F6A0D /* ColorPopoverLocalizable.strings */; };
-		A14C93DB189531CB008F6A0D /* GzColors.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93BA189531CB008F6A0D /* GzColors.m */; };
-		A14C93DC189531CB008F6A0D /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93BD189531CB008F6A0D /* ELCAlbumPickerController.m */; };
-		A14C93DD189531CB008F6A0D /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93BF189531CB008F6A0D /* ELCAsset.m */; };
-		A14C93DE189531CB008F6A0D /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93C1189531CB008F6A0D /* ELCAssetCell.m */; };
-		A14C93DF189531CB008F6A0D /* ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93C5189531CB008F6A0D /* ELCAssetTablePicker.m */; };
-		A14C93E0189531CB008F6A0D /* ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93C7189531CB008F6A0D /* ELCImagePickerController.m */; };
-		A14C93E1189531CB008F6A0D /* ELCAlbumPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14C93C9189531CB008F6A0D /* ELCAlbumPickerController.xib */; };
-		A14C93E2189531CB008F6A0D /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14C93CA189531CB008F6A0D /* ELCAssetPicker.xib */; };
-		A14C93E3189531CB008F6A0D /* ELCAssetTablePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = A14C93CB189531CB008F6A0D /* ELCAssetTablePicker.xib */; };
-		A14C93E4189531CB008F6A0D /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = A14C93CC189531CB008F6A0D /* Overlay.png */; };
-		A14C93E5189531CB008F6A0D /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A14C93CD189531CB008F6A0D /* Overlay@2x.png */; };
-		A14C93E6189531CB008F6A0D /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93D0189531CB008F6A0D /* PopoverView.m */; };
-		A14C93E7189531CB008F6A0D /* PSPDFActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93D3189531CB008F6A0D /* PSPDFActionSheet.m */; };
-		A14C93E8189531CB008F6A0D /* PSPDFAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93D5189531CB008F6A0D /* PSPDFAlertView.m */; };
-		A14C93E9189531CB008F6A0D /* UIColor+PSPDFKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93D7189531CB008F6A0D /* UIColor+PSPDFKitAdditions.m */; };
-		A14C93F718970311008F6A0D /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = A14C93ED18970311008F6A0D /* ioapi.c */; };
-		A14C93F818970311008F6A0D /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = A14C93EF18970311008F6A0D /* mztools.c */; };
-		A14C93F918970311008F6A0D /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = A14C93F118970311008F6A0D /* unzip.c */; };
-		A14C93FA18970311008F6A0D /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = A14C93F318970311008F6A0D /* zip.c */; };
-		A14C93FB18970311008F6A0D /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93F618970311008F6A0D /* SSZipArchive.m */; };
 		A14C93FD1899A50D008F6A0D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A14C93FC1899A50D008F6A0D /* libz.dylib */; };
 		A14C94001899A56D008F6A0D /* ProjectSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93FF1899A56D008F6A0D /* ProjectSelectTableViewCell.m */; };
 		A1758CFE1885DDA600490A06 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758CFD1885DDA600490A06 /* Shape.m */; };
@@ -63,6 +40,7 @@
 		A1D75885187FDEFD00E7AA2F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1D75864187FDEFD00E7AA2F /* UIKit.framework */; };
 		A1D7588D187FDEFD00E7AA2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A1D7588B187FDEFD00E7AA2F /* InfoPlist.strings */; };
 		A1D7588F187FDEFD00E7AA2F /* PrototyperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D7588E187FDEFD00E7AA2F /* PrototyperTests.m */; };
+		E2108AE58D7B48D7B2ED9DA6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13913ABBD076487092923C91 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		13913ABBD076487092923C91 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EA35D255AE14975805FAC1C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A14C938F189530C5008F6A0D /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		A14C9390189530C5008F6A0D /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		A14C9395189530C5008F6A0D /* UIBezierPath+TextPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+TextPaths.h"; sourceTree = "<group>"; };
@@ -94,49 +74,6 @@
 		A14C93A3189530C5008F6A0D /* PlaybackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaybackViewController.m; sourceTree = "<group>"; };
 		A14C93A4189530C5008F6A0D /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
 		A14C93A5189530C5008F6A0D /* ProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewController.m; sourceTree = "<group>"; };
-		A14C93B3189531CB008F6A0D /* ColorButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorButton.h; sourceTree = "<group>"; };
-		A14C93B4189531CB008F6A0D /* ColorButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorButton.m; sourceTree = "<group>"; };
-		A14C93B5189531CB008F6A0D /* ColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorViewController.h; sourceTree = "<group>"; };
-		A14C93B6189531CB008F6A0D /* ColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorViewController.m; sourceTree = "<group>"; };
-		A14C93B8189531CB008F6A0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ColorPopoverLocalizable.strings; sourceTree = "<group>"; };
-		A14C93B9189531CB008F6A0D /* GzColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzColors.h; sourceTree = "<group>"; };
-		A14C93BA189531CB008F6A0D /* GzColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzColors.m; sourceTree = "<group>"; };
-		A14C93BC189531CB008F6A0D /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
-		A14C93BD189531CB008F6A0D /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
-		A14C93BE189531CB008F6A0D /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
-		A14C93BF189531CB008F6A0D /* ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAsset.m; sourceTree = "<group>"; };
-		A14C93C0189531CB008F6A0D /* ELCAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetCell.h; sourceTree = "<group>"; };
-		A14C93C1189531CB008F6A0D /* ELCAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetCell.m; sourceTree = "<group>"; };
-		A14C93C2189531CB008F6A0D /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
-		A14C93C3189531CB008F6A0D /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
-		A14C93C4189531CB008F6A0D /* ELCAssetTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetTablePicker.h; sourceTree = "<group>"; };
-		A14C93C5189531CB008F6A0D /* ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAssetTablePicker.m; sourceTree = "<group>"; };
-		A14C93C6189531CB008F6A0D /* ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCImagePickerController.h; sourceTree = "<group>"; };
-		A14C93C7189531CB008F6A0D /* ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCImagePickerController.m; sourceTree = "<group>"; };
-		A14C93C9189531CB008F6A0D /* ELCAlbumPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAlbumPickerController.xib; sourceTree = "<group>"; };
-		A14C93CA189531CB008F6A0D /* ELCAssetPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetPicker.xib; sourceTree = "<group>"; };
-		A14C93CB189531CB008F6A0D /* ELCAssetTablePicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELCAssetTablePicker.xib; sourceTree = "<group>"; };
-		A14C93CC189531CB008F6A0D /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
-		A14C93CD189531CB008F6A0D /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
-		A14C93CF189531CB008F6A0D /* PopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView.h; sourceTree = "<group>"; };
-		A14C93D0189531CB008F6A0D /* PopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView.m; sourceTree = "<group>"; };
-		A14C93D2189531CB008F6A0D /* PSPDFActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPDFActionSheet.h; sourceTree = "<group>"; };
-		A14C93D3189531CB008F6A0D /* PSPDFActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPDFActionSheet.m; sourceTree = "<group>"; };
-		A14C93D4189531CB008F6A0D /* PSPDFAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSPDFAlertView.h; sourceTree = "<group>"; };
-		A14C93D5189531CB008F6A0D /* PSPDFAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSPDFAlertView.m; sourceTree = "<group>"; };
-		A14C93D6189531CB008F6A0D /* UIColor+PSPDFKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+PSPDFKitAdditions.h"; sourceTree = "<group>"; };
-		A14C93D7189531CB008F6A0D /* UIColor+PSPDFKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+PSPDFKitAdditions.m"; sourceTree = "<group>"; };
-		A14C93EC18970311008F6A0D /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
-		A14C93ED18970311008F6A0D /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
-		A14C93EE18970311008F6A0D /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
-		A14C93EF18970311008F6A0D /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
-		A14C93F018970311008F6A0D /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
-		A14C93F118970311008F6A0D /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
-		A14C93F218970311008F6A0D /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
-		A14C93F318970311008F6A0D /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
-		A14C93F418970311008F6A0D /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
-		A14C93F518970311008F6A0D /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
-		A14C93F618970311008F6A0D /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		A14C93FC1899A50D008F6A0D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A14C93FE1899A56D008F6A0D /* ProjectSelectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectSelectTableViewCell.h; sourceTree = "<group>"; };
 		A14C93FF1899A56D008F6A0D /* ProjectSelectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectSelectTableViewCell.m; sourceTree = "<group>"; };
@@ -185,6 +122,7 @@
 				A1D75863187FDEFD00E7AA2F /* CoreGraphics.framework in Frameworks */,
 				A1D75865187FDEFD00E7AA2F /* UIKit.framework in Frameworks */,
 				A1D75861187FDEFD00E7AA2F /* Foundation.framework in Frameworks */,
+				E2108AE58D7B48D7B2ED9DA6 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,112 +180,6 @@
 			path = viewcontrollers;
 			sourceTree = "<group>";
 		};
-		A14C93B1189531CB008F6A0D /* ThirdParty */ = {
-			isa = PBXGroup;
-			children = (
-				A14C93EA18970311008F6A0D /* SSZipArchive */,
-				A14C93B2189531CB008F6A0D /* ColorPopover */,
-				A14C93BB189531CB008F6A0D /* ELCImagePicker */,
-				A14C93CE189531CB008F6A0D /* PopoverView */,
-				A14C93D1189531CB008F6A0D /* PSAlertView */,
-			);
-			path = ThirdParty;
-			sourceTree = "<group>";
-		};
-		A14C93B2189531CB008F6A0D /* ColorPopover */ = {
-			isa = PBXGroup;
-			children = (
-				A14C93B3189531CB008F6A0D /* ColorButton.h */,
-				A14C93B4189531CB008F6A0D /* ColorButton.m */,
-				A14C93B5189531CB008F6A0D /* ColorViewController.h */,
-				A14C93B6189531CB008F6A0D /* ColorViewController.m */,
-				A14C93B7189531CB008F6A0D /* ColorPopoverLocalizable.strings */,
-				A14C93B9189531CB008F6A0D /* GzColors.h */,
-				A14C93BA189531CB008F6A0D /* GzColors.m */,
-			);
-			path = ColorPopover;
-			sourceTree = "<group>";
-		};
-		A14C93BB189531CB008F6A0D /* ELCImagePicker */ = {
-			isa = PBXGroup;
-			children = (
-				A14C93BC189531CB008F6A0D /* ELCAlbumPickerController.h */,
-				A14C93BD189531CB008F6A0D /* ELCAlbumPickerController.m */,
-				A14C93BE189531CB008F6A0D /* ELCAsset.h */,
-				A14C93BF189531CB008F6A0D /* ELCAsset.m */,
-				A14C93C0189531CB008F6A0D /* ELCAssetCell.h */,
-				A14C93C1189531CB008F6A0D /* ELCAssetCell.m */,
-				A14C93C2189531CB008F6A0D /* ELCAssetPickerFilterDelegate.h */,
-				A14C93C3189531CB008F6A0D /* ELCAssetSelectionDelegate.h */,
-				A14C93C4189531CB008F6A0D /* ELCAssetTablePicker.h */,
-				A14C93C5189531CB008F6A0D /* ELCAssetTablePicker.m */,
-				A14C93C6189531CB008F6A0D /* ELCImagePickerController.h */,
-				A14C93C7189531CB008F6A0D /* ELCImagePickerController.m */,
-				A14C93C8189531CB008F6A0D /* Resources */,
-			);
-			path = ELCImagePicker;
-			sourceTree = "<group>";
-		};
-		A14C93C8189531CB008F6A0D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A14C93C9189531CB008F6A0D /* ELCAlbumPickerController.xib */,
-				A14C93CA189531CB008F6A0D /* ELCAssetPicker.xib */,
-				A14C93CB189531CB008F6A0D /* ELCAssetTablePicker.xib */,
-				A14C93CC189531CB008F6A0D /* Overlay.png */,
-				A14C93CD189531CB008F6A0D /* Overlay@2x.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		A14C93CE189531CB008F6A0D /* PopoverView */ = {
-			isa = PBXGroup;
-			children = (
-				A14C93CF189531CB008F6A0D /* PopoverView.h */,
-				A14C93D0189531CB008F6A0D /* PopoverView.m */,
-			);
-			path = PopoverView;
-			sourceTree = "<group>";
-		};
-		A14C93D1189531CB008F6A0D /* PSAlertView */ = {
-			isa = PBXGroup;
-			children = (
-				A14C93D2189531CB008F6A0D /* PSPDFActionSheet.h */,
-				A14C93D3189531CB008F6A0D /* PSPDFActionSheet.m */,
-				A14C93D4189531CB008F6A0D /* PSPDFAlertView.h */,
-				A14C93D5189531CB008F6A0D /* PSPDFAlertView.m */,
-				A14C93D6189531CB008F6A0D /* UIColor+PSPDFKitAdditions.h */,
-				A14C93D7189531CB008F6A0D /* UIColor+PSPDFKitAdditions.m */,
-			);
-			path = PSAlertView;
-			sourceTree = "<group>";
-		};
-		A14C93EA18970311008F6A0D /* SSZipArchive */ = {
-			isa = PBXGroup;
-			children = (
-				A14C93EB18970311008F6A0D /* minizip */,
-				A14C93F518970311008F6A0D /* SSZipArchive.h */,
-				A14C93F618970311008F6A0D /* SSZipArchive.m */,
-			);
-			path = SSZipArchive;
-			sourceTree = "<group>";
-		};
-		A14C93EB18970311008F6A0D /* minizip */ = {
-			isa = PBXGroup;
-			children = (
-				A14C93EC18970311008F6A0D /* crypt.h */,
-				A14C93ED18970311008F6A0D /* ioapi.c */,
-				A14C93EE18970311008F6A0D /* ioapi.h */,
-				A14C93EF18970311008F6A0D /* mztools.c */,
-				A14C93F018970311008F6A0D /* mztools.h */,
-				A14C93F118970311008F6A0D /* unzip.c */,
-				A14C93F218970311008F6A0D /* unzip.h */,
-				A14C93F318970311008F6A0D /* zip.c */,
-				A14C93F418970311008F6A0D /* zip.h */,
-			);
-			path = minizip;
-			sourceTree = "<group>";
-		};
 		A1D2B2E21880A45000E250BF /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +215,7 @@
 				A1D75888187FDEFD00E7AA2F /* PrototyperTests */,
 				A1D7585F187FDEFD00E7AA2F /* Frameworks */,
 				A1D7585E187FDEFD00E7AA2F /* Products */,
+				3EA35D255AE14975805FAC1C /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -403,6 +236,7 @@
 				A1D75862187FDEFD00E7AA2F /* CoreGraphics.framework */,
 				A1D75864187FDEFD00E7AA2F /* UIKit.framework */,
 				A1D75882187FDEFD00E7AA2F /* XCTest.framework */,
+				13913ABBD076487092923C91 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -410,7 +244,6 @@
 		A1D75866187FDEFD00E7AA2F /* Prototyper */ = {
 			isa = PBXGroup;
 			children = (
-				A14C93B1189531CB008F6A0D /* ThirdParty */,
 				A1D2B2E21880A45000E250BF /* model */,
 				A14C938E189530C5008F6A0D /* cells */,
 				A14C9394189530C5008F6A0D /* utils */,
@@ -464,10 +297,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1D75892187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "Prototyper" */;
 			buildPhases = (
+				544F4E137EF84547BE795168 /* Check Pods Manifest.lock */,
 				A1758D041885F1BE00490A06 /* ShellScript */,
 				A1D75859187FDEFD00E7AA2F /* Sources */,
 				A1D7585A187FDEFD00E7AA2F /* Frameworks */,
 				A1D7585B187FDEFD00E7AA2F /* Resources */,
+				837B1AEFC7D64735ABA83701 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -534,16 +369,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A14C93E1189531CB008F6A0D /* ELCAlbumPickerController.xib in Resources */,
-				A14C93E3189531CB008F6A0D /* ELCAssetTablePicker.xib in Resources */,
-				A14C93E4189531CB008F6A0D /* Overlay.png in Resources */,
 				A1D75877187FDEFD00E7AA2F /* Main_iPad.storyboard in Resources */,
 				A1D7587C187FDEFD00E7AA2F /* Images.xcassets in Resources */,
-				A14C93E5189531CB008F6A0D /* Overlay@2x.png in Resources */,
-				A14C93DA189531CB008F6A0D /* ColorPopoverLocalizable.strings in Resources */,
 				A1758D031885F13300490A06 /* Settings.bundle in Resources */,
 				A1D75874187FDEFD00E7AA2F /* Main_iPhone.storyboard in Resources */,
-				A14C93E2189531CB008F6A0D /* ELCAssetPicker.xib in Resources */,
 				A1D7586B187FDEFD00E7AA2F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,6 +388,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		544F4E137EF84547BE795168 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		837B1AEFC7D64735ABA83701 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A1758D041885F1BE00490A06 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -584,38 +443,21 @@
 				A14C93A9189530C5008F6A0D /* UIColor+Utils.m in Sources */,
 				A14C93A8189530C5008F6A0D /* UIBezierPath+TextPaths.m in Sources */,
 				A14C93A6189530C5008F6A0D /* PhotoCell.m in Sources */,
-				A14C93DD189531CB008F6A0D /* ELCAsset.m in Sources */,
-				A14C93E7189531CB008F6A0D /* PSPDFActionSheet.m in Sources */,
-				A14C93DF189531CB008F6A0D /* ELCAssetTablePicker.m in Sources */,
-				A14C93D8189531CB008F6A0D /* ColorButton.m in Sources */,
 				A1D2B2E91880A47E00E250BF /* Project.m in Sources */,
 				A1758CFE1885DDA600490A06 /* Shape.m in Sources */,
-				A14C93DB189531CB008F6A0D /* GzColors.m in Sources */,
 				A14C93AB189530C5008F6A0D /* ImageEditViewController.m in Sources */,
-				A14C93F918970311008F6A0D /* unzip.c in Sources */,
 				A14C93AA189530C5008F6A0D /* DrawViewController.m in Sources */,
-				A14C93D9189531CB008F6A0D /* ColorViewController.m in Sources */,
-				A14C93DE189531CB008F6A0D /* ELCAssetCell.m in Sources */,
 				A1D2B2EF1880A4A500E250BF /* HotspotView.m in Sources */,
 				A14C93AF189530C5008F6A0D /* ProjectViewController.m in Sources */,
-				A14C93F718970311008F6A0D /* ioapi.c in Sources */,
-				A14C93F818970311008F6A0D /* mztools.c in Sources */,
-				A14C93DC189531CB008F6A0D /* ELCAlbumPickerController.m in Sources */,
 				A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */,
 				A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */,
-				A14C93FA18970311008F6A0D /* zip.c in Sources */,
 				A14C93AD189530C5008F6A0D /* MainViewController.m in Sources */,
 				A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */,
-				A14C93FB18970311008F6A0D /* SSZipArchive.m in Sources */,
 				A1D75871187FDEFD00E7AA2F /* AppDelegate.m in Sources */,
-				A14C93E6189531CB008F6A0D /* PopoverView.m in Sources */,
 				A14C93AC189530C5008F6A0D /* LinkImageViewController.m in Sources */,
 				A1D2B30A1883F11900E250BF /* DrawView.m in Sources */,
-				A14C93E9189531CB008F6A0D /* UIColor+PSPDFKitAdditions.m in Sources */,
-				A14C93E0189531CB008F6A0D /* ELCImagePickerController.m in Sources */,
 				A14C94001899A56D008F6A0D /* ProjectSelectTableViewCell.m in Sources */,
 				A1D7586D187FDEFD00E7AA2F /* main.m in Sources */,
-				A14C93E8189531CB008F6A0D /* PSPDFAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,14 +480,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A14C93B7189531CB008F6A0D /* ColorPopoverLocalizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A14C93B8189531CB008F6A0D /* en */,
-			);
-			name = ColorPopoverLocalizable.strings;
-			sourceTree = "<group>";
-		};
 		A1D75869187FDEFD00E7AA2F /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -685,7 +519,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -718,6 +551,7 @@
 		};
 		A1D2B30018831E6500E250BF /* AdHoc */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EA35D255AE14975805FAC1C /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -733,7 +567,6 @@
 		A1D2B30118831E6500E250BF /* AdHoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Prototyper.app/Prototyper";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -753,7 +586,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -794,7 +626,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -827,6 +658,7 @@
 		};
 		A1D75893187FDEFD00E7AA2F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EA35D255AE14975805FAC1C /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -841,6 +673,7 @@
 		};
 		A1D75894187FDEFD00E7AA2F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EA35D255AE14975805FAC1C /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -856,7 +689,6 @@
 		A1D75896187FDEFD00E7AA2F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Prototyper.app/Prototyper";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -879,7 +711,6 @@
 		A1D75897187FDEFD00E7AA2F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Prototyper.app/Prototyper";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

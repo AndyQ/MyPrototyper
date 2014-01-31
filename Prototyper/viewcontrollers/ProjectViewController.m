@@ -15,7 +15,7 @@
 #import "PhotoCell.h"
 #import "PSPDFActionSheet.h"
 
-#import "ELCImagePickerController.h"
+#import <ELCImagePickerController/ELCImagePickerController.h>
 
 @interface ProjectViewController () <DrawViewControllerDelegate, ELCImagePickerControllerDelegate, UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
@@ -281,8 +281,7 @@
         return;
     
     
-    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-    elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
+    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] init];
     elcPicker.imagePickerDelegate = self;
     
     [self presentViewController:elcPicker animated:YES completion:nil];

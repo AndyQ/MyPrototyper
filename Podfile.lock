@@ -1,0 +1,25 @@
+PODS:
+  - ColorPopover (0.0.1):
+    - WEPopover (~> 0.0.1)
+  - ELCImagePickerController (0.2.0)
+  - PopoverView (0.0.1)
+  - PSAlertView (1.1)
+  - SSZipArchive (0.3.1)
+  - WEPopover (0.0.1)
+
+DEPENDENCIES:
+  - ColorPopover (~> 0.0.1)
+  - ELCImagePickerController (~> 0.2.0)
+  - PopoverView (~> 0.0.1)
+  - PSAlertView (~> 1.1)
+  - SSZipArchive (~> 0.3.1)
+
+SPEC CHECKSUMS:
+  ColorPopover: d808e3c8f19a0ffb635535e03bdf709def3129f2
+  ELCImagePickerController: 1baf64fadfe088550c16f82225469e4dfad917e2
+  PopoverView: 571c17ebd5f0c20570e1f12ca1800bd56e1b6dc3
+  PSAlertView: bdccae3cbd14f6060772654ae641daec7415d9fa
+  SSZipArchive: 47d0589a15452311749a4eeecb97e12800d127de
+  WEPopover: 119fe521e9c35069c5ec63dfc14334ca321275b8
+
+COCOAPODS: 0.29.0

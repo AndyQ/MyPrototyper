@@ -13,6 +13,19 @@
 
 @implementation ImageDetails
 
++ (ImageDetails *) fromDictionary:(NSDictionary *)dict;
+{
+    ImageDetails *imageDetails = [ImageDetails new];
+    imageDetails.imageName = dict[@"imageName"];
+    
+    for ( NSDictionary *d in dict[@"links"] )
+    {
+        [imageDetails.links addObject:[ImageLink fromDictionary:d]];
+    }
+    
+    return imageDetails;
+}
+
 - (id)init
 {
     self = [super init];
@@ -38,6 +51,25 @@
 */
     UIImage *i = [UIImage imageWithContentsOfFile:self.imagePath];
     return i;
+}
+
+
+- (NSDictionary *) toDictionary
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+   
+    dict[@"imageName"] = self.imageName;
+
+    NSMutableArray *links = [NSMutableArray array];
+    dict[@"links"] = links;
+
+    for ( ImageLink *link in self.links )
+    {
+        NSDictionary *d = [link toDictionary];
+        [links addObject:d];
+    }
+    
+    return dict;
 }
 
 // Decode an object from an archive

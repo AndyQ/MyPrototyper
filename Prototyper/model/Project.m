@@ -47,7 +47,7 @@
 
 + (ProjectType) getProjectTypeForProject:(NSString *)projectName
 {
-    NSString *dataFile = [[[Project getDocsDir] stringByAppendingPathComponent:projectName] stringByAppendingPathComponent:@"project.dat"];
+    NSString *dataFile = [[[Project getDocsDir] stringByAppendingPathComponent:projectName] stringByAppendingPathComponent:@"project.json"];
     NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
     NSData *data = [NSData dataWithContentsOfURL:archiveURL];
     
@@ -70,7 +70,7 @@
         NSFileManager *mgr = [NSFileManager defaultManager];
         
         NSString *projectFolder = [self getProjectFolder];
-        NSString *dataFile = [projectFolder stringByAppendingPathComponent:@"project.dat"];
+        NSString *dataFile = [projectFolder stringByAppendingPathComponent:@"project.json"];
         if ( ![mgr fileExistsAtPath:dataFile isDirectory:nil] )
         {
             NSError *err = nil;
@@ -88,7 +88,11 @@
         }
         else
         {
-            [self load];
+            NSError *err = nil;
+            [self load:&err];
+            if ( err )
+                NSLog( @"Error loading project - %@", err.localizedDescription );
+            
             [self setupProjectPaths];
             
             // Little hack temporarily to assign unknown project types to the device we are running on
@@ -171,7 +175,10 @@
     [_images addObject:item];
     
     // Save Project
-    [self save];
+    NSError *err = nil;
+    [self save:&err];
+    if ( err != nil )
+        NSLog( @"Error saving project - %@", err.localizedDescription );
 }
 
 - (void) removeItem:(ImageDetails *)item;
@@ -180,7 +187,7 @@
     
     NSString *path = item.imagePath;
 
-    NSError *err;
+    NSError *err = nil;
     NSFileManager *mgr = [NSFileManager defaultManager];
     [mgr removeItemAtPath:path error:&err];
     
@@ -194,7 +201,10 @@
         }
     }
     
-    [self save];
+    err = nil;
+    [self save:&err];
+    if ( err != nil )
+        NSLog( @"Error saving project - %@", err.localizedDescription );
 }
 
 - (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
@@ -251,7 +261,7 @@
         NSString *path = imageDetails.imagePath;
         [filesList addObject:path];
     }
-    [filesList addObject:[[self getProjectFolder] stringByAppendingPathComponent:@"project.dat"]];
+    [filesList addObject:[[self getProjectFolder] stringByAppendingPathComponent:@"project.json"]];
     
     NSLog( @"Creating zip file - %@", zipPath );
     [SSZipArchive createZipFileAtPath:zipPath withFilesAtPaths:filesList];
@@ -293,49 +303,75 @@
         }
     }
     
-    [self save];
+    NSError *err = nil;
+    [self save:&err];
+    if ( err != nil )
+        NSLog( @"Error saving project - %@", err.localizedDescription );
 }
 
 
 #pragma mark - serialization
-- (bool) load
+- (bool) load:(NSError **)error;
 {
-    NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.dat"];
+    NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.json"];
     NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
     NSData *data = [NSData dataWithContentsOfURL:archiveURL];
     
-    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    
-    bool valid = NO;
-    if ( [unarchiver containsValueForKey:@"projectType"] && [unarchiver containsValueForKey:@"images"] )
+    NSError *err = nil;
+    id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+    if ( err != nil || ![jsonObj isKindOfClass:[NSDictionary class]] )
     {
-        self.projectType = [unarchiver decodeIntegerForKey:@"projectType"];
-        self.startImage = [unarchiver decodeObjectForKey:@"startImage"];
-        self.images = [unarchiver decodeObjectForKey:@"images"];
-        valid = YES;
+        // Invalid object
+        *error = err;
+        return NO;
     }
-    [unarchiver finishDecoding];
 
-    return valid;
+    NSDictionary *dict = jsonObj;
+    self.projectName = dict[@"projectName"];
+    self.startImage = dict[@"startImage"];
+    for ( NSDictionary *d in dict[@"images"] )
+    {
+        ImageDetails *imageDetails = [ImageDetails fromDictionary:d];
+        [self.images addObject:imageDetails];
+    }
+
+    return YES;
 }
 
 
 
-- (void) save
+- (bool) save:(NSError **)error
 {
-    NSMutableData *data = [NSMutableData data];
-    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    NSMutableDictionary *proj = [NSMutableDictionary dictionary];
+    proj[@"projectName"] = self.projectName;
+    proj[@"startImage"] = self.startImage;
+    NSMutableArray *images = [NSMutableArray array];
+    proj[@"images"] = images;
     
-    [archiver encodeInteger:self.projectType forKey:@"projectType"];
-    [archiver encodeObject:self.startImage forKey:@"startImage"];
-    [archiver encodeObject:self.images forKey:@"images"];
-    [archiver finishEncoding];
+    for ( ImageDetails *imageDetails in self.images )
+    {
+        NSDictionary *d = [imageDetails toDictionary];
+        [images addObject:d];
+    }
     
-    NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.dat"];
+    NSError *err = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:proj
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&err];
+    if ( err )
+    {
+        NSLog( @"Error serialising JSON - %@", err.localizedDescription );
+        *error = err;
+        return NO;
+    }
+    
+    NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.json"];
     NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
-    BOOL rc = [data writeToURL:archiveURL atomically:YES];
+    BOOL rc = [jsonData writeToURL:archiveURL atomically:YES];
     if ( !rc )
         NSLog( @"Rc - %d", rc );
+    
+    return YES;
 }
 
 

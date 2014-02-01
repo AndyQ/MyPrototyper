@@ -25,4 +25,8 @@ typedef enum ImageTransition
 @property (nonatomic, assign) CGRect rect;
 @property (nonatomic, strong) NSString *linkedToId;
 @property (nonatomic, assign) ImageTransition transition;
+
++ (ImageLink *) fromDictionary:(NSDictionary *)dict;
+- (NSDictionary *) toDictionary;
+
 @end

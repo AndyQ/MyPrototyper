@@ -31,8 +31,8 @@
 - (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
 - (ImageDetails *) getStartImageDetails;
 - (bool) renameProject:(NSString *)newName error:(NSError **)error;
-- (bool) load;
-- (void) save;
+- (bool) load:(NSError **)error;
+- (bool) save:(NSError **)error;
 
 - (NSInteger) count;
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;

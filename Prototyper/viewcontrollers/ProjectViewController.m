@@ -115,8 +115,10 @@
 
 - (IBAction)unwindFromViewController:(UIStoryboardSegue *)segue
 {
-    [project save];
-    
+    NSError *err = nil;
+    [project save:&err];
+    if ( err != nil )
+        NSLog( @"Error saving project - %@", err.localizedDescription );
     // Unselect all items
     for ( NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems] )
          [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
@@ -166,7 +168,10 @@
     {
         ImageDetails *imageDetails = project[indexPath.row];
         project.startImage = imageDetails.imageName;
-        [project save];
+        NSError *err = nil;
+        [project save:&err];
+        if ( err != nil )
+            NSLog( @"Error saving project - %@", err.localizedDescription );
         
         self.selectStartImageDisplayViewBottom.constant -= self.selectStartImageDisplayView.bounds.size.height;
         [UIView animateWithDuration:0.5 animations:^{
@@ -340,7 +345,10 @@
         }
     }
     
-    [project save];
+    NSError *err = nil;
+    [project save:&err];
+    if ( err != nil )
+        NSLog( @"Error saving project - %@", err.localizedDescription );
     
 }
 

@@ -98,12 +98,12 @@
         valid = NO;
         
         // Finally, validate project
-        if ( [fm fileExistsAtPath:[projectFolder stringByAppendingPathComponent:@"project.dat"]] )
+        if ( [fm fileExistsAtPath:[projectFolder stringByAppendingPathComponent:@"project.json"]] )
         {
             // Make sure we can open it
             Project *p = [[Project alloc] init];
             p.projectName = [zipName stringByDeletingPathExtension];
-            valid = [p load];
+            valid = [p load:nil];
         }
         
         if ( !valid )

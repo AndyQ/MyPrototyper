@@ -17,6 +17,8 @@
 // This is set dynamically when the project is loaded
 @property (nonatomic, strong) NSString *imagePath;
 
-- (UIImage *) getImage;
++ (ImageDetails *) fromDictionary:(NSDictionary *)dict;
 
+- (UIImage *) getImage;
+- (NSDictionary *) toDictionary;
 @end

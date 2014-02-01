@@ -10,6 +10,17 @@
 
 @implementation ImageLink
 
++ (ImageLink *) fromDictionary:(NSDictionary *)dict;
+{
+    ImageLink *link = [ImageLink new];
+    
+    link.rect = CGRectFromString(dict[@"rect"] );
+    link.linkedToId = dict[@"linkedToId"];
+    link.transition = [dict[@"transition"] intValue];
+    
+    return link;
+}
+
 - (id)init
 {
     self = [super init];
@@ -17,6 +28,17 @@
         self.transition = IT_None;
     }
     return self;
+}
+
+- (NSDictionary *) toDictionary
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+
+    dict[@"rect"] = NSStringFromCGRect(self.rect);
+    dict[@"linkedToId"] = self.linkedToId;
+    dict[@"transition"] = @(self.transition);
+
+    return dict;
 }
 
 // Decode an object from an archive

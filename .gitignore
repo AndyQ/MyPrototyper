@@ -1,0 +1,19 @@
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+*.bak*
+
+#Xcode files
+#This ignores everything inside a *.xcodeproj except the project.pbxproj
+*.xcodeproj/xcuserdata
+*.xcodeproj/project.xcworkspace/xcuserdata
+*.log
+xcuserdata
+
+#Project files
+[Bb]uild/
+
+#Version control files
+.svn
+*.orig
+

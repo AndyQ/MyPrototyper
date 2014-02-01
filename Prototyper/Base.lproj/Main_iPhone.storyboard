@@ -60,21 +60,9 @@
                                 <rect key="frame" x="0.0" y="372" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="New" id="nVA-yG-kht">
+                                    <barButtonItem systemItem="add" id="nVA-yG-kht">
                                         <connections>
-                                            <segue destination="iGR-ku-d7J" kind="push" identifier="ShowDraw" id="xBA-rr-lfY"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="OK2-9Y-sq7"/>
-                                    <barButtonItem systemItem="camera" id="kfj-ce-j4r">
-                                        <connections>
-                                            <action selector="takePhotoButtonTapped:" destination="L7h-rU-lpT" id="FXH-zf-9u2"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="20" style="plain" systemItem="fixedSpace" id="DS9-Ej-3Ct"/>
-                                    <barButtonItem title="Photo Album" id="JSj-CZ-hrn">
-                                        <connections>
-                                            <action selector="albumsButtonTapped:" destination="L7h-rU-lpT" id="hIv-b1-5pF"/>
+                                            <action selector="addImagePressed:" destination="L7h-rU-lpT" id="dUb-iA-BUt"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Liv-Ko-Isg"/>
@@ -128,6 +116,7 @@
                         <outlet property="selectStartImageDisplayView" destination="ZgO-n9-y9E" id="nLM-LW-9Pj"/>
                         <outlet property="selectStartImageDisplayViewBottom" destination="uCg-Ug-2Ud" id="Kvb-Ig-smY"/>
                         <segue destination="id8-63-Ttf" kind="push" identifier="EditImage" id="QDg-mr-TLU"/>
+                        <segue destination="iGR-ku-d7J" kind="push" identifier="ShowDraw" id="2kw-eh-RLk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UA7-Pf-EYo" sceneMemberID="firstResponder"/>
@@ -508,6 +497,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="xBA-rr-lfY"/>
+        <segue reference="2kw-eh-RLk"/>
     </inferredMetricsTieBreakers>
 </document>

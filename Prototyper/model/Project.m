@@ -109,6 +109,25 @@
     return path;
 }
 
+- (bool) renameProject:(NSString *)newName error:(NSError **)error;
+{
+    NSFileManager *mgr = [NSFileManager defaultManager];
+    
+    NSString *oldProjectFolder = [self getProjectFolder];
+    NSString *newProjectFolder = [oldProjectFolder stringByReplacingOccurrencesOfString:self.projectName withString:newName];
+
+    NSError *err = nil;
+    [mgr moveItemAtPath:oldProjectFolder toPath:newProjectFolder error:&err];
+    if ( err != nil )
+    {
+        NSLog( @"Error! - %@", err.localizedDescription);
+        *error = err;
+        return NO;
+    }
+    
+    self.projectName = newName;
+    return YES;
+}
 
 - (void) addImageToProject:(UIImage *)image
 {

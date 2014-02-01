@@ -10,15 +10,15 @@
 #import "ProjectViewController.h"
 #import "Project.h"
 #import "ProjectSelectTableViewCell.h"
-#import "PSPDFActionSheet.h"
+#import "PopoverView.h"
 
 #import "Constants.h"
 
 #import "IASKAppSettingsViewController.h"
 
-@interface MainViewController () <IASKSettingsDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface MainViewController () <IASKSettingsDelegate, PopoverViewDelegate, UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
-    PSPDFActionSheet *popupSheet;
+    PopoverView *popoverView;
 
     NSMutableArray *projects;
     NSString *selectedProjectName;
@@ -50,15 +50,15 @@
     actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionPressed:)];
     doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
     self.navigationItem.rightBarButtonItem = actionButton;
-
-
-    [self loadProjects];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     // Register for import notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadProjects) name:NOTIF_IMPORTED object:nil];
+
+    [self loadProjects];
+    [self.tableView reloadData];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -80,49 +80,46 @@
     [av show];
 }
 
-- (IBAction) actionPressed:(id)sender
+-( IBAction) actionPressed:(id)sender
 {
-    if ( popupSheet != nil )
+    NSArray *items = @[@"Delete projects", @"Settings"];
+    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( self.view.frame.size.width - 20, 0) inView:self.view withStringArray:items delegate:self];
+}
+
+#pragma mark - PopoverView delegate
+
+- (void)popoverView:(PopoverView *)thePopoverView didSelectItemAtIndex:(NSInteger)index itemText:(NSString *)text
+{
+    if ( [text isEqualToString:@"Delete projects"] )
     {
-        [popupSheet dismissWithClickedButtonIndex:0 animated:YES];
-        popupSheet = nil;
-        return;
+        self.tableView.editing = YES;
+        [self.tableView reloadData];
+        self.navigationItem.rightBarButtonItem = doneButton;
+        self.addButton.enabled = NO;
     }
-    
-    // Display Action sheet in popever
-    popupSheet = [[PSPDFActionSheet alloc] initWithTitle:@"Prototyper"];
-    
-    __block __typeof__(self) blockSelf = self;
-    
-    [popupSheet addButtonWithTitle:@"Delete projects" block:^{
-        
-        blockSelf->popupSheet = nil;
-        blockSelf.tableView.editing = YES;
-        [blockSelf.tableView reloadData];
-        blockSelf.navigationItem.rightBarButtonItem = blockSelf->doneButton;
-        blockSelf.addButton.enabled = NO;
-    }];
-    
-    [popupSheet addButtonWithTitle:@"Settings" block:^{
-        blockSelf->popupSheet = nil;
+    if ( [text isEqualToString:@"Settings"] )
+    {
         IASKAppSettingsViewController *appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
-        appSettingsViewController.delegate = blockSelf;
+        appSettingsViewController.delegate = self;
         appSettingsViewController.showDoneButton = YES;
         
         UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:appSettingsViewController];
         nc.modalPresentationStyle = UIModalPresentationFormSheet;
         nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         
-        [blockSelf presentViewController:nc animated:YES completion:^{ }];
-    }];
-    
-    [popupSheet setCancelButtonWithTitle:@"Cancel" block:^{
-        blockSelf->popupSheet = nil;
-    }];
-    
-    [popupSheet showWithSender:sender fallbackView:self.view animated:YES];
+        [self presentViewController:nc animated:YES completion:^{ }];
+    }
 
+    [popoverView dismiss];
+    popoverView = nil;
+    
 }
+
+- (void)popoverViewDidDismiss:(PopoverView *)thePopoverView;
+{
+    popoverView = nil;
+}
+
 
 - (void) donePressed:(id)sender
 {

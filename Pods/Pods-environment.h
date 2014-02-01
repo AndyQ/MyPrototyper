@@ -21,7 +21,7 @@
 // InAppSettingsKit
 #define COCOAPODS_POD_AVAILABLE_InAppSettingsKit
 #define COCOAPODS_VERSION_MAJOR_InAppSettingsKit 2
-#define COCOAPODS_VERSION_MINOR_InAppSettingsKit 0
+#define COCOAPODS_VERSION_MINOR_InAppSettingsKit 1
 #define COCOAPODS_VERSION_PATCH_InAppSettingsKit 0
 
 // PSAlertView
@@ -34,7 +34,7 @@
 #define COCOAPODS_POD_AVAILABLE_PopoverView
 #define COCOAPODS_VERSION_MAJOR_PopoverView 0
 #define COCOAPODS_VERSION_MINOR_PopoverView 0
-#define COCOAPODS_VERSION_PATCH_PopoverView 1
+#define COCOAPODS_VERSION_PATCH_PopoverView 3
 
 // SSZipArchive
 #define COCOAPODS_POD_AVAILABLE_SSZipArchive

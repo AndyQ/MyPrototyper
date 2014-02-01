@@ -369,7 +369,7 @@
 
 #pragma mark - PopoverView delegate
 
-- (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index;
+- (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index  itemText:(NSString *)text;
 {
     [popoverView dismiss];
     

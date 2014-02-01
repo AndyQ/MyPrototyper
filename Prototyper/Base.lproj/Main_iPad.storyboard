@@ -60,21 +60,9 @@
                                 <rect key="frame" x="0.0" y="916" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="New" id="l8Q-Al-zJQ">
+                                    <barButtonItem systemItem="add" id="l8Q-Al-zJQ">
                                         <connections>
-                                            <segue destination="qLA-2e-chR" kind="push" identifier="ShowDraw" id="cmn-Un-dnd"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="sEc-82-s9n"/>
-                                    <barButtonItem systemItem="camera" id="QlK-nX-k5t">
-                                        <connections>
-                                            <action selector="takePhotoButtonTapped:" destination="taF-rW-Ib2" id="3zb-01-FF5"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="RmQ-hY-tsA"/>
-                                    <barButtonItem title="Photo Album" id="ywS-8o-IAs">
-                                        <connections>
-                                            <action selector="albumsButtonTapped:" destination="taF-rW-Ib2" id="qbE-hn-uMR"/>
+                                            <action selector="addImagePressed:" destination="taF-rW-Ib2" id="g7F-pb-mB4"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="v4C-Kk-Ia7"/>
@@ -505,7 +493,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="cmn-Un-dnd"/>
-    </inferredMetricsTieBreakers>
 </document>

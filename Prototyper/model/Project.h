@@ -30,7 +30,7 @@
 - (void) removeItem:(ImageDetails *)item;
 - (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
 - (ImageDetails *) getStartImageDetails;
-
+- (bool) renameProject:(NSString *)newName error:(NSError **)error;
 - (bool) load;
 - (void) save;
 

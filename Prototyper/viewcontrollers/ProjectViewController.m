@@ -13,12 +13,12 @@
 #import "Project.h"
 #import "ImageDetails.h"
 #import "PhotoCell.h"
-#import "PSPDFActionSheet.h"
+#import "PopoverView.h"
 
 #import "ELCImagePickerController.h"
 #import "IASKAppSettingsViewController.h"
 
-@interface ProjectViewController () <DrawViewControllerDelegate, ELCImagePickerControllerDelegate, IASKSettingsDelegate,UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProjectViewController () <DrawViewControllerDelegate, ELCImagePickerControllerDelegate, IASKSettingsDelegate, PopoverViewDelegate, UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 {
     UIDocumentInteractionController *docController;
 
@@ -31,9 +31,11 @@
     UIBarButtonItem *deleteBtn;
     UIBarButtonItem *backBtn;
     
-    PSPDFActionSheet *popupSheet;
+    PopoverView *popoverView;
     
     bool settingStartImage;
+    
+    UITextField *txtTitleBar;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectStartImageDisplayViewBottom;
@@ -61,13 +63,31 @@
     [self.collectionView reloadData];
     
     self.selectStartImageDisplayViewBottom.constant -= self.selectStartImageDisplayView.bounds.size.height;
+    
+    UITapGestureRecognizer* tapRecon = [[UITapGestureRecognizer alloc]
+                                        initWithTarget:self action:@selector(navigationBarDoubleTap:)];
+    tapRecon.numberOfTapsRequired = 2;
+    [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
+}
+
+- (void)navigationBarDoubleTap:(UIGestureRecognizer*)recognizer {
+    txtTitleBar = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 80, 22)];
+    txtTitleBar.text = self.title;
+    txtTitleBar.font = [UIFont boldSystemFontOfSize:18];
+    txtTitleBar.textColor = [UIColor blackColor];
+    txtTitleBar.textAlignment = NSTextAlignmentCenter;
+    txtTitleBar.delegate = self;
+    txtTitleBar.returnKeyType = UIReturnKeyDone;
+    self.navigationItem.titleView = txtTitleBar;
+    [txtTitleBar becomeFirstResponder];
+    [txtTitleBar setSelectedTextRange:[txtTitleBar textRangeFromPosition:txtTitleBar.beginningOfDocument toPosition:txtTitleBar.endOfDocument]];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    if ( popupSheet != nil )
+    if ( popoverView != nil )
     {
-        [popupSheet dismissWithClickedButtonIndex:0 animated:NO];
+        [popoverView dismiss];
     }
 }
 
@@ -168,73 +188,103 @@
 
 #pragma mark - Actions
 
-- (void) actionPressed:(id)sender
+-( IBAction) actionPressed:(id)sender
 {
-    if ( popupSheet != nil )
+    NSArray *items = @[@"Set start image", @"Delete images", @"Export project", @"Settings"];
+    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( self.view.frame.size.width - 20, 0) inView:self.view withStringArray:items delegate:self];
+}
+
+- (IBAction)addImagePressed:(id)sender
+{
+    NSArray *items = @[@"New blank image", @"Take from camera", @"Add from library"];
+    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( 20, self.view.frame.size.height - 44) inView:self.view withStringArray:items delegate:self];
+    
+}
+
+
+
+#pragma mark - PopoverView delegate
+
+- (void)popoverView:(PopoverView *)thePopoverView didSelectItemAtIndex:(NSInteger)index itemText:(NSString *)text
+{
+    // Items from action menu button
+    if ( [text isEqualToString:@"Set start image"] )
     {
-        [popupSheet dismissWithClickedButtonIndex:0 animated:YES];
-        popupSheet = nil;
-        return;
+        settingStartImage = YES;
+        self.selectStartImageDisplayViewBottom.constant += self.selectStartImageDisplayView.bounds.size.height;
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            [self.view layoutIfNeeded];
+        }];
+    }
+    if ( [text isEqualToString:@"Delete images"] )
+    {
+        [self editPressed:nil];
     }
     
-    // Display Action sheet in popever
-    popupSheet = [[PSPDFActionSheet alloc] initWithTitle:@"Action"];
+    if ( [text isEqualToString:@"Export project"] )
+    {
+        [self exportProject];
+    }
     
-    __block __typeof__(self) blockSelf = self;
-    
-    
-    [popupSheet addButtonWithTitle:@"Set start image" block:^{
-        blockSelf->popupSheet = nil;
-        blockSelf->settingStartImage = YES;
-        blockSelf.selectStartImageDisplayViewBottom.constant += blockSelf.selectStartImageDisplayView.bounds.size.height;
-
-        [UIView animateWithDuration:0.25 animations:^{
-            [blockSelf.view layoutIfNeeded];
-        }];
-
-    }];
-    
-    
-    [popupSheet addButtonWithTitle:@"Delete images" block:^{
-        
-        blockSelf->popupSheet = nil;
-        [blockSelf editPressed:sender];
-    }];
-    
-    [popupSheet addButtonWithTitle:@"Export project" block:^{
-        
-        blockSelf->popupSheet = nil;
-        [blockSelf exportProject];
-    }];
-    
-    [popupSheet addButtonWithTitle:@"Settings" block:^{
-        blockSelf->popupSheet = nil;
+    if ( [text isEqualToString:@"Settings"] )
+    {
         IASKAppSettingsViewController *appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
-        appSettingsViewController.delegate = blockSelf;
+        appSettingsViewController.delegate = self;
         appSettingsViewController.showDoneButton = YES;
         
         UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:appSettingsViewController];
         nc.modalPresentationStyle = UIModalPresentationFormSheet;
         nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         
-        [blockSelf presentViewController:nc animated:YES completion:^{ }];
-    }];
-    
-/*
-    [popupSheet addButtonWithTitle:@"Compress images" block:^{
-        
-        blockSelf->popupSheet = nil;
-        [blockSelf compressImages];
-    }];
-*/
-    
-    [popupSheet setCancelButtonWithTitle:@"Cancel" block:^{
-        blockSelf->popupSheet = nil;
-    }];
-    
-    [popupSheet showWithSender:sender fallbackView:self.view animated:YES];
+        [self presentViewController:nc animated:YES completion:^{ }];
+    }
 
+    // Items from add new image button
+    if ( [text isEqualToString:@"New blank image"] )
+    {
+        [self performSegueWithIdentifier:@"ShowDraw" sender:self];
+    }
+    if ( [text isEqualToString:@"Take from camera"] )
+    {
+        if (([UIImagePickerController isSourceTypeAvailable:
+              UIImagePickerControllerSourceTypeCamera] == NO))
+        {
+            UIImage *image = [UIImage imageNamed:@"Dummy"];
+            [project addImageToProject:image];
+            [self.collectionView reloadData];
+            return;
+        }
+        
+        UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
+        mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
+        mediaUI.allowsEditing = NO;
+        mediaUI.delegate = self;
+        [self presentViewController:mediaUI animated:YES completion:nil];
+    }
+    if ( [text isEqualToString:@"Add from library"] )
+    {
+        if (([UIImagePickerController isSourceTypeAvailable:
+              UIImagePickerControllerSourceTypePhotoLibrary] == NO))
+            return;
+        
+        
+        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] init];
+        elcPicker.imagePickerDelegate = self;
+        
+        [self presentViewController:elcPicker animated:YES completion:nil];
+    }
+
+    [popoverView dismiss];
+    popoverView = nil;
+    
 }
+
+- (void)popoverViewDidDismiss:(PopoverView *)thePopoverView;
+{
+    popoverView = nil;
+}
+
 
 - (void) editPressed:(id)sender
 {
@@ -311,38 +361,6 @@
     [self.collectionView deleteItemsAtIndexPaths:selectedCells];
     
     [self editPressed:nil];
-}
-
-
-- (IBAction)takePhotoButtonTapped:(id)sender
-{
-    if (([UIImagePickerController isSourceTypeAvailable:
-          UIImagePickerControllerSourceTypeCamera] == NO))
-    {
-        UIImage *image = [UIImage imageNamed:@"Dummy"];
-        [project addImageToProject:image];
-        [self.collectionView reloadData];
-        return;
-    }
-    
-    UIImagePickerController *mediaUI = [[UIImagePickerController alloc] init];
-    mediaUI.sourceType = UIImagePickerControllerSourceTypeCamera;
-    mediaUI.allowsEditing = NO;
-    mediaUI.delegate = self;
-    [self presentViewController:mediaUI animated:YES completion:nil];
-}
-
-- (IBAction)albumsButtonTapped:(id)sender
-{
-    if (([UIImagePickerController isSourceTypeAvailable:
-          UIImagePickerControllerSourceTypePhotoLibrary] == NO))
-        return;
-    
-    
-    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] init];
-    elcPicker.imagePickerDelegate = self;
-    
-    [self presentViewController:elcPicker animated:YES completion:nil];
 }
 
 #pragma mark - DrawViewControllerDelegateMethods
@@ -514,5 +532,42 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - UITextField delegate methods (for editing titlebar)
+- (void) textFieldDidEndEditing:(UITextField *)textField
+{
+    // Rename project if name not the same
+    if ( textField == txtTitleBar )
+    {
+        NSString *text = textField.text;
+        if ( text.length > 0 )
+        {
+            NSError *err = nil;
+            [project renameProject:text error:&err];
+            if ( err == nil )
+            {
+                self.title = project.projectName;
+            }
+            else
+            {
+                // Display alert
+                UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Problem" message:err.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [av show];
+            }
+        }
+        self.navigationItem.titleView = nil;
+        txtTitleBar = nil;
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ( textField == txtTitleBar )
+    {
+        [textField resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
+}
 
 @end

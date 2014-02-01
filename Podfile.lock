@@ -4,7 +4,6 @@ PODS:
   - ELCImagePickerController (0.2.0)
   - InAppSettingsKit (2.1)
   - PopoverView (0.0.3)
-  - PSAlertView (1.1)
   - SSZipArchive (0.3.1)
   - WEPopover (0.0.1)
 
@@ -13,7 +12,6 @@ DEPENDENCIES:
   - ELCImagePickerController (~> 0.2.0)
   - InAppSettingsKit (from `https://github.com/AndyQ/InAppSettingsKit`)
   - PopoverView (from `https://github.com/AndyQ/PopoverView`)
-  - PSAlertView (~> 1.1)
   - SSZipArchive (~> 0.3.1)
 
 EXTERNAL SOURCES:
@@ -27,7 +25,6 @@ SPEC CHECKSUMS:
   ELCImagePickerController: 1baf64fadfe088550c16f82225469e4dfad917e2
   InAppSettingsKit: 1cf19241cbfa501b0a5225d5012696676de8ca67
   PopoverView: 2f7a99ffd68a0308cd271b373afe55fe24f3ece4
-  PSAlertView: bdccae3cbd14f6060772654ae641daec7415d9fa
   SSZipArchive: 47d0589a15452311749a4eeecb97e12800d127de
   WEPopover: 119fe521e9c35069c5ec63dfc14334ca321275b8
 

@@ -439,7 +439,7 @@
         
         //First we build a label for the text to set in.
         CGSize textSize = [string sizeWithAttributes:@{NSFontAttributeName:font}];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height+50)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
         label.backgroundColor = [UIColor clearColor];
         label.font = font;
         label.textAlignment = kTextAlignment;

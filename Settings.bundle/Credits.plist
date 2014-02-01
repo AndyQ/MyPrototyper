@@ -32,14 +32,6 @@
                     <key>Type</key>
                     <string>PSChildPaneSpecifier</string>
                     <key>Title</key>
-                    <string>PSAlertView</string>
-                    <key>File</key>
-                    <string>PSAlertView</string>
-                </dict>
-                <dict>
-                    <key>Type</key>
-                    <string>PSChildPaneSpecifier</string>
-                    <key>Title</key>
                     <string>SSZipArchive</string>
                     <key>File</key>
                     <string>SSZipArchive</string>

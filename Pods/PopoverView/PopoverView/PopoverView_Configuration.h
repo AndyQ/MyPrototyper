@@ -56,7 +56,7 @@
 #define kShowDividersBetweenViews YES
 
 //color for the divider fill
-#define kDividerColor [UIColor colorWithRed:0.329 green:0.341 blue:0.353 alpha:0.15f]
+#define kDividerColor [UIColor colorWithRed:0.329 green:0.341 blue:0.353 alpha:0.8f]
 
 
 // BACKGROUND GRADIENT

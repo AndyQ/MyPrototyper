@@ -24,12 +24,6 @@
 #define COCOAPODS_VERSION_MINOR_InAppSettingsKit 1
 #define COCOAPODS_VERSION_PATCH_InAppSettingsKit 0
 
-// PSAlertView
-#define COCOAPODS_POD_AVAILABLE_PSAlertView
-#define COCOAPODS_VERSION_MAJOR_PSAlertView 1
-#define COCOAPODS_VERSION_MINOR_PSAlertView 1
-#define COCOAPODS_VERSION_PATCH_PSAlertView 0
-
 // PopoverView
 #define COCOAPODS_POD_AVAILABLE_PopoverView
 #define COCOAPODS_VERSION_MAJOR_PopoverView 0

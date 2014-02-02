@@ -196,17 +196,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="372"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap to unhide the navigation bar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="279" translatesAutoresizingMaskIntoConstraints="NO" id="HtM-cA-ATb">
-                                <rect key="frame" x="-8" y="-71" width="279" height="41"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double tap to unhide the navigation bar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="279" translatesAutoresizingMaskIntoConstraints="NO" id="HtM-cA-ATb">
+                                <rect key="frame" x="21" y="179" width="279" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="HtM-cA-ATb" secondAttribute="centerX" id="9Zs-VP-pDN"/>
                             <constraint firstItem="lAp-2Y-Kvr" firstAttribute="leading" secondItem="jmU-yb-LdH" secondAttribute="leading" id="F2y-NG-j63"/>
+                            <constraint firstAttribute="centerY" secondItem="HtM-cA-ATb" secondAttribute="centerY" id="NXB-kI-P1l"/>
                             <constraint firstAttribute="trailing" secondItem="lAp-2Y-Kvr" secondAttribute="trailing" id="P5w-5a-SHI"/>
                             <constraint firstItem="lAp-2Y-Kvr" firstAttribute="top" secondItem="RJF-7Y-zOJ" secondAttribute="bottom" id="ecu-bz-uVV"/>
                             <constraint firstItem="p4Z-eA-uVX" firstAttribute="top" secondItem="lAp-2Y-Kvr" secondAttribute="bottom" id="hOg-aZ-hfg"/>

@@ -44,7 +44,7 @@
     }
 }
 
-
+/*
 + (ProjectType) getProjectTypeForProject:(NSString *)projectName
 {
     NSString *dataFile = [[[Project getDocsDir] stringByAppendingPathComponent:projectName] stringByAppendingPathComponent:@"project.json"];
@@ -60,18 +60,21 @@
 
     return projectType;
 }
+*/
 
 - (id) initWithProjectName:(NSString *)projectName
 {
     self = [super init];
     if (self) {
         self.projectName = projectName;
-        
+        self.images = [NSMutableArray array];
+
         NSFileManager *mgr = [NSFileManager defaultManager];
         
         NSString *projectFolder = [self getProjectFolder];
         NSString *dataFile = [projectFolder stringByAppendingPathComponent:@"project.json"];
-        if ( ![mgr fileExistsAtPath:dataFile isDirectory:nil] )
+        NSString *oldDataFile = [projectFolder stringByAppendingPathComponent:@"project.dat"];
+        if ( ![mgr fileExistsAtPath:dataFile isDirectory:nil] && ![mgr fileExistsAtPath:oldDataFile isDirectory:nil]  )
         {
             NSError *err = nil;
             [mgr createDirectoryAtPath:projectFolder withIntermediateDirectories:YES attributes:nil error:&err];
@@ -84,7 +87,6 @@
                 self.projectType = PT_IPAD;
             else
                 self.projectType = PT_IPHONE;
-            self.images = [NSMutableArray array];
         }
         else
         {
@@ -314,6 +316,10 @@
 - (bool) load:(NSError **)error;
 {
     NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.json"];
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ( ![fm fileExistsAtPath:dataFile] )
+        return [self loadOldProject];
+    
     NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
     NSData *data = [NSData dataWithContentsOfURL:archiveURL];
     
@@ -338,7 +344,26 @@
     return YES;
 }
 
+- (bool) loadOldProject
+{
+    NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.dat"];
+    NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
+    NSData *data = [NSData dataWithContentsOfURL:archiveURL];
+    
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    
+    bool valid = NO;
+    if ( [unarchiver containsValueForKey:@"projectType"] && [unarchiver containsValueForKey:@"images"] )
+    {
+        self.projectType = [unarchiver decodeIntegerForKey:@"projectType"];
+        self.startImage = [unarchiver decodeObjectForKey:@"startImage"];
+        self.images = [unarchiver decodeObjectForKey:@"images"];
+        valid = YES;
+    }
+    [unarchiver finishDecoding];
 
+    return valid;
+}
 
 - (bool) save:(NSError **)error
 {
@@ -369,7 +394,13 @@
     NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
     BOOL rc = [jsonData writeToURL:archiveURL atomically:YES];
     if ( !rc )
+    {
         NSLog( @"Rc - %d", rc );
+        *error = [NSError errorWithDomain:PROTOTYPER_ERROR_DOMAIN
+                                     code:FAILED_TO_SAVE
+                                 userInfo:nil];
+        return NO;
+    }
     
     return YES;
 }

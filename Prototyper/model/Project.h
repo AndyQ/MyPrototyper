@@ -21,7 +21,7 @@
 
 + (NSString *) getDocsDir;
 + (void) deleteProjectWithName:(NSString *)projectName;
-+ (ProjectType) getProjectTypeForProject:(NSString *)projectName;
+//+ (ProjectType) getProjectTypeForProject:(NSString *)projectName;
 
 
 - (id) initWithProjectName:(NSString *)projectName;

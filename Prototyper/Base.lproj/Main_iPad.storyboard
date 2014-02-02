@@ -131,14 +131,14 @@
                         <viewControllerLayoutGuide type="bottom" id="c73-XT-QNr"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DhM-Lo-UNt">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mvX-Qg-4ip">
-                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mvX-Qg-4ip">
+                                <rect key="frame" x="0.0" y="64" width="768" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zvw-av-9fI" customClass="DrawView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zvw-av-9fI" customClass="DrawView">
                                 <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -147,7 +147,7 @@
                                 </connections>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ywe-7W-PSX">
-                                <rect key="frame" x="0.0" y="980" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="916" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem title="Freehand" id="m09-VH-ArM">
@@ -218,15 +218,15 @@
                         <viewControllerLayoutGuide type="bottom" id="mLS-m7-SSp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="k7Z-aF-85G">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TLK-2S-AY0">
-                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TLK-2S-AY0">
+                                <rect key="frame" x="0.0" y="64" width="768" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QM0-RT-32j" customClass="ImageEditView">
-                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QM0-RT-32j" customClass="ImageEditView">
+                                <rect key="frame" x="0.0" y="64" width="768" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -352,17 +352,17 @@
                         <viewControllerLayoutGuide type="bottom" id="PVF-ya-fkc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZZ0-cw-bbX">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-Bd-UN5">
-                                <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q0t-Bd-UN5">
+                                <rect key="frame" x="0.0" y="64" width="768" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Double tap to unhide the navigation bar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="738" translatesAutoresizingMaskIntoConstraints="NO" id="ZH9-Cq-tVJ">
-                                <rect key="frame" x="10" y="74" width="738" height="41"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Double tap to unhide the navigation bar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="496" translatesAutoresizingMaskIntoConstraints="NO" id="ZH9-Cq-tVJ">
+                                <rect key="frame" x="136" y="420" width="496" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -371,7 +371,9 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Q0t-Bd-UN5" secondAttribute="trailing" id="8ft-f9-Nf1"/>
                             <constraint firstItem="Q0t-Bd-UN5" firstAttribute="top" secondItem="GdD-RX-Mas" secondAttribute="bottom" id="IB6-mR-Ypc"/>
+                            <constraint firstAttribute="centerY" secondItem="ZH9-Cq-tVJ" secondAttribute="centerY" id="U7q-sY-XnY"/>
                             <constraint firstItem="PVF-ya-fkc" firstAttribute="top" secondItem="Q0t-Bd-UN5" secondAttribute="bottom" id="hiV-pD-w6l"/>
+                            <constraint firstAttribute="centerX" secondItem="ZH9-Cq-tVJ" secondAttribute="centerX" id="m3d-9i-dwc"/>
                             <constraint firstItem="Q0t-Bd-UN5" firstAttribute="leading" secondItem="ZZ0-cw-bbX" secondAttribute="leading" id="yhp-CV-3It"/>
                         </constraints>
                     </view>
@@ -474,7 +476,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="J8q-O9-423" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SKo-dm-qoA">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="SKo-dm-qoA">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

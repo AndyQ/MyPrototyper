@@ -43,7 +43,7 @@ CGPoint CGRectCenter( CGRect r )
 
 - (id) initWithCoder:(NSCoder *)aDecoder
 {
-    if ( [super initWithCoder:aDecoder] )
+    if ( (self = [super initWithCoder:aDecoder]) )
     {
         [self setColor:[UIColor redColor]];
     }

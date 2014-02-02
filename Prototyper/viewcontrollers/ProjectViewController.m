@@ -115,10 +115,7 @@
 
 - (IBAction)unwindFromViewController:(UIStoryboardSegue *)segue
 {
-    NSError *err = nil;
-    [project save:&err];
-    if ( err != nil )
-        NSLog( @"Error saving project - %@", err.localizedDescription );
+    [self saveProject];
     // Unselect all items
     for ( NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems] )
          [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
@@ -168,10 +165,8 @@
     {
         ImageDetails *imageDetails = project[indexPath.row];
         project.startImage = imageDetails.imageName;
-        NSError *err = nil;
-        [project save:&err];
-        if ( err != nil )
-            NSLog( @"Error saving project - %@", err.localizedDescription );
+        
+        [self saveProject];
         
         self.selectStartImageDisplayViewBottom.constant -= self.selectStartImageDisplayView.bounds.size.height;
         [UIView animateWithDuration:0.5 animations:^{
@@ -236,13 +231,21 @@
     {
         IASKAppSettingsViewController *appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
         appSettingsViewController.delegate = self;
-        appSettingsViewController.showDoneButton = YES;
         
-        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:appSettingsViewController];
-        nc.modalPresentationStyle = UIModalPresentationFormSheet;
-        nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        
-        [self presentViewController:nc animated:YES completion:^{ }];
+        if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+        {
+            appSettingsViewController.showDoneButton = YES;
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:appSettingsViewController];
+            nc.modalPresentationStyle = UIModalPresentationFormSheet;
+            nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            
+            [self presentViewController:nc animated:YES completion:^{ }];
+        }
+        else
+        {
+            appSettingsViewController.showDoneButton = NO;
+            [self.navigationController pushViewController:appSettingsViewController animated:YES];
+        }
     }
 
     // Items from add new image button
@@ -345,11 +348,7 @@
         }
     }
     
-    NSError *err = nil;
-    [project save:&err];
-    if ( err != nil )
-        NSLog( @"Error saving project - %@", err.localizedDescription );
-    
+    [self saveProject];
 }
 
 - (void) deletePressed:(id)sender
@@ -578,4 +577,12 @@
     return YES;
 }
 
+
+- (void) saveProject
+{
+    NSError *err = nil;
+    [project save:&err];
+    if ( err != nil )
+        NSLog( @"Error saving project - %@", err.localizedDescription );
+}
 @end

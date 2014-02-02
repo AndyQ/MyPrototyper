@@ -23,3 +23,8 @@ typedef enum ProjectType
 
 // Notifications
 #define NOTIF_IMPORTED @"NOTIF_IMPORTED"
+
+// Errors
+#define PROTOTYPER_ERROR_DOMAIN @"Prototyper"
+
+#define FAILED_TO_SAVE kCFURLErrorCannotWriteToFile

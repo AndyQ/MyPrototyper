@@ -12,6 +12,7 @@
 
 @interface PlaybackViewController () <UIAlertViewDelegate>
 {
+    bool hasShownDoubleTapInfo;
     ImageDetails *imageDetails;
     
     CGSize imageScale;
@@ -30,6 +31,7 @@
 {
     [super viewDidLoad];
     
+    hasShownDoubleTapInfo = NO;
     imageDetails = [self.project getStartImageDetails];
     
     self.imageView.image = [imageDetails getImage];
@@ -42,7 +44,7 @@
     
     // Add outline around double tap text
     self.doubleTapText.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.doubleTapText.layer.shadowRadius = 2;
+    self.doubleTapText.layer.shadowRadius = 5;
     self.doubleTapText.layer.shadowOpacity = 1;
     self.doubleTapText.layer.shadowOffset = CGSizeMake( 0, 0 );
 }
@@ -106,8 +108,12 @@
     self.topConstraint.constant = 22;
     self.bottomConstraint.constant = 22;
 
+    if ( hasShownDoubleTapInfo )
+        return;
+    hasShownDoubleTapInfo = YES;
+
     self.doubleTapText.alpha = 1;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [UIView animateWithDuration:.25 animations:^{
             self.doubleTapText.alpha = 0;
         }];

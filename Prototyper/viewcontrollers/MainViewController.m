@@ -66,6 +66,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (UIStatusBarStyle) preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -101,13 +104,21 @@
     {
         IASKAppSettingsViewController *appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
         appSettingsViewController.delegate = self;
-        appSettingsViewController.showDoneButton = YES;
         
-        UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:appSettingsViewController];
-        nc.modalPresentationStyle = UIModalPresentationFormSheet;
-        nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+        {
+            appSettingsViewController.showDoneButton = YES;
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:appSettingsViewController];
+            nc.modalPresentationStyle = UIModalPresentationFormSheet;
+            nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         
-        [self presentViewController:nc animated:YES completion:^{ }];
+            [self presentViewController:nc animated:YES completion:^{ }];
+        }
+        else
+        {
+            appSettingsViewController.showDoneButton = NO;
+            [self.navigationController pushViewController:appSettingsViewController animated:YES];
+        }
     }
 
     [popoverView dismiss];
@@ -165,10 +176,10 @@
         BOOL isDir = NO;
         if (![file hasPrefix:@"."] && [fm fileExistsAtPath:path isDirectory:&isDir] && isDir)
         {
-            ProjectType projectType = [Project getProjectTypeForProject:file];
+//            ProjectType projectType = [Project getProjectTypeForProject:file];
             Project *p = [[Project alloc] init];
             p.projectName = file;
-            p.projectType = projectType;
+//            p.projectType = projectType;
             [projects addObject:p];
         }
     }
@@ -207,11 +218,12 @@
     
     Project *project = projects[indexPath.row];
     cell.projectName.text = project.projectName;
+/*
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && project.projectType == PT_IPHONE)
         cell.projectName.text = [project.projectName stringByAppendingString:@" - iPhone project"];
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone && project.projectType == PT_IPAD)
         cell.projectName.text = [project.projectName stringByAppendingString:@" - iPad project"];
-    
+*/
     return cell;
 }
 

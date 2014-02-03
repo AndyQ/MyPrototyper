@@ -21,6 +21,8 @@
 
 + (NSString *) getDocsDir;
 + (void) deleteProjectWithName:(NSString *)projectName;
++ (bool) isProjectValidWithName:(NSString *)projectName;
+
 //+ (ProjectType) getProjectTypeForProject:(NSString *)projectName;
 
 

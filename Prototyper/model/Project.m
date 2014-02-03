@@ -44,23 +44,27 @@
     }
 }
 
-/*
-+ (ProjectType) getProjectTypeForProject:(NSString *)projectName
++ (bool) isProjectValidWithName:(NSString *)projectName;
 {
     NSString *dataFile = [[[Project getDocsDir] stringByAppendingPathComponent:projectName] stringByAppendingPathComponent:@"project.json"];
-    NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
-    NSData *data = [NSData dataWithContentsOfURL:archiveURL];
     
-    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    
-    // Customize the unarchiver.
-    ProjectType projectType = [unarchiver decodeIntegerForKey:@"projectType"];
-    
-    [unarchiver finishDecoding];
+    NSData *data = [NSData dataWithContentsOfFile:dataFile];
+    NSError *err = nil;
+    id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+    if ( err != nil || ![jsonObj isKindOfClass:[NSDictionary class]] )
+    {
+        // Invalid object
+        return NO;
+    }
 
-    return projectType;
+    // Check that this JSON object contains a valid project name (may also want to add version number check
+    // when version numbers get implemented)
+    NSDictionary *dict = jsonObj;
+    if ( dict[@"projectName"] == nil )
+        return NO;
+    
+    return YES;
 }
-*/
 
 - (id) initWithProjectName:(NSString *)projectName
 {
@@ -320,8 +324,7 @@
     if ( ![fm fileExistsAtPath:dataFile] )
         return [self loadOldProject];
     
-    NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
-    NSData *data = [NSData dataWithContentsOfURL:archiveURL];
+    NSData *data = [NSData dataWithContentsOfFile:dataFile];
     
     NSError *err = nil;
     id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];

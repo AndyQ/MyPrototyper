@@ -58,18 +58,23 @@
     NSString *projectFolder = [file stringByDeletingPathExtension];
 
     NSString *errorMsg = nil;
-    // before we do anything check if file exists already
+    
+    // before we do anything check if file exists already, if it does, rename it
     bool valid = YES;
-    if ( [fm fileExistsAtPath:projectFolder] )
+    int suffix = 1;
+    while ( [fm fileExistsAtPath:projectFolder] )
     {
-        errorMsg = @"A project with this name already exists - currently can't replace it";
-        valid = NO;
+        NSString *suffixStr = [NSString stringWithFormat:@"_%d", suffix];
+        projectFolder = [[file stringByDeletingPathExtension] stringByAppendingString:suffixStr];
+        suffix ++;
     }
-    else
-        [fm createDirectoryAtPath:projectFolder withIntermediateDirectories:YES attributes:nil error:&error];
+
+    [fm createDirectoryAtPath:projectFolder withIntermediateDirectories:YES attributes:nil error:&error];
 
     if ( valid )
     {
+        // There may already be an old zip file in this location (there shouldn't be but just in case)
+        // so we remove it first as the move will fail if one does exist.
         [fm removeItemAtPath:file error:nil];
         [fm moveItemAtURL:url toURL:[NSURL fileURLWithPath:file] error:&error];
         if ( error != nil )
@@ -101,9 +106,7 @@
         if ( [fm fileExistsAtPath:[projectFolder stringByAppendingPathComponent:@"project.json"]] )
         {
             // Make sure we can open it
-            Project *p = [[Project alloc] init];
-            p.projectName = [zipName stringByDeletingPathExtension];
-            valid = [p load:nil];
+            valid = [Project isProjectValidWithName:[zipName stringByDeletingPathExtension]];
         }
         
         if ( !valid )

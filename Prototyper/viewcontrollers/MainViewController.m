@@ -218,12 +218,7 @@
     
     Project *project = projects[indexPath.row];
     cell.projectName.text = project.projectName;
-/*
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad && project.projectType == PT_IPHONE)
-        cell.projectName.text = [project.projectName stringByAppendingString:@" - iPhone project"];
-    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone && project.projectType == PT_IPAD)
-        cell.projectName.text = [project.projectName stringByAppendingString:@" - iPad project"];
-*/
+
     return cell;
 }
 

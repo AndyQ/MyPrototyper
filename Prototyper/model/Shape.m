@@ -288,11 +288,6 @@
     transform = CGAffineTransformScale(transform, 1.0f, -1.0f);
     [textPath applyTransform:transform];
 
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path appendPath:textPath];
-
-
     return textPath;
-//    return path;
 }
 @end

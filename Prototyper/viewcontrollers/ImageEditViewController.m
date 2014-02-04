@@ -203,7 +203,7 @@
 {
     if ( buttonIndex != actionSheet.cancelButtonIndex )
     {
-        shadeView.associatedImageLink.transition = buttonIndex;
+        shadeView.associatedImageLink.transition = (ImageTransition)buttonIndex;
     }
     [self showMenuFromRect:shadeView.frame];
 }
@@ -365,6 +365,18 @@
         NSLog( @"Failed");
 
     self.imageView.image = image;
+    
+    // Now we need to update all the hotspot positions as the image frame may well have changed!
+    imageScale.width = self.imageView.widthScale;
+    imageScale.height = self.imageView.heightScale;
+    for ( UIView *subview in self.imageEditView.subviews )
+    {
+        if ( [subview isKindOfClass:[HotspotView class]] )
+        {
+            HotspotView *hv = (HotspotView *)subview;
+            [hv updateImageScale:imageScale];
+        }
+    }
 }
 
 #pragma mark - PopoverView delegate

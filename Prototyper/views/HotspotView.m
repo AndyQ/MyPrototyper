@@ -71,6 +71,33 @@
     return _associatedImageLink;
 }
 
+- (void) updateImageScale:(CGSize)imageScale;
+{
+    // Screen scale may well have changed so resize our imagelink rect back up to 1:1
+    CGRect f = self.associatedImageLink.rect;
+    f.origin.x *= scale.width;
+    f.origin.y *= scale.height;
+    f.size.width *= scale.width;
+    f.size.height *= scale.height;
+
+    // Update the scale
+    scale = imageScale;
+    
+    // And then rescale our frame and also our imageLink frame
+    f.origin.x *= scale.width;
+    f.origin.y *= scale.height;
+    f.size.width *= scale.width;
+    f.size.height *= scale.height;
+    self.frame = f;
+    
+    f.origin.x /= scale.width;
+    f.origin.y /= scale.height;
+    f.size.width /= scale.width;
+    f.size.height /= scale.height;
+    self.associatedImageLink.rect = f;
+
+}
+
 - (void) setAssociatedImageLink:(ImageLink *)link
 {
     _associatedImageLink = link;
@@ -83,7 +110,6 @@
 
     self.frame = f;
     [self setNeedsDisplay];
-//    [self updateFrame:link.rect];
 }
 
 - (void) updateFrame:(CGRect)f

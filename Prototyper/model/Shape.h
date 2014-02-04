@@ -31,6 +31,7 @@ typedef enum {
 - (void) applyTransform:(CGAffineTransform)transform;
 
 @property (nonatomic, strong) UIBezierPath *path;
+@property (nonatomic, strong) UIBezierPath *tapTargetPath;
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, readonly) bool shouldFill;
 @property (nonatomic, assign, readonly) CGRect totalBounds;

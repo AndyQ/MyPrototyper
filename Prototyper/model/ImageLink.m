@@ -35,7 +35,7 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
     dict[@"rect"] = NSStringFromCGRect(self.rect);
-    dict[@"linkedToId"] = self.linkedToId;
+    dict[@"linkedToId"] = self.linkedToId != nil ? self.linkedToId : @"";
     dict[@"transition"] = @(self.transition);
 
     return dict;

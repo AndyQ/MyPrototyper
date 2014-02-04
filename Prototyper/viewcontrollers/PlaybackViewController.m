@@ -53,9 +53,6 @@
 {
     // Have to do this here as this is when the autolayout stuff has finished
     
-    imageScale.width = self.imageView.widthScale;
-    imageScale.height = self.imageView.heightScale;
-
     // Add views for touchpoints
     [self updateHotspots];
 }
@@ -194,6 +191,9 @@
 - (void) updateHotspots
 {
     [self.imageView.subviews makeObjectsPerformSelector:@selector( removeFromSuperview)];
+
+    imageScale.width = self.imageView.widthScale;
+    imageScale.height = self.imageView.heightScale;
 
     int index = 1000;
     for ( ImageLink *link in imageDetails.links )

@@ -172,6 +172,7 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
     {
         [[UIColor whiteColor] setFill];
         CGContextFillRect( UIGraphicsGetCurrentContext(), self.drawView.frame );
+        [self.image drawAtPoint:CGPointMake( 0, 0 )];
         [self.imageView.layer renderInContext: ctx];
         [self.drawView.layer renderInContext: ctx];
         image = UIGraphicsGetImageFromCurrentImageContext();
@@ -231,6 +232,8 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
         // Add Text
         NSString *text = [[alertView textFieldAtIndex:0] text];
         Shape *shape = [Shape shapeWithText:text atPoint:textPoint];
+        shape.lineColor = selectedColor;
+        
         [self addShape:shape];
     }
 }

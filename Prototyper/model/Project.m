@@ -66,6 +66,89 @@
     return YES;
 }
 
+
++ (bool) importProjectArchiveFromURL:(NSURL *)url
+{
+    NSFileManager *fm = [NSFileManager defaultManager];
+    NSError *error = nil;
+    NSString *projectName = [url lastPathComponent];
+    NSString *file = [[Project getDocsDir] stringByAppendingPathComponent:projectName];
+    NSString *projectFolder = [file stringByDeletingPathExtension];
+    NSString *errorMsg = nil;
+    
+    // before we do anything check if file exists already, if it does, rename it
+    bool valid = YES;
+    int suffix = 1;
+    while ( [fm fileExistsAtPath:projectFolder] )
+    {
+        NSString *suffixStr = [NSString stringWithFormat:@"_%d", suffix];
+        projectFolder = [[file stringByDeletingPathExtension] stringByAppendingString:suffixStr];
+        suffix ++;
+    }
+    projectName = [projectFolder lastPathComponent];
+    
+    [fm createDirectoryAtPath:projectFolder withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    if ( valid )
+    {
+        // There may already be an old zip file in this location (there shouldn't be but just in case)
+        // so we remove it first as the move will fail if one does exist.
+        [fm removeItemAtPath:file error:nil];
+        [fm moveItemAtURL:url toURL:[NSURL fileURLWithPath:file] error:&error];
+        if ( error != nil )
+        {
+            NSLog( @"Error - %@", error.localizedDescription );
+            // Error - go no futher
+            errorMsg = @"Unable to save file";
+            valid = NO;
+        }
+    }
+    
+    if ( valid )
+    {
+        bool rc = [SSZipArchive unzipFileAtPath:file toDestination:projectFolder];
+        if ( !rc )
+        {
+            // Error - go no futher
+            errorMsg = @"Unable to unzip file";
+            valid = NO;
+        }
+    }
+    
+    error = nil;
+    if ( valid )
+    {
+        valid = NO;
+        
+        // Finally, validate project
+        if ( [fm fileExistsAtPath:[projectFolder stringByAppendingPathComponent:@"project.json"]] )
+        {
+            // Make sure we can open it
+            valid = [Project isProjectValidWithName:[projectName stringByDeletingPathExtension]];
+        }
+        
+        if ( !valid )
+            errorMsg = @"Project not valid - not imported";
+    }
+    
+    // remove zip file
+    [fm removeItemAtPath:file error:&error];
+    
+    if ( !valid )
+    {
+        error = nil;
+        [fm removeItemAtPath:projectFolder error:&error];
+        
+        // Error - go no futher
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Problem" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
+        return NO;
+    }
+    
+    return YES;
+}
+
+
 - (id) initWithProjectName:(NSString *)projectName
 {
     self = [super init];
@@ -322,7 +405,12 @@
     NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.json"];
     NSFileManager *fm = [NSFileManager defaultManager];
     if ( ![fm fileExistsAtPath:dataFile] )
-        return [self loadOldProject];
+    {
+        *error = [NSError errorWithDomain:PROTOTYPER_ERROR_DOMAIN
+                                     code:PROJECT_NOT_FOUND
+                                 userInfo:nil];
+        return NO;
+    }
     
     NSData *data = [NSData dataWithContentsOfFile:dataFile];
     
@@ -345,27 +433,6 @@
     }
 
     return YES;
-}
-
-- (bool) loadOldProject
-{
-    NSString *dataFile = [[self getProjectFolder] stringByAppendingPathComponent:@"project.dat"];
-    NSURL *archiveURL = [NSURL fileURLWithPath:dataFile];
-    NSData *data = [NSData dataWithContentsOfURL:archiveURL];
-    
-    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
-    
-    bool valid = NO;
-    if ( [unarchiver containsValueForKey:@"projectType"] && [unarchiver containsValueForKey:@"images"] )
-    {
-        self.projectType = [unarchiver decodeIntegerForKey:@"projectType"];
-        self.startImage = [unarchiver decodeObjectForKey:@"startImage"];
-        self.images = [unarchiver decodeObjectForKey:@"images"];
-        valid = YES;
-    }
-    [unarchiver finishDecoding];
-
-    return valid;
 }
 
 - (bool) save:(NSError **)error

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) ImageLink *associatedImageLink;
 
 - (id)initWithScale:(CGSize)imageScale;
+- (void) updateImageScale:(CGSize)imageScale;
 - (void) updateFrame:(CGRect)f;
 - (UIColor *) getColor;
 - (void) setSelected:(bool)sel;

@@ -30,7 +30,7 @@
 {
     if (url != nil && [url isFileURL])
     {
-        [self handleDocumentOpenURL:url];
+        [Project importProjectArchiveFromURL:url];
         
         // Remove all stored files in Inbox folder
         NSFileManager *fm = [NSFileManager defaultManager];
@@ -46,87 +46,6 @@
         // Post notification to update files
         [[NSNotificationCenter defaultCenter] postNotificationName:NOTIF_IMPORTED object:self];
     }
-    return YES;
-}
-
-- (bool) handleDocumentOpenURL:(NSURL *)url
-{
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSError *error = nil;
-    NSString *zipName = [url lastPathComponent];
-    NSString *file = [[Project getDocsDir] stringByAppendingPathComponent:zipName];
-    NSString *projectFolder = [file stringByDeletingPathExtension];
-
-    NSString *errorMsg = nil;
-    
-    // before we do anything check if file exists already, if it does, rename it
-    bool valid = YES;
-    int suffix = 1;
-    while ( [fm fileExistsAtPath:projectFolder] )
-    {
-        NSString *suffixStr = [NSString stringWithFormat:@"_%d", suffix];
-        projectFolder = [[file stringByDeletingPathExtension] stringByAppendingString:suffixStr];
-        suffix ++;
-    }
-
-    [fm createDirectoryAtPath:projectFolder withIntermediateDirectories:YES attributes:nil error:&error];
-
-    if ( valid )
-    {
-        // There may already be an old zip file in this location (there shouldn't be but just in case)
-        // so we remove it first as the move will fail if one does exist.
-        [fm removeItemAtPath:file error:nil];
-        [fm moveItemAtURL:url toURL:[NSURL fileURLWithPath:file] error:&error];
-        if ( error != nil )
-        {
-            NSLog( @"Error - %@", error.localizedDescription );
-            // Error - go no futher
-            errorMsg = @"Unable to save file";
-            valid = NO;
-        }
-    }
-    
-    if ( valid )
-    {
-        bool rc = [SSZipArchive unzipFileAtPath:file toDestination:projectFolder];
-        if ( !rc )
-        {
-            // Error - go no futher
-            errorMsg = @"Unable to unzip file";
-            valid = NO;
-        }
-    }
-    
-    error = nil;
-    if ( valid )
-    {
-        valid = NO;
-        
-        // Finally, validate project
-        if ( [fm fileExistsAtPath:[projectFolder stringByAppendingPathComponent:@"project.json"]] )
-        {
-            // Make sure we can open it
-            valid = [Project isProjectValidWithName:[zipName stringByDeletingPathExtension]];
-        }
-        
-        if ( !valid )
-            errorMsg = @"Project not valid - not imported";
-    }
-
-    // remove zip file
-    [fm removeItemAtPath:file error:&error];
-
-    if ( !valid )
-    {
-        error = nil;
-        [fm removeItemAtPath:projectFolder error:&error];
-        
-        // Error - go no futher
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Problem" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [av show];
-        return NO;
-    }
-    
     return YES;
 }
 				

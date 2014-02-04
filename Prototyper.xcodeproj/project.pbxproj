@@ -303,7 +303,7 @@
 			buildConfigurationList = A1D75892187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "Prototyper" */;
 			buildPhases = (
 				544F4E137EF84547BE795168 /* Check Pods Manifest.lock */,
-				A1758D041885F1BE00490A06 /* ShellScript */,
+				A1758D041885F1BE00490A06 /* Run Script */,
 				A1D75859187FDEFD00E7AA2F /* Sources */,
 				A1D7585A187FDEFD00E7AA2F /* Frameworks */,
 				A1D7585B187FDEFD00E7AA2F /* Resources */,
@@ -423,18 +423,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A1758D041885F1BE00490A06 /* ShellScript */ = {
+		A1758D041885F1BE00490A06 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "plist=\"$SRCROOT/Prototyper/Prototyper-Info.plist\"\necho $plist\nversion=`/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$plist\"`\nbuild=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$plist\"`\n\n#update build number\necho \"OldBuild - $build\"\nbuild=$((${build} + 1))\necho \"NewBuild - $build\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $build\" \"$plist\"\n\nstringsFile=\"$SRCROOT/Settings.bundle/en.lproj/Root.strings\"\necho \"\\\"author\\\" = \\\"Prototyper Version ${version} (${build})\" > $stringsFile\necho \"Written by Andy Qua\\\";\" >> $stringsFile\ntouch \"$SRCROOT/Settings.bundle\"\n";
+			shellScript = "plist=\"$SRCROOT/Prototyper/Prototyper-Info.plist\"\necho $plist\nversion=`/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$plist\"`\nbuild=`git rev-list --count HEAD`\n\n#update build number\necho \"OldBuild - $build\"\nbuild=$((${build} + 1))\necho \"NewBuild - $build\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $build\" \"$plist\"\n\nstringsFile=\"$SRCROOT/Settings.bundle/en.lproj/Root.strings\"\necho \"\\\"author\\\" = \\\"Prototyper Version ${version} (${build})\" > $stringsFile\necho \"Written by Andy Qua\\\";\" >> $stringsFile\ntouch \"$SRCROOT/Settings.bundle\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

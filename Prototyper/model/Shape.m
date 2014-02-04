@@ -10,9 +10,8 @@
 #import "Shape.h"
 
 @interface Shape ()
-
-@property (nonatomic, strong) UIBezierPath *tapTarget;
-
+{
+}
 - (UIBezierPath *)tapTargetForPath:(UIBezierPath *)path;
 
 + (ShapeType)randomShapeType;
@@ -27,9 +26,6 @@
 
 @implementation Shape
 
-@synthesize path = _path;
-@synthesize lineColor = _lineColor;
-@synthesize tapTarget = _tapTarget;
 @dynamic totalBounds;
 
 
@@ -99,7 +95,7 @@
     {
         _path = path;
         _lineColor = lineColor;
-        _tapTarget = [self tapTargetForPath:_path];
+        _tapTargetPath = [self tapTargetForPath:_path];
     }
     return self;
 }
@@ -141,7 +137,7 @@
 
 - (BOOL)containsPoint:(CGPoint)point
 {
-    return [self.tapTarget containsPoint:point];
+    return [self.tapTargetPath containsPoint:point];
 }
 
 
@@ -163,13 +159,13 @@
 {
     CGAffineTransform transform = CGAffineTransformMakeTranslation(delta.x, delta.y);
     [self.path applyTransform:transform];
-    [self.tapTarget applyTransform:transform];
+    [self.tapTargetPath applyTransform:transform];
 }
 
 - (void) applyTransform:(CGAffineTransform)transform;
 {
     [self.path applyTransform:transform];
-    [self.tapTarget applyTransform:transform];
+    [self.tapTargetPath applyTransform:transform];
 }
 
 #pragma mark - Random Shape Generator Methods
@@ -215,7 +211,7 @@
                        [UIColor purpleColor], 
                        [UIColor orangeColor], 
                        nil];
-    uint32_t colorIndex = arc4random_uniform([colors count]);
+    NSUInteger colorIndex = arc4random_uniform([colors count]);
     return [colors objectAtIndex:colorIndex];
 }
 
@@ -284,7 +280,7 @@
 
 + (UIBezierPath *) text:(NSString *)text atPoint:(CGPoint)p
 {
-    UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:30];
+    UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:60];
 
     UIBezierPath *textPath = [UIBezierPath pathFromString:text WithFont:font];
     CGAffineTransform transform = CGAffineTransformIdentity;
@@ -296,6 +292,7 @@
     [path appendPath:textPath];
 
 
-    return path;
+    return textPath;
+//    return path;
 }
 @end

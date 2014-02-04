@@ -28,3 +28,4 @@ typedef enum ProjectType
 #define PROTOTYPER_ERROR_DOMAIN @"Prototyper"
 
 #define FAILED_TO_SAVE kCFURLErrorCannotWriteToFile
+#define PROJECT_NOT_FOUND  10001

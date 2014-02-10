@@ -21,6 +21,7 @@
 		A14C9403189BB254008F6A0D /* UIImageView+ContentScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C9402189BB254008F6A0D /* UIImageView+ContentScale.m */; };
 		A1758CFE1885DDA600490A06 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758CFD1885DDA600490A06 /* Shape.m */; };
 		A1758D031885F13300490A06 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A1758D021885F13300490A06 /* Settings.bundle */; };
+		A1CC97C718A83AE200816C03 /* demo.zip in Resources */ = {isa = PBXBuildFile; fileRef = A1CC97C618A83AE200816C03 /* demo.zip */; };
 		A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E51880A47E00E250BF /* ImageDetails.m */; };
 		A1D2B2E91880A47E00E250BF /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E71880A47E00E250BF /* Project.m */; };
 		A1D2B2EF1880A4A500E250BF /* HotspotView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2EE1880A4A500E250BF /* HotspotView.m */; };
@@ -83,6 +84,7 @@
 		A1758CFC1885DDA600490A06 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		A1758CFD1885DDA600490A06 /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		A1758D021885F13300490A06 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
+		A1CC97C618A83AE200816C03 /* demo.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = demo.zip; sourceTree = "<group>"; };
 		A1D2B2E41880A47E00E250BF /* ImageDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetails.h; sourceTree = "<group>"; };
 		A1D2B2E51880A47E00E250BF /* ImageDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetails.m; sourceTree = "<group>"; };
 		A1D2B2E61880A47E00E250BF /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 		A1D75867187FDEFD00E7AA2F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A1CC97C618A83AE200816C03 /* demo.zip */,
 				A1758D021885F13300490A06 /* Settings.bundle */,
 				A1D75868187FDEFD00E7AA2F /* Prototyper-Info.plist */,
 				A1D75869187FDEFD00E7AA2F /* InfoPlist.strings */,
@@ -376,6 +379,7 @@
 			files = (
 				A1D75877187FDEFD00E7AA2F /* Main_iPad.storyboard in Resources */,
 				A1D7587C187FDEFD00E7AA2F /* Images.xcassets in Resources */,
+				A1CC97C718A83AE200816C03 /* demo.zip in Resources */,
 				A1758D031885F13300490A06 /* Settings.bundle in Resources */,
 				A1D75874187FDEFD00E7AA2F /* Main_iPhone.storyboard in Resources */,
 				A1D7586B187FDEFD00E7AA2F /* InfoPlist.strings in Resources */,

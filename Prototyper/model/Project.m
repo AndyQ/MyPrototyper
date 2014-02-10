@@ -11,7 +11,7 @@
 
 #import "SSZipArchive.h"
 
-@interface Project () 
+@interface Project ()
 
 @property (nonatomic, strong) NSMutableArray *images;
 
@@ -24,8 +24,7 @@
 
 + (NSString *) getDocsDir
 {
-    NSURL *docsUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
-                                                   inDomains:NSUserDomainMask] lastObject];
+    NSURL *docsUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
     
     NSString *path = [docsUrl.path stringByAppendingPathComponent:@"Projects"];
     return path;
@@ -60,7 +59,7 @@
     // Check that this JSON object contains a valid project name (may also want to add version number check
     // when version numbers get implemented)
     NSDictionary *dict = jsonObj;
-    if ( dict[@"projectName"] == nil )
+    if ( dict[@"startImage"] == nil )
         return NO;
     
     return YES;
@@ -92,9 +91,9 @@
     if ( valid )
     {
         // There may already be an old zip file in this location (there shouldn't be but just in case)
-        // so we remove it first as the move will fail if one does exist.
+        // so we remove it first as the copy will fail if one does exist.
         [fm removeItemAtPath:file error:nil];
-        [fm moveItemAtURL:url toURL:[NSURL fileURLWithPath:file] error:&error];
+        [fm copyItemAtURL:url toURL:[NSURL fileURLWithPath:file] error:&error];
         if ( error != nil )
         {
             NSLog( @"Error - %@", error.localizedDescription );
@@ -188,9 +187,6 @@
             if ( _projectType == 0 )
                 _projectType = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? PT_IPAD : PT_IPHONE;
         }
-        
-
-        
     }
     return self;
 }
@@ -230,7 +226,6 @@
     // If we haven't got a start image then mark this image as the start image
     if ( self.startImage.length == 0 )
         self.startImage = guid;
-
     
     NSString *imageType = [[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_FORMAT];
     NSString *imageName = [NSString stringWithFormat:@"%@.%@", guid, imageType];
@@ -424,7 +419,6 @@
     }
 
     NSDictionary *dict = jsonObj;
-    self.projectName = dict[@"projectName"];
     self.startImage = dict[@"startImage"];
     for ( NSDictionary *d in dict[@"images"] )
     {
@@ -438,7 +432,6 @@
 - (bool) save:(NSError **)error
 {
     NSMutableDictionary *proj = [NSMutableDictionary dictionary];
-    proj[@"projectName"] = self.projectName;
     proj[@"startImage"] = self.startImage;
     NSMutableArray *images = [NSMutableArray array];
     proj[@"images"] = images;

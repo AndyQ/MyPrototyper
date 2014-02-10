@@ -22,6 +22,8 @@
     NSInteger selectedIndex;
     
     UIBarButtonItem *doneBtn;
+    UIImageView *zoomImageView;
+    CGRect zoomOrigFrame;
 }
 
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -41,11 +43,49 @@
     
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(processLongTouch:)];
+    [longPress setMinimumPressDuration:0.5];
+    [self.collectionView addGestureRecognizer:longPress];
 }
 
 - (BOOL)prefersStatusBarHidden
 {
     return NO;
+}
+
+
+- (void) processLongTouch:(UITapGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        CGPoint point = [sender locationInView:self.collectionView];
+        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
+        if (indexPath)
+        {
+            PhotoCell *cell = (PhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            zoomOrigFrame = cell.frame;
+            
+            zoomImageView = [[UIImageView alloc] initWithImage:cell.image];
+            zoomImageView.layer.borderWidth = 1;
+            zoomImageView.layer.borderColor = [UIColor blackColor].CGColor;
+            
+            zoomImageView.frame = zoomOrigFrame;
+            [self.view addSubview:zoomImageView];
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect f = self.view.bounds;
+                zoomImageView.frame = f;
+            }];
+        }
+    }
+    if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            zoomImageView.frame = zoomOrigFrame;
+        } completion:^(BOOL finished) {
+            [zoomImageView removeFromSuperview];
+            zoomImageView = nil;
+        }];
+    }
 }
 
 

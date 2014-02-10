@@ -19,7 +19,17 @@
                                             PREF_IMAGE_QUALITY : @"0.5"};
     [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
 
-    // Override point for customization after application launch.
+    // Add in tutorial if first launch
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    if ( [defaults objectForKey:@"FirstUse"] == nil )
+    {
+        [defaults setObject:@"YES" forKey:@"FirstUse"];
+        
+        // Copy over demo file into place
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"zip"];
+        [Project importProjectArchiveFromURL:url];
+    }
+
     return YES;
 }
 

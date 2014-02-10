@@ -9,12 +9,14 @@ PODS:
 
 DEPENDENCIES:
   - ColorPopover (~> 0.0.1)
-  - ELCImagePickerController (~> 0.2.0)
+  - ELCImagePickerController (from `https://github.com/AndyQ/ELCImagePickerController`)
   - InAppSettingsKit (from `https://github.com/AndyQ/InAppSettingsKit`)
   - PopoverView (from `https://github.com/AndyQ/PopoverView`)
   - SSZipArchive (~> 0.3.1)
 
 EXTERNAL SOURCES:
+  ELCImagePickerController:
+    :git: https://github.com/AndyQ/ELCImagePickerController
   InAppSettingsKit:
     :git: https://github.com/AndyQ/InAppSettingsKit
   PopoverView:

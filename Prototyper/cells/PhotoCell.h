@@ -10,7 +10,10 @@
 
 @interface PhotoCell : UICollectionViewCell
 
+@property(nonatomic, weak) IBOutlet UIImageView *imageView;
+
 @property(nonatomic, strong) UIImage *image;
+@property(nonatomic, assign) BOOL highlight;
 
 @end
 

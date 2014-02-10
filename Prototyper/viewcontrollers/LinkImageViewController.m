@@ -60,10 +60,17 @@
     {
         CGPoint point = [sender locationInView:self.collectionView];
         NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
+
         if (indexPath)
         {
+            ImageDetails *imageDetails = self.project[indexPath.row];
+            if ( [self.currentImageId isEqualToString:imageDetails.imageName] )
+                return;
+        
             PhotoCell *cell = (PhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-            zoomOrigFrame = cell.frame;
+            zoomOrigFrame = CGRectInset( cell.frame, 5, 5 );
+            zoomOrigFrame.origin.x -= self.collectionView.contentOffset.x;
+            zoomOrigFrame.origin.y -= self.collectionView.contentOffset.y;
             
             zoomImageView = [[UIImageView alloc] initWithImage:cell.image];
             zoomImageView.layer.borderWidth = 1;
@@ -84,6 +91,7 @@
         } completion:^(BOOL finished) {
             [zoomImageView removeFromSuperview];
             zoomImageView = nil;
+            [self.collectionView reloadData];
         }];
     }
 }
@@ -109,14 +117,16 @@
         cell.contentView.alpha = 1;
     
         
-    if ( [self.linkedId isEqualToString:imageDetails.imageName] )
+    if ( (selectedIndex == -1 && [self.linkedId isEqualToString:imageDetails.imageName]) || selectedIndex == indexPath.row )
     {
         selectedIndex = indexPath.row;
         self.navigationItem.rightBarButtonItem = doneBtn;
 
         [self.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-        cell.selected = YES;
+        cell.highlight = YES;
     }
+    else
+        cell.highlight = NO;
     
     return cell;
 }
@@ -138,11 +148,19 @@
     ImageDetails *imageDetails = self.project[indexPath.row];
     if ( [self.currentImageId isEqualToString:imageDetails.imageName] )
     {
-        selectedIndex = -1;
+        NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+        PhotoCell *cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:oldIndexPath];
+        cell.highlight = YES;
+
         self.navigationItem.rightBarButtonItem = nil;
         return NO;
     }
     
+    return YES;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
     return YES;
 }
 
@@ -151,7 +169,19 @@
     if ( selectedIndex == indexPath.row )
         [self donePressed:nil];
     
+    if ( selectedIndex != -1 )
+    {
+        NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+        PhotoCell *cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:oldIndexPath];
+        cell.highlight = NO;
+        [cell setNeedsDisplay];
+    }
+    
     selectedIndex = indexPath.row;
+    PhotoCell *cell = (PhotoCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.highlight = YES;
+    [cell setNeedsDisplay];
+    
     self.navigationItem.rightBarButtonItem = doneBtn;
 }
 

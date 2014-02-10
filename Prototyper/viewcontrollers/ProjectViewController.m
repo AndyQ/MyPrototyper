@@ -325,7 +325,7 @@
             return;
         
         
-        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] init];
+        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
         elcPicker.imagePickerDelegate = self;
         elcPicker.maximumImagesCount = 65535;
         

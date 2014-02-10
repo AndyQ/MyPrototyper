@@ -51,13 +51,16 @@
 
         ELCAsset *asset = [_rowAssets objectAtIndex:i];
 
+        UIImageView *imageView;
         if (i < [_imageViewArray count]) {
-            UIImageView *imageView = [_imageViewArray objectAtIndex:i];
+            imageView = [_imageViewArray objectAtIndex:i];
             imageView.image = [UIImage imageWithCGImage:asset.asset.thumbnail];
         } else {
-            UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithCGImage:asset.asset.thumbnail]];
+            imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithCGImage:asset.asset.thumbnail]];
             [_imageViewArray addObject:imageView];
         }
+        imageView.layer.borderColor = [UIColor blackColor].CGColor;
+        imageView.layer.borderWidth = 1;
         
         if (i < [_overlayViewArray count]) {
             UIImageView *overlayView = [_overlayViewArray objectAtIndex:i];

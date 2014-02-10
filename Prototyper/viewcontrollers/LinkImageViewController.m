@@ -44,7 +44,7 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(processLongTouch:)];
-    [longPress setMinimumPressDuration:0.5];
+    [longPress setMinimumPressDuration:0.25];
     [self.collectionView addGestureRecognizer:longPress];
 }
 

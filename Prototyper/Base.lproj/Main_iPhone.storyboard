@@ -493,7 +493,7 @@
             </objects>
             <point key="canvasLocation" x="1353" y="-904"/>
         </scene>
-        <!--Album Select View Controller - MyImagePicker-->
+        <!--Album Select View Controller - Choose Album-->
         <scene sceneID="uo6-FZ-cqz">
             <objects>
                 <tableViewController id="QeN-FE-N1h" customClass="AlbumSelectViewController" sceneMemberID="viewController">
@@ -530,7 +530,7 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="MyImagePicker" id="WV5-os-jLD"/>
+                    <navigationItem key="navigationItem" title="Choose Album" id="WV5-os-jLD"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYn-PH-44g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -77,11 +77,6 @@
     
     // setup our failure view controller in case enumerateGroupsWithTypes fails
     ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
-        /*
-
-        AssetsDataIsInaccessibleViewController *assetsDataInaccessibleViewController =
-            [self.storyboard instantiateViewControllerWithIdentifier:@"inaccessibleViewController"];
-        
         NSString *errorMessage = nil;
         switch ([error code]) {
             case ALAssetsLibraryAccessUserDeniedError:
@@ -89,13 +84,15 @@
                 errorMessage = @"The user has declined access to it.";
                 break;
             default:
-                errorMessage = @"Reason unknown.";
+                errorMessage = [error localizedDescription];
                 break;
         }
         
-        assetsDataInaccessibleViewController.explanation = errorMessage;
-        [self presentViewController:assetsDataInaccessibleViewController animated:NO completion:nil];
-         */
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"Album Error: %@ - %@", errorMessage, [error localizedRecoverySuggestion]] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alert show];
+        
+        NSLog(@"A problem occured %@", [error description]);
+
     };
     
     // emumerate through our groups and only add groups that contain photos
@@ -114,7 +111,8 @@
     };
     
     // enumerate only photos
-    NSUInteger groupTypes = ALAssetsGroupAlbum | ALAssetsGroupEvent | ALAssetsGroupFaces | ALAssetsGroupSavedPhotos;
+//    NSUInteger groupTypes = ALAssetsGroupAlbum | ALAssetsGroupEvent | ALAssetsGroupFaces | ALAssetsGroupSavedPhotos;
+    NSUInteger groupTypes = ALAssetsGroupAll;
     [self.assetsLibrary enumerateGroupsWithTypes:groupTypes usingBlock:listGroupBlock failureBlock:failureBlock];
 }
 
@@ -138,6 +136,10 @@
     CGImageRef posterImageRef = [groupForCell posterImage];
     UIImage *posterImage = [UIImage imageWithCGImage:posterImageRef];
     cell.imageView.image = posterImage;
+    cell.imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    cell.imageView.layer.borderWidth = 1;
+
+    
     cell.textLabel.text = [groupForCell valueForProperty:ALAssetsGroupPropertyName];
     cell.detailTextLabel.text = [@(groupForCell.numberOfAssets) stringValue];
 

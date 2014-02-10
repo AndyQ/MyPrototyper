@@ -16,14 +16,6 @@
                     <key>Type</key>
                     <string>PSChildPaneSpecifier</string>
                     <key>Title</key>
-                    <string>ELCImagePickerController</string>
-                    <key>File</key>
-                    <string>ELCImagePickerController</string>
-                </dict>
-                <dict>
-                    <key>Type</key>
-                    <string>PSChildPaneSpecifier</string>
-                    <key>Title</key>
                     <string>PopoverView</string>
                     <key>File</key>
                     <string>PopoverView</string>

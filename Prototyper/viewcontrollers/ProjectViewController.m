@@ -15,10 +15,10 @@
 #import "PhotoCell.h"
 #import "PopoverView.h"
 
-#import "ELCImagePickerController.h"
+#import "AlbumSelectViewController.h"
 #import "IASKAppSettingsViewController.h"
 
-@interface ProjectViewController () <DrawViewControllerDelegate, ELCImagePickerControllerDelegate, IASKSettingsDelegate, PopoverViewDelegate, UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
+@interface ProjectViewController () <DrawViewControllerDelegate, AlbumSelectViewControllerDelegate, IASKSettingsDelegate, PopoverViewDelegate, UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 {
     UIDocumentInteractionController *docController;
 
@@ -118,6 +118,12 @@
         DrawViewController *vc = segue.destinationViewController;
         vc.delegate = self;
     }
+    
+    if ( [segue.identifier isEqualToString:@"ShowAddAlbum"] )
+    {
+        AlbumSelectViewController *vc = segue.destinationViewController;
+        vc.delegate = self;
+    }
 }
 
 - (IBAction)unwindFromViewController:(UIStoryboardSegue *)segue
@@ -190,8 +196,23 @@
         // Do something with the image
         [self performSegueWithIdentifier:@"EditImage" sender:self];
     }
+    else
+    {
+        PhotoCell *cell = (PhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        cell.highlight = cell.selected;
+        [cell setNeedsDisplay];
+    }
 }
 
+- (void) collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ( editMode )
+    {
+        PhotoCell *cell = (PhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        cell.highlight = cell.selected;
+        [cell setNeedsDisplay];
+    }
+}
 
 #pragma mark - Zooming a selected cell
 
@@ -324,12 +345,14 @@
               UIImagePickerControllerSourceTypePhotoLibrary] == NO))
             return;
         
-        
+        [self performSegueWithIdentifier:@"ShowAddAlbum" sender:self];
+/*
         ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
         elcPicker.imagePickerDelegate = self;
         elcPicker.maximumImagesCount = 65535;
         
         [self presentViewController:elcPicker animated:YES completion:nil];
+*/
     }
 
     [popoverView dismiss];
@@ -427,10 +450,10 @@
 }
 
 #pragma mark - ELCImagePickerController delegates
-- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info
+- (void) imagesSelected:(NSArray *)info
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-		
+    [self.navigationController popViewControllerAnimated:YES];
+
 	for (NSDictionary *dict in info) {
         
         UIImage *image = [dict objectForKey:UIImagePickerControllerOriginalImage];
@@ -442,10 +465,6 @@
     [self.collectionView reloadData];
 }
 
-- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 #pragma mark - image picker delegate
 

@@ -22,6 +22,8 @@
 		A1758CFE1885DDA600490A06 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758CFD1885DDA600490A06 /* Shape.m */; };
 		A1758D031885F13300490A06 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A1758D021885F13300490A06 /* Settings.bundle */; };
 		A1CC97C718A83AE200816C03 /* demo.zip in Resources */ = {isa = PBXBuildFile; fileRef = A1CC97C618A83AE200816C03 /* demo.zip */; };
+		A1CC97D118A9875900816C03 /* AlbumSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC97CE18A9875900816C03 /* AlbumSelectViewController.m */; };
+		A1CC97D218A9875900816C03 /* AlbumContentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC97D018A9875900816C03 /* AlbumContentsViewController.m */; };
 		A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E51880A47E00E250BF /* ImageDetails.m */; };
 		A1D2B2E91880A47E00E250BF /* Project.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2E71880A47E00E250BF /* Project.m */; };
 		A1D2B2EF1880A4A500E250BF /* HotspotView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D2B2EE1880A4A500E250BF /* HotspotView.m */; };
@@ -85,6 +87,10 @@
 		A1758CFD1885DDA600490A06 /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		A1758D021885F13300490A06 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
 		A1CC97C618A83AE200816C03 /* demo.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = demo.zip; sourceTree = "<group>"; };
+		A1CC97CD18A9875900816C03 /* AlbumSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumSelectViewController.h; sourceTree = "<group>"; };
+		A1CC97CE18A9875900816C03 /* AlbumSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumSelectViewController.m; sourceTree = "<group>"; };
+		A1CC97CF18A9875900816C03 /* AlbumContentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumContentsViewController.h; sourceTree = "<group>"; };
+		A1CC97D018A9875900816C03 /* AlbumContentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumContentsViewController.m; sourceTree = "<group>"; };
 		A1D2B2E41880A47E00E250BF /* ImageDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDetails.h; sourceTree = "<group>"; };
 		A1D2B2E51880A47E00E250BF /* ImageDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDetails.m; sourceTree = "<group>"; };
 		A1D2B2E61880A47E00E250BF /* Project.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Project.h; sourceTree = "<group>"; };
@@ -187,6 +193,17 @@
 			path = viewcontrollers;
 			sourceTree = "<group>";
 		};
+		A1CC97CC18A9874900816C03 /* PhotoLibrarySelecter */ = {
+			isa = PBXGroup;
+			children = (
+				A1CC97CD18A9875900816C03 /* AlbumSelectViewController.h */,
+				A1CC97CE18A9875900816C03 /* AlbumSelectViewController.m */,
+				A1CC97CF18A9875900816C03 /* AlbumContentsViewController.h */,
+				A1CC97D018A9875900816C03 /* AlbumContentsViewController.m */,
+			);
+			path = PhotoLibrarySelecter;
+			sourceTree = "<group>";
+		};
 		A1D2B2E21880A45000E250BF /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +272,7 @@
 				A14C938E189530C5008F6A0D /* cells */,
 				A14C9394189530C5008F6A0D /* utils */,
 				A1D2B2E31880A45000E250BF /* views */,
+				A1CC97CC18A9874900816C03 /* PhotoLibrarySelecter */,
 				A14C9399189530C5008F6A0D /* viewcontrollers */,
 				A1D7586F187FDEFD00E7AA2F /* AppDelegate.h */,
 				A1D75870187FDEFD00E7AA2F /* AppDelegate.m */,
@@ -461,7 +479,9 @@
 				A14C93AF189530C5008F6A0D /* ProjectViewController.m in Sources */,
 				A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */,
 				A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */,
+				A1CC97D118A9875900816C03 /* AlbumSelectViewController.m in Sources */,
 				A14C93AD189530C5008F6A0D /* MainViewController.m in Sources */,
+				A1CC97D218A9875900816C03 /* AlbumContentsViewController.m in Sources */,
 				A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */,
 				A1D75871187FDEFD00E7AA2F /* AppDelegate.m in Sources */,
 				A14C93AC189530C5008F6A0D /* LinkImageViewController.m in Sources */,

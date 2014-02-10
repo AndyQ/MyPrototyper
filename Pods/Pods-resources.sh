@@ -41,11 +41,6 @@ install_resource()
       ;;
   esac
 }
-install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/ELCAlbumPickerController.xib"
-install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/ELCAssetPicker.xib"
-install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/ELCAssetTablePicker.xib"
-install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/Overlay.png"
-install_resource "ELCImagePickerController/Classes/ELCImagePicker/Resources/Overlay@2x.png"
 install_resource "WEPopover/popoverArrowDown.png"
 install_resource "WEPopover/popoverArrowDown@2x.png"
 install_resource "WEPopover/popoverArrowDownSimple.png"

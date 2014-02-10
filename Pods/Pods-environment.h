@@ -12,12 +12,6 @@
 #define COCOAPODS_VERSION_MINOR_ColorPopover 0
 #define COCOAPODS_VERSION_PATCH_ColorPopover 1
 
-// ELCImagePickerController
-#define COCOAPODS_POD_AVAILABLE_ELCImagePickerController
-#define COCOAPODS_VERSION_MAJOR_ELCImagePickerController 0
-#define COCOAPODS_VERSION_MINOR_ELCImagePickerController 2
-#define COCOAPODS_VERSION_PATCH_ELCImagePickerController 0
-
 // InAppSettingsKit
 #define COCOAPODS_POD_AVAILABLE_InAppSettingsKit
 #define COCOAPODS_VERSION_MAJOR_InAppSettingsKit 2

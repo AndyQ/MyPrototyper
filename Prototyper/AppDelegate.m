@@ -21,7 +21,7 @@
 
     // Add in tutorial if first launch
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    if ( [defaults objectForKey:@"FirstUse"] == nil )
+    if ( [defaults objectForKey:@"FirstUse"] == nil )
     {
         [defaults setObject:@"YES" forKey:@"FirstUse"];
         

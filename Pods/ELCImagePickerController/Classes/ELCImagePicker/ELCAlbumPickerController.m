@@ -132,7 +132,11 @@
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ (%ld)",[g valueForProperty:ALAssetsGroupPropertyName], (long)gCount];
     [cell.imageView setImage:[UIImage imageWithCGImage:[(ALAssetsGroup*)[self.assetGroups objectAtIndex:indexPath.row] posterImage]]];
+
+    cell.imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    cell.imageView.layer.borderWidth = 1;
 	[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    
 	
     return cell;
 }

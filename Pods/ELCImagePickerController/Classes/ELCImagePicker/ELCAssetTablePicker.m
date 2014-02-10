@@ -10,7 +10,11 @@
 #import "ELCAsset.h"
 #import "ELCAlbumPickerController.h"
 
-@interface ELCAssetTablePicker ()
+@interface ELCAssetTablePicker () <ELCAssetCellDelegate>
+{
+    UIImageView *zoomImageView;
+    CGRect zoomOrigFrame;
+}
 
 @property (nonatomic, assign) int columns;
 
@@ -185,7 +189,8 @@
     static NSString *CellIdentifier = @"Cell";
         
     ELCAssetCell *cell = (ELCAssetCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
+    cell.delegate = self;
+    
     if (cell == nil) {		        
         cell = [[ELCAssetCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
@@ -213,5 +218,41 @@
     return count;
 }
 
+#pragma mark - ELCAssetCell delegate
+- (void) cellLongPressed:(CGRect)f asset:(ELCAsset *)asset;
+{
+    if ( zoomImageView != nil )
+        return;
+    
+    CGImageRef imgRef = [asset.asset.defaultRepresentation fullScreenImage];
+    UIImageOrientation orientation = UIImageOrientationUp;
+    UIImage *img = [UIImage imageWithCGImage:imgRef
+                                       scale:1.0f
+                                 orientation:orientation];
 
+    zoomOrigFrame = CGRectInset( f, 5, 5 );
+
+    zoomImageView = [[UIImageView alloc] initWithImage:img];
+    zoomImageView.layer.borderWidth = 1;
+    zoomImageView.layer.borderColor = [UIColor blackColor].CGColor;
+        
+    zoomImageView.frame = zoomOrigFrame;
+    [self.view addSubview:zoomImageView];
+    [UIView animateWithDuration:0.25 animations:^{
+        CGFloat w = MIN( self.view.bounds.size.width, self.view.bounds.size.height) - 30;
+        CGRect f = CGRectMake( 15, 15, w, w );
+        zoomImageView.frame = f;
+    }];
+
+}
+
+- (void) cellLongReleased;
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        zoomImageView.frame = zoomOrigFrame;
+    } completion:^(BOOL finished) {
+        [zoomImageView removeFromSuperview];
+        zoomImageView = nil;
+    }];
+}
 @end

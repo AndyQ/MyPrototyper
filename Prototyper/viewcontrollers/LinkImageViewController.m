@@ -78,7 +78,7 @@
             
             zoomImageView.frame = zoomOrigFrame;
             [self.view addSubview:zoomImageView];
-            [UIView animateWithDuration:0.5 animations:^{
+            [UIView animateWithDuration:0.25 animations:^{
                 CGRect f = self.view.bounds;
                 zoomImageView.frame = f;
             }];
@@ -86,7 +86,7 @@
     }
     if (sender.state == UIGestureRecognizerStateEnded)
     {
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.25 animations:^{
             zoomImageView.frame = zoomOrigFrame;
         } completion:^(BOOL finished) {
             [zoomImageView removeFromSuperview];

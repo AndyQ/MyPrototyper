@@ -32,6 +32,11 @@
         
         NSMutableArray *overlayArray = [[NSMutableArray alloc] initWithCapacity:4];
         self.overlayViewArray = overlayArray;
+        
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellPressed:)];
+        [longPress setMinimumPressDuration:0.25];
+        [self addGestureRecognizer:longPress];
+
 	}
 	return self;
 }
@@ -74,6 +79,35 @@
             overlayView.hidden = asset.selected ? NO : YES;
         }
     }
+}
+
+- (void)cellPressed:(UILongPressGestureRecognizer *)tapRecognizer
+{
+    if (tapRecognizer.state == UIGestureRecognizerStateBegan)
+    {
+        CGPoint point = [tapRecognizer locationInView:self];
+        CGFloat totalWidth = self.rowAssets.count * 75 + (self.rowAssets.count - 1) * 4;
+        CGFloat startX = (self.bounds.size.width - totalWidth) / 2;
+        
+        CGRect frame = CGRectMake(startX, 2, 75, 75);
+        
+        for (int i = 0; i < [_rowAssets count]; ++i)
+        {
+            if (CGRectContainsPoint(frame, point))
+            {
+                ELCAsset *asset = [_rowAssets objectAtIndex:i];
+                
+                CGRect displayFrame = CGRectMake( self.frame.origin.x + frame.origin.x, self.frame.origin.y + 2, 75, 75 );
+                [self.delegate cellLongPressed:displayFrame asset:asset];
+            }
+            frame.origin.x = frame.origin.x + frame.size.width + 4;
+        }
+    }
+    else if (tapRecognizer.state == UIGestureRecognizerStateEnded)
+    {
+        [self.delegate cellLongReleased];
+    }
+
 }
 
 - (void)cellTapped:(UITapGestureRecognizer *)tapRecognizer

@@ -4,3 +4,4 @@ pod 'ColorPopover',  '~> 0.0.1'
 pod 'ELCImagePickerController', :git => 'https://github.com/AndyQ/ELCImagePickerController'
 pod 'PopoverView',  :git => 'https://github.com/AndyQ/PopoverView'
 pod 'InAppSettingsKit', :git => 'https://github.com/AndyQ/InAppSettingsKit'
+

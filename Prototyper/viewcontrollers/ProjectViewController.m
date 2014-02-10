@@ -36,6 +36,9 @@
     bool settingStartImage;
     
     UITextField *txtTitleBar;
+    
+    UIImageView *zoomImageView;
+    CGRect zoomOrigFrame;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectStartImageDisplayViewBottom;
@@ -68,6 +71,10 @@
                                         initWithTarget:self action:@selector(navigationBarDoubleTap:)];
     tapRecon.numberOfTapsRequired = 2;
     [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
+
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(processLongTouch:)];
+    [longPress setMinimumPressDuration:0.25];
+    [self.collectionView addGestureRecognizer:longPress];
 }
 
 - (void)navigationBarDoubleTap:(UIGestureRecognizer*)recognizer {
@@ -182,6 +189,47 @@
         
         // Do something with the image
         [self performSegueWithIdentifier:@"EditImage" sender:self];
+    }
+}
+
+
+#pragma mark - Zooming a selected cell
+
+- (void) processLongTouch:(UITapGestureRecognizer *)sender
+{
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        CGPoint point = [sender locationInView:self.collectionView];
+        NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
+        
+        if (indexPath)
+        {
+            PhotoCell *cell = (PhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            zoomOrigFrame = CGRectInset( cell.frame, 5, 5 );
+            zoomOrigFrame.origin.x -= self.collectionView.contentOffset.x;
+            zoomOrigFrame.origin.y -= self.collectionView.contentOffset.y;
+            
+            zoomImageView = [[UIImageView alloc] initWithImage:cell.image];
+            zoomImageView.layer.borderWidth = 1;
+            zoomImageView.layer.borderColor = [UIColor blackColor].CGColor;
+            
+            zoomImageView.frame = zoomOrigFrame;
+            [self.view addSubview:zoomImageView];
+            [UIView animateWithDuration:0.5 animations:^{
+                CGRect f = self.view.bounds;
+                zoomImageView.frame = f;
+            }];
+        }
+    }
+    if (sender.state == UIGestureRecognizerStateEnded)
+    {
+        [UIView animateWithDuration:0.5 animations:^{
+            zoomImageView.frame = zoomOrigFrame;
+        } completion:^(BOOL finished) {
+            [zoomImageView removeFromSuperview];
+            zoomImageView = nil;
+            [self.collectionView reloadData];
+        }];
     }
 }
 

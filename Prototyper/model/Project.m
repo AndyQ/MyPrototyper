@@ -179,9 +179,11 @@
             NSError *err = nil;
             [self load:&err];
             if ( err )
+            {
                 NSLog( @"Error loading project - %@", err.localizedDescription );
-            
-            [self setupProjectPaths];
+            }
+            else
+                [self setupProjectPaths];
             
             // Little hack temporarily to assign unknown project types to the device we are running on
             if ( _projectType == 0 )
@@ -256,7 +258,14 @@
     ImageDetails *item = [ImageDetails new];
     item.imageName = [imageName stringByDeletingPathExtension];
     item.imagePath = imagePath;
-    [_images addObject:item];
+    [self.images addObject:item];
+    
+    // If first image then set the start image
+    if ( self.startImage.length == 0 )
+    {
+        self.startImage = item.imageName;
+    }
+
     
     // Save Project
     NSError *err = nil;
@@ -267,7 +276,7 @@
 
 - (void) removeItem:(ImageDetails *)item;
 {
-    [_images removeObject:item];
+    [self.images removeObject:item];
     
     NSString *path = item.imagePath;
 
@@ -283,6 +292,11 @@
             if ( [link.linkedToId isEqualToString:item.imageName] )
                 link.linkedToId = nil;
         }
+    }
+    
+    if ( self.images.count == 0 )
+    {
+        self.startImage = @"";
     }
     
     err = nil;
@@ -387,6 +401,9 @@
         }
     }
     
+    if ( self.startImage.length == 0 && self.images.count > 0 )
+        self.startImage = ((ImageDetails *)self.images[0]).imageName;
+    
     NSError *err = nil;
     [self save:&err];
     if ( err != nil )
@@ -432,6 +449,9 @@
 - (bool) save:(NSError **)error
 {
     NSMutableDictionary *proj = [NSMutableDictionary dictionary];
+    if ( self.startImage == nil )
+        self.startImage = @"";
+    
     proj[@"startImage"] = self.startImage;
     NSMutableArray *images = [NSMutableArray array];
     proj[@"images"] = images;

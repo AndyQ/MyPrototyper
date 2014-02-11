@@ -13,26 +13,6 @@
 #import "Constants.h"
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    NSDictionary *userDefaultsDefaults = @{ PREF_IMAGE_FORMAT : @"jpg",
-                                            PREF_IMAGE_QUALITY : @"0.5"};
-    [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
-
-    // Add in tutorial if first launch
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if ( [defaults objectForKey:@"FirstUse"] == nil )
-    {
-        [defaults setObject:@"YES" forKey:@"FirstUse"];
-        
-        // Copy over demo file into place
-        NSURL *url = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"zip"];
-        [Project importProjectArchiveFromURL:url];
-    }
-
-    return YES;
-}
-
 #pragma mark - Open File from external app
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication
@@ -40,7 +20,14 @@
 {
     if (url != nil && [url isFileURL])
     {
-        [Project importProjectArchiveFromURL:url];
+        NSError *err = nil;
+        [Project importProjectArchiveFromURL:url error:&err];
+        if ( err )
+        {
+            // Error - go no futher
+            UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Problem" message:err.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [av show];
+        }
         
         // Remove all stored files in Inbox folder
         NSFileManager *fm = [NSFileManager defaultManager];
@@ -58,7 +45,29 @@
     }
     return YES;
 }
-				
+
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    NSDictionary *userDefaultsDefaults = @{ PREF_IMAGE_FORMAT : @"jpg",
+                                            PREF_IMAGE_QUALITY : @"0.5"};
+    [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
+    
+    // Add in tutorial if first launch
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ( [defaults objectForKey:@"FirstUse"] == nil )
+    {
+        [defaults setObject:@"YES" forKey:@"FirstUse"];
+        
+        // Copy over demo file into place
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"zip"];
+        [Project importProjectArchiveFromURL:url error:nil];
+    }
+    
+    return YES;
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

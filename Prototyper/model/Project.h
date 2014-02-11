@@ -22,7 +22,7 @@
 + (NSString *) getDocsDir;
 + (void) deleteProjectWithName:(NSString *)projectName;
 + (bool) isProjectValidWithName:(NSString *)projectName;
-+ (bool) importProjectArchiveFromURL:(NSURL *)url;
++ (bool) importProjectArchiveFromURL:(NSURL *)url error:(NSError **)error;
 
 
 - (id) initWithProjectName:(NSString *)projectName;

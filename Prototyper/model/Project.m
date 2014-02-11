@@ -66,10 +66,10 @@
 }
 
 
-+ (bool) importProjectArchiveFromURL:(NSURL *)url
++ (bool) importProjectArchiveFromURL:(NSURL *)url error:(NSError **)error
 {
     NSFileManager *fm = [NSFileManager defaultManager];
-    NSError *error = nil;
+    NSError *err = nil;
     NSString *projectName = [url lastPathComponent];
     NSString *file = [[Project getDocsDir] stringByAppendingPathComponent:projectName];
     NSString *projectFolder = [file stringByDeletingPathExtension];
@@ -86,17 +86,17 @@
     }
     projectName = [projectFolder lastPathComponent];
     
-    [fm createDirectoryAtPath:projectFolder withIntermediateDirectories:YES attributes:nil error:&error];
+    [fm createDirectoryAtPath:projectFolder withIntermediateDirectories:YES attributes:nil error:&err];
     
     if ( valid )
     {
         // There may already be an old zip file in this location (there shouldn't be but just in case)
         // so we remove it first as the copy will fail if one does exist.
         [fm removeItemAtPath:file error:nil];
-        [fm copyItemAtURL:url toURL:[NSURL fileURLWithPath:file] error:&error];
+        [fm copyItemAtURL:url toURL:[NSURL fileURLWithPath:file] error:&err];
         if ( error != nil )
         {
-            NSLog( @"Error - %@", error.localizedDescription );
+            NSLog( @"Error - %@", err.localizedDescription );
             // Error - go no futher
             errorMsg = @"Unable to save file";
             valid = NO;
@@ -131,22 +131,21 @@
     }
     
     // remove zip file
-    [fm removeItemAtPath:file error:&error];
+    err = nil;
+    [fm removeItemAtPath:file error:&err];
     
     if ( !valid )
     {
-        error = nil;
-        [fm removeItemAtPath:projectFolder error:&error];
+        err = nil;
+        [fm removeItemAtPath:projectFolder error:&err];
         
-        // Error - go no futher
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Problem" message:errorMsg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [av show];
+        *error = [NSError errorWithDomain:@"PrototyperPlayer" code:-1 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
+        
         return NO;
     }
     
     return YES;
 }
-
 
 - (id) initWithProjectName:(NSString *)projectName
 {

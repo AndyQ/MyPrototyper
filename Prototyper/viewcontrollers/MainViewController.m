@@ -85,7 +85,7 @@
 
 -( IBAction) actionPressed:(id)sender
 {
-    NSArray *items = @[@"Delete projects", @"Settings"];
+    NSArray *items = @[@"Delete projects", @"Settings", @"Add demo project"];
     popoverView = [PopoverView showPopoverAtPoint:CGPointMake( self.view.frame.size.width - 20, 0) inView:self.view withStringArray:items delegate:self];
 }
 
@@ -100,7 +100,7 @@
         self.navigationItem.rightBarButtonItem = doneButton;
         self.addButton.enabled = NO;
     }
-    if ( [text isEqualToString:@"Settings"] )
+    else if ( [text isEqualToString:@"Settings"] )
     {
         IASKAppSettingsViewController *appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
         appSettingsViewController.delegate = self;
@@ -119,6 +119,15 @@
             appSettingsViewController.showDoneButton = NO;
             [self.navigationController pushViewController:appSettingsViewController animated:YES];
         }
+    }
+    else if ( [text isEqualToString:@"Add demo project"] )
+    {
+        // Copy over demo file into place
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"zip"];
+        [Project importProjectArchiveFromURL:url error:nil];
+        
+        [self loadProjects];
+        [self.tableView reloadData];
     }
 
     [popoverView dismiss];

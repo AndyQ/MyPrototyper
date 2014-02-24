@@ -1,13 +1,13 @@
-#Prototyper#
+#MyPrototyper#
 
-Prototyper is a simple app designed to show off your user interface prototypes. It consists of an Editor and a Playback view.
+MyPrototyper is a simple app designed to show off your user interface prototypes. It consists of an Editor and a Playback view.
 
 In Editor mode, images can be added to a project by capturing a picture via the camera, adding from your photo library or simply quickly sketching them in app.
 Then tappable hotspots can quickly be added and linked to another image.
 
 In Playback mode, you can navigate through your screens by tapping on the hotspots.
 
-Prototyper is released under the MIT licence.
+MyPrototyper is released under the MIT licence.
 
 ##License##
 

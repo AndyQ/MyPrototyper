@@ -10,7 +10,7 @@ In Playback mode, you can navigate through your screens by tapping on the hotspo
 MyPrototyper is released under the MIT licence.
 
 
-There is a correspoinding playback sample app which can be used for playback of MyPrototyper data files only.
+There is a corresponding playback sample app which can be used for playback of MyPrototyper data files only.
 This can be found at https://github.com/AndyQ/MyPrototyperPlayer
 
 ##License##

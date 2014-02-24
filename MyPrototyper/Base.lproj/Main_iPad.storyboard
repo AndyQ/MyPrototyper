@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Project View Controller - Prototyper-->
+        <!--Project View Controller - MyPrototyper-->
         <scene sceneID="b5O-yK-x8H">
             <objects>
                 <viewController id="taF-rW-Ib2" customClass="ProjectViewController" sceneMemberID="viewController">
@@ -110,7 +110,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Prototyper" id="4WQ-ro-g4W"/>
+                    <navigationItem key="navigationItem" title="MyPrototyper" id="4WQ-ro-g4W"/>
                     <connections>
                         <outlet property="collectionView" destination="ITH-B8-WzL" id="FAt-RQ-x9X"/>
                         <outlet property="selectStartImageDisplayView" destination="6aD-Ql-zQf" id="m41-Tm-YBl"/>
@@ -403,7 +403,7 @@
             </objects>
             <point key="canvasLocation" x="3873" y="597"/>
         </scene>
-        <!--Main View Controller - Prototyper-->
+        <!--Main View Controller - MyPrototyper-->
         <scene sceneID="WzB-0D-wos">
             <objects>
                 <viewController id="BR6-Dv-U5V" customClass="MainViewController" sceneMemberID="viewController">
@@ -456,7 +456,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Prototyper" id="eat-9k-2pM">
+                    <navigationItem key="navigationItem" title="MyPrototyper" id="eat-9k-2pM">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="1UM-Fa-WMZ">
                             <connections>
                                 <action selector="addProjectPressed:" destination="BR6-Dv-U5V" id="m4o-88-QBc"/>

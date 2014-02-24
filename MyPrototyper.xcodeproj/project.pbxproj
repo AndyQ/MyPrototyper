@@ -103,22 +103,22 @@
 		A1D2B2F41881777B00E250BF /* ImageEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageEditView.m; sourceTree = "<group>"; };
 		A1D2B3081883F11900E250BF /* DrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawView.h; sourceTree = "<group>"; };
 		A1D2B3091883F11900E250BF /* DrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawView.m; sourceTree = "<group>"; };
-		A1D7585D187FDEFD00E7AA2F /* Prototyper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prototyper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1D7585D187FDEFD00E7AA2F /* MyPrototyper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPrototyper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D75860187FDEFD00E7AA2F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1D75862187FDEFD00E7AA2F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A1D75864187FDEFD00E7AA2F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		A1D75868187FDEFD00E7AA2F /* Prototyper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Prototyper-Info.plist"; sourceTree = "<group>"; };
+		A1D75868187FDEFD00E7AA2F /* MyPrototyper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyPrototyper-Info.plist"; sourceTree = "<group>"; };
 		A1D7586A187FDEFD00E7AA2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1D7586C187FDEFD00E7AA2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A1D7586E187FDEFD00E7AA2F /* Prototyper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Prototyper-Prefix.pch"; sourceTree = "<group>"; };
+		A1D7586E187FDEFD00E7AA2F /* MyPrototyper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MyPrototyper-Prefix.pch"; sourceTree = "<group>"; };
 		A1D7586F187FDEFD00E7AA2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A1D75870187FDEFD00E7AA2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A1D75873187FDEFD00E7AA2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		A1D75876187FDEFD00E7AA2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		A1D7587B187FDEFD00E7AA2F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A1D75881187FDEFD00E7AA2F /* PrototyperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototyperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1D75881187FDEFD00E7AA2F /* MyPrototyperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyPrototyperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D75882187FDEFD00E7AA2F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		A1D7588A187FDEFD00E7AA2F /* PrototyperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PrototyperTests-Info.plist"; sourceTree = "<group>"; };
+		A1D7588A187FDEFD00E7AA2F /* MyPrototyperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MyPrototyperTests-Info.plist"; sourceTree = "<group>"; };
 		A1D7588C187FDEFD00E7AA2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A1D7588E187FDEFD00E7AA2F /* PrototyperTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrototyperTests.m; sourceTree = "<group>"; };
 		A1F1437D18849DFD006829F2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -235,8 +235,8 @@
 		A1D75854187FDEFD00E7AA2F = {
 			isa = PBXGroup;
 			children = (
-				A1D75866187FDEFD00E7AA2F /* Prototyper */,
-				A1D75888187FDEFD00E7AA2F /* PrototyperTests */,
+				A1D75866187FDEFD00E7AA2F /* MyPrototyper */,
+				A1D75888187FDEFD00E7AA2F /* MyPrototyperTests */,
 				A1D7585F187FDEFD00E7AA2F /* Frameworks */,
 				A1D7585E187FDEFD00E7AA2F /* Products */,
 				3EA35D255AE14975805FAC1C /* Pods.xcconfig */,
@@ -246,8 +246,8 @@
 		A1D7585E187FDEFD00E7AA2F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A1D7585D187FDEFD00E7AA2F /* Prototyper.app */,
-				A1D75881187FDEFD00E7AA2F /* PrototyperTests.xctest */,
+				A1D7585D187FDEFD00E7AA2F /* MyPrototyper.app */,
+				A1D75881187FDEFD00E7AA2F /* MyPrototyperTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -265,7 +265,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		A1D75866187FDEFD00E7AA2F /* Prototyper */ = {
+		A1D75866187FDEFD00E7AA2F /* MyPrototyper */ = {
 			isa = PBXGroup;
 			children = (
 				A1D2B2E21880A45000E250BF /* model */,
@@ -282,7 +282,7 @@
 				A1D7587B187FDEFD00E7AA2F /* Images.xcassets */,
 				A1D75867187FDEFD00E7AA2F /* Supporting Files */,
 			);
-			path = Prototyper;
+			path = MyPrototyper;
 			sourceTree = "<group>";
 		};
 		A1D75867187FDEFD00E7AA2F /* Supporting Files */ = {
@@ -290,27 +290,27 @@
 			children = (
 				A1CC97C618A83AE200816C03 /* demo.zip */,
 				A1758D021885F13300490A06 /* Settings.bundle */,
-				A1D75868187FDEFD00E7AA2F /* Prototyper-Info.plist */,
+				A1D75868187FDEFD00E7AA2F /* MyPrototyper-Info.plist */,
 				A1D75869187FDEFD00E7AA2F /* InfoPlist.strings */,
 				A1D7586C187FDEFD00E7AA2F /* main.m */,
-				A1D7586E187FDEFD00E7AA2F /* Prototyper-Prefix.pch */,
+				A1D7586E187FDEFD00E7AA2F /* MyPrototyper-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A1D75888187FDEFD00E7AA2F /* PrototyperTests */ = {
+		A1D75888187FDEFD00E7AA2F /* MyPrototyperTests */ = {
 			isa = PBXGroup;
 			children = (
 				A1D7588E187FDEFD00E7AA2F /* PrototyperTests.m */,
 				A1D75889187FDEFD00E7AA2F /* Supporting Files */,
 			);
-			path = PrototyperTests;
+			path = MyPrototyperTests;
 			sourceTree = "<group>";
 		};
 		A1D75889187FDEFD00E7AA2F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A1D7588A187FDEFD00E7AA2F /* PrototyperTests-Info.plist */,
+				A1D7588A187FDEFD00E7AA2F /* MyPrototyperTests-Info.plist */,
 				A1D7588B187FDEFD00E7AA2F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -319,9 +319,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A1D7585C187FDEFD00E7AA2F /* Prototyper */ = {
+		A1D7585C187FDEFD00E7AA2F /* MyPrototyper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A1D75892187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "Prototyper" */;
+			buildConfigurationList = A1D75892187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "MyPrototyper" */;
 			buildPhases = (
 				544F4E137EF84547BE795168 /* Check Pods Manifest.lock */,
 				A1758D041885F1BE00490A06 /* Run Script */,
@@ -334,14 +334,14 @@
 			);
 			dependencies = (
 			);
-			name = Prototyper;
+			name = MyPrototyper;
 			productName = Prototyper;
-			productReference = A1D7585D187FDEFD00E7AA2F /* Prototyper.app */;
+			productReference = A1D7585D187FDEFD00E7AA2F /* MyPrototyper.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A1D75880187FDEFD00E7AA2F /* PrototyperTests */ = {
+		A1D75880187FDEFD00E7AA2F /* MyPrototyperTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A1D75895187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "PrototyperTests" */;
+			buildConfigurationList = A1D75895187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "MyPrototyperTests" */;
 			buildPhases = (
 				A1D7587D187FDEFD00E7AA2F /* Sources */,
 				A1D7587E187FDEFD00E7AA2F /* Frameworks */,
@@ -352,9 +352,9 @@
 			dependencies = (
 				A1D75887187FDEFD00E7AA2F /* PBXTargetDependency */,
 			);
-			name = PrototyperTests;
+			name = MyPrototyperTests;
 			productName = PrototyperTests;
-			productReference = A1D75881187FDEFD00E7AA2F /* PrototyperTests.xctest */;
+			productReference = A1D75881187FDEFD00E7AA2F /* MyPrototyperTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -371,7 +371,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A1D75858187FDEFD00E7AA2F /* Build configuration list for PBXProject "Prototyper" */;
+			buildConfigurationList = A1D75858187FDEFD00E7AA2F /* Build configuration list for PBXProject "MyPrototyper" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -384,8 +384,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A1D7585C187FDEFD00E7AA2F /* Prototyper */,
-				A1D75880187FDEFD00E7AA2F /* PrototyperTests */,
+				A1D7585C187FDEFD00E7AA2F /* MyPrototyper */,
+				A1D75880187FDEFD00E7AA2F /* MyPrototyperTests */,
 			);
 		};
 /* End PBXProject section */
@@ -505,7 +505,7 @@
 /* Begin PBXTargetDependency section */
 		A1D75887187FDEFD00E7AA2F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A1D7585C187FDEFD00E7AA2F /* Prototyper */;
+			target = A1D7585C187FDEFD00E7AA2F /* MyPrototyper */;
 			targetProxy = A1D75886187FDEFD00E7AA2F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -587,10 +587,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Prototyper/Prototyper-Prefix.pch";
-				INFOPLIST_FILE = "Prototyper/Prototyper-Info.plist";
+				GCC_PREFIX_HEADER = "MyPrototyper/MyPrototyper-Prefix.pch";
+				INFOPLIST_FILE = "MyPrototyper/MyPrototyper-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MyPrototyper;
 				WRAPPER_EXTENSION = app;
 			};
 			name = AdHoc;
@@ -606,8 +606,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Prototyper/Prototyper-Prefix.pch";
-				INFOPLIST_FILE = "PrototyperTests/PrototyperTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "PrototyperTests/MyPrototyperTests-Info.plist";
+				PRODUCT_NAME = MyPrototyperTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -694,10 +694,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Prototyper/Prototyper-Prefix.pch";
-				INFOPLIST_FILE = "Prototyper/Prototyper-Info.plist";
+				GCC_PREFIX_HEADER = "MyPrototyper/MyPrototyper-Prefix.pch";
+				INFOPLIST_FILE = "MyPrototyper/MyPrototyper-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MyPrototyper;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -709,10 +709,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Prototyper/Prototyper-Prefix.pch";
-				INFOPLIST_FILE = "Prototyper/Prototyper-Info.plist";
+				GCC_PREFIX_HEADER = "MyPrototyper/MyPrototyper-Prefix.pch";
+				INFOPLIST_FILE = "MyPrototyper/MyPrototyper-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = MyPrototyper;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -732,8 +732,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "PrototyperTests/PrototyperTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "PrototyperTests/MyPrototyperTests-Info.plist";
+				PRODUCT_NAME = MyPrototyperTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -750,8 +750,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Prototyper/Prototyper-Prefix.pch";
-				INFOPLIST_FILE = "PrototyperTests/PrototyperTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "PrototyperTests/MyPrototyperTests-Info.plist";
+				PRODUCT_NAME = MyPrototyperTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -760,7 +760,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A1D75858187FDEFD00E7AA2F /* Build configuration list for PBXProject "Prototyper" */ = {
+		A1D75858187FDEFD00E7AA2F /* Build configuration list for PBXProject "MyPrototyper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1D75890187FDEFD00E7AA2F /* Debug */,
@@ -770,7 +770,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1D75892187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "Prototyper" */ = {
+		A1D75892187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "MyPrototyper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1D75893187FDEFD00E7AA2F /* Debug */,
@@ -780,7 +780,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1D75895187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "PrototyperTests" */ = {
+		A1D75895187FDEFD00E7AA2F /* Build configuration list for PBXNativeTarget "MyPrototyperTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1D75896187FDEFD00E7AA2F /* Debug */,

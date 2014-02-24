@@ -457,7 +457,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "plist=\"$SRCROOT/Prototyper/Prototyper-Info.plist\"\necho $plist\nversion=`/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$plist\"`\nbuild=`git rev-list --count HEAD`\n\n#update build number\necho \"OldBuild - $build\"\nbuild=$((${build} + 1))\necho \"NewBuild - $build\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $build\" \"$plist\"\n\nstringsFile=\"$SRCROOT/Settings.bundle/en.lproj/Root.strings\"\necho \"\\\"author\\\" = \\\"Prototyper Version ${version} (${build})\" > $stringsFile\necho \"Written by Andy Qua\\\";\" >> $stringsFile\ntouch \"$SRCROOT/Settings.bundle\"\n";
+			shellScript = "plist=\"$SRCROOT/MyPrototyper/MyPrototyper-Info.plist\"\necho $plist\nversion=`/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"$plist\"`\nbuild=`git rev-list --count HEAD`\n\n#update build number\necho \"OldBuild - $build\"\nbuild=$((${build} + 1))\necho \"NewBuild - $build\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $build\" \"$plist\"\n\nstringsFile=\"$SRCROOT/Settings.bundle/en.lproj/Root.strings\"\necho \"\\\"author\\\" = \\\"MyPrototyper Version ${version} (${build})\" > $stringsFile\necho \"Written by Andy Qua\\\";\" >> $stringsFile\ntouch \"$SRCROOT/Settings.bundle\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

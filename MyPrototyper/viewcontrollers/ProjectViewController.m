@@ -18,6 +18,21 @@
 #import "AlbumSelectViewController.h"
 #import "IASKAppSettingsViewController.h"
 
+
+// Menu items
+#define MENU_SET_START_IMAGE @"Set start image"
+#define MENU_DELETE_IMAGES @"Delete images"
+#define MENU_REORDER_FILES @"Re-order files"
+#define MENU_EXPORT_PROJECT @"Export project"
+#define MENU_SETTINGS @"Settings"
+#define MENU_SHOW_PROJECT_STRUCTURE @"Show project structure"
+
+#define MENU_NEW_IMAGE @"New blank image"
+#define MENU_TAKE_CAMERA @"Take from camera"
+#define MENU_ADD_LIBRARY @"Add from library"
+
+
+
 @interface ProjectViewController () <DrawViewControllerDelegate, AlbumSelectViewControllerDelegate, IASKSettingsDelegate, PopoverViewDelegate, UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 {
     UIDocumentInteractionController *docController;
@@ -26,8 +41,10 @@
     ImageDetails *selectedImageDetails;
     
     bool editMode;
+    bool reordering;
     UIBarButtonItem *actionBtn;
     UIBarButtonItem *doneBtn;
+    UIBarButtonItem *doneReorderBtn;
     UIBarButtonItem *deleteBtn;
     UIBarButtonItem *backBtn;
     
@@ -39,10 +56,14 @@
     
     UIImageView *zoomImageView;
     CGRect zoomOrigFrame;
+    
+    // Used for reordering cells
+    NSIndexPath *selectedIndexPath;
 }
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectStartImageDisplayViewBottom;
 @property (weak, nonatomic) IBOutlet UIView *selectStartImageDisplayView;
+@property (weak, nonatomic) IBOutlet UILabel *infoTitleLabel;
 
 @property(nonatomic, weak) IBOutlet UICollectionView *collectionView;
 @property(nonatomic, strong) NSArray *assets;
@@ -59,6 +80,7 @@
     
     actionBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(actionPressed:)];
     doneBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editPressed:)];
+    doneReorderBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(reorderPressed:)];
     deleteBtn = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deletePressed:)];
     
     self.navigationItem.rightBarButtonItem = actionBtn;
@@ -81,7 +103,7 @@
     txtTitleBar = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 80, 22)];
     txtTitleBar.text = self.title;
     txtTitleBar.font = [UIFont boldSystemFontOfSize:18];
-    txtTitleBar.textColor = [UIColor blackColor];
+    txtTitleBar.textColor = [UIColor whiteColor];
     txtTitleBar.textAlignment = NSTextAlignmentCenter;
     txtTitleBar.delegate = self;
     txtTitleBar.returnKeyType = UIReturnKeyDone;
@@ -154,7 +176,15 @@
     cell.backgroundColor = [UIColor clearColor];
     
     if ( [project.startImage isEqualToString:imageDetails.imageName] )
-        cell.backgroundColor = [UIColor blueColor];
+    {
+        cell.layer.borderColor = [UIColor colorWithRed:0.224 green:0.576 blue:0.996 alpha:1.000].CGColor;
+        cell.layer.borderWidth = 2;
+    }
+    else
+    {
+        cell.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        cell.layer.borderWidth = 2;
+    }
     
     return cell;
 }
@@ -189,10 +219,28 @@
         [self.collectionView reloadData];
         settingStartImage = NO;
     }
+    else if ( reordering )
+    {
+        if ( selectedIndexPath == nil )
+        {
+            PhotoCell *cell = (PhotoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            cell.backgroundColor = [UIColor yellowColor];
+            selectedIndexPath = indexPath;
+            self.infoTitleLabel.text = @"Select the image position to move before";
+        }
+        else
+        {
+            // Move image at previous selected index path to after the selected on
+            [project moveImageAtIndex:selectedIndexPath.row toAfter:indexPath.row];
+            [self.collectionView reloadData];
+            selectedIndexPath = nil;
+            self.infoTitleLabel.text = @"Select the image to move";
+        }
+    }
     else if ( !editMode )
     {
         selectedImageDetails = project[indexPath.row];
-        
+
         // Do something with the image
         [self performSegueWithIdentifier:@"EditImage" sender:self];
     }
@@ -259,13 +307,13 @@
 
 -( IBAction) actionPressed:(id)sender
 {
-    NSArray *items = @[@"Set start image", @"Delete images", @"Export project", @"Settings"];
-    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( self.view.frame.size.width - 20, 0) inView:self.view withStringArray:items delegate:self];
+    NSArray *items = @[MENU_SET_START_IMAGE, MENU_DELETE_IMAGES, MENU_REORDER_FILES, MENU_EXPORT_PROJECT, MENU_SETTINGS, MENU_SHOW_PROJECT_STRUCTURE];
+    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( self.view.frame.size.width - 20, 0) inView:self.view withTitle:@"Action" withStringArray:items delegate:self];
 }
 
 - (IBAction)addImagePressed:(id)sender
 {
-    NSArray *items = @[@"New blank image", @"Take from camera", @"Add from library"];
+    NSArray *items = @[MENU_NEW_IMAGE, MENU_TAKE_CAMERA, MENU_ADD_LIBRARY];
     popoverView = [PopoverView showPopoverAtPoint:CGPointMake( 20, self.view.frame.size.height - 44) inView:self.view withStringArray:items delegate:self];
     
 }
@@ -277,26 +325,33 @@
 - (void)popoverView:(PopoverView *)thePopoverView didSelectItemAtIndex:(NSInteger)index itemText:(NSString *)text
 {
     // Items from action menu button
-    if ( [text isEqualToString:@"Set start image"] )
+    if ( [text isEqualToString:MENU_SET_START_IMAGE] )
     {
         settingStartImage = YES;
+        self.infoTitleLabel.text = @"Select the starting image";
         self.selectStartImageDisplayViewBottom.constant += self.selectStartImageDisplayView.bounds.size.height;
         
         [UIView animateWithDuration:0.25 animations:^{
             [self.view layoutIfNeeded];
         }];
     }
-    if ( [text isEqualToString:@"Delete images"] )
+    if ( [text isEqualToString:MENU_DELETE_IMAGES] )
     {
         [self editPressed:nil];
     }
     
-    if ( [text isEqualToString:@"Export project"] )
+    if ( [text isEqualToString:MENU_REORDER_FILES] )
+    {
+        [self reorderPressed:nil];
+    }
+    
+
+    if ( [text isEqualToString:MENU_EXPORT_PROJECT] )
     {
         [self exportProject];
     }
     
-    if ( [text isEqualToString:@"Settings"] )
+    if ( [text isEqualToString:MENU_SETTINGS] )
     {
         IASKAppSettingsViewController *appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
         appSettingsViewController.delegate = self;
@@ -317,12 +372,25 @@
         }
     }
 
+    if ( [text isEqualToString:MENU_SHOW_PROJECT_STRUCTURE] )
+    {
+        NSString *urlStr = [project generateDotFile];
+        urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        NSURL *url = [NSURL URLWithString:urlStr];
+        
+        if (![[UIApplication sharedApplication] openURL:url])
+            
+            NSLog(@"%@%@",@"Failed to open url:",[url description]);
+
+    }
+    
+    
     // Items from add new image button
-    if ( [text isEqualToString:@"New blank image"] )
+    if ( [text isEqualToString:MENU_NEW_IMAGE] )
     {
         [self performSegueWithIdentifier:@"ShowDraw" sender:self];
     }
-    if ( [text isEqualToString:@"Take from camera"] )
+    if ( [text isEqualToString:MENU_TAKE_CAMERA] )
     {
         if (([UIImagePickerController isSourceTypeAvailable:
               UIImagePickerControllerSourceTypeCamera] == NO))
@@ -339,22 +407,14 @@
         mediaUI.delegate = self;
         [self presentViewController:mediaUI animated:YES completion:nil];
     }
-    if ( [text isEqualToString:@"Add from library"] )
+    if ( [text isEqualToString:MENU_ADD_LIBRARY] )
     {
         if (([UIImagePickerController isSourceTypeAvailable:
               UIImagePickerControllerSourceTypePhotoLibrary] == NO))
             return;
         
         [self performSegueWithIdentifier:@"ShowAddAlbum" sender:self];
-/*
-        ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
-        elcPicker.imagePickerDelegate = self;
-        elcPicker.maximumImagesCount = 65535;
-        
-        [self presentViewController:elcPicker animated:YES completion:nil];
-*/
     }
-
     [popoverView dismiss];
     popoverView = nil;
     
@@ -384,6 +444,29 @@
         
         [self.collectionView reloadData];
     }
+}
+
+- (void) reorderPressed:(id)sender
+{
+    reordering = !reordering;
+    if ( reordering )
+    {
+        self.navigationItem.rightBarButtonItem = doneReorderBtn;
+        self.infoTitleLabel.text = @"Select the image to move";
+        self.selectStartImageDisplayViewBottom.constant += self.selectStartImageDisplayView.bounds.size.height;
+    }
+    else
+    {
+        self.navigationItem.rightBarButtonItem = actionBtn;
+        
+        self.selectStartImageDisplayViewBottom.constant -= self.selectStartImageDisplayView.bounds.size.height;
+        [self saveProject];
+    }
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        [self.view layoutIfNeeded];
+    }];
+
 }
 
 - (void) exportProject
@@ -614,7 +697,7 @@
     if ( textField == txtTitleBar )
     {
         NSString *text = textField.text;
-        if ( text.length > 0 )
+        if ( text.length > 0 && ![text isEqualToString:project.projectName] )
         {
             NSError *err = nil;
             [project renameProject:text error:&err];

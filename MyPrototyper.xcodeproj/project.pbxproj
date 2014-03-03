@@ -17,10 +17,10 @@
 		A14C93AE189530C5008F6A0D /* PlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93A3189530C5008F6A0D /* PlaybackViewController.m */; };
 		A14C93AF189530C5008F6A0D /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93A5189530C5008F6A0D /* ProjectViewController.m */; };
 		A14C93FD1899A50D008F6A0D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A14C93FC1899A50D008F6A0D /* libz.dylib */; };
-		A14C94001899A56D008F6A0D /* ProjectSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93FF1899A56D008F6A0D /* ProjectSelectTableViewCell.m */; };
 		A14C9403189BB254008F6A0D /* UIImageView+ContentScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C9402189BB254008F6A0D /* UIImageView+ContentScale.m */; };
 		A1758CFE1885DDA600490A06 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758CFD1885DDA600490A06 /* Shape.m */; };
 		A1758D031885F13300490A06 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A1758D021885F13300490A06 /* Settings.bundle */; };
+		A1A98F6018C47356003B261E /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A98F5F18C47356003B261E /* ItemCell.m */; };
 		A1CC97C718A83AE200816C03 /* demo.zip in Resources */ = {isa = PBXBuildFile; fileRef = A1CC97C618A83AE200816C03 /* demo.zip */; };
 		A1CC97D118A9875900816C03 /* AlbumSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC97CE18A9875900816C03 /* AlbumSelectViewController.m */; };
 		A1CC97D218A9875900816C03 /* AlbumContentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1CC97D018A9875900816C03 /* AlbumContentsViewController.m */; };
@@ -79,13 +79,13 @@
 		A14C93A4189530C5008F6A0D /* ProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectViewController.h; sourceTree = "<group>"; };
 		A14C93A5189530C5008F6A0D /* ProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectViewController.m; sourceTree = "<group>"; };
 		A14C93FC1899A50D008F6A0D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A14C93FE1899A56D008F6A0D /* ProjectSelectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectSelectTableViewCell.h; sourceTree = "<group>"; };
-		A14C93FF1899A56D008F6A0D /* ProjectSelectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectSelectTableViewCell.m; sourceTree = "<group>"; };
 		A14C9401189BB254008F6A0D /* UIImageView+ContentScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ContentScale.h"; sourceTree = "<group>"; };
 		A14C9402189BB254008F6A0D /* UIImageView+ContentScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ContentScale.m"; sourceTree = "<group>"; };
 		A1758CFC1885DDA600490A06 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		A1758CFD1885DDA600490A06 /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		A1758D021885F13300490A06 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
+		A1A98F5E18C47356003B261E /* ItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCell.h; sourceTree = "<group>"; };
+		A1A98F5F18C47356003B261E /* ItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCell.m; sourceTree = "<group>"; };
 		A1CC97C618A83AE200816C03 /* demo.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = demo.zip; sourceTree = "<group>"; };
 		A1CC97CD18A9875900816C03 /* AlbumSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumSelectViewController.h; sourceTree = "<group>"; };
 		A1CC97CE18A9875900816C03 /* AlbumSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumSelectViewController.m; sourceTree = "<group>"; };
@@ -153,10 +153,10 @@
 		A14C938E189530C5008F6A0D /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				A1A98F5E18C47356003B261E /* ItemCell.h */,
+				A1A98F5F18C47356003B261E /* ItemCell.m */,
 				A14C938F189530C5008F6A0D /* PhotoCell.h */,
 				A14C9390189530C5008F6A0D /* PhotoCell.m */,
-				A14C93FE1899A56D008F6A0D /* ProjectSelectTableViewCell.h */,
-				A14C93FF1899A56D008F6A0D /* ProjectSelectTableViewCell.m */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -481,12 +481,12 @@
 				A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */,
 				A1CC97D118A9875900816C03 /* AlbumSelectViewController.m in Sources */,
 				A14C93AD189530C5008F6A0D /* MainViewController.m in Sources */,
+				A1A98F6018C47356003B261E /* ItemCell.m in Sources */,
 				A1CC97D218A9875900816C03 /* AlbumContentsViewController.m in Sources */,
 				A1D2B2E81880A47E00E250BF /* ImageDetails.m in Sources */,
 				A1D75871187FDEFD00E7AA2F /* AppDelegate.m in Sources */,
 				A14C93AC189530C5008F6A0D /* LinkImageViewController.m in Sources */,
 				A1D2B30A1883F11900E250BF /* DrawView.m in Sources */,
-				A14C94001899A56D008F6A0D /* ProjectSelectTableViewCell.m in Sources */,
 				A1D7586D187FDEFD00E7AA2F /* main.m in Sources */,
 				A14C9403189BB254008F6A0D /* UIImageView+ContentScale.m in Sources */,
 			);

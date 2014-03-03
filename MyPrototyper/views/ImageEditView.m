@@ -113,11 +113,14 @@ CGPoint CGRectCenter( CGRect r )
         CGContextStrokeRect(context, r);
         
         // Draw control points
-        CGContextSetFillColorWithColor(context, borderColor.CGColor);
-        CGContextFillEllipseInRect (context, CGRectInset( topLeftPoint, 7, 7 ));
-        CGContextFillEllipseInRect (context, CGRectInset( topRightPoint, 7, 7 ));
-        CGContextFillEllipseInRect (context, CGRectInset( bottomLeftPoint, 7, 7 ));
-        CGContextFillEllipseInRect (context, CGRectInset( bottomRightPoint, 7, 7 ));
+        if ( self.allowResize )
+        {
+            CGContextSetFillColorWithColor(context, borderColor.CGColor);
+            CGContextFillEllipseInRect (context, CGRectInset( topLeftPoint, 7, 7 ));
+            CGContextFillEllipseInRect (context, CGRectInset( topRightPoint, 7, 7 ));
+            CGContextFillEllipseInRect (context, CGRectInset( bottomLeftPoint, 7, 7 ));
+            CGContextFillEllipseInRect (context, CGRectInset( bottomRightPoint, 7, 7 ));
+        }
     }
 }
 
@@ -129,15 +132,15 @@ CGPoint CGRectCenter( CGRect r )
     startPoint = p;
     
     // Which point to move
-    if ( self.showSelectArea )
+    if ( self.showSelectArea  )
     {
-        if ( CGRectContainsPoint(topLeftPoint, p) )
+        if ( CGRectContainsPoint(topLeftPoint, p) && self.allowResize)
             pointMove = TOP_LEFT;
-        else if ( CGRectContainsPoint(topRightPoint, p) )
+        else if ( CGRectContainsPoint(topRightPoint, p) && self.allowResize)
             pointMove = TOP_RIGHT;
-        else if ( CGRectContainsPoint(bottomLeftPoint, p) )
+        else if ( CGRectContainsPoint(bottomLeftPoint, p) && self.allowResize)
             pointMove = BOTTOM_LEFT;
-        else if ( CGRectContainsPoint(bottomRightPoint, p) )
+        else if ( CGRectContainsPoint(bottomRightPoint, p) && self.allowResize)
             pointMove = BOTTOM_RIGHT;
         else if ( CGRectContainsPoint(self.selectArea, p) )
             pointMove = FRAME;

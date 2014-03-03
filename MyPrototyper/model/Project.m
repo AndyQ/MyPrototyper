@@ -94,7 +94,7 @@
         // so we remove it first as the copy will fail if one does exist.
         [fm removeItemAtPath:file error:nil];
         [fm copyItemAtURL:url toURL:[NSURL fileURLWithPath:file] error:&err];
-        if ( error != nil )
+        if ( err != nil )
         {
             NSLog( @"Error - %@", err.localizedDescription );
             // Error - go no futher
@@ -114,7 +114,7 @@
         }
     }
     
-    error = nil;
+    err = nil;
     if ( valid )
     {
         valid = NO;
@@ -139,8 +139,9 @@
         err = nil;
         [fm removeItemAtPath:projectFolder error:&err];
         
-        *error = [NSError errorWithDomain:@"PrototyperPlayer" code:-1 userInfo:@{NSLocalizedDescriptionKey : errorMsg}];
-        
+        NSDictionary *dict = @{NSLocalizedDescriptionKey : errorMsg};
+        *error = [[NSError alloc] initWithDomain:@"BALearning"
+                                              code:-1 userInfo:dict];
         return NO;
     }
     
@@ -302,6 +303,16 @@
     [self save:&err];
     if ( err != nil )
         NSLog( @"Error saving project - %@", err.localizedDescription );
+}
+
+- (void) moveImageAtIndex:(int) originalPos toAfter:(int)newPos;
+{
+    id obj = self.images[originalPos];
+    [self.images removeObject:obj];
+    
+    if ( newPos > originalPos )
+        newPos --;
+    [self.images insertObject:obj atIndex:newPos];
 }
 
 - (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
@@ -487,5 +498,46 @@
     return YES;
 }
 
+
+- (NSString *) generateDotFile
+{
+    NSMutableString *data = [NSMutableString string];
+    [data appendString:@"https://chart.googleapis.com/chart?cht=gv&chl=digraph g{"];
+    for ( ImageDetails *d in self.images )
+    {
+        NSString *imageId = d.imageName;
+        NSInteger sourceIndex = [self getIndexOfItemForName:imageId];
+        for ( ImageLink *il in d.links )
+        {
+            NSString *linkId = il.linkedToId;
+            
+            NSInteger targetIndex = [self getIndexOfItemForName:linkId];
+            if ( targetIndex != -1 )
+                [data appendFormat:@"%d -> %d;", sourceIndex, targetIndex];
+        }
+    }
+    [data appendString:@"}\n"];
+
+    NSLog( @"%@", data );
+    return data;
+}
+
+
+- (NSInteger) getIndexOfItemForName:(NSString *)name
+{
+    NSInteger index = -1;
+    NSInteger i = 0;
+    for ( ImageDetails *item in self.images )
+    {
+        if ( [item.imageName isEqualToString:name] )
+        {
+            index = i;
+            break;
+        }
+        i++;
+    }
+    
+    return index;
+}
 
 @end

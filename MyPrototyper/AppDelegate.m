@@ -58,10 +58,16 @@
     if ( [defaults objectForKey:@"FirstUse"] == nil )
     {
         [defaults setObject:@"YES" forKey:@"FirstUse"];
+        [defaults synchronize];
         
         // Copy over demo file into place
-        NSURL *url = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"zip"];
-        [Project importProjectArchiveFromURL:url error:nil];
+        NSString *demoProjectFile = [[Project getDocsDir] stringByAppendingPathComponent:@"demo"];
+        NSFileManager *fm = [NSFileManager defaultManager];
+        if ( ![fm fileExistsAtPath:demoProjectFile] )
+        {
+            NSURL *url = [[NSBundle mainBundle] URLForResource:@"demo" withExtension:@"zip"];
+            [Project importProjectArchiveFromURL:url error:nil];
+        }
     }
     
     return YES;

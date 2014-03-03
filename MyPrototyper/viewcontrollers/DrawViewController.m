@@ -95,7 +95,9 @@ static CGPoint midpoint(CGPoint p0, CGPoint p1)
 - (IBAction)btnDrawTypePressed:(id)sender
 {
     NSArray *items = @[@"Freehand", @"Text", @"Rectangle", @"Ellipse"];
-    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( 50, self.view.frame.size.height - 44) inView:self.view withStringArray:items delegate:self];
+    NSArray *imageItems = @[[UIImage imageNamed:@"freehand"],[UIImage imageNamed:@"text"],[UIImage imageNamed:@"rectangle"],
+                            [UIImage imageNamed:@"ellipse"]];
+    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( 50, self.view.frame.size.height - 44) inView:self.view withStringArray:items withImageArray:imageItems delegate:self];
 }
 
 - (IBAction)choseColourPressed:(id)sender

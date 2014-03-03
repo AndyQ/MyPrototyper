@@ -9,6 +9,7 @@
 #import "PlaybackViewController.h"
 #import "UIColor+Utils.h"
 #import "UIImageView+ContentScale.h"
+#import <PopoverView/PopoverView.h>
 
 @interface PlaybackViewController () <UIAlertViewDelegate>
 {
@@ -16,6 +17,8 @@
     ImageDetails *imageDetails;
     
     CGSize imageScale;
+    
+    NSMutableArray *breadcrumbTrail;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
@@ -31,10 +34,16 @@
 {
     [super viewDidLoad];
     
+    breadcrumbTrail = [NSMutableArray array];
+    
     hasShownDoubleTapInfo = NO;
     imageDetails = [self.project getStartImageDetails];
     
     self.imageView.image = [imageDetails getImage];
+
+    UISwipeGestureRecognizer *backSwipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(backSwipe:)];
+    backSwipe.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:backSwipe];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
     [self.view addGestureRecognizer:tap];
@@ -64,6 +73,30 @@
 }
 
 
+- (void) backSwipe:(UITapGestureRecognizer *)gr
+{
+    if ( gr.state == UIGestureRecognizerStateEnded )
+    {
+        if ( breadcrumbTrail.count > 0 )
+        {
+            // Pop off the last page of the breakcrumb stack
+            NSString *imageId = [breadcrumbTrail lastObject];
+            [breadcrumbTrail removeLastObject];
+            
+            imageDetails = [self.project getLinkWithId:imageId];
+            self.imageView.image = [imageDetails getImage];
+            [self updateHotspots];
+            
+            CATransition *transition = [CATransition animation];
+            transition.delegate = self;
+            transition.duration = 0.5;
+            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            transition.type = kCATransitionMoveIn;
+            transition.subtype = kCATransitionFromLeft;
+            [self.imageView.layer addAnimation:transition forKey:nil];
+        }
+    }
+}
 
 - (void) tap:(UITapGestureRecognizer *)gr
 {
@@ -78,7 +111,7 @@
             if ( CGRectContainsPoint( link.rect, p ) )
             {
                 hit = YES;
-                if ( link.linkedToId != nil )
+                if ( link.linkType == ILT_Info || link.linkedToId.length > 0 )
                     [self selectLink:link];
                 break;
             }
@@ -126,15 +159,30 @@
 
 - (void) selectLink:(ImageLink *)link
 {
-    CATransition *transition = [self getTransitionForLink:link];
-    if ( transition != nil )
-        [self.imageView.layer addAnimation:transition forKey:nil];
-    
-    imageDetails = [self.project getLinkWithId:link.linkedToId];
-    self.imageView.image = [imageDetails getImage];
+    if ( link.linkType == ILT_Normal )
+    {
+        // Save current page in breadcrumb trail so we can swip back
+        [breadcrumbTrail addObject:imageDetails.imageName];
 
-    if ( transition == nil )
-        [self updateHotspots];
+        CATransition *transition = [self getTransitionForLink:link];
+        if ( transition != nil )
+            [self.imageView.layer addAnimation:transition forKey:nil];
+        
+        imageDetails = [self.project getLinkWithId:link.linkedToId];
+        self.imageView.image = [imageDetails getImage];
+
+        if ( transition == nil )
+            [self updateHotspots];
+    }
+    else
+    {
+        // Show popover with text
+        CGRect r = link.rect;
+        CGPoint center = CGPointMake(r.origin.x + (r.size.width / 2), r.origin.y + (r.size.height / 2));
+        center.x *= imageScale.width;
+        center.y *= imageScale.height;
+        [PopoverView showPopoverAtPoint:center inView:self.view withText:link.infoText delegate:nil];
+    }
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
@@ -198,7 +246,7 @@
     int index = 1000;
     for ( ImageLink *link in imageDetails.links )
     {
-        if ( link.linkedToId.length == 0 )
+        if ( link.linkType == ILT_Normal && link.linkedToId.length == 0 )
             continue;
         
         CGRect f = link.rect;
@@ -209,17 +257,26 @@
         UIView *v = [[UIView alloc] initWithFrame:f];
         
         UIColor *bgColor;
-        if ( link.linkedToId.length == 0 )
-            bgColor = [UIColor redColor];
+        if ( link.linkType == ILT_Normal )
+        {
+            if ( link.linkedToId.length == 0 )
+                bgColor = [UIColor redColor];
+            else
+                bgColor = [UIColor greenColor];
+            
+            UIColor *darkerColor = [bgColor darkerColorByAmount:0.5];
+            
+            v.backgroundColor = [bgColor colorWithAlphaComponent:0.2];
+            v.layer.borderColor = darkerColor.CGColor;
+            v.layer.borderWidth = 2;
+            v.alpha = 0;
+        }
         else
-            bgColor = [UIColor greenColor];
-        
-        UIColor *darkerColor = [bgColor darkerColorByAmount:0.5];
-        
-        v.backgroundColor = [bgColor colorWithAlphaComponent:0.2];
-        v.layer.borderColor = darkerColor.CGColor;
-        v.layer.borderWidth = 2;
-        v.alpha = 0;
+        {
+            UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+            infoButton.frame = f;
+            v = infoButton;
+        }
         [self.imageView addSubview:v];
         index ++;
     }

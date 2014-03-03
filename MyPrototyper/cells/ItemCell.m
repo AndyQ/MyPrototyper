@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Andy Qua. All rights reserved.
 //
 
-#import "PhotoCell.h"
+#import "ItemCell.h"
 
-@interface PhotoCell ()
+@interface ItemCell ()
 @end
 
-@implementation PhotoCell
+@implementation ItemCell
 
 
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -19,20 +19,17 @@
     self = [super initWithCoder:coder];
     if (self)
     {
-        self.layer.borderColor = [UIColor blackColor].CGColor;
-        self.layer.borderWidth = 1;
+        self.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.layer.borderWidth = 3;
         self.layer.cornerRadius = 5;
     }
     return self;
 }
-- (void) setImage:(UIImage *)image
-{
-    _image = image;
-    self.imageView.image = image;
-}
+
 
 - (void) setHighlight:(BOOL)highlight
 {
+ //   [super setSelected:highlighted];
     _highlight = highlight;
     
     if ( _highlight )

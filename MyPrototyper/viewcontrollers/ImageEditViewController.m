@@ -15,7 +15,7 @@
 
 #import "UIImageView+ContentScale.h"
 
-@interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, PopoverViewDelegate>
+@interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, PopoverViewDelegate, UIAlertViewDelegate>
 {
     HotspotView* shadeView;
     PopoverView *thePopoverView;
@@ -133,6 +133,8 @@
         return YES;
     else if(action == @selector(gotoLink))
         return YES;
+    else if(action == @selector(editInfoText))
+        return YES;
 
     return NO;
 }
@@ -141,14 +143,25 @@
 {
     UIMenuController *sharedController = [UIMenuController sharedMenuController];
     
-    UIMenuItem *menuItem1 = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteView)];
-    UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Link" action:@selector(linkView)];
-    UIMenuItem *menuItem3 = [[UIMenuItem alloc] initWithTitle:@"Transition" action:@selector(transitionView)];
-    UIMenuItem *menuItem4 = [[UIMenuItem alloc] initWithTitle:@"Follow link" action:@selector(gotoLink)];
+    NSMutableArray *menuItems;
     
-    NSMutableArray *menuItems = [@[menuItem1, menuItem2, menuItem3] mutableCopy];
-    if ( shadeView.associatedImageLink.linkedToId.length > 0 )
-        [menuItems addObject:menuItem4];
+    if ( shadeView.associatedImageLink.linkType == ILT_Normal )
+    {
+        UIMenuItem *menuItem1 = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteView)];
+        UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Link" action:@selector(linkView)];
+        UIMenuItem *menuItem3 = [[UIMenuItem alloc] initWithTitle:@"Transition" action:@selector(transitionView)];
+        UIMenuItem *menuItem4 = [[UIMenuItem alloc] initWithTitle:@"Follow link" action:@selector(gotoLink)];
+        
+        menuItems = [@[menuItem1, menuItem2, menuItem3] mutableCopy];
+        if ( shadeView.associatedImageLink.linkedToId.length > 0 )
+            [menuItems addObject:menuItem4];
+    }
+    else
+    {
+        UIMenuItem *menuItem1 = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteView)];
+        UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Edit info text" action:@selector(editInfoText)];
+        menuItems = [@[menuItem1, menuItem2] mutableCopy];
+    }
     
     [sharedController setTargetRect:r inView:self.imageEditView];
     
@@ -169,6 +182,15 @@
     shadeView = nil;
     
     [self.imageEditView hideSelectArea];
+}
+
+- (void) editInfoText
+{
+    // Display View with text
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Enter info text" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    av.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [av textFieldAtIndex:0].text = shadeView.associatedImageLink.infoText;
+    [av show];
 }
 
 - (void) linkView
@@ -212,6 +234,8 @@
 - (void) positionHotspotArea:(CGRect)r
 {
     [self.imageEditView showSelectArea:r];
+    self.imageEditView.allowResize = shadeView.associatedImageLink.linkType == ILT_Normal;
+    
     [shadeView updateFrame:r];
     [shadeView setSelected:YES];
 }
@@ -243,6 +267,28 @@
     
     [self showHotspotRect:YES];
 
+}
+
+
+- (void) addInfoHotspotAtPoint:(CGPoint)p
+{
+    if ( shadeView )
+        [shadeView setSelected:NO];
+    
+    ImageLink *link = [ImageLink new];
+    link.linkType = ILT_Info;
+    [self.imageDetails.links addObject:link];
+    
+    shadeView = [[HotspotView alloc] initWithScale:imageScale];
+    shadeView.associatedImageLink = link;
+    [self.imageEditView addSubview:shadeView];
+    
+    float w = 40;
+    CGRect r = CGRectMake( p.x - w/2, p.y - w/2, w, w );
+    [self positionHotspotArea:r];
+    
+    [self showHotspotRect:YES];
+    
 }
 
 
@@ -319,7 +365,7 @@
         if ( showPopover )
         {
             selectedPoint = p;
-            thePopoverView = [PopoverView showPopoverAtPoint:p inView:self.imageEditView withStringArray:@[@"Add hotspot", @"Edit image"] delegate:self];
+            thePopoverView = [PopoverView showPopoverAtPoint:p inView:self.imageEditView withStringArray:@[@"Add hotspot", @"Add info hotspot", @"Edit image"] delegate:self];
         }
         
     }
@@ -388,7 +434,29 @@
     if ( index == 0 )
         [self addHotspotAtPoint:selectedPoint];
     else if ( index == 1 )
+        [self addInfoHotspotAtPoint:selectedPoint];
+    else if ( index == 2 )
         [self performSegueWithIdentifier:@"ShowDraw" sender:self];
    
 }
+
+#pragma mark - UIAlertViewDelegate methods
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    NSString *inputText = [[alertView textFieldAtIndex:0] text];
+    if ( inputText.length == 0 )
+        return NO;
+    
+    return YES;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex == 1 )
+    {
+        NSString *text = [alertView textFieldAtIndex:0].text;
+        shadeView.associatedImageLink.infoText = text;
+    }
+}
+
 @end

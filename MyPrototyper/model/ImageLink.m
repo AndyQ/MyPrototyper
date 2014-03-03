@@ -17,6 +17,8 @@
     link.rect = CGRectFromString(dict[@"rect"] );
     link.linkedToId = dict[@"linkedToId"];
     link.transition = [dict[@"transition"] intValue];
+    link.linkType = [dict[@"linkType"] intValue];
+    link.infoText = dict[@"infoText"];
     
     return link;
 }
@@ -26,6 +28,8 @@
     self = [super init];
     if (self) {
         self.transition = IT_None;
+        self.linkType = ILT_Normal;
+        self.infoText = @"";
     }
     return self;
 }
@@ -37,6 +41,8 @@
     dict[@"rect"] = NSStringFromCGRect(self.rect);
     dict[@"linkedToId"] = self.linkedToId != nil ? self.linkedToId : @"";
     dict[@"transition"] = @(self.transition);
+    dict[@"linkType"] = @(self.linkType);
+    dict[@"infoText"] = self.infoText != nil ? self.infoText : @"";
 
     return dict;
 }
@@ -53,6 +59,16 @@
             self.transition = [aDecoder decodeInt32ForKey:@"transition"];
         else
             self.transition = IT_None;
+
+        if ( [aDecoder containsValueForKey:@"linkType"] )
+            self.transition = [aDecoder decodeInt32ForKey:@"linkType"];
+        else
+            self.transition = ILT_Normal;
+        
+        if ( [aDecoder containsValueForKey:@"infoText"] )
+            self.infoText = [aDecoder decodeObjectForKey:@"infoText"];
+        else
+            self.infoText = @"";
     }
     
     return self;
@@ -63,5 +79,7 @@
     [coder encodeCGRect:self.rect forKey:@"rect"];
     [coder encodeObject:self.linkedToId forKey:@"linkedToId"];
     [coder encodeInt32:self.transition forKey:@"transition"];
+    [coder encodeInt32:self.linkType forKey:@"linkType"];
+    [coder encodeObject:self.infoText forKey:@"infoText"];
 }
 @end

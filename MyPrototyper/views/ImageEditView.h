@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIImage *image;
 
 @property (nonatomic, assign) bool showSelectArea;
+@property (nonatomic, assign) bool allowResize;
 @property (nonatomic, assign) CGRect selectArea;
 @property (nonatomic, weak) IBOutlet id<ImageEditViewDelegate>delegate;
 

@@ -45,7 +45,9 @@
 
 - (void) setColor
 {
-    if ( _associatedImageLink.linkedToId.length > 0 )
+    if ( _associatedImageLink.linkType == ILT_Info )
+        borderColor = [UIColor blueColor];
+    else if ( _associatedImageLink.linkedToId.length > 0 )
     {
         // Linked
         borderColor = [UIColor greenColor];
@@ -151,14 +153,29 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextClearRect(context, rect);
     
-    CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
-    CGContextFillRect(context, rect);
-    
-    CGContextSetStrokeColorWithColor(context, unselBorderColor.CGColor);
-    
-    CGContextSetLineWidth(context, 2);
-    CGRect r = CGRectInset(rect, 1, 1);
-    CGContextStrokeRect(context, r);
+    if ( _associatedImageLink.linkType == ILT_Normal )
+    {
+        CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+        CGContextFillRect(context, rect);
+        
+        CGContextSetStrokeColorWithColor(context, unselBorderColor.CGColor);
+        
+        CGContextSetLineWidth(context, 2);
+        CGRect r = CGRectInset(rect, 1, 1);
+        CGContextStrokeRect(context, r);
+    }
+    else
+    {
+        CGContextSetFillColorWithColor(context, backgroundColor.CGColor);
+        CGContextFillEllipseInRect(context, rect);
+        
+        CGContextSetStrokeColorWithColor(context, unselBorderColor.CGColor);
+        
+        CGContextSetLineWidth(context, 2);
+        CGRect r = CGRectInset(rect, 1, 1);
+        CGContextStrokeEllipseInRect(context, r);
+    }
+
 }
 
 @end

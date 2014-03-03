@@ -31,6 +31,8 @@
 - (void) removeItem:(ImageDetails *)item;
 - (ImageDetails *) getLinkWithId:(NSString *) linkedToId;
 - (ImageDetails *) getStartImageDetails;
+- (void) moveImageAtIndex:(int) originPos toAfter:(int)newPos;
+
 - (bool) renameProject:(NSString *)newName error:(NSError **)error;
 - (bool) load:(NSError **)error;
 - (bool) save:(NSError **)error;
@@ -39,4 +41,7 @@
 - (id)objectAtIndexedSubscript:(NSUInteger)idx;
 
 - (NSString *) exportFile;
+
+- (NSString *) generateDotFile;
+
 @end

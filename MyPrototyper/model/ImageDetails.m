@@ -46,8 +46,12 @@
 {
     UIImage *i = [UIImage imageWithContentsOfFile:self.thumbImagePath];
     if ( i == nil )
+    {
         i = [[self getImage] createThumbnail];
-        
+        CGFloat imageQuality = [[[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_QUALITY] floatValue];
+        [UIImageJPEGRepresentation(i, imageQuality) writeToFile:self.thumbImagePath atomically:YES];
+    }
+    
     return i;
 }
 

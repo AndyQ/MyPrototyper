@@ -9,6 +9,7 @@
 #import "ImageDetails.h"
 #import "ImageLink.h"
 #import "Project.h"
+#import "UIImage+Utils.h"
 
 
 @implementation ImageDetails
@@ -37,19 +38,16 @@
 
 - (UIImage *) getImage
 {
-/*
-    // Fix image path it it has more that two path components - only get the last two (the project and filename
-    // This is to support older style projects that embedded the full path! Should no longer be needed but 
-    // kept here whilst I check.
-    NSArray *items = [self.imagePath pathComponents];
-    if ( items.count >= 2 )
-    {
-        NSString *project = items[items.count-2];
-        NSString *file = [items lastObject];
-        self.imagePath = [project stringByAppendingPathComponent:file];
-    }
-*/
     UIImage *i = [UIImage imageWithContentsOfFile:self.imagePath];
+    return i;
+}
+
+- (UIImage *) getThumbImage
+{
+    UIImage *i = [UIImage imageWithContentsOfFile:self.thumbImagePath];
+    if ( i == nil )
+        i = [[self getImage] createThumbnail];
+        
     return i;
 }
 

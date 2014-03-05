@@ -18,6 +18,7 @@
 		A14C93AF189530C5008F6A0D /* ProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C93A5189530C5008F6A0D /* ProjectViewController.m */; };
 		A14C93FD1899A50D008F6A0D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A14C93FC1899A50D008F6A0D /* libz.dylib */; };
 		A14C9403189BB254008F6A0D /* UIImageView+ContentScale.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C9402189BB254008F6A0D /* UIImageView+ContentScale.m */; };
+		A1673A1318C7914600E90C75 /* UIImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A1673A1218C7914600E90C75 /* UIImage+Utils.m */; };
 		A1758CFE1885DDA600490A06 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = A1758CFD1885DDA600490A06 /* Shape.m */; };
 		A1758D031885F13300490A06 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A1758D021885F13300490A06 /* Settings.bundle */; };
 		A1A98F6018C47356003B261E /* ItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1A98F5F18C47356003B261E /* ItemCell.m */; };
@@ -81,6 +82,8 @@
 		A14C93FC1899A50D008F6A0D /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A14C9401189BB254008F6A0D /* UIImageView+ContentScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ContentScale.h"; sourceTree = "<group>"; };
 		A14C9402189BB254008F6A0D /* UIImageView+ContentScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ContentScale.m"; sourceTree = "<group>"; };
+		A1673A1118C7914600E90C75 /* UIImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utils.h"; sourceTree = "<group>"; };
+		A1673A1218C7914600E90C75 /* UIImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utils.m"; sourceTree = "<group>"; };
 		A1758CFC1885DDA600490A06 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		A1758CFD1885DDA600490A06 /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		A1758D021885F13300490A06 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
@@ -164,6 +167,8 @@
 		A14C9394189530C5008F6A0D /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				A1673A1118C7914600E90C75 /* UIImage+Utils.h */,
+				A1673A1218C7914600E90C75 /* UIImage+Utils.m */,
 				A14C9395189530C5008F6A0D /* UIBezierPath+TextPaths.h */,
 				A14C9396189530C5008F6A0D /* UIBezierPath+TextPaths.m */,
 				A14C9397189530C5008F6A0D /* UIColor+Utils.h */,
@@ -468,6 +473,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A14C93AE189530C5008F6A0D /* PlaybackViewController.m in Sources */,
+				A1673A1318C7914600E90C75 /* UIImage+Utils.m in Sources */,
 				A14C93A9189530C5008F6A0D /* UIColor+Utils.m in Sources */,
 				A14C93A8189530C5008F6A0D /* UIBezierPath+TextPaths.m in Sources */,
 				A14C93A6189530C5008F6A0D /* PhotoCell.m in Sources */,

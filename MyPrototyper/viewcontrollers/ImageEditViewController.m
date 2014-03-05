@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Andy Qua. All rights reserved.
 //
 
+@import AVFoundation;
+
 #import "ImageEditViewController.h"
 #import "LinkImageViewController.h"
 #import "DrawViewController.h"
@@ -135,6 +137,8 @@
         return YES;
     else if(action == @selector(editInfoText))
         return YES;
+    else if(action == @selector(speakInfoText))
+        return YES;
 
     return NO;
 }
@@ -160,7 +164,8 @@
     {
         UIMenuItem *menuItem1 = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteView)];
         UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Edit info text" action:@selector(editInfoText)];
-        menuItems = [@[menuItem1, menuItem2] mutableCopy];
+        UIMenuItem *menuItem3 = [[UIMenuItem alloc] initWithTitle:@"Speak info text" action:@selector(speakInfoText)];
+        menuItems = [@[menuItem1, menuItem2, menuItem3] mutableCopy];
     }
     
     [sharedController setTargetRect:r inView:self.imageEditView];
@@ -193,6 +198,22 @@
     [av show];
 }
 
+- (void) speakInfoText
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *voice = [defaults stringForKey:@"speechvoice_preference"];
+    if ( voice == nil )
+        voice = @"en-GB";
+    
+    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:shadeView.associatedImageLink.infoText];
+    utterance.rate = 0.25;
+    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:voice];
+    
+    AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc] init];
+    [synthesizer speakUtterance:utterance];
+    [self showMenuFromRect:shadeView.frame];
+}
+
 - (void) linkView
 {
     [self performSegueWithIdentifier:@"showLinkToVC" sender:self];
@@ -218,6 +239,28 @@
 {
     self.imageDetails = [self.project getLinkWithId:shadeView.associatedImageLink.linkedToId];
     [self setupView];
+}
+
+#pragma mark - UIAlertViewDelegate methods
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
+{
+    NSString *inputText = [[alertView textFieldAtIndex:0] text];
+    if ( inputText.length == 0 )
+        return NO;
+    
+    return YES;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( buttonIndex == 1 )
+    {
+        NSString *text = [alertView textFieldAtIndex:0].text;
+        shadeView.associatedImageLink.infoText = text;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self showMenuFromRect:shadeView.frame];
+    });
 }
 
 #pragma mark - UIActionSheetDelegate method
@@ -440,23 +483,5 @@
    
 }
 
-#pragma mark - UIAlertViewDelegate methods
-- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
-{
-    NSString *inputText = [[alertView textFieldAtIndex:0] text];
-    if ( inputText.length == 0 )
-        return NO;
-    
-    return YES;
-}
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if ( buttonIndex == 1 )
-    {
-        NSString *text = [alertView textFieldAtIndex:0].text;
-        shadeView.associatedImageLink.infoText = text;
-    }
-}
 
 @end

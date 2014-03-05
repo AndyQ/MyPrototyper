@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Andy Qua. All rights reserved.
 //
 
+@import AVFoundation;
+
 #import "PlaybackViewController.h"
 #import "UIColor+Utils.h"
 #import "UIImageView+ContentScale.h"
@@ -182,6 +184,22 @@
         center.x *= imageScale.width;
         center.y *= imageScale.height;
         [PopoverView showPopoverAtPoint:center inView:self.view withText:link.infoText delegate:nil];
+
+// TODO : May add speech for popups
+/*
+        // Speak text
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *voice = [defaults stringForKey:@"speechvoice_preference"];
+        if ( voice == nil )
+            voice = @"en-GB";
+        
+        AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:link.infoText];
+        utterance.rate = 0.25;
+        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:voice];
+        
+        AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc] init];
+        [synthesizer speakUtterance:utterance];
+*/
     }
 }
 

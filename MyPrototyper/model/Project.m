@@ -10,6 +10,7 @@
 #import "Constants.h"
 
 #import "SSZipArchive.h"
+#import "UIImage+Utils.h"
 
 @interface Project ()
 
@@ -232,24 +233,33 @@
     NSString *imageType = [[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_FORMAT];
     NSString *imageName = [NSString stringWithFormat:@"%@.%@", guid, imageType];
     NSString *imagePath = [[self getProjectFolder] stringByAppendingPathComponent:imageName];
+    NSString *thumbImageName = [NSString stringWithFormat:@"%@_t.%@", guid, imageType];
+    NSString *thumbImagePath = [[self getProjectFolder] stringByAppendingPathComponent:thumbImageName];
 
     bool rc;
     if ( image != nil )
     {
+        // Create thumbnail
+        UIImage *thumb = [image createThumbnail];
+
         if ( [imageType isEqualToString:JPEG] )
         {
             CGFloat imageQuality = [[[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_QUALITY] floatValue];
             rc = [UIImageJPEGRepresentation(image, imageQuality) writeToFile:imagePath atomically:YES];
+            [UIImageJPEGRepresentation(thumb, imageQuality) writeToFile:thumbImagePath atomically:YES];
         }
         else
         {
             rc = [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+            [UIImagePNGRepresentation(thumb) writeToFile:thumbImagePath atomically:YES];
         }
 
         if ( rc != YES )
         {
             NSLog( @"Failed to save image - %@", imagePath );
         }
+        
+        
     }
     else
         NSLog( @"Failed to save image as its nil!" );
@@ -397,9 +407,11 @@
         for ( NSString *ext in extensions )
         {
             NSString *file = [base stringByAppendingPathExtension:ext];
+            NSString *thumbFile = [[NSString stringWithFormat:@"%@_t", base ] stringByAppendingPathExtension:ext];
             if ( [fm fileExistsAtPath:file] )
             {
                 imageDetails.imagePath = file;
+                imageDetails.thumbImagePath = thumbFile;
                 break;
             }
         }
@@ -506,14 +518,11 @@
     for ( ImageDetails *d in self.images )
     {
         NSString *imageId = d.imageName;
-        NSInteger sourceIndex = [self getIndexOfItemForName:imageId];
         for ( ImageLink *il in d.links )
         {
             NSString *linkId = il.linkedToId;
             
-            NSInteger targetIndex = [self getIndexOfItemForName:linkId];
-            if ( targetIndex != -1 )
-                [data appendFormat:@"%d -> %d;", sourceIndex, targetIndex];
+            [data appendFormat:@"%d -> %d;", [self getIndexOfItemForName:imageId], [self getIndexOfItemForName:linkId]];
         }
     }
     [data appendString:@"}\n"];
@@ -523,10 +532,10 @@
 }
 
 
-- (NSInteger) getIndexOfItemForName:(NSString *)name
+- (int) getIndexOfItemForName:(NSString *)name
 {
-    NSInteger index = -1;
-    NSInteger i = 0;
+    int index = -1;
+    int i = 0;
     for ( ImageDetails *item in self.images )
     {
         if ( [item.imageName isEqualToString:name] )

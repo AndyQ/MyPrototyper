@@ -71,8 +71,8 @@
             zoomOrigFrame = CGRectInset( cell.frame, 5, 5 );
             zoomOrigFrame.origin.x -= self.collectionView.contentOffset.x;
             zoomOrigFrame.origin.y -= self.collectionView.contentOffset.y;
-            
-            zoomImageView = [[UIImageView alloc] initWithImage:cell.image];
+                        
+            zoomImageView = [[UIImageView alloc] initWithImage:[imageDetails getImage]];
             zoomImageView.layer.borderWidth = 1;
             zoomImageView.layer.borderColor = [UIColor blackColor].CGColor;
             
@@ -109,7 +109,7 @@
     PhotoCell *cell = (PhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
     ImageDetails *imageDetails = self.project[indexPath.row];
-    cell.image = [imageDetails getImage];
+    cell.image = [imageDetails getThumbImage];
     
     if ( [self.currentImageId isEqualToString:imageDetails.imageName] )
         cell.contentView.alpha = 0.3;

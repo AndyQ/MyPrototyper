@@ -15,6 +15,7 @@
 #import "PhotoCell.h"
 #import "PopoverView.h"
 
+
 #import "AlbumSelectViewController.h"
 #import "IASKAppSettingsViewController.h"
 
@@ -36,7 +37,7 @@
 @interface ProjectViewController () <DrawViewControllerDelegate, AlbumSelectViewControllerDelegate, IASKSettingsDelegate, PopoverViewDelegate, UIDocumentInteractionControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate>
 {
     UIDocumentInteractionController *docController;
-
+    
     Project *project;
     ImageDetails *selectedImageDetails;
     
@@ -84,7 +85,7 @@
     deleteBtn = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStylePlain target:self action:@selector(deletePressed:)];
     
     self.navigationItem.rightBarButtonItem = actionBtn;
-
+    
     [self.collectionView reloadData];
     
     self.selectStartImageDisplayViewBottom.constant -= self.selectStartImageDisplayView.bounds.size.height;
@@ -93,7 +94,7 @@
                                         initWithTarget:self action:@selector(navigationBarDoubleTap:)];
     tapRecon.numberOfTapsRequired = 2;
     [self.navigationController.navigationBar addGestureRecognizer:tapRecon];
-
+    
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(processLongTouch:)];
     [longPress setMinimumPressDuration:0.25];
     [self.collectionView addGestureRecognizer:longPress];
@@ -153,7 +154,7 @@
     [self saveProject];
     // Unselect all items
     for ( NSIndexPath *indexPath in [self.collectionView indexPathsForSelectedItems] )
-         [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+        [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
     
     [self.collectionView reloadData];
 }
@@ -171,7 +172,7 @@
     
     ImageDetails *imageDetails = project[indexPath.row];
     
-    UIImage *i = [imageDetails getImage];
+    UIImage *i = [imageDetails getThumbImage];
     cell.image = i;
     cell.backgroundColor = [UIColor clearColor];
     
@@ -215,7 +216,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             [self.view layoutIfNeeded];
         }];
-
+        
         [self.collectionView reloadData];
         settingStartImage = NO;
     }
@@ -240,7 +241,7 @@
     else if ( !editMode )
     {
         selectedImageDetails = project[indexPath.row];
-
+        
         // Do something with the image
         [self performSegueWithIdentifier:@"EditImage" sender:self];
     }
@@ -278,7 +279,9 @@
             zoomOrigFrame.origin.x -= self.collectionView.contentOffset.x;
             zoomOrigFrame.origin.y -= self.collectionView.contentOffset.y;
             
-            zoomImageView = [[UIImageView alloc] initWithImage:cell.image];
+            ImageDetails *imageDetails = project[indexPath.row];
+
+            zoomImageView = [[UIImageView alloc] initWithImage:[imageDetails getImage]];
             zoomImageView.layer.borderWidth = 1;
             zoomImageView.layer.borderColor = [UIColor blackColor].CGColor;
             
@@ -345,7 +348,7 @@
         [self reorderPressed:nil];
     }
     
-
+    
     if ( [text isEqualToString:MENU_EXPORT_PROJECT] )
     {
         [self exportProject];
@@ -371,7 +374,7 @@
             [self.navigationController pushViewController:appSettingsViewController animated:YES];
         }
     }
-
+    
     if ( [text isEqualToString:MENU_SHOW_PROJECT_STRUCTURE] )
     {
         NSString *urlStr = [project generateDotFile];
@@ -381,7 +384,7 @@
         if (![[UIApplication sharedApplication] openURL:url])
             
             NSLog(@"%@%@",@"Failed to open url:",[url description]);
-
+        
     }
     
     
@@ -466,7 +469,7 @@
     [UIView animateWithDuration:0.25 animations:^{
         [self.view layoutIfNeeded];
     }];
-
+    
 }
 
 - (void) exportProject
@@ -480,7 +483,7 @@
     bool rc = [docController presentOptionsMenuFromBarButtonItem:actionBtn animated:YES];
     
     NSLog( @"rc = %d", rc );
-
+    
 }
 
 
@@ -494,7 +497,7 @@
         NSLog( @"Converting %@", imageDetails.imageName );
         
         imageDetails.imagePath = [imageDetails.imagePath stringByReplacingOccurrencesOfString:@".png" withString:@".jpg"];
-
+        
         CGFloat imageQuality = [[[NSUserDefaults standardUserDefaults] objectForKey:PREF_IMAGE_QUALITY] floatValue];
         bool rc = [UIImageJPEGRepresentation(i, imageQuality) writeToFile:imageDetails.imagePath atomically:YES];
         if ( !rc )
@@ -536,7 +539,7 @@
 - (void) imagesSelected:(NSArray *)info
 {
     [self.navigationController popViewControllerAnimated:YES];
-
+    
 	for (NSDictionary *dict in info) {
         
         UIImage *image = [dict objectForKey:UIImagePickerControllerOriginalImage];
@@ -648,7 +651,7 @@
             [NSException raise:NSInternalInconsistencyException format:@"Invalid image orientation"];
             
     }
-
+    
     UIGraphicsBeginImageContext(bounds.size);
     
     CGContextRef context = UIGraphicsGetCurrentContext();

@@ -7,6 +7,7 @@
 //
 
 #import "ImageLink.h"
+#import "UIColor-Expanded.h"
 
 @implementation ImageLink
 
@@ -19,7 +20,17 @@
     link.transition = [dict[@"transition"] intValue];
     link.linkType = [dict[@"linkType"] intValue];
     link.infoText = dict[@"infoText"];
+
+    if ( dict[@"infoLinkColor"] != nil )
+        link.infoLinkColor = [UIColor colorWithHexString:dict[@"infoLinkColor"]];
+    else
+        link.infoLinkColor = [UIColor whiteColor];
     
+    if ( dict[@"speakInfoText"] != nil )
+        link.speakInfoText = [dict[@"speakInfoText"] boolValue];
+    else
+        link.speakInfoText = NO;
+
     return link;
 }
 
@@ -30,6 +41,8 @@
         self.transition = IT_None;
         self.linkType = ILT_Normal;
         self.infoText = @"";
+        self.infoLinkColor = [UIColor whiteColor];
+        self.speakInfoText = NO;
     }
     return self;
 }
@@ -43,43 +56,10 @@
     dict[@"transition"] = @(self.transition);
     dict[@"linkType"] = @(self.linkType);
     dict[@"infoText"] = self.infoText != nil ? self.infoText : @"";
+    dict[@"infoLinkColor"] = [self.infoLinkColor hexStringFromColor];
+    dict[@"speakInfoText"] = @(self.speakInfoText);
 
     return dict;
 }
 
-// Decode an object from an archive
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if(self = [super init])
-    {
-        self.rect = [aDecoder decodeCGRectForKey:@"rect"];
-        self.linkedToId = [aDecoder decodeObjectForKey:@"linkedToId"];
-        
-        if ( [aDecoder containsValueForKey:@"transition"] )
-            self.transition = [aDecoder decodeInt32ForKey:@"transition"];
-        else
-            self.transition = IT_None;
-
-        if ( [aDecoder containsValueForKey:@"linkType"] )
-            self.transition = [aDecoder decodeInt32ForKey:@"linkType"];
-        else
-            self.transition = ILT_Normal;
-        
-        if ( [aDecoder containsValueForKey:@"infoText"] )
-            self.infoText = [aDecoder decodeObjectForKey:@"infoText"];
-        else
-            self.infoText = @"";
-    }
-    
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-    [coder encodeCGRect:self.rect forKey:@"rect"];
-    [coder encodeObject:self.linkedToId forKey:@"linkedToId"];
-    [coder encodeInt32:self.transition forKey:@"transition"];
-    [coder encodeInt32:self.linkType forKey:@"linkType"];
-    [coder encodeObject:self.infoText forKey:@"infoText"];
-}
 @end

@@ -25,11 +25,14 @@ typedef enum ImageLinkType
     ILT_Normal = 0,
     ILT_Info
 } ImageLinkType;
-@interface ImageLink : NSObject <NSCoding>
+
+@interface ImageLink : NSObject
 
 @property (nonatomic, assign) CGRect rect;
 @property (nonatomic, strong) NSString *linkedToId;
 @property (nonatomic, strong) NSString *infoText;
+@property (nonatomic, assign) BOOL speakInfoText;
+@property (nonatomic, strong) UIColor *infoLinkColor;
 @property (nonatomic, assign) ImageLinkType linkType;
 @property (nonatomic, assign) ImageTransition transition;
 

@@ -12,7 +12,13 @@
 
 #pragma mark - Implementation
 
+float __defaultPopvoverFieldHeight = 0;
+float __popvoverFieldHeightForNextShow = 0;
+
 @implementation PopoverView
+{
+    float fieldHeight;
+}
 
 @synthesize subviewsArray;
 @synthesize contentView;
@@ -20,6 +26,17 @@
 @synthesize delegate;
 
 #pragma mark - Static Methods
+
++ (void) setDefaultPopoverFieldHeight:(float)height
+{
+    __defaultPopvoverFieldHeight = height;
+    __popvoverFieldHeightForNextShow = height;
+}
+
++ (void) setPopoverFieldHeightForNextDisplayOnly:(float)height
+{
+    __popvoverFieldHeightForNextShow = height;
+}
 
 + (PopoverView *)showPopoverAtPoint:(CGPoint)point inView:(UIView *)view withText:(NSString *)text delegate:(id<PopoverViewDelegate>)delegate {
     PopoverView *popoverView = [[PopoverView alloc] initWithFrame:CGRectZero];
@@ -113,6 +130,7 @@
         
         self.titleView = nil;
         self.contentView = nil;
+        fieldHeight = __popvoverFieldHeightForNextShow;
         
         showDividerRects = kShowDividersBetweenViews;
     }
@@ -130,7 +148,9 @@
     
     self.contentView = nil;
     self.titleView = nil;
-    
+
+    // Reset this back to __defaultPopvoverFieldHeight
+    __popvoverFieldHeightForNextShow = __defaultPopvoverFieldHeight;
     [super DEALLOC];
 }
 
@@ -256,7 +276,7 @@
         
         //and if dividers are enabled, we record their position for the drawing methods
         if (kShowDividersBetweenViews && i != viewArray.count-1) {
-            CGRect dividerRect = CGRectMake(view.frame.origin.x, floorf(view.frame.origin.y + view.frame.size.height + kBoxPadding*0.5f), view.frame.size.width, 0.5f);
+            CGRect dividerRect = CGRectMake(0, floorf(view.frame.origin.y + view.frame.size.height + kBoxPadding*0.5f), totalWidth, 0.5f);
             
             [((NSMutableArray *)dividerRects) addObject:[NSValue valueWithCGRect:dividerRect]];
         }
@@ -335,7 +355,7 @@
         
         //and if dividers are enabled, we record their position for the drawing methods
         if (kShowDividersBetweenViews && i != viewArray.count-1) {
-            CGRect dividerRect = CGRectMake(view.frame.origin.x, floorf(view.frame.origin.y + view.frame.size.height + kBoxPadding*0.5f), view.frame.size.width, 0.5f);
+            CGRect dividerRect = CGRectMake(0, floorf(view.frame.origin.y + view.frame.size.height + kBoxPadding*0.5f), totalWidth, 0.5f);
             
             [((NSMutableArray *)dividerRects) addObject:[NSValue valueWithCGRect:dividerRect]];
         }
@@ -367,6 +387,8 @@
     
     for (NSString *string in stringArray) {
         CGSize textSize = [string sizeWithAttributes:@{NSFontAttributeName:font}];
+        if ( fieldHeight > 0 )
+            textSize.height = fieldHeight;
         UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height  +10)];
         textButton.backgroundColor = [UIColor clearColor];
         textButton.titleLabel.font = font;
@@ -392,6 +414,8 @@
     
     for (NSString *string in stringArray) {
         CGSize textSize = [string sizeWithAttributes:@{NSFontAttributeName:font}];
+        if ( fieldHeight > 0 )
+            textSize.height = fieldHeight;
         UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
         textButton.backgroundColor = [UIColor clearColor];
         textButton.titleLabel.font = font;

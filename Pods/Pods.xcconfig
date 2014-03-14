@@ -1,5 +1,5 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/ColorPopover" "${PODS_ROOT}/Headers/InAppSettingsKit" "${PODS_ROOT}/Headers/PopoverView" "${PODS_ROOT}/Headers/SSZipArchive" "${PODS_ROOT}/Headers/SSZipArchive/minizip" "${PODS_ROOT}/Headers/WEPopover"
-OTHER_CFLAGS = $(inherited) "-isystem${PODS_ROOT}/Headers" "-isystem${PODS_ROOT}/Headers/ColorPopover" "-isystem${PODS_ROOT}/Headers/InAppSettingsKit" "-isystem${PODS_ROOT}/Headers/PopoverView" "-isystem${PODS_ROOT}/Headers/SSZipArchive" "-isystem${PODS_ROOT}/Headers/SSZipArchive/minizip" "-isystem${PODS_ROOT}/Headers/WEPopover"
-OTHER_LDFLAGS = -ObjC -lz -framework MessageUI
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/ColorPopover" "${PODS_ROOT}/Headers/InAppSettingsKit" "${PODS_ROOT}/Headers/JSCustomBadge" "${PODS_ROOT}/Headers/MBProgressHUD" "${PODS_ROOT}/Headers/PopoverView" "${PODS_ROOT}/Headers/SSZipArchive" "${PODS_ROOT}/Headers/SSZipArchive/minizip"
+OTHER_CFLAGS = $(inherited) "-isystem${PODS_ROOT}/Headers" "-isystem${PODS_ROOT}/Headers/ColorPopover" "-isystem${PODS_ROOT}/Headers/InAppSettingsKit" "-isystem${PODS_ROOT}/Headers/JSCustomBadge" "-isystem${PODS_ROOT}/Headers/MBProgressHUD" "-isystem${PODS_ROOT}/Headers/PopoverView" "-isystem${PODS_ROOT}/Headers/SSZipArchive" "-isystem${PODS_ROOT}/Headers/SSZipArchive/minizip"
+OTHER_LDFLAGS = -ObjC -lz -framework CoreGraphics -framework MessageUI -framework QuartzCore
 PODS_ROOT = ${SRCROOT}/Pods

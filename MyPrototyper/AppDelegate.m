@@ -11,6 +11,8 @@
 #import "SSZipArchive.h"
 
 #import "Constants.h"
+#import <PopoverView/PopoverView.h>
+
 @implementation AppDelegate
 
 #pragma mark - Open File from external app
@@ -50,7 +52,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSDictionary *userDefaultsDefaults = @{ PREF_IMAGE_FORMAT : @"jpg",
-                                            PREF_IMAGE_QUALITY : @"0.5"};
+                                            PREF_IMAGE_QUALITY : @"0.5",
+                                            PREF_SPEECH_ENABLED : @(NO)};
+
     [[NSUserDefaults standardUserDefaults] registerDefaults:userDefaultsDefaults];
     
     // Add in tutorial if first launch
@@ -69,6 +73,10 @@
             [Project importProjectArchiveFromURL:url error:nil];
         }
     }
+
+    // Set the default height for a popoverview
+    [PopoverView setDefaultPopoverFieldHeight:44];
+
     
     return YES;
 }

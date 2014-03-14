@@ -17,6 +17,8 @@ typedef enum ProjectType
 // Preferences
 #define PREF_IMAGE_FORMAT @"pref_imageFormat"
 #define PREF_IMAGE_QUALITY @"pref_imageQuality"
+#define PREF_SPEECH_ENABLED @"speechenabled_preference"
+#define PREF_SPEECH_VOICE @"speechvoice_preference"
 
 #define JPEG @"jpg"
 #define PNG @"png"

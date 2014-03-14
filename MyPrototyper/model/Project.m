@@ -514,15 +514,21 @@
 - (NSString *) generateDotFile
 {
     NSMutableString *data = [NSMutableString string];
-    [data appendString:@"https://chart.googleapis.com/chart?cht=gv&chl=digraph g{"];
+    [data appendString:@"https://chart.googleapis.com/chart?cht=gv&chof=png&chl=digraph g{"];
     for ( ImageDetails *d in self.images )
     {
         NSString *imageId = d.imageName;
+        int fromId = [self getIndexOfItemForName:imageId];
         for ( ImageLink *il in d.links )
         {
-            NSString *linkId = il.linkedToId;
+            if ( il.linkType != ILT_Normal || il.linkedToId == nil )
+                continue;
             
-            [data appendFormat:@"%d -> %d;", [self getIndexOfItemForName:imageId], [self getIndexOfItemForName:linkId]];
+            NSString *linkId = il.linkedToId;
+            int toId = [self getIndexOfItemForName:linkId];
+            
+            if ( toId != -1 )
+                [data appendFormat:@"%d -> %d;", fromId, toId];
         }
     }
     [data appendString:@"}\n"];

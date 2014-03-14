@@ -109,7 +109,7 @@
     PhotoCell *cell = (PhotoCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     
     ImageDetails *imageDetails = self.project[indexPath.row];
-    cell.image = [imageDetails getThumbImage];
+    [cell setImage:[imageDetails getThumbImage] withBadgeText:nil];
     
     if ( [self.currentImageId isEqualToString:imageDetails.imageName] )
         cell.contentView.alpha = 0.3;

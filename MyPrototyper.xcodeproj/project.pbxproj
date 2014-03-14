@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A112CAF218D3AC340042AD10 /* UIColor-Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A112CAF118D3AC340042AD10 /* UIColor-Expanded.m */; };
+		A112CAF518D3AC3D0042AD10 /* ProjectStructureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A112CAF418D3AC3D0042AD10 /* ProjectStructureViewController.m */; };
+		A112CAF818D3AC460042AD10 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = A112CAF718D3AC460042AD10 /* Node.m */; };
 		A14C93A6189530C5008F6A0D /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C9390189530C5008F6A0D /* PhotoCell.m */; };
 		A14C93A8189530C5008F6A0D /* UIBezierPath+TextPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C9396189530C5008F6A0D /* UIBezierPath+TextPaths.m */; };
 		A14C93A9189530C5008F6A0D /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A14C9398189530C5008F6A0D /* UIColor+Utils.m */; };
@@ -61,6 +64,12 @@
 /* Begin PBXFileReference section */
 		13913ABBD076487092923C91 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3EA35D255AE14975805FAC1C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		A112CAF018D3AC340042AD10 /* UIColor-Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor-Expanded.h"; sourceTree = "<group>"; };
+		A112CAF118D3AC340042AD10 /* UIColor-Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor-Expanded.m"; sourceTree = "<group>"; };
+		A112CAF318D3AC3D0042AD10 /* ProjectStructureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectStructureViewController.h; sourceTree = "<group>"; };
+		A112CAF418D3AC3D0042AD10 /* ProjectStructureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectStructureViewController.m; sourceTree = "<group>"; };
+		A112CAF618D3AC460042AD10 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		A112CAF718D3AC460042AD10 /* Node.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		A14C938F189530C5008F6A0D /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
 		A14C9390189530C5008F6A0D /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
 		A14C9395189530C5008F6A0D /* UIBezierPath+TextPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+TextPaths.h"; sourceTree = "<group>"; };
@@ -167,6 +176,8 @@
 		A14C9394189530C5008F6A0D /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				A112CAF018D3AC340042AD10 /* UIColor-Expanded.h */,
+				A112CAF118D3AC340042AD10 /* UIColor-Expanded.m */,
 				A1673A1118C7914600E90C75 /* UIImage+Utils.h */,
 				A1673A1218C7914600E90C75 /* UIImage+Utils.m */,
 				A14C9395189530C5008F6A0D /* UIBezierPath+TextPaths.h */,
@@ -182,6 +193,8 @@
 		A14C9399189530C5008F6A0D /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
+				A112CAF318D3AC3D0042AD10 /* ProjectStructureViewController.h */,
+				A112CAF418D3AC3D0042AD10 /* ProjectStructureViewController.m */,
 				A14C93A0189530C5008F6A0D /* MainViewController.h */,
 				A14C93A1189530C5008F6A0D /* MainViewController.m */,
 				A14C93A4189530C5008F6A0D /* ProjectViewController.h */,
@@ -212,6 +225,8 @@
 		A1D2B2E21880A45000E250BF /* model */ = {
 			isa = PBXGroup;
 			children = (
+				A112CAF618D3AC460042AD10 /* Node.h */,
+				A112CAF718D3AC460042AD10 /* Node.m */,
 				A1758CFC1885DDA600490A06 /* Shape.h */,
 				A1758CFD1885DDA600490A06 /* Shape.m */,
 				A1D2B2E41880A47E00E250BF /* ImageDetails.h */,
@@ -480,9 +495,12 @@
 				A1D2B2E91880A47E00E250BF /* Project.m in Sources */,
 				A1758CFE1885DDA600490A06 /* Shape.m in Sources */,
 				A14C93AB189530C5008F6A0D /* ImageEditViewController.m in Sources */,
+				A112CAF218D3AC340042AD10 /* UIColor-Expanded.m in Sources */,
 				A14C93AA189530C5008F6A0D /* DrawViewController.m in Sources */,
 				A1D2B2EF1880A4A500E250BF /* HotspotView.m in Sources */,
 				A14C93AF189530C5008F6A0D /* ProjectViewController.m in Sources */,
+				A112CAF518D3AC3D0042AD10 /* ProjectStructureViewController.m in Sources */,
+				A112CAF818D3AC460042AD10 /* Node.m in Sources */,
 				A1D2B2F21880A4FA00E250BF /* ImageLink.m in Sources */,
 				A1D2B2F51881777B00E250BF /* ImageEditView.m in Sources */,
 				A1CC97D118A9875900816C03 /* AlbumSelectViewController.m in Sources */,

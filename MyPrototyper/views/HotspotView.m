@@ -46,7 +46,7 @@
 - (void) setColor
 {
     if ( _associatedImageLink.linkType == ILT_Info )
-        borderColor = [UIColor blueColor];
+        borderColor = _associatedImageLink.infoLinkColor;
     else if ( _associatedImageLink.linkedToId.length > 0 )
     {
         // Linked

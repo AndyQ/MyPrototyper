@@ -17,8 +17,12 @@
 
 #import "UIImageView+ContentScale.h"
 
-@interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, PopoverViewDelegate, UIAlertViewDelegate>
+#import <ColorPopover/ColorViewController.h>
+
+@interface ImageEditViewController () <DrawViewControllerDelegate, ImageEditViewDelegate, LinkImageViewControllerDelegate, ColorViewControllerDelegate, UIActionSheetDelegate, UIGestureRecognizerDelegate, PopoverViewDelegate, UIAlertViewDelegate>
 {
+    ColorViewController *cvc;
+    
     HotspotView* shadeView;
     PopoverView *thePopoverView;
     CGPoint selectedPoint;
@@ -139,6 +143,10 @@
         return YES;
     else if(action == @selector(speakInfoText))
         return YES;
+    else if(action == @selector(hearInfoText))
+        return YES;
+    else if(action == @selector(setInfoHotspotColor))
+        return YES;
 
     return NO;
 }
@@ -155,18 +163,33 @@
         UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Link" action:@selector(linkView)];
         UIMenuItem *menuItem3 = [[UIMenuItem alloc] initWithTitle:@"Transition" action:@selector(transitionView)];
         UIMenuItem *menuItem4 = [[UIMenuItem alloc] initWithTitle:@"Follow link" action:@selector(gotoLink)];
-        
+        UIMenuItem *menuItem5 = [[UIMenuItem alloc] initWithTitle:@"Edit info text" action:@selector(editInfoText)];
+
         menuItems = [@[menuItem1, menuItem2, menuItem3] mutableCopy];
         if ( shadeView.associatedImageLink.linkedToId.length > 0 )
             [menuItems addObject:menuItem4];
+        [menuItems addObject:menuItem5];
     }
     else
     {
         UIMenuItem *menuItem1 = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteView)];
-        UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Edit info text" action:@selector(editInfoText)];
-        UIMenuItem *menuItem3 = [[UIMenuItem alloc] initWithTitle:@"Speak info text" action:@selector(speakInfoText)];
-        menuItems = [@[menuItem1, menuItem2, menuItem3] mutableCopy];
+        UIMenuItem *menuItem2 = [[UIMenuItem alloc] initWithTitle:@"Set color" action:@selector(setInfoHotspotColor)];
+        UIMenuItem *menuItem3 = [[UIMenuItem alloc] initWithTitle:@"Edit info text" action:@selector(editInfoText)];
+        
+        UIMenuItem *menuItem4;
+        if ( shadeView.associatedImageLink.speakInfoText )
+            menuItem4 = [[UIMenuItem alloc] initWithTitle:@"Don't speak info text" action:@selector(speakInfoText)];
+        else
+            menuItem4 = [[UIMenuItem alloc] initWithTitle:@"Speak info text" action:@selector(speakInfoText)];
+        menuItems = [@[menuItem1, menuItem2, menuItem3, menuItem4] mutableCopy];
     }
+    
+    if ( shadeView.associatedImageLink.infoText.length > 0 )
+    {
+        UIMenuItem *hearItem = [[UIMenuItem alloc] initWithTitle:@"Hear info text" action:@selector(hearInfoText)];
+        [menuItems addObject:hearItem];
+    }
+
     
     [sharedController setTargetRect:r inView:self.imageEditView];
     
@@ -198,19 +221,50 @@
     [av show];
 }
 
+- (void) setInfoHotspotColor
+{
+    cvc = [[ColorViewController alloc] init];
+    cvc.view.frame = CGRectMake( 0, 0, 240, 250 );
+    cvc.delegate = self;
+    
+    CGPoint p = shadeView.frame.origin;
+    p.x += shadeView.frame.size.width/2;
+    thePopoverView = [PopoverView showPopoverAtPoint:p inView:self.view withContentView:cvc.view delegate:self];
+}
+
 - (void) speakInfoText
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *voice = [defaults stringForKey:@"speechvoice_preference"];
-    if ( voice == nil )
-        voice = @"en-GB";
-    
-    AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:shadeView.associatedImageLink.infoText];
-    utterance.rate = 0.25;
-    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:voice];
-    
-    AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc] init];
-    [synthesizer speakUtterance:utterance];
+    /*
+     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     NSString *voice = [defaults stringForKey:@"speechvoice_preference"];
+     if ( voice == nil )
+     voice = @"en-GB";
+     
+     AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:shadeView.associatedImageLink.infoText];
+     utterance.rate = 0.25;
+     utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:voice];
+     
+     AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc] init];
+     [synthesizer speakUtterance:utterance];
+     */
+    shadeView.associatedImageLink.speakInfoText = !shadeView.associatedImageLink.speakInfoText;
+    [self showMenuFromRect:shadeView.frame];
+}
+
+- (void) hearInfoText
+{
+     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     NSString *voice = [defaults stringForKey:@"speechvoice_preference"];
+     if ( voice == nil )
+     voice = @"en-GB";
+     
+     AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:shadeView.associatedImageLink.infoText];
+     utterance.rate = 0.25;
+     utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:voice];
+     
+     AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc] init];
+     [synthesizer speakUtterance:utterance];
+
     [self showMenuFromRect:shadeView.frame];
 }
 
@@ -240,6 +294,21 @@
     self.imageDetails = [self.project getLinkWithId:shadeView.associatedImageLink.linkedToId];
     [self setupView];
 }
+
+
+#pragma mark - ColorViewControllerDelegate implementation
+
+-(void) colorPopoverControllerDidSelectColor:(NSString *)hexColor
+{
+    shadeView.associatedImageLink.infoLinkColor = [GzColors colorFromHex:hexColor];
+    [self.imageEditView setColor:shadeView.associatedImageLink.infoLinkColor];
+    [self.view setNeedsDisplay];
+    
+    [thePopoverView dismiss];
+    thePopoverView = nil;
+    cvc = nil;
+}
+
 
 #pragma mark - UIAlertViewDelegate methods
 - (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView
@@ -408,6 +477,7 @@
         if ( showPopover )
         {
             selectedPoint = p;
+            
             thePopoverView = [PopoverView showPopoverAtPoint:p inView:self.imageEditView withStringArray:@[@"Add hotspot", @"Add info hotspot", @"Edit image"] delegate:self];
         }
         

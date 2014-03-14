@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5051" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="J8q-O9-423">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="J8q-O9-423">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -119,6 +119,7 @@
                         <segue destination="O5L-vZ-Ghy" kind="push" identifier="EditImage" id="gaA-FR-9Hd"/>
                         <segue destination="qLA-2e-chR" kind="push" identifier="ShowDraw" id="0MJ-ND-CmN"/>
                         <segue destination="5if-sZ-sR1" kind="push" identifier="ShowAddAlbum" id="QwK-2B-yH2"/>
+                        <segue destination="DHW-72-vXh" kind="push" identifier="ShowProjectStructure" id="FuY-HQ-dbr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QtV-Zr-RrU" sceneMemberID="firstResponder"/>
@@ -210,7 +211,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HI3-f1-xQW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="H9B-JM-N9F" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2608" y="-1596"/>
+            <point key="canvasLocation" x="3887" y="-1858"/>
         </scene>
         <!--Image Edit View Controller - Edit View-->
         <scene sceneID="18z-Dt-xm9">
@@ -386,19 +387,44 @@
                                 <segue destination="SnL-hE-DxX" kind="unwind" unwindAction="unwindFromViewController:" id="ZoQ-rE-w5B"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Hide title bar" id="fcr-Pt-Fmp">
-                            <connections>
-                                <action selector="hidePressed:" destination="UeX-H3-hXM" id="3Cq-Oz-iJc"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="actionButton" destination="rdt-hl-1o4" id="2ql-T4-Hpr"/>
                         <outlet property="bottomConstraint" destination="hiV-pD-w6l" id="kRH-gG-7OP"/>
                         <outlet property="doubleTapText" destination="ZH9-Cq-tVJ" id="cpJ-ii-Pd3"/>
                         <outlet property="imageView" destination="Q0t-Bd-UN5" id="zFY-mL-zZS"/>
+                        <outlet property="speechEnabledButton" destination="u3d-bS-KBV" id="Ogk-2d-LOY"/>
                         <outlet property="topConstraint" destination="IB6-mR-Ypc" id="qZ0-Ft-Mgl"/>
                     </connections>
                 </viewController>
+                <barButtonItem systemItem="action" id="rdt-hl-1o4">
+                    <connections>
+                        <action selector="actionPressed:" destination="UeX-H3-hXM" id="30n-cm-vox"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem style="plain" id="u3d-bS-KBV" userLabel="Bar Button Item - Speech On">
+                    <view key="customView" contentMode="scaleToFill" id="ee8-mx-FBp">
+                        <rect key="frame" x="582" y="5" width="170" height="33"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Ei-im-wtu">
+                                <rect key="frame" x="115" y="0.0" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Speech On" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="anc-Qm-whS">
+                                <rect key="frame" x="7" y="6" width="86" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <action selector="speechOnChanged:" destination="UeX-H3-hXM" id="P3Q-UP-ej0"/>
+                    </connections>
+                </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tKy-OM-XrE" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="SnL-hE-DxX" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
@@ -542,7 +568,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cnp-1O-JjD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1837" y="1794"/>
+            <point key="canvasLocation" x="3873" y="1794"/>
         </scene>
         <!--Album Contents View Controller-->
         <scene sceneID="wOl-d1-QYb">
@@ -598,7 +624,27 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jKE-pa-2ji" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2900" y="1794"/>
+            <point key="canvasLocation" x="4876" y="1794"/>
+        </scene>
+        <!--Project Structure View Controller-->
+        <scene sceneID="m5N-cn-ImL">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="DHW-72-vXh" customClass="ProjectStructureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YHT-WN-hZo"/>
+                        <viewControllerLayoutGuide type="bottom" id="Upz-Ev-WWZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cqz-er-zwx">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="0qg-AI-MIN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HaM-iW-U9R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3887" y="-3070"/>
         </scene>
     </scenes>
     <resources>

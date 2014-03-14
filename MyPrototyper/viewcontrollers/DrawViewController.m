@@ -12,7 +12,7 @@
 #import "Shape.h"
 #import "PopoverView.h"
 
-#import "ColorViewController.h"
+#import <ColorPopover/ColorViewController.h>
 
 
 static CGPoint midpoint(CGPoint p0, CGPoint p1)

@@ -14,6 +14,9 @@
 
 @property(nonatomic, strong) UIImage *image;
 @property(nonatomic, assign) BOOL highlight;
+@property(nonatomic, assign) int badgeNr;
+
+- (void) setImage:(UIImage *)image withBadgeText:(NSString *)badgeText;
 
 @end
 

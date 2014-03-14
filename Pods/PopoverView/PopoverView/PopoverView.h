@@ -114,6 +114,11 @@
 //These are the main static methods you can use to display the popover.
 //Simply call [PopoverView show...] with your arguments, and the popover will be generated, added to the view stack, and notify you when it's done.
 
+// AQ Patch
++ (void) setDefaultPopoverFieldHeight:(float)height;
++ (void) setPopoverFieldHeightForNextDisplayOnly:(float)height;
+
+
 + (PopoverView *)showPopoverAtPoint:(CGPoint)point inView:(UIView *)view withText:(NSString *)text delegate:(id<PopoverViewDelegate>)delegate;
 
 + (PopoverView *)showPopoverAtPoint:(CGPoint)point inView:(UIView *)view withTitle:(NSString *)title withText:(NSString *)text delegate:(id<PopoverViewDelegate>)delegate;

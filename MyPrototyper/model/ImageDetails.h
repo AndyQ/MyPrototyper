@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface ImageDetails : NSObject <NSCoding>
+@interface ImageDetails : NSObject
 
 @property (nonatomic, strong) NSString *imageName;
 @property (nonatomic, strong) NSMutableArray *links;

@@ -10,6 +10,7 @@
 #import "ImageEditViewController.h"
 #import "PlaybackViewController.h"
 #import "DrawViewController.h"
+#import "ProjectStructureViewController.h"
 #import "Project.h"
 #import "ImageDetails.h"
 #import "PhotoCell.h"
@@ -147,6 +148,12 @@
         AlbumSelectViewController *vc = segue.destinationViewController;
         vc.delegate = self;
     }
+
+    if ( [segue.identifier isEqualToString:@"ShowProjectStructure"] )
+    {
+        ProjectStructureViewController *vc = segue.destinationViewController;
+        vc.project = project;
+    }    
 }
 
 - (IBAction)unwindFromViewController:(UIStoryboardSegue *)segue
@@ -172,8 +179,7 @@
     
     ImageDetails *imageDetails = project[indexPath.row];
     
-    UIImage *i = [imageDetails getThumbImage];
-    cell.image = i;
+    [cell setImage:[imageDetails getThumbImage] withBadgeText:[NSString stringWithFormat:@"%d", indexPath.row]];
     cell.backgroundColor = [UIColor clearColor];
     
     if ( [project.startImage isEqualToString:imageDetails.imageName] )
@@ -327,6 +333,9 @@
 
 - (void)popoverView:(PopoverView *)thePopoverView didSelectItemAtIndex:(NSInteger)index itemText:(NSString *)text
 {
+    [popoverView dismiss];
+    popoverView = nil;
+
     // Items from action menu button
     if ( [text isEqualToString:MENU_SET_START_IMAGE] )
     {
@@ -353,6 +362,7 @@
     {
         [self exportProject];
     }
+
     
     if ( [text isEqualToString:MENU_SETTINGS] )
     {
@@ -377,13 +387,7 @@
     
     if ( [text isEqualToString:MENU_SHOW_PROJECT_STRUCTURE] )
     {
-        NSString *urlStr = [project generateDotFile];
-        urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        NSURL *url = [NSURL URLWithString:urlStr];
-        
-        if (![[UIApplication sharedApplication] openURL:url])
-            
-            NSLog(@"%@%@",@"Failed to open url:",[url description]);
+        [self performSegueWithIdentifier:@"ShowProjectStructure" sender:self];
         
     }
     
@@ -418,14 +422,6 @@
         
         [self performSegueWithIdentifier:@"ShowAddAlbum" sender:self];
     }
-    [popoverView dismiss];
-    popoverView = nil;
-    
-}
-
-- (void)popoverViewDidDismiss:(PopoverView *)thePopoverView;
-{
-    popoverView = nil;
 }
 
 

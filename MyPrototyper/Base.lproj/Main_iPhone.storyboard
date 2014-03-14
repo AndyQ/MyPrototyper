@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5051" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nCa-Yb-gFQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="nCa-Yb-gFQ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -119,6 +119,7 @@
                         <segue destination="id8-63-Ttf" kind="push" identifier="EditImage" id="QDg-mr-TLU"/>
                         <segue destination="iGR-ku-d7J" kind="push" identifier="ShowDraw" id="2kw-eh-RLk"/>
                         <segue destination="QeN-FE-N1h" kind="push" identifier="ShowAddAlbum" id="2hU-Ez-Osq"/>
+                        <segue destination="73W-BS-S3x" kind="push" identifier="ShowProjectStructure" id="aOg-kd-iTx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UA7-Pf-EYo" sceneMemberID="firstResponder"/>
@@ -223,24 +224,25 @@
                                 <segue destination="23r-qg-Sn2" kind="unwind" unwindAction="unwindFromViewController:" id="Kaa-r0-88K"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Hide bar" id="sVG-un-LvO">
-                            <connections>
-                                <action selector="hidePressed:" destination="Fc0-GT-s3r" id="LK8-vL-FUb"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="actionButton" destination="gzf-zG-UFT" id="8kb-IM-brS"/>
                         <outlet property="bottomConstraint" destination="hOg-aZ-hfg" id="Il3-x0-igr"/>
                         <outlet property="doubleTapText" destination="HtM-cA-ATb" id="laf-Dq-qGp"/>
                         <outlet property="imageView" destination="lAp-2Y-Kvr" id="9xI-QI-y3B"/>
                         <outlet property="topConstraint" destination="ecu-bz-uVV" id="DdK-Yg-0IZ"/>
                     </connections>
                 </viewController>
+                <barButtonItem systemItem="action" id="gzf-zG-UFT">
+                    <connections>
+                        <action selector="actionPressed:" destination="Fc0-GT-s3r" id="5mj-Fg-KS9"/>
+                    </connections>
+                </barButtonItem>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ujY-1p-3Rl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="23r-qg-Sn2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1640" y="343"/>
+            <point key="canvasLocation" x="1778" y="309"/>
         </scene>
         <!--Link Image View Controller - Link To-->
         <scene sceneID="pHn-r2-3HC">
@@ -501,7 +503,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5n-Yc-MUh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Ydd-F1-LvJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1353" y="-904"/>
+            <point key="canvasLocation" x="1778" y="-942"/>
         </scene>
         <!--Album Select View Controller - Choose Album-->
         <scene sceneID="uo6-FZ-cqz">
@@ -544,7 +546,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYn-PH-44g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="877" y="882"/>
+            <point key="canvasLocation" x="1778" y="928"/>
         </scene>
         <!--Album Contents View Controller-->
         <scene sceneID="8o4-h3-rj9">
@@ -600,7 +602,27 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z3b-s0-YdV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1276" y="866"/>
+            <point key="canvasLocation" x="2258" y="928"/>
+        </scene>
+        <!--Project Structure View Controller-->
+        <scene sceneID="QAM-2A-byv">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="73W-BS-S3x" customClass="ProjectStructureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="doh-U9-9EA"/>
+                        <viewControllerLayoutGuide type="bottom" id="AKo-m6-8sU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Y9-ob-MJN">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="bUW-QA-B6q"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3az-6c-kaj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1778" y="-1604"/>
         </scene>
     </scenes>
     <resources>

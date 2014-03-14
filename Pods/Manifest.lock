@@ -1,28 +1,35 @@
 PODS:
-  - ColorPopover (0.0.1):
-    - WEPopover (~> 0.0.1)
+  - ColorPopover (0.0.1b)
   - InAppSettingsKit (2.1)
-  - PopoverView (0.0.3)
+  - JSCustomBadge (1.0.1)
+  - MBProgressHUD (0.8)
+  - PopoverView (0.0.4b)
   - SSZipArchive (0.3.1)
-  - WEPopover (0.0.1)
 
 DEPENDENCIES:
-  - ColorPopover (~> 0.0.1)
+  - ColorPopover (from `https://github.com/AndyQ/ColorPopover`, tag `0.0.1b`)
   - InAppSettingsKit (from `https://github.com/AndyQ/InAppSettingsKit`)
-  - PopoverView (from `https://github.com/AndyQ/PopoverView`)
-  - SSZipArchive (~> 0.3.1)
+  - JSCustomBadge (= 1.0.1)
+  - MBProgressHUD (= 0.8)
+  - PopoverView (from `https://github.com/AndyQ/PopoverView`, tag `0.0.4b`)
+  - SSZipArchive (= 0.3.1)
 
 EXTERNAL SOURCES:
+  ColorPopover:
+    :git: https://github.com/AndyQ/ColorPopover
+    :tag: 0.0.1b
   InAppSettingsKit:
     :git: https://github.com/AndyQ/InAppSettingsKit
   PopoverView:
     :git: https://github.com/AndyQ/PopoverView
+    :tag: 0.0.4b
 
 SPEC CHECKSUMS:
-  ColorPopover: d808e3c8f19a0ffb635535e03bdf709def3129f2
+  ColorPopover: d3bbd226a614a8c975ea88c0a4de36477e3c02d5
   InAppSettingsKit: 1cf19241cbfa501b0a5225d5012696676de8ca67
-  PopoverView: 2f7a99ffd68a0308cd271b373afe55fe24f3ece4
+  JSCustomBadge: a8b5c34addd4becc36d90918ca5837ed2851a59b
+  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
+  PopoverView: 2f63ea43c90ca44ca9378d0d5b3c84dc5c2fae82
   SSZipArchive: 47d0589a15452311749a4eeecb97e12800d127de
-  WEPopover: 119fe521e9c35069c5ec63dfc14334ca321275b8
 
 COCOAPODS: 0.29.0

@@ -12,20 +12,37 @@
 #import "UIColor+Utils.h"
 #import "UIImageView+ContentScale.h"
 #import <PopoverView/PopoverView.h>
+#import <InAppSettingsKit/IASKAppSettingsViewController.h>
 
-@interface PlaybackViewController () <UIAlertViewDelegate>
+
+#define NORMAL_LINK_TAG 1000
+#define INFO_LINK_TAG 2000
+
+@interface PlaybackViewController () <PopoverViewDelegate, IASKSettingsDelegate ,UIAlertViewDelegate>
 {
+    bool speechEnabled;
     bool hasShownDoubleTapInfo;
     ImageDetails *imageDetails;
     
     CGSize imageScale;
     
     NSMutableArray *breadcrumbTrail;
+    
+    PopoverView *popoverView;
+    
+    AVSpeechSynthesizer *synthesizer;
+    AVSpeechSynthesisVoice *currentVoice;
 }
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *doubleTapText;
+
+
+// Right navigation bar buttons (have to manually add these as no other way to do this yet!
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *actionButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *speechEnabledButton;
+@property (weak, nonatomic) IBOutlet UISwitch *speechOnSwitch;
 
 @end
 
@@ -36,7 +53,14 @@
 {
     [super viewDidLoad];
     
+    // First add the right navigation bar buttons
+    if ( self.speechEnabledButton != nil )
+        self.navigationItem.rightBarButtonItems = @[self.actionButton, self.speechEnabledButton];
+    else
+        self.navigationItem.rightBarButtonItem = self.actionButton;
+    
     breadcrumbTrail = [NSMutableArray array];
+    speechEnabled = NO;
     
     hasShownDoubleTapInfo = NO;
     imageDetails = [self.project getStartImageDetails];
@@ -58,6 +82,10 @@
     self.doubleTapText.layer.shadowRadius = 5;
     self.doubleTapText.layer.shadowOpacity = 1;
     self.doubleTapText.layer.shadowOffset = CGSizeMake( 0, 0 );
+    
+    
+    // Set speech defaults
+    [self updateSpeechValuesFromSettings];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -72,6 +100,30 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) updateSpeechValuesFromSettings
+{
+    NSString *voice = [[NSUserDefaults standardUserDefaults] stringForKey:PREF_SPEECH_VOICE];
+    if ( voice == nil )
+        voice = @"en-GB";
+    synthesizer = [[AVSpeechSynthesizer alloc] init];
+    currentVoice = [AVSpeechSynthesisVoice voiceWithLanguage:voice];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    id val = [defaults objectForKey:PREF_SPEECH_ENABLED];
+    if ( val != nil )
+        speechEnabled = [val boolValue];
+    else
+        speechEnabled = YES;
+    
+    self.speechOnSwitch.on = speechEnabled;
+}
+
+
+- (IBAction)speechOnChanged:(id)sender
+{
+    speechEnabled = !speechEnabled;
 }
 
 
@@ -127,14 +179,56 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [UIView animateWithDuration:.5 animations:^{
                     for ( UIView *v in self.imageView.subviews )
-                        v.alpha = 0;
+                    {
+                        if ( v.tag != INFO_LINK_TAG )
+                            v.alpha = 0;
+                    }
                 }];
             });
         }
     }
 }
 
-- (IBAction)hidePressed:(id)sender
+- (IBAction)actionPressed:(id)sender
+{
+    NSArray *items = @[@"Hide toolbars", @"Settings"];
+    popoverView = [PopoverView showPopoverAtPoint:CGPointMake( self.view.frame.size.width - 20, 0) inView:self.view withTitle:@"Action" withStringArray:items delegate:self];
+}
+
+#pragma mark - PopoverView delegate
+
+- (void)popoverView:(PopoverView *)thePopoverView didSelectItemAtIndex:(NSInteger)index itemText:(NSString *)text
+{
+    if ( [text isEqualToString:@"Hide toolbars"] )
+    {
+        [self hideNavAndToolBars];
+    }
+    else if ( [text isEqualToString:@"Settings"] )
+    {
+        IASKAppSettingsViewController *appSettingsViewController = [[IASKAppSettingsViewController alloc] init];
+        appSettingsViewController.delegate = self;
+        
+        if ( UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad )
+        {
+            appSettingsViewController.showDoneButton = YES;
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:appSettingsViewController];
+            nc.modalPresentationStyle = UIModalPresentationFormSheet;
+            nc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            
+            [self presentViewController:nc animated:YES completion:^{ }];
+        }
+        else
+        {
+            appSettingsViewController.showDoneButton = NO;
+            [self.navigationController pushViewController:appSettingsViewController animated:YES];
+        }
+    }
+    
+    [popoverView dismiss];
+    popoverView = nil;
+}
+
+- (void) hideNavAndToolBars
 {
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     self.topConstraint.constant = 22;
@@ -175,7 +269,7 @@
 
         if ( transition == nil )
             [self updateHotspots];
-    }
+        }
     else
     {
         // Show popover with text
@@ -184,22 +278,22 @@
         center.x *= imageScale.width;
         center.y *= imageScale.height;
         [PopoverView showPopoverAtPoint:center inView:self.view withText:link.infoText delegate:nil];
+    }
 
-// TODO : May add speech for popups
-/*
-        // Speak text
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *voice = [defaults stringForKey:@"speechvoice_preference"];
-        if ( voice == nil )
-            voice = @"en-GB";
-        
-        AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:link.infoText];
+    if ( link.infoText.length > 0 )
+        [self speakText:link.infoText];
+}
+
+- (void) speakText:(NSString *)text
+{
+    // Speak text
+    if ( speechEnabled )
+    {
+        AVSpeechUtterance *utterance = [[AVSpeechUtterance alloc] initWithString:text];
         utterance.rate = 0.25;
-        utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:voice];
+        utterance.voice = currentVoice;
         
-        AVSpeechSynthesizer *synthesizer = [[AVSpeechSynthesizer alloc] init];
         [synthesizer speakUtterance:utterance];
-*/
     }
 }
 
@@ -288,16 +382,104 @@
             v.layer.borderColor = darkerColor.CGColor;
             v.layer.borderWidth = 2;
             v.alpha = 0;
+            v.tag = NORMAL_LINK_TAG;
         }
         else
         {
-            UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+            UIImage *infoImg = [self createInfoButtonImageWithColor:link.infoLinkColor];
+            UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [infoButton setImage:infoImg forState:UIControlStateNormal];
             infoButton.frame = f;
             v = infoButton;
+            v.tag = INFO_LINK_TAG;
         }
         [self.imageView addSubview:v];
         index ++;
     }
 }
 
+
+#pragma mark - InAppSettingsKit Delegate
+- (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender
+{
+    [self updateSpeechValuesFromSettings];
+
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+- (UIImage *) createInfoButtonImageWithColor:(UIColor *)color
+{
+	UIGraphicsBeginImageContext(CGSizeMake( 40, 40 ) );
+
+    //// General Declarations
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    //// Shadow Declarations
+    UIColor* shadow = color;
+    CGSize shadowOffset = CGSizeMake(0.1, -0.1);
+    CGFloat shadowBlurRadius = 4;
+    
+    //// Abstracted Attributes
+    NSString* textContent = @"i";
+    
+    
+    //// Oval Drawing
+    UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(4, 4, 32, 32)];
+    CGContextSaveGState(context);
+    CGContextSetShadowWithColor(context, shadowOffset, shadowBlurRadius, shadow.CGColor);
+    [[UIColor clearColor] setFill];
+    [ovalPath fill];
+    
+    ////// Oval Inner Shadow
+    CGRect ovalBorderRect = CGRectInset([ovalPath bounds], -shadowBlurRadius, -shadowBlurRadius);
+    ovalBorderRect = CGRectOffset(ovalBorderRect, -shadowOffset.width, -shadowOffset.height);
+    ovalBorderRect = CGRectInset(CGRectUnion(ovalBorderRect, [ovalPath bounds]), -1, -1);
+    
+    UIBezierPath* ovalNegativePath = [UIBezierPath bezierPathWithRect: ovalBorderRect];
+    [ovalNegativePath appendPath: ovalPath];
+    ovalNegativePath.usesEvenOddFillRule = YES;
+    
+    CGContextSaveGState(context);
+    {
+        CGFloat xOffset = shadowOffset.width + round(ovalBorderRect.size.width);
+        CGFloat yOffset = shadowOffset.height;
+        CGContextSetShadowWithColor(context,
+                                    CGSizeMake(xOffset + copysign(0.1, xOffset), yOffset + copysign(0.1, yOffset)),
+                                    shadowBlurRadius,
+                                    shadow.CGColor);
+        
+        [ovalPath addClip];
+        CGAffineTransform transform = CGAffineTransformMakeTranslation(-round(ovalBorderRect.size.width), 0);
+        [ovalNegativePath applyTransform: transform];
+        [[UIColor grayColor] setFill];
+        [ovalNegativePath fill];
+    }
+    CGContextRestoreGState(context);
+    
+    CGContextRestoreGState(context);
+    
+    [color setStroke];
+    ovalPath.lineWidth = 1;
+    [ovalPath stroke];
+    
+    
+    //// Text Drawing
+    CGRect textRect = CGRectMake(11, 5, 18, 29);
+    NSMutableParagraphStyle* textStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+    [textStyle setAlignment: NSTextAlignmentCenter];
+    
+    NSDictionary* textFontAttributes = @{NSFontAttributeName: [UIFont fontWithName: @"Baskerville-SemiBoldItalic" size: 25], NSForegroundColorAttributeName: color, NSParagraphStyleAttributeName: textStyle};
+    
+    [textContent drawInRect: textRect withAttributes: textFontAttributes];
+    
+    
+	UIImage *retImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+
+    return retImage;
+
+}
 @end

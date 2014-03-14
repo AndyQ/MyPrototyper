@@ -8,9 +8,10 @@
 
 // ColorPopover
 #define COCOAPODS_POD_AVAILABLE_ColorPopover
-#define COCOAPODS_VERSION_MAJOR_ColorPopover 0
-#define COCOAPODS_VERSION_MINOR_ColorPopover 0
-#define COCOAPODS_VERSION_PATCH_ColorPopover 1
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 0.0.1b.
 
 // InAppSettingsKit
 #define COCOAPODS_POD_AVAILABLE_InAppSettingsKit
@@ -18,21 +19,28 @@
 #define COCOAPODS_VERSION_MINOR_InAppSettingsKit 1
 #define COCOAPODS_VERSION_PATCH_InAppSettingsKit 0
 
+// JSCustomBadge
+#define COCOAPODS_POD_AVAILABLE_JSCustomBadge
+#define COCOAPODS_VERSION_MAJOR_JSCustomBadge 1
+#define COCOAPODS_VERSION_MINOR_JSCustomBadge 0
+#define COCOAPODS_VERSION_PATCH_JSCustomBadge 1
+
+// MBProgressHUD
+#define COCOAPODS_POD_AVAILABLE_MBProgressHUD
+#define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0
+#define COCOAPODS_VERSION_MINOR_MBProgressHUD 8
+#define COCOAPODS_VERSION_PATCH_MBProgressHUD 0
+
 // PopoverView
 #define COCOAPODS_POD_AVAILABLE_PopoverView
-#define COCOAPODS_VERSION_MAJOR_PopoverView 0
-#define COCOAPODS_VERSION_MINOR_PopoverView 0
-#define COCOAPODS_VERSION_PATCH_PopoverView 3
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 0.0.4b.
 
 // SSZipArchive
 #define COCOAPODS_POD_AVAILABLE_SSZipArchive
 #define COCOAPODS_VERSION_MAJOR_SSZipArchive 0
 #define COCOAPODS_VERSION_MINOR_SSZipArchive 3
 #define COCOAPODS_VERSION_PATCH_SSZipArchive 1
-
-// WEPopover
-#define COCOAPODS_POD_AVAILABLE_WEPopover
-#define COCOAPODS_VERSION_MAJOR_WEPopover 0
-#define COCOAPODS_VERSION_MINOR_WEPopover 0
-#define COCOAPODS_VERSION_PATCH_WEPopover 1
 

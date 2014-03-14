@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
     s.name = "PopoverView"
-    s.version = "0.0.3"
+    s.version = "0.0.4b"
     s.summary = "A simple UIView popover control for iPhone/iPad written with CoreGraphics." \
                 "Forked from https://github.com/cocoa-factory/PopoverView"
     s.homepage = "https://github.com/AndyQ/PopoverView"

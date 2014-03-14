@@ -74,25 +74,5 @@
     return dict;
 }
 
-// Decode an object from an archive
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    if(self = [super init])
-    {
-        self.imageName = [aDecoder decodeObjectForKey:@"imageName"];
-        self.links = [aDecoder decodeObjectForKey:@"links"];
-        
-        if ( self.links == nil )
-            self.links = [NSMutableArray array];
-    }
-    
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-    [coder encodeObject:self.imageName forKey:@"imageName"];
-    [coder encodeObject:self.links forKey:@"links"];
-}
 
 @end
